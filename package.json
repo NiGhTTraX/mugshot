@@ -1,0 +1,32 @@
+{
+  "name": "mugshot",
+  "version": "0.0.0",
+  "description": "visual regression testing",
+  "main": "./lib/mughshot.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uberVU/mugshot.git"
+  },
+  "keywords": [
+    "css",
+    "regression",
+    "visual",
+    "test"
+  ],
+  "author": "Florentin Simion",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uberVU/mugshot/issues"
+  },
+  "homepage": "https://github.com/uberVU/mugshot#readme"
+}
