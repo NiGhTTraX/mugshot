@@ -7,9 +7,12 @@
     "test": "test"
   },
   "dependencies": {
-    "chai": "^3.2.0"
+    "looks-same": "^2.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
   "scripts": {
     "test": "mocha"
   },
