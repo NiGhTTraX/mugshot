@@ -7,16 +7,20 @@ chai.use(require('sinon-chai'));
 
 describe('Mugshot browser interaction', function() {
   var browser;
+  var mugshot;
 
   before(function() {
     browser = {
       takeScreenshot: sinon.stub()
     };
-    var mugshot = new Mugshot(browser);
+    
+    mugshot = new Mugshot(browser);
   });
 
   describe('takeScreenshot method', function() {
     it('should be called exactly one time', function() {
+      mugshot.capture();
+      
       expect(browser.takeScreenshot).have.been.calledOnce;
     });
   });
