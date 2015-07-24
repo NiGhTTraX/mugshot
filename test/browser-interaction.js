@@ -5,7 +5,7 @@ var Mugshot = require('../lib/mugshot.js');
 
 chai.use(require('sinon-chai'));
 
-describe('Mugshot browser interaction', function() {
+describe('Mugshot', function() {
   var browser;
   var mugshot;
 
@@ -17,11 +17,9 @@ describe('Mugshot browser interaction', function() {
     mugshot = new Mugshot(browser);
   });
 
-  describe('takeScreenshot method', function() {
-    it('should be called exactly one time', function() {
-      mugshot.capture();
-      
-      expect(browser.takeScreenshot).have.been.calledOnce;
-    });
+  it('should call the browser to take a screenshot', function() {
+    mugshot.capture();
+    
+    expect(browser.takeScreenshot).have.been.calledOnce;
   });
 });
