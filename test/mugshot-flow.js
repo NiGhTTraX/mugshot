@@ -6,12 +6,12 @@ var Mugshot = require('../lib/mugshot.js');
 chai.use(require('sinon-chai'));
 
 describe('Mugshot', function() {
-  var mugshot,
-      browser,
-      FS,
-      dummySelector = {
+  var dummySelector = {
         name: 'path'
-      };
+      },
+      mugshot, 
+      browser,
+      FS;
 
   beforeEach(function() {
     browser = {
@@ -34,20 +34,20 @@ describe('Mugshot', function() {
   it('should call the browser to take a screenshot', function() {
     mugshot.capture(dummySelector);
     
-    expect(browser.takeScreenshot).have.been.calledOnce;
+    expect(browser.takeScreenshot).to.have.been.calledOnce;
   });
 
   it('should verify if a baseline already exists', function() {
     mugshot.capture(dummySelector);
 
-    expect(FS.exists).have.been.calledOnce;
+    expect(FS.exists).to.have.been.calledOnce;
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
     FS.exists.yields(null, false);
     mugshot.capture(dummySelector);
 
-    expect(FS.writeFile).have.been.calledOnce;
+    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name);
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
@@ -55,20 +55,20 @@ describe('Mugshot', function() {
       FS.exists.yields(null, true);
       mugshot.capture(dummySelector);
 
-      expect(FS.writeFile).have.been.not.called;
+      expect(FS.writeFile).to.have.been.not.called;
     });
 
   it('should read the baseline from disk if it exists', function() {
     FS.exists.yields(null, true);
     mugshot.capture(dummySelector);
 
-    expect(FS.readFile).have.been.calledOnce;
+    expect(FS.readFile).to.have.been.calledWith(dummySelector.name);
   });
 
   it('should not read a screenshot from disk if there is none', function() {
     FS.exists.yields(null, false);
     mugshot.capture(dummySelector);
 
-    expect(FS.readFile).have.been.not.called;
+    expect(FS.readFile).to.have.been.not.called;
   });
 });
