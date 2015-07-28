@@ -9,7 +9,8 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
-      base64 = 'bXVnc2hvdA==',
+      baseline = 'bXVnc2hvdA==',
+      screenshot = 'ZmxvcmVudGlu',
       mugshot, browser,
       FS, differ;
 
@@ -38,20 +39,21 @@ describe('Mugshot', function() {
   });
 
   it('should call the browser to take a screenshot', function() {
-    mugshot.capture(dummySelector);
+    mugshot.test(dummySelector);
 
     expect(browser.takeScreenshot).to.have.been.calledOnce;
   });
 
   it('should verify if a baseline already exists', function() {
-    mugshot.capture(dummySelector);
+    mugshot.test(dummySelector);
 
     expect(FS.exists).to.have.been.calledOnce;
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
     FS.exists.yields(null, false);
-    mugshot.capture(dummySelector);
+
+    mugshot.test(dummySelector);
 
     expect(FS.writeFile).to.have.been.calledWith(dummySelector.name);
   });
@@ -59,47 +61,44 @@ describe('Mugshot', function() {
   it('should not write the screenshot on disk if there is already a baseline',
     function() {
       FS.exists.yields(null, true);
-      mugshot.capture(dummySelector);
+
+      mugshot.test(dummySelector);
 
       expect(FS.writeFile).to.have.been.not.called;
     });
 
   it('should read the baseline from disk if it exists', function() {
     FS.exists.yields(null, true);
-    mugshot.capture(dummySelector);
+
+    mugshot.test(dummySelector);
 
     expect(FS.readFile).to.have.been.calledWith(dummySelector.name);
   });
 
   it('should not read a baseline from disk if there is none', function() {
     FS.exists.yields(null, false);
-    mugshot.capture(dummySelector);
+
+    mugshot.test(dummySelector);
 
     expect(FS.readFile).to.have.been.not.called;
   });
 
-  it('should compare the screenshot and the baseline', function() {
-    FS.exists.yields(null, true);
-    FS.readFile.yields(null, base64);
-    mugshot.capture(dummySelector);
-
-    expect(differ.isEqual).to.have.been.calledOnce;
-  });
-
-  it('should call the differ with the screenshot from the browser and the ' +
-    'baseline from the fs', function() {
-      browser.takeScreenshot.returns(base64);
+  it('should call the differ to compare the baseline from the fs with the ' +
+    'screenshot from the browser', function() {
+      browser.takeScreenshot.returns(screenshot);
       FS.exists.yields(null, true);
-      FS.readFile.yields(null, base64);
-      mugshot.capture(dummySelector);
+      FS.readFile.yields(null, baseline);
 
-      expect(differ.isEqual).to.have.been.calledWith(base64, base64);
+      mugshot.test(dummySelector);
+
+      expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot);
   });
 
   it('should not compare if there is no baseline', function() {
     FS.exists.yields(null, false);
-    FS.readFile.yields(null, base64);
-    mugshot.capture(dummySelector);
+    FS.readFile.yields(null, baseline);
+
+    mugshot.test(dummySelector);
 
     expect(differ.isEqual).to.have.been.not.called;
   });
