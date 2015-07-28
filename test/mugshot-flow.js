@@ -9,9 +9,9 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
-      mugshot, 
-      browser,
-      FS;
+      base64 = 'bXVnc2hvdA==',
+      mugshot, browser,
+      FS, differ;
 
   beforeEach(function() {
     browser = {
@@ -24,16 +24,22 @@ describe('Mugshot', function() {
       writeFile: sinon.stub()
     };
 
+    differ = {
+      isEqual: sinon.stub(),
+      buildDiff: sinon.stub()
+    };
+
     var options = {
+      differ: differ,
       fs: FS
     };
-    
+
     mugshot = new Mugshot(browser, options);
   });
 
   it('should call the browser to take a screenshot', function() {
     mugshot.capture(dummySelector);
-    
+
     expect(browser.takeScreenshot).to.have.been.calledOnce;
   });
 
@@ -65,10 +71,36 @@ describe('Mugshot', function() {
     expect(FS.readFile).to.have.been.calledWith(dummySelector.name);
   });
 
-  it('should not read a screenshot from disk if there is none', function() {
+  it('should not read a baseline from disk if there is none', function() {
     FS.exists.yields(null, false);
     mugshot.capture(dummySelector);
 
     expect(FS.readFile).to.have.been.not.called;
+  });
+
+  it('should compare the screenshot and the baseline', function() {
+    FS.exists.yields(null, true);
+    FS.readFile.yields(null, base64);
+    mugshot.capture(dummySelector);
+
+    expect(differ.isEqual).to.have.been.calledOnce;
+  });
+
+  it('should call the differ with the screenshot from the browser and the ' +
+    'baseline from the fs', function() {
+      browser.takeScreenshot.returns(base64);
+      FS.exists.yields(null, true);
+      FS.readFile.yields(null, base64);
+      mugshot.capture(dummySelector);
+
+      expect(differ.isEqual).to.have.been.calledWith(base64, base64);
+  });
+
+  it('should not compare if there is no baseline', function() {
+    FS.exists.yields(null, false);
+    FS.readFile.yields(null, base64);
+    mugshot.capture(dummySelector);
+
+    expect(differ.isEqual).to.have.been.not.called;
   });
 });
