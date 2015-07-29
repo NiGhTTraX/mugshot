@@ -64,7 +64,7 @@ describe('Mugshot', function() {
 
       mugshot.test(dummySelector);
 
-      expect(FS.writeFile).to.have.been.not.called;
+      expect(FS.writeFile).to.not.have.been.called;
     });
 
   it('should read the baseline from disk if it exists', function() {
@@ -80,7 +80,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.readFile).to.have.been.not.called;
+    expect(FS.readFile).to.not.have.been.called;
   });
 
   it('should call the differ to compare the baseline from the fs with the ' +
@@ -100,6 +100,6 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(differ.isEqual).to.have.been.not.called;
+    expect(differ.isEqual).to.not.have.been.called;
   });
 });
