@@ -11,6 +11,7 @@ describe('Mugshot', function() {
       },
       baseline = 'bXVnc2hvdA==',
       screenshot = 'ZmxvcmVudGlu',
+      diff = baseline + screenshot,
       mugshot, browser,
       FS, differ;
 
@@ -126,7 +127,6 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the diff on disk', function() {
-    var diff = baseline + screenshot;
     var diffName = dummySelector.name + '.diff.png';
     FS.exists.yields(null, true);
     FS.readFile.yields(null, baseline);
@@ -140,20 +140,17 @@ describe('Mugshot', function() {
 
   it('should not call the fs to write the diff on disk if there is none',
     function() {
-      var diff = baseline + screenshot;
       var diffName = dummySelector.name + '.diff.png';
       FS.exists.yields(null, true);
       FS.readFile.yields(null, baseline);
       differ.isEqual.yields(null, true);
-      differ.createDiff.yields(null, diff);
 
       mugshot.test(dummySelector);
 
-      expect(FS.writeFile).to.not.have.been.calledWith(diffName, diff);
+      expect(FS.writeFile).to.not.have.been.called;
   });
 
   it('should call the fs to write the screenshot on disk', function() {
-    var diff = baseline + screenshot;
     var screenshotName = dummySelector.name + '.new.png';
     browser.takeScreenshot.returns(screenshot);
     FS.exists.yields(null, true);
@@ -164,20 +161,5 @@ describe('Mugshot', function() {
     mugshot.test(dummySelector);
 
     expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot);
-  });
-
-  it('should not call the fs to write the screenshot on disk if there is ' +
-    'no diff', function() {
-      var diff = baseline + screenshot;
-      var screenshotName = dummySelector.name + '.new.png';
-      FS.exists.yields(null, true);
-      FS.readFile.yields(null, baseline);
-      differ.isEqual.yields(null, true);
-      differ.createDiff.yields(null, diff);
-
-      mugshot.test(dummySelector);
-
-      expect(FS.writeFile).to.not.have.been
-        .calledWith(screenshotName, screenshot);
   });
 });
