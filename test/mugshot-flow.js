@@ -17,7 +17,7 @@ describe('Mugshot', function() {
 
   beforeEach(function() {
     browser = {
-      takeScreenshot: sinon.stub()
+      takeScreenshot: sinon.stub().yields(null, screenshot)
     };
 
     FS = {
@@ -52,7 +52,6 @@ describe('Mugshot', function() {
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
-    browser.takeScreenshot.returns(screenshot);
     FS.exists.yields(null, false);
 
     mugshot.test(dummySelector);
@@ -87,7 +86,6 @@ describe('Mugshot', function() {
 
   it('should call the differ to compare the baseline from the fs with the ' +
     'screenshot from the browser', function() {
-      browser.takeScreenshot.returns(screenshot);
       FS.exists.yields(null, true);
       FS.readFile.yields(null, baseline);
 
@@ -106,7 +104,6 @@ describe('Mugshot', function() {
   });
 
   it('should create a diff only if there are differences', function() {
-    browser.takeScreenshot.returns(screenshot);
     FS.exists.yields(null, true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -152,7 +149,6 @@ describe('Mugshot', function() {
 
   it('should call the fs to write the screenshot on disk', function() {
     var screenshotName = dummySelector.name + '.new.png';
-    browser.takeScreenshot.returns(screenshot);
     FS.exists.yields(null, true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
