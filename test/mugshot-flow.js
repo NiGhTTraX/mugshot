@@ -11,6 +11,7 @@ describe('Mugshot', function() {
       },
       baseline = 'bXVnc2hvdA==',
       screenshot = 'ZmxvcmVudGlu',
+      diff = baseline + screenshot,
       mugshot, browser,
       FS, differ;
 
@@ -27,7 +28,7 @@ describe('Mugshot', function() {
 
     differ = {
       isEqual: sinon.stub(),
-      buildDiff: sinon.stub()
+      createDiff: sinon.stub()
     };
 
     var options = {
@@ -47,15 +48,16 @@ describe('Mugshot', function() {
   it('should verify if a baseline already exists', function() {
     mugshot.test(dummySelector);
 
-    expect(FS.exists).to.have.been.calledOnce;
+    expect(FS.exists).to.have.been.calledWith(dummySelector.name);
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
+    browser.takeScreenshot.returns(screenshot);
     FS.exists.yields(null, false);
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name);
+    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot);
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
@@ -101,5 +103,63 @@ describe('Mugshot', function() {
     mugshot.test(dummySelector);
 
     expect(differ.isEqual).to.not.have.been.called;
+  });
+
+  it('should create a diff only if there are differences', function() {
+    browser.takeScreenshot.returns(screenshot);
+    FS.exists.yields(null, true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+
+    mugshot.test(dummySelector);
+
+    expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot);
+  });
+
+  it('should not create a diff if there are no differences', function() {
+    FS.exists.yields(null, true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    mugshot.test(dummySelector);
+
+    expect(differ.createDiff).to.not.have.been.called;
+  });
+
+  it('should call the fs to write the diff on disk', function() {
+    var diffName = dummySelector.name + '.diff.png';
+    FS.exists.yields(null, true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(null, diff);
+
+    mugshot.test(dummySelector);
+
+    expect(FS.writeFile).to.have.been.calledWith(diffName, diff);
+  });
+
+  it('should not call the fs to write the diff on disk if there is none',
+    function() {
+      var diffName = dummySelector.name + '.diff.png';
+      FS.exists.yields(null, true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+
+      mugshot.test(dummySelector);
+
+      expect(FS.writeFile).to.not.have.been.called;
+  });
+
+  it('should call the fs to write the screenshot on disk', function() {
+    var screenshotName = dummySelector.name + '.new.png';
+    browser.takeScreenshot.returns(screenshot);
+    FS.exists.yields(null, true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(null, diff);
+
+    mugshot.test(dummySelector);
+
+    expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot);
   });
 });
