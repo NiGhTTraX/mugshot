@@ -7,7 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "looks-same": "^2.0.0"
+    "looks-same": "flore77/looks-same"
   },
   "devDependencies": {
     "chai": "^3.2.0",
