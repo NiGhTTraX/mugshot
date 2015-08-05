@@ -29,9 +29,9 @@ describe('looks-same adaptor', function() {
       });
     });
 
-    it('should also return false if differences are unnoticable', function(done) {
+    it('should also return false if differences are unnoticeable', function(done) {
       var img1 = composePath('same.png');
-      var img2 = composePath('different-unnoticable.png');
+      var img2 = composePath('different-unnoticeable.png');
 
       looksSameAdaptor.isEqual(img1, img2, function(error, equal) {
         expect(error).to.be.null;
@@ -69,11 +69,11 @@ describe('looks-same adaptor', function() {
       });
     });
 
-    it('should also create a proper diff if the differences are unnoticable',
+    it('should also create a proper diff if the differences are unnoticeable',
       function(done) {
         var img1 = composePath('same.png');
-        var img2 = composePath('different-unnoticable.png');
-        var diff = composePath('strict-unnoticable.png');
+        var img2 = composePath('different-unnoticeable.png');
+        var diff = composePath('strict-unnoticeable.png');
 
         looksSameAdaptor.createDiff(img1, img2, function(error, base64) {
           var buffer = new Buffer(base64, 'base64');
