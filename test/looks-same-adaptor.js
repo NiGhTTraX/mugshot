@@ -1,8 +1,9 @@
 var expect = require('chai').expect;
+var path = require('path');
 var looksSameAdaptor = require('../lib/looks-same-adaptor.js');
 
 function composePath(file) {
-  return __dirname + '/data/looks-same/' + file;
+  return path.join(__dirname, '/data/looks-same/', file);
 }
 
 describe('looks-same adaptor', function() {
