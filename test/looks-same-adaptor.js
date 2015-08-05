@@ -63,6 +63,7 @@ describe('looks-same adaptor', function() {
         expect(error).to.be.null;
 
         looksSameAdaptor.isEqual(diff, buffer, function(error, equal) {
+          expect(error).to.be.null;
           expect(equal).to.be.equal(true);
           done();
         });
@@ -80,6 +81,7 @@ describe('looks-same adaptor', function() {
           expect(error).to.be.null;
 
           looksSameAdaptor.isEqual(diff, buffer, function(error, equal) {
+            expect(error).to.be.null;
             expect(equal).to.be.equal(true);
             done();
           });
@@ -97,6 +99,7 @@ describe('looks-same adaptor', function() {
         expect(error).to.be.null;
 
         looksSameAdaptor.isEqual(diff, buffer, function(error, equal) {
+          expect(error).to.be.null;
           expect(equal).to.be.equal(true);
           done();
         });
