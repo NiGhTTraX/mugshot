@@ -56,7 +56,8 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot);
+    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot,
+      sinon.match.func);
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
@@ -73,7 +74,8 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.readFile).to.have.been.calledWith(dummySelector.name);
+    expect(FS.readFile).to.have.been.calledWith(dummySelector.name,
+      sinon.match.func);
   });
 
   it('should not read a baseline from disk if there is none', function() {
@@ -132,7 +134,8 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(diffName, diff);
+    expect(FS.writeFile).to.have.been.calledWith(diffName, diff,
+      sinon.match.func);
   });
 
   it('should not call the fs to write the diff on disk if there is none',
@@ -156,6 +159,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot);
+    expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot,
+      sinon.match.func);
   });
 });
