@@ -93,7 +93,8 @@ describe('Mugshot', function() {
 
       mugshot.test(dummySelector);
 
-      expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot);
+      expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
+        sinon.match.func);
   });
 
   it('should not compare if there is no baseline', function() {
@@ -112,7 +113,8 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot);
+    expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
+      sinon.match.func);
   });
 
   it('should not create a diff if there are no differences', function() {
