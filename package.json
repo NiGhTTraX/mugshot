@@ -7,6 +7,7 @@
     "test": "test"
   },
   "dependencies": {
+    "object-assign": "^3.0.0",
     "looks-same": "flore77/looks-same"
   },
   "devDependencies": {
