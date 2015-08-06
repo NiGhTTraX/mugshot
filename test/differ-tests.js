@@ -111,4 +111,6 @@ function differTests(getDifferInstance) {
       });
     });
   });
-});
+}
+
+module.exports = differTests;
