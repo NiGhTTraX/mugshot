@@ -9,9 +9,9 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
-      baseline = new Buffer('bXVnc2hvdA==', 'base64'),
-      screenshot = new Buffer('ZmxvcmVudGlu', 'base64'),
-      diff = new Buffer(baseline + screenshot, 'base64'),
+      baseline = new Buffer('bXVnc2hvdA=='),
+      screenshot = new Buffer('ZmxvcmVudGlu'),
+      diff = new Buffer('anything'),
       mugshot, browser,
       FS, differ;
 
