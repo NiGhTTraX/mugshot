@@ -7,7 +7,9 @@
     "test": "test"
   },
   "dependencies": {
-    "looks-same": "flore77/looks-same"
+    "looks-same": "flore77/looks-same",
+    "object-assign": "^3.0.0",
+    "webdriverio": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^3.2.0",
