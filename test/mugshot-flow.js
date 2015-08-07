@@ -9,9 +9,9 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
-      baseline = 'bXVnc2hvdA==',
-      screenshot = 'ZmxvcmVudGlu',
-      diff = baseline + screenshot,
+      baseline = new Buffer('bXVnc2hvdA=='),
+      screenshot = new Buffer('ZmxvcmVudGlu'),
+      diff = new Buffer('anything'),
       mugshot, browser,
       FS, differ;
 
@@ -52,7 +52,7 @@ describe('Mugshot', function() {
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
-    FS.exists.yields(null, false);
+    FS.exists.yields(false);
 
     mugshot.test(dummySelector);
 
@@ -62,7 +62,7 @@ describe('Mugshot', function() {
 
   it('should not write the screenshot on disk if there is already a baseline',
     function() {
-      FS.exists.yields(null, true);
+      FS.exists.yields(true);
 
       mugshot.test(dummySelector);
 
@@ -70,7 +70,7 @@ describe('Mugshot', function() {
     });
 
   it('should read the baseline from disk if it exists', function() {
-    FS.exists.yields(null, true);
+    FS.exists.yields(true);
 
     mugshot.test(dummySelector);
 
@@ -79,7 +79,7 @@ describe('Mugshot', function() {
   });
 
   it('should not read a baseline from disk if there is none', function() {
-    FS.exists.yields(null, false);
+    FS.exists.yields(false);
 
     mugshot.test(dummySelector);
 
@@ -88,7 +88,7 @@ describe('Mugshot', function() {
 
   it('should call the differ to compare the baseline from the fs with the ' +
     'screenshot from the browser', function() {
-      FS.exists.yields(null, true);
+      FS.exists.yields(true);
       FS.readFile.yields(null, baseline);
 
       mugshot.test(dummySelector);
@@ -98,7 +98,7 @@ describe('Mugshot', function() {
   });
 
   it('should not compare if there is no baseline', function() {
-    FS.exists.yields(null, false);
+    FS.exists.yields(false);
     FS.readFile.yields(null, baseline);
 
     mugshot.test(dummySelector);
@@ -107,7 +107,7 @@ describe('Mugshot', function() {
   });
 
   it('should create a diff only if there are differences', function() {
-    FS.exists.yields(null, true);
+    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
 
@@ -118,7 +118,7 @@ describe('Mugshot', function() {
   });
 
   it('should not create a diff if there are no differences', function() {
-    FS.exists.yields(null, true);
+    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
@@ -129,7 +129,7 @@ describe('Mugshot', function() {
 
   it('should call the fs to write the diff on disk', function() {
     var diffName = dummySelector.name + '.diff.png';
-    FS.exists.yields(null, true);
+    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
@@ -143,7 +143,7 @@ describe('Mugshot', function() {
   it('should not call the fs to write the diff on disk if there is none',
     function() {
       var diffName = dummySelector.name + '.diff.png';
-      FS.exists.yields(null, true);
+      FS.exists.yields(true);
       FS.readFile.yields(null, baseline);
       differ.isEqual.yields(null, true);
 
@@ -154,7 +154,7 @@ describe('Mugshot', function() {
 
   it('should call the fs to write the screenshot on disk', function() {
     var screenshotName = dummySelector.name + '.new.png';
-    FS.exists.yields(null, true);
+    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
