@@ -9,6 +9,7 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
+      error = new Error('Fatal Error'),
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
       diff = new Buffer('anything'),
@@ -45,6 +46,12 @@ describe('Mugshot', function() {
     expect(browser.takeScreenshot).to.have.been.calledOnce;
   });
 
+  it('should throw an error if the screenshot fails', function() {
+    browser.takeScreenshot.yields(error, null);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should verify if a baseline already exists', function() {
     mugshot.test(dummySelector);
 
@@ -58,6 +65,13 @@ describe('Mugshot', function() {
 
     expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot,
       sinon.match.func);
+  });
+
+  it('should throw an error if the screenshot cannot be written', function() {
+    FS.exists.yields(false);
+    FS.writeFile.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
@@ -76,6 +90,13 @@ describe('Mugshot', function() {
 
     expect(FS.readFile).to.have.been.calledWith(dummySelector.name,
       sinon.match.func);
+  });
+
+  it('should throw an error if the baseline cannot be read', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(error, null);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
 
   it('should not read a baseline from disk if there is none', function() {
@@ -97,6 +118,14 @@ describe('Mugshot', function() {
         sinon.match.func);
   });
 
+  it('should throw an error if the comparison fails', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(error, null);
+
+      expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should not compare if there is no baseline', function() {
     FS.exists.yields(false);
     FS.readFile.yields(null, baseline);
@@ -115,6 +144,15 @@ describe('Mugshot', function() {
 
     expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
       sinon.match.func);
+  });
+
+  it('should throw an error if the diff building fails', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(error, null);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
 
   it('should not create a diff if there are no differences', function() {
@@ -140,6 +178,16 @@ describe('Mugshot', function() {
       sinon.match.func);
   });
 
+  it('should throw an error if the diff cannot be written', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(null, diff);
+    FS.writeFile.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should not call the fs to write the diff on disk if there is none',
     function() {
       var diffName = dummySelector.name + '.diff.png';
@@ -163,5 +211,16 @@ describe('Mugshot', function() {
 
     expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot,
       sinon.match.func);
+  });
+
+  it('should throw an error if the screenshot cannot be written', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(null, diff);
+    FS.writeFile.yields(null);
+    FS.writeFile.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
 });
