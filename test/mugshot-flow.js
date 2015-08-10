@@ -91,13 +91,13 @@ describe('Mugshot', function() {
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
-    function() {
-      FS.exists.yields(true);
+     function() {
+    FS.exists.yields(true);
 
-      mugshot.test(dummySelector);
+    mugshot.test(dummySelector);
 
-      expect(FS.writeFile).to.not.have.been.called;
-    });
+    expect(FS.writeFile).to.not.have.been.called;
+  });
 
   it('should read the baseline from disk if it exists', function() {
     FS.exists.yields(true);
@@ -205,16 +205,15 @@ describe('Mugshot', function() {
   });
 
   it('should not call the fs to write the diff on disk if there is none',
-    function() {
-      FS.exists.yields(true);
-      FS.readFile.yields(null, baseline);
-      differ.isEqual.yields(null, true);
+     function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
 
-      mugshot.test(dummySelector);
+    mugshot.test(dummySelector);
 
-      expect(FS.writeFile).to.not.have.been.called;
-    }
-  );
+    expect(FS.writeFile).to.not.have.been.called;
+  });
 
   it('should call the fs to write the screenshot on disk', function() {
     var screenshotName = dummySelector.name + '.new.png';
