@@ -2,6 +2,7 @@ var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
 var Mugshot = require('../lib/mugshot.js');
+var path = require('path');
 
 chai.use(require('sinon-chai'));
 
@@ -12,6 +13,8 @@ describe('Mugshot', function() {
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
       diff = new Buffer('anything'),
+      rootDirectory = 'visual-tests',
+      extension = '.png',
       mugshot, browser,
       FS, differ;
 
@@ -52,11 +55,12 @@ describe('Mugshot', function() {
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
+    var dummyPath = path.join(rootDirectory, dummySelector.name + extension);
     FS.exists.yields(false);
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(dummyPath, screenshot,
       sinon.match.func);
   });
 
@@ -128,7 +132,8 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the diff on disk', function() {
-    var diffName = dummySelector.name + '.diff.png';
+    var dummyPath = path.join(rootDirectory, dummySelector.name + '.diff' +
+      extension);
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -136,7 +141,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(diffName, diff,
+    expect(FS.writeFile).to.have.been.calledWith(dummyPath, diff,
       sinon.match.func);
   });
 
@@ -153,7 +158,8 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the screenshot on disk', function() {
-    var screenshotName = dummySelector.name + '.new.png';
+    var dummyPath = path.join(rootDirectory, dummySelector.name + '.new' +
+      extension);
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -161,7 +167,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(dummyPath, screenshot,
       sinon.match.func);
   });
 });
