@@ -238,8 +238,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(null);
-    FS.writeFile.yields(error);
+    FS.writeFile.onSecondCall().yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
