@@ -124,22 +124,22 @@ describe('Mugshot', function() {
   });
 
   it('should call the differ to compare the baseline from the fs with the ' +
-    'screenshot from the browser', function() {
-      FS.exists.yields(true);
-      FS.readFile.yields(null, baseline);
+     'screenshot from the browser', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
 
-      mugshot.test(dummySelector);
+    mugshot.test(dummySelector);
 
-      expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
-        sinon.match.func);
+    expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
+      sinon.match.func);
   });
 
   it('should throw an error if the comparison fails', function() {
-      FS.exists.yields(true);
-      FS.readFile.yields(null, baseline);
-      differ.isEqual.yields(error);
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(error);
 
-      expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
 
   it('should not compare if there is no baseline', function() {
@@ -206,7 +206,6 @@ describe('Mugshot', function() {
 
   it('should not call the fs to write the diff on disk if there is none',
     function() {
-      var diffName = dummySelector.name + '.diff.png';
       FS.exists.yields(true);
       FS.readFile.yields(null, baseline);
       differ.isEqual.yields(null, true);
@@ -214,7 +213,8 @@ describe('Mugshot', function() {
       mugshot.test(dummySelector);
 
       expect(FS.writeFile).to.not.have.been.called;
-  });
+    }
+  );
 
   it('should call the fs to write the screenshot on disk', function() {
     var screenshotName = dummySelector.name + '.new.png';

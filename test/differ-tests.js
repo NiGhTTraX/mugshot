@@ -34,16 +34,18 @@ function differTests(getDifferInstance) {
       });
     });
 
-    it('should also return false if differences are unnoticeable', function(done) {
-      var img1 = composePath('same.png');
-      var img2 = composePath('different-unnoticeable.png');
+    it('should also return false if differences are unnoticeable',
+      function(done) {
+        var img1 = composePath('same.png');
+        var img2 = composePath('different-unnoticeable.png');
 
-      differInstance.isEqual(img1, img2, function(error, equal) {
-        expect(error).to.be.null;
-        expect(equal).to.be.false;
-        done();
-      });
-    })
+        differInstance.isEqual(img1, img2, function(error, equal) {
+          expect(error).to.be.null;
+          expect(equal).to.be.false;
+          done();
+        });
+      }
+    );
 
     it('should return false for images of different sizes', function(done) {
       var img1 = composePath('wide.png');

@@ -12,13 +12,18 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
+    "eslint": "^1.1.0",
     "mocha": "^2.2.5",
+    "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0"
   },
   "scripts": {
     "test": "mocha"
   },
+  "pre-commit": [
+    "eslint ."
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uberVU/mugshot.git"
