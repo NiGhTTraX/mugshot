@@ -40,6 +40,26 @@ describe('Mugshot', function() {
     mugshot = new Mugshot(browser, options);
   });
 
+  it('should throw an error if no selector is provided', function() {
+    expect(mugshot.test.bind(mugshot)).to.throw('You have not provided any ' +
+      'selector');
+  });
+
+  it('should throw an error if the parameter is not an object', function() {
+    expect(mugshot.test.bind(mugshot, function() {})).to.throw('The provided ' +
+      'selector is not an object');
+  });
+
+  it('should throw an error if the parameter is an array', function() {
+    expect(mugshot.test.bind(mugshot, [])).to.throw('The provided selector ' +
+      'is not an object');
+  });
+
+  it('should throw an error if the object has no name property', function() {
+    expect(mugshot.test.bind(mugshot, {})).to.throw('Your object has no ' +
+      '\'name\' property');
+  });
+
   it('should call the browser to take a screenshot', function() {
     mugshot.test(dummySelector);
 
