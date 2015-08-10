@@ -41,23 +41,19 @@ describe('Mugshot', function() {
   });
 
   it('should throw an error if no selector is provided', function() {
-    expect(mugshot.test.bind(mugshot)).to.throw('You have not provided any ' +
-      'selector');
+    expect(mugshot.test.bind(mugshot)).to.throw(Error);
   });
 
   it('should throw an error if the parameter is not an object', function() {
-    expect(mugshot.test.bind(mugshot, function() {})).to.throw('The provided ' +
-      'selector is not an object');
+    expect(mugshot.test.bind(mugshot, function() {})).to.throw(Error);
   });
 
   it('should throw an error if the parameter is an array', function() {
-    expect(mugshot.test.bind(mugshot, [])).to.throw('The provided selector ' +
-      'is not an object');
+    expect(mugshot.test.bind(mugshot, [])).to.throw(Error);
   });
 
   it('should throw an error if the object has no name property', function() {
-    expect(mugshot.test.bind(mugshot, {})).to.throw('Your object has no ' +
-      '\'name\' property');
+    expect(mugshot.test.bind(mugshot, {})).to.throw(Error);
   });
 
   it('should call the browser to take a screenshot', function() {
@@ -67,7 +63,7 @@ describe('Mugshot', function() {
   });
 
   it('should throw an error if the screenshot fails', function() {
-    browser.takeScreenshot.yields(error, null);
+    browser.takeScreenshot.yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
@@ -114,7 +110,7 @@ describe('Mugshot', function() {
 
   it('should throw an error if the baseline cannot be read', function() {
     FS.exists.yields(true);
-    FS.readFile.yields(error, null);
+    FS.readFile.yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
@@ -141,7 +137,7 @@ describe('Mugshot', function() {
   it('should throw an error if the comparison fails', function() {
       FS.exists.yields(true);
       FS.readFile.yields(null, baseline);
-      differ.isEqual.yields(error, null);
+      differ.isEqual.yields(error);
 
       expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
@@ -170,7 +166,7 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
-    differ.createDiff.yields(error, null);
+    differ.createDiff.yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
