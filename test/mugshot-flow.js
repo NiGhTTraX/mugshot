@@ -2,6 +2,7 @@ var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
 var Mugshot = require('../lib/mugshot.js');
+var path = require('path');
 
 chai.use(require('sinon-chai'));
 
@@ -13,6 +14,13 @@ describe('Mugshot', function() {
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
       diff = new Buffer('anything'),
+      rootDirectory = 'visual-tests',
+      extension = '.png',
+      baselinePath = path.join(rootDirectory, dummySelector.name + extension),
+      screenshotPath = path.join(rootDirectory, dummySelector.name + '.new' +
+        extension),
+      diffPath = path.join(rootDirectory, dummySelector.name + '.diff' +
+        extension),
       mugshot, browser,
       FS, differ;
 
@@ -24,7 +32,8 @@ describe('Mugshot', function() {
     FS = {
       exists: sinon.stub(),
       readFile: sinon.stub(),
-      writeFile: sinon.stub()
+      writeFile: sinon.stub(),
+      mkdir: sinon.stub().yields(null)
     };
 
     differ = {
@@ -56,6 +65,25 @@ describe('Mugshot', function() {
     expect(mugshot.test.bind(mugshot, {})).to.throw(Error);
   });
 
+  it('should create the rootDirectory', function() {
+    mugshot.test(dummySelector);
+
+    expect(FS.mkdir).to.have.been.calledWith(rootDirectory);
+  });
+
+  it('should not throw error if the rootDirectory already exists', function() {
+    var error = {code: 'EEXIST'};
+    FS.mkdir.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.not.throw(error);
+  });
+
+  it('should throw error if mkdir callback receives another error', function() {
+    FS.mkdir.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should call the browser to take a screenshot', function() {
     mugshot.test(dummySelector);
 
@@ -71,7 +99,7 @@ describe('Mugshot', function() {
   it('should verify if a baseline already exists', function() {
     mugshot.test(dummySelector);
 
-    expect(FS.exists).to.have.been.calledWith(dummySelector.name);
+    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
@@ -79,7 +107,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummySelector.name, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
       sinon.match.func);
   });
 
@@ -104,8 +132,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.readFile).to.have.been.calledWith(dummySelector.name,
-      sinon.match.func);
+    expect(FS.readFile).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
 
   it('should throw an error if the baseline cannot be read', function() {
@@ -182,7 +209,6 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the diff on disk', function() {
-    var diffName = dummySelector.name + '.diff.png';
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -190,7 +216,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(diffName, diff,
+    expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
       sinon.match.func);
   });
 
@@ -216,7 +242,6 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the screenshot on disk', function() {
-    var screenshotName = dummySelector.name + '.new.png';
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -224,7 +249,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(screenshotName, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
       sinon.match.func);
   });
 
