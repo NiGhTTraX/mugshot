@@ -104,12 +104,12 @@ describe('Mugshot', function() {
   });
 
   it('should read the baseline from disk if it exists', function() {
+    var dummyPath = path.join(rootDirectory, dummySelector.name + extension);
     FS.exists.yields(true);
 
     mugshot.test(dummySelector);
 
-    expect(FS.readFile).to.have.been.calledWith(dummySelector.name,
-      sinon.match.func);
+    expect(FS.readFile).to.have.been.calledWith(dummyPath, sinon.match.func);
   });
 
   it('should throw an error if the baseline cannot be read', function() {
