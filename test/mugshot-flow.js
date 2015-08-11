@@ -270,7 +270,9 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
-    expect(FS.unlink).to.be.calledWith(diffPath);
+    mugshot.test(dummySelector);
+
+    expect(FS.unlink).to.have.been.calledWith(diffPath);
   });
 
   it('should try to unlink old screenshot if the comparison returns true',
@@ -279,7 +281,9 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
-    expect(FS.unlink).to.be.calledWith(screenshotPath);
+    mugshot.test(dummySelector);
+
+    expect(FS.unlink).to.have.been.calledWith(screenshotPath);
   });
 
   it('should not try to unlink old diff and screenshot it the comparison ' +
@@ -288,6 +292,6 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
 
-    expect(FS.unlink).to.not.be.called;
+    expect(FS.unlink).to.not.have.been.called;
   });
 });
