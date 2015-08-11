@@ -286,7 +286,7 @@ describe('Mugshot', function() {
     expect(FS.unlink).to.have.been.calledWith(screenshotPath);
   });
 
-  it('should not try to unlink old diff and screenshot it the comparison ' +
+  it('should not try to unlink old diff and screenshot if the comparison ' +
      'returns false', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
