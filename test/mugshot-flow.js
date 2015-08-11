@@ -33,7 +33,8 @@ describe('Mugshot', function() {
       exists: sinon.stub(),
       readFile: sinon.stub(),
       writeFile: sinon.stub(),
-      mkdir: sinon.stub().yields(null)
+      mkdir: sinon.stub().yields(null),
+      unlink: sinon.stub()
     };
 
     differ = {
@@ -259,6 +260,57 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
     FS.writeFile.onSecondCall().yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
+  it('should try to unlink old diff if the comparison returns true',
+     function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    mugshot.test(dummySelector);
+
+    expect(FS.unlink).to.have.been.calledWith(diffPath);
+  });
+
+  it('should try to unlink old screenshot if the comparison returns true',
+     function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    mugshot.test(dummySelector);
+
+    expect(FS.unlink).to.have.been.calledWith(screenshotPath);
+  });
+
+  it('should not try to unlink old diff and screenshot if the comparison ' +
+     'returns false', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+
+    mugshot.test(dummySelector);
+
+    expect(FS.unlink).to.not.have.been.called;
+  });
+
+  it('should not throw an error if the file is not there', function() {
+    var error = {code: 'ENOENT'};
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.not.throw(error);
+  });
+
+  it('should throw an error if the file couldn\'t be unlinked', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+    FS.unlink.yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
   });
