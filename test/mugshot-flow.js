@@ -17,6 +17,10 @@ describe('Mugshot', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       baselinePath = path.join(rootDirectory, dummySelector.name + extension),
+      screenshotPath = path.join(rootDirectory, dummySelector.name + '.new' +
+        extension),
+      diffPath = path.join(rootDirectory, dummySelector.name + '.diff' +
+        extension),
       mugshot, browser,
       FS, differ;
 
@@ -186,8 +190,6 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the diff on disk', function() {
-    var dummyPath = path.join(rootDirectory, dummySelector.name + '.diff' +
-      extension);
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -195,7 +197,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummyPath, diff,
+    expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
       sinon.match.func);
   });
 
@@ -221,8 +223,6 @@ describe('Mugshot', function() {
   });
 
   it('should call the fs to write the screenshot on disk', function() {
-    var dummyPath = path.join(rootDirectory, dummySelector.name + '.new' +
-      extension);
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
@@ -230,7 +230,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummyPath, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
       sinon.match.func);
   });
 
