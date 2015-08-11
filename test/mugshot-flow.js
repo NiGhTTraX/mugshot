@@ -16,6 +16,7 @@ describe('Mugshot', function() {
       diff = new Buffer('anything'),
       rootDirectory = 'visual-tests',
       extension = '.png',
+      baselinePath = path.join(rootDirectory, dummySelector.name + extension),
       mugshot, browser,
       FS, differ;
 
@@ -27,7 +28,8 @@ describe('Mugshot', function() {
     FS = {
       exists: sinon.stub(),
       readFile: sinon.stub(),
-      writeFile: sinon.stub()
+      writeFile: sinon.stub(),
+      mkdir: sinon.stub().yields(null)
     };
 
     differ = {
@@ -74,16 +76,15 @@ describe('Mugshot', function() {
   it('should verify if a baseline already exists', function() {
     mugshot.test(dummySelector);
 
-    expect(FS.exists).to.have.been.calledWith(dummySelector.name);
+    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
 
   it('should write the screenshot on disk if no baseline exists', function() {
-    var dummyPath = path.join(rootDirectory, dummySelector.name + extension);
     FS.exists.yields(false);
 
     mugshot.test(dummySelector);
 
-    expect(FS.writeFile).to.have.been.calledWith(dummyPath, screenshot,
+    expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
       sinon.match.func);
   });
 
@@ -104,12 +105,11 @@ describe('Mugshot', function() {
   });
 
   it('should read the baseline from disk if it exists', function() {
-    var dummyPath = path.join(rootDirectory, dummySelector.name + extension);
     FS.exists.yields(true);
 
     mugshot.test(dummySelector);
 
-    expect(FS.readFile).to.have.been.calledWith(dummyPath, sinon.match.func);
+    expect(FS.readFile).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
 
   it('should throw an error if the baseline cannot be read', function() {
