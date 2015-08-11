@@ -65,6 +65,25 @@ describe('Mugshot', function() {
     expect(mugshot.test.bind(mugshot, {})).to.throw(Error);
   });
 
+  it('should create the rootDirectory', function() {
+    mugshot.test(dummySelector);
+
+    expect(FS.mkdir).to.have.been.calledWith(rootDirectory);
+  });
+
+  it('should not throw error if the rootDirectory already exists', function() {
+    var error = {code: 'EEXIST'};
+    FS.mkdir.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.not.throw(error);
+  });
+
+  it('should throw error if mkdir callback receives another error', function() {
+    FS.mkdir.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should call the browser to take a screenshot', function() {
     mugshot.test(dummySelector);
 
