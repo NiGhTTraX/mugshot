@@ -296,4 +296,22 @@ describe('Mugshot', function() {
 
     expect(FS.unlink).to.not.have.been.called;
   });
+
+  it('should not throw an error if the file is not there', function() {
+    var error = {code: 'ENOENT'};
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.not.throw(error);
+  });
+
+  it('should throw an error if the file couldn\'t be unlinked', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+    FS.unlink.yields(error);
+
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
 });
