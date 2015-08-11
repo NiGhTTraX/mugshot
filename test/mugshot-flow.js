@@ -33,7 +33,8 @@ describe('Mugshot', function() {
       exists: sinon.stub(),
       readFile: sinon.stub(),
       writeFile: sinon.stub(),
-      mkdir: sinon.stub().yields(null)
+      mkdir: sinon.stub().yields(null),
+      unlink: sinon.stub()
     };
 
     differ = {
@@ -261,5 +262,32 @@ describe('Mugshot', function() {
     FS.writeFile.onSecondCall().yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
+  it('should try to unlink old diff if the comparison returns true',
+     function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    expect(FS.unlink).to.be.calledWith(diffPath);
+  });
+
+  it('should try to unlink old screenshot if the comparison returns true',
+     function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+
+    expect(FS.unlink).to.be.calledWith(screenshotPath);
+  });
+
+  it('should not try to unlink old diff and screenshot it the comparison ' +
+     'returns false', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+
+    expect(FS.unlink).to.not.be.called;
   });
 });
