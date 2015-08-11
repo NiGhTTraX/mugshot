@@ -292,6 +292,8 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
 
+    mugshot.test(dummySelector);
+
     expect(FS.unlink).to.not.have.been.called;
   });
 });
