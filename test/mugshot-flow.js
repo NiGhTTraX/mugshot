@@ -10,6 +10,16 @@ describe('Mugshot', function() {
   var dummySelector = {
         name: 'path'
       },
+      captureItem = {
+        name: dummySelector.name,
+        selector: 'a dom selector'
+      },
+      rect = {
+        width: 100,
+        height: 100,
+        top: 50,
+        left: 50
+      },
       error = new Error('Fatal Error'),
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
@@ -22,11 +32,13 @@ describe('Mugshot', function() {
       diffPath = path.join(rootDirectory, dummySelector.name + '.diff' +
         extension),
       mugshot, browser,
-      FS, differ;
+      FS, differ,
+      PNGProcessor;
 
   beforeEach(function() {
     browser = {
-      takeScreenshot: sinon.stub().yields(null, screenshot)
+      takeScreenshot: sinon.stub().yields(null, screenshot),
+      getBoundingClientRect: sinon.stub()
     };
 
     FS = {
@@ -37,6 +49,10 @@ describe('Mugshot', function() {
       unlink: sinon.stub()
     };
 
+    PNGProcessor = {
+      crop: sinon.stub()
+    };
+
     differ = {
       isEqual: sinon.stub(),
       createDiff: sinon.stub()
@@ -44,7 +60,8 @@ describe('Mugshot', function() {
 
     var options = {
       differ: differ,
-      fs: FS
+      fs: FS,
+      PNGProcessor: PNGProcessor
     };
 
     mugshot = new Mugshot(browser, options);
@@ -313,5 +330,48 @@ describe('Mugshot', function() {
     FS.unlink.yields(error);
 
     expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
+  it('should get the bounding rect if a selector is provided', function() {
+    mugshot.test(captureItem);
+
+    expect(browser.getBoundingClientRect).to.have.been.calledWith(
+      captureItem.selector, sinon.match.func);
+  });
+
+  it('should throw an error if the bounding rect couldn\'t be calculated',
+     function() {
+      browser.getBoundingClientRect.yields(error);
+
+      expect(mugshot.test.bind(mugshot, captureItem)).to.throw(Error);
+    });
+
+  it('should not get the bounding rect if no selector is provided', function() {
+    mugshot.test(dummySelector);
+
+    expect(browser.getBoundingClientRect).to.not.have.been.called;
+  });
+
+  it('should crop the image if a selector is provided', function() {
+    browser.getBoundingClientRect.yields(null, rect);
+
+    mugshot.test(captureItem);
+
+    expect(PNGProcessor.crop).to.have.been.calledWith(screenshot, rect,
+      sinon.match.func);
+  });
+
+  it('should throw an error if the screenshot couldn\'t be cropped',
+     function() {
+      browser.getBoundingClientRect.yields(error);
+      PNGProcessor.crop.yields(error);
+
+      expect(mugshot.test.bind(mugshot, captureItem)).to.throw(Error);
+    });
+
+  it('should not crop the image if there is no selector', function() {
+    mugshot.test(dummySelector);
+
+    expect(PNGProcessor.crop).to.not.have.been.called;
   });
 });
