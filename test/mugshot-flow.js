@@ -349,7 +349,7 @@ describe('Mugshot', function() {
   it('should not get the bounding rect if no selector is provided', function() {
     mugshot.test(dummySelector);
 
-    expect(browser.getBoundingClientRect).to.have.been.not.called;
+    expect(browser.getBoundingClientRect).to.not.have.been.called;
   });
 
   it('should crop the image if a selector is provided', function() {
@@ -372,6 +372,6 @@ describe('Mugshot', function() {
   it('should not crop the image if there is no selector', function() {
     mugshot.test(dummySelector);
 
-    expect(PNGProcessor.crop).to.have.been.not.called;
+    expect(PNGProcessor.crop).to.not.have.been.called;
   });
 });
