@@ -20,7 +20,7 @@ describe('Mugshot', function() {
         top: 50,
         left: 50
       },
-      callback = function() {},
+      callback,
       error = new Error('Fatal Error'),
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
@@ -65,6 +65,8 @@ describe('Mugshot', function() {
       PNGProcessor: PNGProcessor
     };
 
+    callback = sinon.spy();
+
     mugshot = new Mugshot(browser, options);
   });
 
@@ -103,15 +105,17 @@ describe('Mugshot', function() {
     var error = {code: 'EEXIST'};
     FS.mkdir.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback))
-      .to.not.throw(error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.not.called;
   });
 
   it('should throw error if mkdir callback receives another error', function() {
     FS.mkdir.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback))
-      .to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should call the browser to take a screenshot', function() {
@@ -123,7 +127,9 @@ describe('Mugshot', function() {
   it('should throw an error if the screenshot fails', function() {
     browser.takeScreenshot.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should verify if a baseline already exists', function() {
@@ -141,11 +147,13 @@ describe('Mugshot', function() {
       sinon.match.func);
   });
 
-  it('should throw an error if the screenshot cannot be written', function() {
+  it('should throw an error if the baseline cannot be written', function() {
     FS.exists.yields(false);
     FS.writeFile.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should not write the screenshot on disk if there is already a baseline',
@@ -169,7 +177,9 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should not read a baseline from disk if there is none', function() {
@@ -196,7 +206,9 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should not compare if there is no baseline', function() {
@@ -225,7 +237,9 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should not create a diff if there are no differences', function() {
@@ -257,7 +271,9 @@ describe('Mugshot', function() {
     differ.createDiff.yields(null, diff);
     FS.writeFile.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should not call the fs to write the diff on disk if there is none',
@@ -290,7 +306,9 @@ describe('Mugshot', function() {
     differ.createDiff.yields(null, diff);
     FS.writeFile.onSecondCall().yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should try to unlink old diff if the comparison returns true',
@@ -331,9 +349,11 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
+    FS.unlink.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback))
-      .to.not.throw(error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.not.called;
   });
 
   it('should throw an error if the file couldn\'t be unlinked', function() {
@@ -342,7 +362,9 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, true);
     FS.unlink.yields(error);
 
-    expect(mugshot.test.bind(mugshot, dummySelector, callback)).to.throw(Error);
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should get the bounding rect if a selector is provided', function() {
@@ -354,10 +376,12 @@ describe('Mugshot', function() {
 
   it('should throw an error if the bounding rect couldn\'t be calculated',
      function() {
-      browser.getBoundingClientRect.yields(error);
+    browser.getBoundingClientRect.yields(error);
 
-      expect(mugshot.test.bind(mugshot, captureItem, callback)).to.throw(Error);
-    });
+    mugshot.test(captureItem, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
+  });
 
   it('should not get the bounding rect if no selector is provided', function() {
     mugshot.test(dummySelector, callback);
@@ -376,11 +400,13 @@ describe('Mugshot', function() {
 
   it('should throw an error if the screenshot couldn\'t be cropped',
      function() {
-      browser.getBoundingClientRect.yields(error);
-      PNGProcessor.crop.yields(error);
+    browser.getBoundingClientRect.yields(error);
+    PNGProcessor.crop.yields(error);
 
-      expect(mugshot.test.bind(mugshot, captureItem, callback)).to.throw(Error);
-    });
+    mugshot.test(captureItem, callback);
+
+    expect(callback).to.have.been.calledWithExactly(error);
+  });
 
   it('should not crop the image if there is no selector', function() {
     mugshot.test(dummySelector, callback);
