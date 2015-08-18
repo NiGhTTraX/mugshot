@@ -257,6 +257,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
+    FS.writeFile.yields(null);
 
     mugshot.test(dummySelector, callback);
 
@@ -269,7 +270,8 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(error);
+    FS.writeFile.onFirstCall().yields(null);
+    FS.writeFile.onSecondCall().yields(error);
 
     mugshot.test(dummySelector, callback);
 
@@ -304,7 +306,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
-    FS.writeFile.onSecondCall().yields(error);
+    FS.writeFile.onFirstCall().yields(error);
 
     mugshot.test(dummySelector, callback);
 
@@ -316,7 +318,7 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
-
+    FS.unlink.onFirstCall().yields(null);
     mugshot.test(dummySelector, callback);
 
     expect(FS.unlink).to.have.been.calledWith(diffPath);
@@ -353,7 +355,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector, callback);
 
-    expect(callback).to.have.been.not.called;
+    expect(callback).to.have.been.not.calledWith(error);
   });
 
   it('should throw an error if the file couldn\'t be unlinked', function() {
