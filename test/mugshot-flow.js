@@ -83,6 +83,10 @@ describe('Mugshot', function() {
     expect(mugshot.test.bind(mugshot, {})).to.throw(Error);
   });
 
+  it('should throw an error if no callback is provided', function() {
+    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
+  });
+
   it('should create the rootDirectory', function() {
     mugshot.test(dummySelector);
 
