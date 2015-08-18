@@ -355,7 +355,7 @@ describe('Mugshot', function() {
 
     mugshot.test(dummySelector, callback);
 
-    expect(callback).to.have.been.not.calledWith(error);
+    expect(callback).to.not.have.been.calledWith(error);
   });
 
   it('should throw an error if the file couldn\'t be unlinked', function() {
@@ -438,7 +438,7 @@ describe('Mugshot', function() {
     expect(callback).to.have.been.calledWithExactly(null, false);
   });
 
-  it('should return false if there are differences', function() {
+  it('should return true if there are no differences', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
