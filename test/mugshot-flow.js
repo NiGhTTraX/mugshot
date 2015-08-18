@@ -415,4 +415,38 @@ describe('Mugshot', function() {
 
     expect(PNGProcessor.crop).to.not.have.been.called;
   });
+
+  it('should return true if there is no baseline', function() {
+    FS.exists.yields(false);
+    FS.writeFile.yields(null);
+
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(null, true);
+  });
+
+  it('should return false if there are differences', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, false);
+    differ.createDiff.yields(null, diff);
+    FS.writeFile.yields(null);
+    FS.writeFile.yields(null);
+
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(null, false);
+  });
+
+  it('should return false if there are differences', function() {
+    FS.exists.yields(true);
+    FS.readFile.yields(null, baseline);
+    differ.isEqual.yields(null, true);
+    FS.unlink.yields(null);
+    FS.unlink.yields(null);
+
+    mugshot.test(dummySelector, callback);
+
+    expect(callback).to.have.been.calledWithExactly(null, true);
+  });
 });
