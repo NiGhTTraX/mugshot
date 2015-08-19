@@ -20,7 +20,6 @@ describe('Mugshot', function() {
         top: 50,
         left: 50
       },
-      callback,
       error = new Error('Fatal Error'),
       baseline = new Buffer('bXVnc2hvdA=='),
       screenshot = new Buffer('ZmxvcmVudGlu'),
@@ -32,9 +31,7 @@ describe('Mugshot', function() {
         extension),
       diffPath = path.join(rootDirectory, dummySelector.name + '.diff' +
         extension),
-      mugshot, browser,
-      FS, differ,
-      PNGProcessor;
+      mugshot, browser, FS, differ, PNGProcessor, callback;
 
   beforeEach(function() {
     browser = {
