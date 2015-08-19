@@ -188,37 +188,39 @@ describe('Mugshot', function() {
     });
   });
 
-  it('should verify if a baseline already exists', function() {
-    mugshot.test(noSelector, callback);
+  describe('No baseline', function() {
+    it('should verify that a baseline doesn\'t exist', function() {
+      mugshot.test(noSelector, callback);
 
-    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
-  });
+      expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
+    });
 
-  it('should write the screenshot on disk if no baseline exists', function() {
-    FS.exists.yields(false);
+    it('should write the screenshot on disk', function() {
+      FS.exists.yields(false);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
-      sinon.match.func);
-  });
+      expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
+        sinon.match.func);
+    });
 
-  it('should throw an error if the baseline cannot be written', function() {
-    FS.exists.yields(false);
-    FS.writeFile.yields(error);
+    it('should throw an error if the screenshot cannot be written', function() {
+      FS.exists.yields(false);
+      FS.writeFile.yields(error);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
 
-  it('should not write the screenshot on disk if there is already a baseline',
-     function() {
-    FS.exists.yields(true);
+    it('should not write the screenshot on disk if there is already a baseline',
+       function() {
+      FS.exists.yields(true);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(FS.writeFile).to.not.have.been.called;
+      expect(FS.writeFile).to.not.have.been.called;
+    });
   });
 
   it('should read the baseline from disk if it exists', function() {
