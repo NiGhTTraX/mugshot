@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var path = require('path');
 
 function composePath(file) {
-  return path.join(__dirname, 'data', 'looks-same', file);
+  return path.join(__dirname, 'data', file);
 }
 
 function differTests(getDifferInstance) {
