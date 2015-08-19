@@ -7,11 +7,11 @@ var path = require('path');
 chai.use(require('sinon-chai'));
 
 describe('Mugshot', function() {
-  var dummySelector = {
+  var noSelector = {
         name: 'path'
       },
       captureItem = {
-        name: dummySelector.name,
+        name: noSelector.name,
         selector: 'a dom selector'
       },
       rect = {
@@ -26,10 +26,10 @@ describe('Mugshot', function() {
       diff = new Buffer('anything'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      baselinePath = path.join(rootDirectory, dummySelector.name + extension),
-      screenshotPath = path.join(rootDirectory, dummySelector.name + '.new' +
+      baselinePath = path.join(rootDirectory, noSelector.name + extension),
+      screenshotPath = path.join(rootDirectory, noSelector.name + '.new' +
         extension),
-      diffPath = path.join(rootDirectory, dummySelector.name + '.diff' +
+      diffPath = path.join(rootDirectory, noSelector.name + '.diff' +
         extension),
       mugshot, browser, FS, differ, PNGProcessor, callback;
 
@@ -56,44 +56,47 @@ describe('Mugshot', function() {
       createDiff: sinon.stub()
     };
 
+    callback = sinon.spy();
+
     var options = {
       differ: differ,
       fs: FS,
       PNGProcessor: PNGProcessor
     };
 
-    callback = sinon.spy();
-
     mugshot = new Mugshot(browser, options);
   });
 
-  it('should throw an error if no selector is provided', function() {
-    expect(mugshot.test.bind(mugshot)).to.throw(Error);
-  });
+  describe('Parameters checking', function() {
+    it('should throw an error if no captureItem is provided', function() {
+      expect(mugshot.test.bind(mugshot)).to.throw(Error);
+    });
 
-  it('should throw an error if the parameter is not an object', function() {
-    expect(mugshot.test.bind(mugshot, function() {}, callback)).to.throw(Error);
-  });
+    it('should throw an error if the captureItem is not an object', function() {
+      expect(mugshot.test.bind(mugshot, function() {}, callback))
+      .to.throw(Error);
+    });
 
-  it('should throw an error if the parameter is an array', function() {
-    expect(mugshot.test.bind(mugshot, [], callback)).to.throw(Error);
-  });
+    it('should throw an error if the captureItem is an array', function() {
+      expect(mugshot.test.bind(mugshot, [], callback)).to.throw(Error);
+    });
 
-  it('should throw an error if the object has no name property', function() {
-    expect(mugshot.test.bind(mugshot, {}, callback)).to.throw(Error);
-  });
+    it('should throw an error if the captureItem has no name property',
+       function() {
+      expect(mugshot.test.bind(mugshot, {}, callback)).to.throw(Error);
+    });
 
-  it('should throw an error if no callback is provided', function() {
-    expect(mugshot.test.bind(mugshot, dummySelector)).to.throw(Error);
-  });
+    it('should throw an error if no callback is provided', function() {
+      expect(mugshot.test.bind(mugshot, noSelector)).to.throw(Error);
+    });
 
-  it('should throw an error if the callback param is not a function',
-     function() {
-    expect(mugshot.test.bind(mugshot, dummySelector, {})).to.throw(Error);
+    it('should throw an error if the callback is not a function', function() {
+      expect(mugshot.test.bind(mugshot, noSelector, {})).to.throw(Error);
+    });
   });
 
   it('should create the rootDirectory', function() {
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.mkdir).to.have.been.calledWith(rootDirectory);
   });
@@ -102,7 +105,7 @@ describe('Mugshot', function() {
     var error = {code: 'EEXIST'};
     FS.mkdir.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.not.called;
   });
@@ -110,13 +113,13 @@ describe('Mugshot', function() {
   it('should throw error if mkdir callback receives another error', function() {
     FS.mkdir.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should call the browser to take a screenshot', function() {
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(browser.takeScreenshot).to.have.been.calledOnce;
   });
@@ -124,13 +127,13 @@ describe('Mugshot', function() {
   it('should throw an error if the screenshot fails', function() {
     browser.takeScreenshot.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
   it('should verify if a baseline already exists', function() {
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
@@ -138,7 +141,7 @@ describe('Mugshot', function() {
   it('should write the screenshot on disk if no baseline exists', function() {
     FS.exists.yields(false);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
       sinon.match.func);
@@ -148,7 +151,7 @@ describe('Mugshot', function() {
     FS.exists.yields(false);
     FS.writeFile.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -157,7 +160,7 @@ describe('Mugshot', function() {
      function() {
     FS.exists.yields(true);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.not.have.been.called;
   });
@@ -165,7 +168,7 @@ describe('Mugshot', function() {
   it('should read the baseline from disk if it exists', function() {
     FS.exists.yields(true);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.readFile).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
@@ -174,7 +177,7 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -182,7 +185,7 @@ describe('Mugshot', function() {
   it('should not read a baseline from disk if there is none', function() {
     FS.exists.yields(false);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.readFile).to.not.have.been.called;
   });
@@ -192,7 +195,7 @@ describe('Mugshot', function() {
     FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
       sinon.match.func);
@@ -203,7 +206,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -212,7 +215,7 @@ describe('Mugshot', function() {
     FS.exists.yields(false);
     FS.readFile.yields(null, baseline);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(differ.isEqual).to.not.have.been.called;
   });
@@ -222,7 +225,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
       sinon.match.func);
@@ -234,7 +237,7 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -244,7 +247,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(differ.createDiff).to.not.have.been.called;
   });
@@ -256,7 +259,7 @@ describe('Mugshot', function() {
     differ.createDiff.yields(null, diff);
     FS.writeFile.yields(null);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
       sinon.match.func);
@@ -270,7 +273,7 @@ describe('Mugshot', function() {
     FS.writeFile.onFirstCall().yields(null);
     FS.writeFile.onSecondCall().yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -281,7 +284,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.not.have.been.called;
   });
@@ -292,7 +295,7 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
       sinon.match.func);
@@ -305,7 +308,7 @@ describe('Mugshot', function() {
     differ.createDiff.yields(null, diff);
     FS.writeFile.onFirstCall().yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -316,7 +319,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
     FS.unlink.onFirstCall().yields(null);
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.have.been.calledWith(diffPath);
   });
@@ -327,7 +330,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, true);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.have.been.calledWith(screenshotPath);
   });
@@ -338,7 +341,7 @@ describe('Mugshot', function() {
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(null, false);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.not.have.been.called;
   });
@@ -350,7 +353,7 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, true);
     FS.unlink.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.not.have.been.calledWith(error);
   });
@@ -361,7 +364,7 @@ describe('Mugshot', function() {
     differ.isEqual.yields(null, true);
     FS.unlink.yields(error);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
   });
@@ -383,7 +386,7 @@ describe('Mugshot', function() {
   });
 
   it('should not get the bounding rect if no selector is provided', function() {
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(browser.getBoundingClientRect).to.not.have.been.called;
   });
@@ -408,7 +411,7 @@ describe('Mugshot', function() {
   });
 
   it('should not crop the image if there is no selector', function() {
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(PNGProcessor.crop).to.not.have.been.called;
   });
@@ -417,7 +420,7 @@ describe('Mugshot', function() {
     FS.exists.yields(false);
     FS.writeFile.yields(null);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(null, true);
   });
@@ -430,7 +433,7 @@ describe('Mugshot', function() {
     FS.writeFile.yields(null);
     FS.writeFile.yields(null);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(null, false);
   });
@@ -442,7 +445,7 @@ describe('Mugshot', function() {
     FS.unlink.yields(null);
     FS.unlink.yields(null);
 
-    mugshot.test(dummySelector, callback);
+    mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(null, true);
   });
