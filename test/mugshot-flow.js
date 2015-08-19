@@ -10,7 +10,7 @@ describe('Mugshot', function() {
   var noSelector = {
         name: 'path'
       },
-      captureItem = {
+      withSelector = {
         name: noSelector.name,
         selector: 'a dom selector'
       },
@@ -74,7 +74,7 @@ describe('Mugshot', function() {
 
     it('should throw an error if the captureItem is not an object', function() {
       expect(mugshot.test.bind(mugshot, function() {}, callback))
-      .to.throw(Error);
+        .to.throw(Error);
     });
 
     it('should throw an error if the captureItem is an array', function() {
@@ -95,41 +95,97 @@ describe('Mugshot', function() {
     });
   });
 
-  it('should create the rootDirectory', function() {
-    mugshot.test(noSelector, callback);
+  describe('Preparations for testing', function() {
+    it('should create the rootDirectory', function() {
+      mugshot.test(noSelector, callback);
 
-    expect(FS.mkdir).to.have.been.calledWith(rootDirectory);
+      expect(FS.mkdir).to.have.been.calledWith(rootDirectory, sinon.match.func);
+    });
+
+    it('should not call the cb with error if the rootDirectory already exists',
+       function() {
+      var error = {code: 'EEXIST'};
+      FS.mkdir.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.not.called;
+    });
+
+    it('should call the cb with error if mkdir callback receives another error',
+       function() {
+      FS.mkdir.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
+
+    it('should call the browser to take a screenshot', function() {
+      mugshot.test(noSelector, callback);
+
+      expect(browser.takeScreenshot).to.have.been.calledOnce;
+    });
+
+    it('should call the cb with error if the screenshot fails', function() {
+      browser.takeScreenshot.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
   });
 
-  it('should not throw error if the rootDirectory already exists', function() {
-    var error = {code: 'EEXIST'};
-    FS.mkdir.yields(error);
+  describe('No selector', function() {
+    it('should not get the bounding rect if no selector is provided',
+       function() {
+      mugshot.test(noSelector, callback);
 
-    mugshot.test(noSelector, callback);
+      expect(browser.getBoundingClientRect).to.not.have.been.called;
+    });
 
-    expect(callback).to.have.been.not.called;
+    it('should not crop the image if there is no selector', function() {
+      mugshot.test(noSelector, callback);
+
+      expect(PNGProcessor.crop).to.not.have.been.called;
+    });
   });
 
-  it('should throw error if mkdir callback receives another error', function() {
-    FS.mkdir.yields(error);
+  describe('With selector', function() {
+    it('should get the bounding rect', function() {
+      mugshot.test(withSelector, callback);
 
-    mugshot.test(noSelector, callback);
+      expect(browser.getBoundingClientRect).to.have.been.calledWith(
+        withSelector.selector, sinon.match.func);
+    });
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+    it('should call the cb with error if the bounding rect couldn\'t be ' +
+       'calculated', function() {
+      browser.getBoundingClientRect.yields(error);
 
-  it('should call the browser to take a screenshot', function() {
-    mugshot.test(noSelector, callback);
+      mugshot.test(withSelector, callback);
 
-    expect(browser.takeScreenshot).to.have.been.calledOnce;
-  });
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
 
-  it('should throw an error if the screenshot fails', function() {
-    browser.takeScreenshot.yields(error);
+    it('should crop the image', function() {
+      browser.getBoundingClientRect.yields(null, rect);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(withSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
+      expect(PNGProcessor.crop).to.have.been.calledWith(screenshot, rect,
+        sinon.match.func);
+    });
+
+    it('should call the cb with error if the screenshot couldn\'t be cropped',
+       function() {
+      browser.getBoundingClientRect.yields(null, rect);
+      PNGProcessor.crop.yields(error);
+
+      mugshot.test(withSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
   });
 
   it('should verify if a baseline already exists', function() {
@@ -367,53 +423,6 @@ describe('Mugshot', function() {
     mugshot.test(noSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should get the bounding rect if a selector is provided', function() {
-    mugshot.test(captureItem, callback);
-
-    expect(browser.getBoundingClientRect).to.have.been.calledWith(
-      captureItem.selector, sinon.match.func);
-  });
-
-  it('should throw an error if the bounding rect couldn\'t be calculated',
-     function() {
-    browser.getBoundingClientRect.yields(error);
-
-    mugshot.test(captureItem, callback);
-
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should not get the bounding rect if no selector is provided', function() {
-    mugshot.test(noSelector, callback);
-
-    expect(browser.getBoundingClientRect).to.not.have.been.called;
-  });
-
-  it('should crop the image if a selector is provided', function() {
-    browser.getBoundingClientRect.yields(null, rect);
-
-    mugshot.test(captureItem, callback);
-
-    expect(PNGProcessor.crop).to.have.been.calledWith(screenshot, rect,
-      sinon.match.func);
-  });
-
-  it('should throw an error if the screenshot couldn\'t be cropped',
-     function() {
-    browser.getBoundingClientRect.yields(error);
-    PNGProcessor.crop.yields(error);
-
-    mugshot.test(captureItem, callback);
-
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should not crop the image if there is no selector', function() {
-    mugshot.test(noSelector, callback);
-
-    expect(PNGProcessor.crop).to.not.have.been.called;
   });
 
   it('should return true if there is no baseline', function() {
