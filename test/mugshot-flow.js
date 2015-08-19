@@ -203,6 +203,15 @@ describe('Mugshot', function() {
       expect(FS.readFile).to.not.have.been.called;
     });
 
+    it('should not try to compare', function() {
+      FS.exists.yields(false);
+      FS.readFile.yields(null, baseline);
+
+      mugshot.test(noSelector, callback);
+
+      expect(differ.isEqual).to.not.have.been.called;
+    });
+
     it('should write the screenshot on disk', function() {
       FS.exists.yields(false);
 
@@ -212,7 +221,7 @@ describe('Mugshot', function() {
         sinon.match.func);
     });
 
-    it('should call the cb with  error if the screenshot cannot be written',
+    it('should call the cb with error if the screenshot cannot be written',
        function() {
       FS.exists.yields(false);
       FS.writeFile.yields(error);
@@ -220,6 +229,15 @@ describe('Mugshot', function() {
       mugshot.test(noSelector, callback);
 
       expect(callback).to.have.been.calledWithExactly(error);
+    });
+
+    it('should return true through the cb', function() {
+      FS.exists.yields(false);
+      FS.writeFile.yields(null);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(null, true);
     });
   });
 
@@ -257,218 +275,218 @@ describe('Mugshot', function() {
 
       expect(callback).to.have.been.calledWithExactly(error);
     });
+
+    it('should compare the baseline and the screenshot', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+
+      mugshot.test(noSelector, callback);
+
+      expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
+        sinon.match.func);
+    });
+
+    it('should call the cb with error if the comparison fails', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
   });
 
-  it('should call the differ to compare the baseline from the fs with the ' +
-     'screenshot from the browser', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
+  describe('No differences', function() {
+    it('should not create a diff', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
-      sinon.match.func);
+      expect(differ.createDiff).to.not.have.been.called;
+    });
+
+    it('should try to unlink old screenshot', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+
+      mugshot.test(noSelector, callback);
+
+      expect(FS.unlink).to.have.been.calledWith(screenshotPath,
+        sinon.match.func);
+    });
+
+    it('should try to unlink old diff',
+       function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.onFirstCall().yields(null);
+
+      mugshot.test(noSelector, callback);
+
+      expect(FS.unlink).to.have.been.calledWith(diffPath, sinon.match.func);
+    });
+
+    it('should not throw an error if the screenshot is not there', function() {
+      var error = {code: 'ENOENT'};
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.not.have.been.calledWith(error);
+    });
+
+    it('should not throw an error if the diff is not there', function() {
+      var error = {code: 'ENOENT'};
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.onFirstCall().yields(null);
+      FS.unlink.onSecondCall().yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.not.have.been.calledWith(error);
+    });
+
+    it('should throw an error if the screenshot couldn\'t be unlinked',
+       function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
+
+    it('should throw an error if the diff couldn\'t be unlinked',
+       function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.onFirstCall().yields(null);
+      FS.unlink.onSecondCall().yields(error);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
+
+    it('should return true through the cb', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, true);
+      FS.unlink.yields(null);
+      FS.unlink.yields(null);
+
+      mugshot.test(noSelector, callback);
+
+      expect(callback).to.have.been.calledWithExactly(null, true);
+    });
   });
 
-  it('should throw an error if the comparison fails', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(error);
+  describe('With differences', function() {
+    it('should create a diff', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+      expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
+        sinon.match.func);
+    });
 
-  it('should not compare if there is no baseline', function() {
-    FS.exists.yields(false);
-    FS.readFile.yields(null, baseline);
+    it('should call the cb with error if the diff building fails', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(error);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(differ.isEqual).to.not.have.been.called;
-  });
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
 
-  it('should create a diff only if there are differences', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
+    it('should not try to unlink old diff and screenshot', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
-      sinon.match.func);
-  });
+      expect(FS.unlink).to.not.have.been.called;
+    });
 
-  it('should throw an error if the diff building fails', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(error);
+    it('should call the fs to write the screenshot on disk', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(null, diff);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+      expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
+        sinon.match.func);
+    });
 
-  it('should not create a diff if there are no differences', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
+    it('should throw an error if the screenshot cannot be written', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(null, diff);
+      FS.writeFile.yields(error);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(differ.createDiff).to.not.have.been.called;
-  });
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
 
-  it('should call the fs to write the diff on disk', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(null);
+    it('should call the fs to write the diff on disk', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(null, diff);
+      FS.writeFile.yields(null);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
-      sinon.match.func);
-  });
+      expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
+        sinon.match.func);
+    });
 
-  it('should throw an error if the diff cannot be written', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(null, diff);
-    FS.writeFile.onFirstCall().yields(null);
-    FS.writeFile.onSecondCall().yields(error);
+    it('should throw an error if the diff cannot be written', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(null, diff);
+      FS.writeFile.onFirstCall().yields(null);
+      FS.writeFile.onSecondCall().yields(error);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
 
-  it('should not call the fs to write the diff on disk if there is none',
-     function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
+    it('should return false through the callback', function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(null, baseline);
+      differ.isEqual.yields(null, false);
+      differ.createDiff.yields(null, diff);
+      FS.writeFile.yields(null);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(FS.writeFile).to.not.have.been.called;
-  });
-
-  it('should call the fs to write the screenshot on disk', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(null, diff);
-
-    mugshot.test(noSelector, callback);
-
-    expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
-      sinon.match.func);
-  });
-
-  it('should throw an error if the screenshot cannot be written', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(null, diff);
-    FS.writeFile.onFirstCall().yields(error);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should try to unlink old diff if the comparison returns true',
-     function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.onFirstCall().yields(null);
-    mugshot.test(noSelector, callback);
-
-    expect(FS.unlink).to.have.been.calledWith(diffPath);
-  });
-
-  it('should try to unlink old screenshot if the comparison returns true',
-     function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-
-    mugshot.test(noSelector, callback);
-
-    expect(FS.unlink).to.have.been.calledWith(screenshotPath);
-  });
-
-  it('should not try to unlink old diff and screenshot if the comparison ' +
-     'returns false', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-
-    mugshot.test(noSelector, callback);
-
-    expect(FS.unlink).to.not.have.been.called;
-  });
-
-  it('should not throw an error if the file is not there', function() {
-    var error = {code: 'ENOENT'};
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.yields(error);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.not.have.been.calledWith(error);
-  });
-
-  it('should throw an error if the file couldn\'t be unlinked', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.yields(error);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should return true if there is no baseline', function() {
-    FS.exists.yields(false);
-    FS.writeFile.yields(null);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.have.been.calledWithExactly(null, true);
-  });
-
-  it('should return false if there are differences', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-    differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(null);
-    FS.writeFile.yields(null);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.have.been.calledWithExactly(null, false);
-  });
-
-  it('should return true if there are no differences', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.yields(null);
-    FS.unlink.yields(null);
-
-    mugshot.test(noSelector, callback);
-
-    expect(callback).to.have.been.calledWithExactly(null, true);
+      expect(callback).to.have.been.calledWithExactly(null, false);
+    });
   });
 });
