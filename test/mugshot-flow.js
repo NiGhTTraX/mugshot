@@ -195,6 +195,14 @@ describe('Mugshot', function() {
       expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
     });
 
+    it('should not read a baseline from disk', function() {
+      FS.exists.yields(false);
+
+      mugshot.test(noSelector, callback);
+
+      expect(FS.readFile).to.not.have.been.called;
+    });
+
     it('should write the screenshot on disk', function() {
       FS.exists.yields(false);
 
@@ -204,7 +212,8 @@ describe('Mugshot', function() {
         sinon.match.func);
     });
 
-    it('should throw an error if the screenshot cannot be written', function() {
+    it('should call the cb with  error if the screenshot cannot be written',
+       function() {
       FS.exists.yields(false);
       FS.writeFile.yields(error);
 
@@ -212,8 +221,16 @@ describe('Mugshot', function() {
 
       expect(callback).to.have.been.calledWithExactly(error);
     });
+  });
 
-    it('should not write the screenshot on disk if there is already a baseline',
+  describe('With baseline', function() {
+    it('should verify that a baseline exists', function() {
+      mugshot.test(noSelector, callback);
+
+      expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
+    });
+
+    it('should not write the screenshot on disk',
        function() {
       FS.exists.yields(true);
 
@@ -221,31 +238,25 @@ describe('Mugshot', function() {
 
       expect(FS.writeFile).to.not.have.been.called;
     });
-  });
 
-  it('should read the baseline from disk if it exists', function() {
-    FS.exists.yields(true);
+    it('should read the baseline from disk', function() {
+      FS.exists.yields(true);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(FS.readFile).to.have.been.calledWith(baselinePath, sinon.match.func);
-  });
+      expect(FS.readFile).to.have.been.calledWith(baselinePath,
+        sinon.match.func);
+    });
 
-  it('should throw an error if the baseline cannot be read', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(error);
+    it('should call the cb with error if the baseline cannot be read',
+       function() {
+      FS.exists.yields(true);
+      FS.readFile.yields(error);
 
-    mugshot.test(noSelector, callback);
+      mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
-
-  it('should not read a baseline from disk if there is none', function() {
-    FS.exists.yields(false);
-
-    mugshot.test(noSelector, callback);
-
-    expect(FS.readFile).to.not.have.been.called;
+      expect(callback).to.have.been.calledWithExactly(error);
+    });
   });
 
   it('should call the differ to compare the baseline from the fs with the ' +
