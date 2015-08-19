@@ -8,11 +8,18 @@ chai.use(require('sinon-chai'));
 describe('No selector', function() {
   var noSelector = {name: 'path'},
       callback = function() {},
-      mugshot, browser, PNGProcessor;
+      screenshot = new Buffer('ZmxvcmVudGlu'),
+      mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {
     browser = {
+      takeScreenshot: sinon.stub().yields(null, screenshot),
       getBoundingClientRect: sinon.stub()
+    };
+
+    FS = {
+      mkdir: sinon.stub().yields(null),
+      exists: function() {}
     };
 
     PNGProcessor = {
@@ -20,6 +27,7 @@ describe('No selector', function() {
     };
 
     var options = {
+      fs: FS,
       PNGProcessor: PNGProcessor
     };
 
