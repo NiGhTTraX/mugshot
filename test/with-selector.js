@@ -16,8 +16,8 @@ describe('With selector', function() {
         top: 50,
         left: 50
       },
-      error = new Error('Fatal Error'),
       screenshot = new Buffer('ZmxvcmVudGlu'),
+      error = new Error('Fatal Error'),
       callback, mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {

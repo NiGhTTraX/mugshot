@@ -7,8 +7,8 @@ chai.use(require('sinon-chai'));
 
 describe('No selector', function() {
   var noSelector = {name: 'path'},
-      callback = function() {},
       screenshot = new Buffer('ZmxvcmVudGlu'),
+      callback = function() {},
       mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {

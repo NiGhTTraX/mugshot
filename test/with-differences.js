@@ -26,15 +26,15 @@ describe('With differences', function() {
     };
 
     FS = {
-      exists: sinon.stub(),
-      readFile: sinon.stub(),
+      exists: sinon.stub().yields(true),
+      readFile: sinon.stub().yields(null, baseline),
       writeFile: sinon.stub(),
       mkdir: sinon.stub().yields(null),
       unlink: sinon.stub()
     };
 
     differ = {
-      isEqual: sinon.stub(),
+      isEqual: sinon.stub().yields(null, false),
       createDiff: sinon.stub()
     };
 
@@ -49,10 +49,6 @@ describe('With differences', function() {
   });
 
   it('should create a diff', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-
     mugshot.test(noSelector, callback);
 
     expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
@@ -60,9 +56,6 @@ describe('With differences', function() {
   });
 
   it('should call the cb with error if the diff building fails', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(error);
 
     mugshot.test(noSelector, callback);
@@ -71,19 +64,12 @@ describe('With differences', function() {
   });
 
   it('should not try to unlink old diff and screenshot', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
-
     mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.not.have.been.called;
   });
 
   it('should call the fs to write the screenshot on disk', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
 
     mugshot.test(noSelector, callback);
@@ -93,11 +79,8 @@ describe('With differences', function() {
   });
 
   it('should throw an error if the screenshot cannot be written', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(error);
+    FS.writeFile.onFirstCall().yields(error);
 
     mugshot.test(noSelector, callback);
 
@@ -105,11 +88,8 @@ describe('With differences', function() {
   });
 
   it('should call the fs to write the diff on disk', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(null);
+    FS.writeFile.onFirstCall().yields(null);
 
     mugshot.test(noSelector, callback);
 
@@ -118,9 +98,6 @@ describe('With differences', function() {
   });
 
   it('should throw an error if the diff cannot be written', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
     FS.writeFile.onFirstCall().yields(null);
     FS.writeFile.onSecondCall().yields(error);
@@ -131,9 +108,6 @@ describe('With differences', function() {
   });
 
   it('should return false through the callback', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, false);
     differ.createDiff.yields(null, diff);
     FS.writeFile.yields(null);
 

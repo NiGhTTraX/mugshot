@@ -22,7 +22,7 @@ describe('With baseline', function() {
     };
 
     FS = {
-      exists: sinon.stub(),
+      exists: sinon.stub().yields(true),
       readFile: sinon.stub(),
       writeFile: sinon.stub(),
       mkdir: sinon.stub().yields(null)
@@ -50,16 +50,12 @@ describe('With baseline', function() {
 
   it('should not write the screenshot on disk',
      function() {
-    FS.exists.yields(true);
-
     mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.not.have.been.called;
   });
 
   it('should read the baseline from disk', function() {
-    FS.exists.yields(true);
-
     mugshot.test(noSelector, callback);
 
     expect(FS.readFile).to.have.been.calledWith(baselinePath,
@@ -68,7 +64,6 @@ describe('With baseline', function() {
 
   it('should call the cb with error if the baseline cannot be read',
      function() {
-    FS.exists.yields(true);
     FS.readFile.yields(error);
 
     mugshot.test(noSelector, callback);
@@ -77,7 +72,6 @@ describe('With baseline', function() {
   });
 
   it('should compare the baseline and the screenshot', function() {
-    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
 
     mugshot.test(noSelector, callback);
@@ -87,7 +81,6 @@ describe('With baseline', function() {
   });
 
   it('should call the cb with error if the comparison fails', function() {
-    FS.exists.yields(true);
     FS.readFile.yields(null, baseline);
     differ.isEqual.yields(error);
 

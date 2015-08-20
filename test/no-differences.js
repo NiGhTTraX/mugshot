@@ -23,15 +23,15 @@ describe('No differences', function() {
     };
 
     FS = {
-      exists: sinon.stub(),
-      readFile: sinon.stub(),
+      exists: sinon.stub().yields(true),
+      readFile: sinon.stub().yields(null, baseline),
       writeFile: sinon.stub(),
       mkdir: sinon.stub().yields(null),
       unlink: sinon.stub()
     };
 
     differ = {
-      isEqual: sinon.stub(),
+      isEqual: sinon.stub().yields(null, true),
       createDiff: sinon.stub()
     };
 
@@ -46,20 +46,12 @@ describe('No differences', function() {
   });
 
   it('should not create a diff', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-
     mugshot.test(noSelector, callback);
 
     expect(differ.createDiff).to.not.have.been.called;
   });
 
   it('should try to unlink old screenshot', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-
     mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.have.been.calledWith(screenshotPath,
@@ -68,9 +60,6 @@ describe('No differences', function() {
 
   it('should try to unlink old diff',
      function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
     FS.unlink.onFirstCall().yields(null);
 
     mugshot.test(noSelector, callback);
@@ -80,10 +69,7 @@ describe('No differences', function() {
 
   it('should not throw an error if the screenshot is not there', function() {
     var error = {code: 'ENOENT'};
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.yields(error);
+    FS.unlink.onFirstCall().yields(error);
 
     mugshot.test(noSelector, callback);
 
@@ -92,9 +78,6 @@ describe('No differences', function() {
 
   it('should not throw an error if the diff is not there', function() {
     var error = {code: 'ENOENT'};
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
     FS.unlink.onFirstCall().yields(null);
     FS.unlink.onSecondCall().yields(error);
 
@@ -105,10 +88,7 @@ describe('No differences', function() {
 
   it('should throw an error if the screenshot couldn\'t be unlinked',
      function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
-    FS.unlink.yields(error);
+    FS.unlink.onFirstCall().yields(error);
 
     mugshot.test(noSelector, callback);
 
@@ -117,9 +97,6 @@ describe('No differences', function() {
 
   it('should throw an error if the diff couldn\'t be unlinked',
      function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
     FS.unlink.onFirstCall().yields(null);
     FS.unlink.onSecondCall().yields(error);
 
@@ -129,9 +106,6 @@ describe('No differences', function() {
   });
 
   it('should return true through the cb', function() {
-    FS.exists.yields(true);
-    FS.readFile.yields(null, baseline);
-    differ.isEqual.yields(null, true);
     FS.unlink.yields(null);
     FS.unlink.yields(null);
 
