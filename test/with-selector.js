@@ -2,6 +2,7 @@ var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
 var Mugshot = require('../lib/mugshot.js');
+var path = require('path');
 
 chai.use(require('sinon-chai'));
 
@@ -18,6 +19,9 @@ describe('With selector', function() {
       },
       screenshot = new Buffer('ZmxvcmVudGlu'),
       error = new Error('Fatal Error'),
+      rootDirectory = 'visual-tests',
+      extension = '.png',
+      baselinePath = path.join(rootDirectory, withSelector.name + extension),
       callback, mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {
@@ -27,7 +31,8 @@ describe('With selector', function() {
     };
 
     FS = {
-      mkdir: sinon.stub().yields(null)
+      mkdir: sinon.stub().yields(null),
+      exists: sinon.stub()
     };
 
     PNGProcessor = {
@@ -77,5 +82,14 @@ describe('With selector', function() {
     mugshot.test(withSelector, callback);
 
     expect(callback).to.have.been.calledWithExactly(error);
+  });
+
+  it('should check if a baseline exists', function() {
+    browser.getBoundingClientRect.yields(null, rect);
+    PNGProcessor.crop.yields(null, rect);
+
+    mugshot.test(withSelector, callback);
+
+    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
   });
 });
