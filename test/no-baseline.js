@@ -41,13 +41,7 @@ describe('No baseline', function() {
     mugshot = new Mugshot(browser, options);
   });
 
-  it('should verify that a baseline doesn\'t exist', function() {
-    mugshot.test(noSelector, callback);
-
-    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
-  });
-
-  it('should not read a baseline from disk', function() {
+  it('should not try to read a baseline from disk', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.readFile).to.not.have.been.called;
