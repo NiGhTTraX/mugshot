@@ -42,12 +42,6 @@ describe('With baseline', function() {
     mugshot = new Mugshot(browser, options);
   });
 
-  it('should verify that a baseline exists', function() {
-    mugshot.test(noSelector, callback);
-
-    expect(FS.exists).to.have.been.calledWith(baselinePath, sinon.match.func);
-  });
-
   it('should not write the screenshot on disk',
      function() {
     mugshot.test(noSelector, callback);
