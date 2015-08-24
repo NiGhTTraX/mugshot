@@ -2,7 +2,7 @@
   "name": "mugshot",
   "version": "0.0.0",
   "description": "visual regression testing",
-  "main": "./lib/mughshot.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
