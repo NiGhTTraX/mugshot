@@ -8,7 +8,7 @@ Mugshot.adapters = {
 Mugshot.interfaces = {
   browser: require('./lib/interfaces/browser.js'),
   differ: require('./lib/interfaces/differ.js'),
-  FS: require('./lib/interfaces/fs.js'),
+  fs: require('./lib/interfaces/fs.js'),
   PNGProcessor: require('./lib/interfaces/png-processor.js')
 };
 
