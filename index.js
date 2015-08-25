@@ -5,4 +5,11 @@ Mugshot.adapters = {
   LooksSame: require('./lib/adapters/looks-same.js')
 };
 
+Mugshot.interfaces = {
+  browser: require('./lib/interfaces/browser.js'),
+  differ: require('./lib/interfaces/differ.js'),
+  FS: require('./lib/interfaces/fs.js'),
+  PNGProcessor: require('./lib/interfaces/png-processor.js')
+};
+
 module.exports = Mugshot;
