@@ -92,11 +92,11 @@ interface](lib/interfaces/browser.js).
 The options object is optional and has the following keys:
 
 - **fs** - an implementation of the [file system
-  interface](lib/interfaces/fs.js]),
+  interface](lib/interfaces/fs.js),
 - **differ** - an implementation of the [differ
-  interface](lib/interfaces/diff.js),
+  interface](lib/interfaces/differ.js),
 - **pngProcessor** - an implementation of the [PNG processor
-  interface](lib/interfaces/processor.js),
+  interface](lib/interfaces/png-processor.js),
 - **rootDirectory** - the path where the screenshots and diffs will be saved;
   defaults to `visual-tests`.
 
