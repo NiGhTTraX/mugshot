@@ -118,8 +118,8 @@ If no selector is provided, then the **whole page** will be tested.
 Mugshot will use the provided name to create the following files:
 
 - **<name>.png** - the baseline screenshot,
-- **<name>-new.png** - the new screenshot and
-- **<name>-diff.png** - the diff between the above two.
+- **<name>.new.png** - the new screenshot and
+- **<name>.diff.png** - the diff between the above two.
 
 If testing a selector for the first time, the baseline screenshot will be saved
 and the test will pass. If the baseline is found on the file system, a new
