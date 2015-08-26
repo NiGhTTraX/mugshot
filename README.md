@@ -17,6 +17,9 @@ Mugshot comes with the following implementations out of the box:
   native `fs` module.
 * [PNGCrop](https://github.com/chenglou/png-crop) - crop PNG images.
 
+There's also a [ChaiJS](http://chaijs.com/) plugin:
+[chai-mugshot](https://github.com/uberVU/chai-mugshot).
+
 
 ## Installation
 
