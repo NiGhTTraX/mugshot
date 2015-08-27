@@ -1,8 +1,8 @@
 var tests = require('./differ-tests.js');
-var LooksSameAdaptor = require('../../lib/adapters/looks-same.js');
+var LooksSameAdapter = require('../../lib/adapters/looks-same.js');
 
-describe('LooksSame Adaptor', function() {
+describe('LooksSame Adapter', function() {
   tests(function() {
-    return LooksSameAdaptor;
+    return new LooksSameAdapter();
   });
 });
