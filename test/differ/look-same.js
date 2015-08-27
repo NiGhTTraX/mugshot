@@ -8,7 +8,7 @@ function composePath(file) {
   return path.join(__dirname, 'data', file + ext);
 }
 
-describe('LooksSame Adaptor', function() {
+describe('LooksSame Adapter', function() {
   var tall = fs.readFileSync(composePath('tall')),
       wide = fs.readFileSync(composePath('wide')),
       sizes = fs.readFileSync(composePath('sizes'));
@@ -39,6 +39,21 @@ describe('LooksSame Adaptor', function() {
     adapter.createDiff(tall, wide, function(error, diff) {
       expect(error).to.be.null;
       expect(diff).to.be.an.instanceof(Buffer);
+
+      done();
+    });
+  });
+
+  it('should set strict to false if it receives a tolerance', function(done) {
+    var options = {
+          tolerance: 5,
+          strict: true
+        },
+        adapter = new LooksSameAdapter(options);
+
+    adapter.isEqual(tall, wide, function(error, equal) {
+      expect(error).to.be.null;
+      expect(equal).to.be.false;
 
       done();
     });
