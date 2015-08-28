@@ -23,6 +23,7 @@
   },
   "scripts": {
     "test": "mocha",
+    "browser": "phantomjs --webdriver=4444",
     "coverage": "istanbul cover _mocha"
   },
   "pre-commit": [
