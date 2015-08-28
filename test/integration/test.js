@@ -40,10 +40,10 @@ describe('Mugshot integration', function() {
         name: name,
         selector: 'anything'
       },
-      noSelector = {
+      differencesSelector = {
         name: name
       },
-      withSelector = {
+      noDifferencesSelector = {
         name: name,
         selector: '#rectangle'
       },
@@ -65,7 +65,7 @@ describe('Mugshot integration', function() {
   beforeEach(function(done) {
     cleanUp();
 
-    mugshot.test(withSelector, function(error) {
+    mugshot.test(noDifferencesSelector, function(error) {
       if (error) {
         throw error;
       }
@@ -86,7 +86,7 @@ describe('Mugshot integration', function() {
   it('should be true if there is no previous baseline', function(done) {
     cleanUp();
 
-    mugshot.test(withSelector, function(error, result) {
+    mugshot.test(noDifferencesSelector, function(error, result) {
       expect(error).to.be.null;
       expect(result).to.be.true;
 
@@ -95,7 +95,7 @@ describe('Mugshot integration', function() {
   });
 
   it('should be true if there are no differences', function(done) {
-    mugshot.test(withSelector, function(error, result) {
+    mugshot.test(noDifferencesSelector, function(error, result) {
       expect(error).to.be.null;
       expect(result).to.be.true;
 
@@ -104,7 +104,7 @@ describe('Mugshot integration', function() {
   });
 
   it('should be false if there are differences', function(done) {
-    mugshot.test(noSelector, function(error, result) {
+    mugshot.test(differencesSelector, function(error, result) {
       expect(error).to.be.null;
       expect(result).to.be.false;
 
