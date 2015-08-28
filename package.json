@@ -23,7 +23,7 @@
     "webdriverio": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha tests/unit",
     "test-integration": "mocha tests/integration",
     "browser": "phantomjs --webdriver=4444",
     "coverage": "istanbul cover _mocha"
