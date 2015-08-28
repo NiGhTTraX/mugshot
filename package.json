@@ -19,7 +19,8 @@
     "mocha": "^2.2.5",
     "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "webdriverio": "^3.2.0"
   },
   "scripts": {
     "test": "mocha",
