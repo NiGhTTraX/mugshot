@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Mugshot = require('../lib/mugshot.js');
+var Mugshot = require('../../lib/mugshot.js');
 
 describe('Mugshot constructor', function() {
   var dummyBrowser = 'anything';

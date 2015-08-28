@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var LooksSameAdapter = require('../../lib/adapters/looks-same.js');
+var LooksSameAdapter = require('../../../lib/adapters/looks-same.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -8,7 +8,7 @@ function composePath(file) {
   return path.join(__dirname, 'data', file + ext);
 }
 
-describe('LooksSame Adapter', function() {
+describe('LooksSame Adapter Constructor', function() {
   var tall = fs.readFileSync(composePath('tall')),
       wide = fs.readFileSync(composePath('wide')),
       sizes = fs.readFileSync(composePath('sizes'));

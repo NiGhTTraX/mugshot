@@ -1,7 +1,7 @@
 var chai = require('chai');
 var sinon = require('sinon');
 var expect = chai.expect;
-var Mugshot = require('../lib/mugshot.js');
+var Mugshot = require('../../lib/mugshot.js');
 
 chai.use(require('sinon-chai'));
 
