@@ -8,7 +8,9 @@ parts of your product that have unexpected visual changes.
 The beauty of Mugshot comes from its independence of any browser,
 test-runner, diffing tool etc. It achieves this through interfaces over
 these dependencies and comes with some implementations of its own. You can
-easily write your own over the tools you prefer.
+easily [write your
+own](https://github.com/uberVU/mugshot/wiki/Mugshot-Adapters) over the
+tools you prefer.
 
 Mugshot comes with the following implementations out of the box:
 
