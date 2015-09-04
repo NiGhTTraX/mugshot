@@ -5,14 +5,13 @@ var WdioAdapter = require('../../lib/adapters/webdriverio.js');
 var path = require('path');
 var fs = require('fs');
 
-var name = 'great';
-var ext = '.png';
-var dir = path.join(__dirname, '..', '..', 'visual-tests');
+var name = 'great',
+    ext = '.png',
+    dir = path.join(__dirname, '..', '..', 'visual-tests'),
+    paths = [path.join(dir, name + ext), path.join(dir, name + '.new' + ext),
+             path.join(dir, name + '.diff' + ext)];
 
 function cleanUp() {
-  var paths = [path.join(dir, name + ext), path.join(dir, name + '.new' + ext),
-               path.join(dir, name + '.diff' + ext)];
-
   for (var i = 0; i < paths.length; i++) {
     try {
       fs.unlinkSync(paths[i]);
@@ -46,6 +45,16 @@ describe('Mugshot integration', function() {
       noDifferencesSelector = {
         name: name,
         selector: '#rectangle'
+      },
+      noDifferencesResult = {
+        isEqual: true,
+        baseline: paths[0]
+      },
+      differencesResult = {
+        isEqual: false,
+        baseline: paths[0],
+        screenshot: paths[1],
+        diff: paths[2]
       },
       wdioInstance, mugshot;
 
@@ -88,7 +97,7 @@ describe('Mugshot integration', function() {
 
     mugshot.test(noDifferencesSelector, function(error, result) {
       expect(error).to.be.null;
-      expect(result).to.be.true;
+      expect(result).to.be.deep.equal(noDifferencesResult);
 
       done();
     });
@@ -97,7 +106,7 @@ describe('Mugshot integration', function() {
   it('should be true if there are no differences', function(done) {
     mugshot.test(noDifferencesSelector, function(error, result) {
       expect(error).to.be.null;
-      expect(result).to.be.true;
+      expect(result).to.be.deep.equal(noDifferencesResult);
 
       done();
     });
@@ -106,7 +115,7 @@ describe('Mugshot integration', function() {
   it('should be false if there are differences', function(done) {
     mugshot.test(differencesSelector, function(error, result) {
       expect(error).to.be.null;
-      expect(result).to.be.false;
+      expect(result).to.be.deep.equal(differencesResult);
 
       done();
     });
