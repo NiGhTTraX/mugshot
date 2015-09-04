@@ -14,6 +14,10 @@ describe('No baseline', function() {
       extension = '.png',
       baselinePath = path.join(process.cwd(), rootDirectory,
         noSelector.name + extension),
+      result = {
+        isEqual: true,
+        baseline: baselinePath
+      },
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -75,6 +79,6 @@ describe('No baseline', function() {
 
     mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, true);
+    expect(callback).to.have.been.calledWithExactly(null, result);
   });
 });
