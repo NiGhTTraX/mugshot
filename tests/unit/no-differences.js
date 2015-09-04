@@ -11,10 +11,16 @@ describe('No differences', function() {
       error = new Error('Fatal Error'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      screenshotPath = path.join(rootDirectory, noSelector.name + '.new' +
-        extension),
-      diffPath = path.join(rootDirectory, noSelector.name + '.diff' +
-        extension),
+      screenshotPath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + '.new' + extension),
+      diffPath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + '.diff' + extension),
+      baselinePath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + extension),
+      result = {
+        isEqual: true,
+        baseline: baselinePath
+      },
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -105,12 +111,12 @@ describe('No differences', function() {
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
-  it('should return true through the cb', function() {
+  it('should return true and only baseline path through the cb', function() {
     FS.unlink.yields(null);
     FS.unlink.yields(null);
 
     mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, true);
+    expect(callback).to.have.been.calledWithExactly(null, result);
   });
 });

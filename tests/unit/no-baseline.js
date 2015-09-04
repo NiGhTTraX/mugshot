@@ -12,7 +12,12 @@ describe('No baseline', function() {
       error = new Error('Fatal Error'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      baselinePath = path.join(rootDirectory, noSelector.name + extension),
+      baselinePath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + extension),
+      result = {
+        isEqual: true,
+        baseline: baselinePath
+      },
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -69,11 +74,11 @@ describe('No baseline', function() {
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
-  it('should return true through the cb', function() {
+  it('should return true and only baseline path through the cb', function() {
     FS.writeFile.yields(null);
 
     mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, true);
+    expect(callback).to.have.been.calledWithExactly(null, result);
   });
 });
