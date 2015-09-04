@@ -92,7 +92,8 @@ describe('Mugshot integration', function() {
     });
   });
 
-  it('should be true if there is no previous baseline', function(done) {
+  it('should be true and contain only baseline path if there is no previous ' +
+     'baseline', function(done) {
     cleanUp();
 
     mugshot.test(noDifferencesSelector, function(error, result) {
@@ -103,7 +104,8 @@ describe('Mugshot integration', function() {
     });
   });
 
-  it('should be true if there are no differences', function(done) {
+  it('should be true and contain only baseline path if there are no ' +
+     'differences', function(done) {
     mugshot.test(noDifferencesSelector, function(error, result) {
       expect(error).to.be.null;
       expect(result).to.be.deep.equal(noDifferencesResult);
@@ -112,7 +114,8 @@ describe('Mugshot integration', function() {
     });
   });
 
-  it('should be false if there are differences', function(done) {
+  it('should be false and contain all images paths if there are differences',
+     function(done) {
     mugshot.test(differencesSelector, function(error, result) {
       expect(error).to.be.null;
       expect(result).to.be.deep.equal(differencesResult);
