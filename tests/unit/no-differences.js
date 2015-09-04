@@ -15,6 +15,12 @@ describe('No differences', function() {
         noSelector.name + '.new' + extension),
       diffPath = path.join(process.cwd(), rootDirectory,
         noSelector.name + '.diff' + extension),
+      baselinePath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + extension),
+      result = {
+        isEqual: true,
+        baseline: baselinePath
+      },
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -111,6 +117,6 @@ describe('No differences', function() {
 
     mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, true);
+    expect(callback).to.have.been.calledWithExactly(null, result);
   });
 });
