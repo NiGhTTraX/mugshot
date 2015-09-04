@@ -111,7 +111,7 @@ describe('No differences', function() {
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
-  it('should return true through the cb', function() {
+  it('should return true and only baseline path through the cb', function() {
     FS.unlink.yields(null);
     FS.unlink.yields(null);
 

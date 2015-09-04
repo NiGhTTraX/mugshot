@@ -115,7 +115,8 @@ describe('With differences', function() {
     expect(callback).to.have.been.calledWithExactly(error);
   });
 
-  it('should return false through the callback', function() {
+  it('should return false and all images paths through the callback',
+     function() {
     differ.createDiff.yields(null, diff);
     FS.writeFile.yields(null);
 
