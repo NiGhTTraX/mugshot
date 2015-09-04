@@ -11,10 +11,10 @@ describe('No differences', function() {
       error = new Error('Fatal Error'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      screenshotPath = path.join(rootDirectory, noSelector.name + '.new' +
-        extension),
-      diffPath = path.join(rootDirectory, noSelector.name + '.diff' +
-        extension),
+      screenshotPath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + '.new' + extension),
+      diffPath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + '.diff' + extension),
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {

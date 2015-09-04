@@ -12,7 +12,8 @@ describe('No baseline', function() {
       error = new Error('Fatal Error'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      baselinePath = path.join(rootDirectory, noSelector.name + extension),
+      baselinePath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + extension),
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
