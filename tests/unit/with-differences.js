@@ -18,6 +18,14 @@ describe('With differences', function() {
         noSelector.name + '.new' + extension),
       diffPath = path.join(process.cwd(), rootDirectory,
         noSelector.name + '.diff' + extension),
+      baselinePath = path.join(process.cwd(), rootDirectory,
+        noSelector.name + extension),
+      result = {
+        isEqual: false,
+        baseline: baselinePath,
+        screenshot: screenshotPath,
+        diff: diffPath
+      },
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -113,6 +121,6 @@ describe('With differences', function() {
 
     mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, false);
+    expect(callback).to.have.been.calledWithExactly(null, result);
   });
 });
