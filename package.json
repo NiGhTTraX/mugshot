@@ -26,10 +26,11 @@
     "test": "mocha tests/unit --recursive",
     "test-integration": "mocha tests/integration",
     "browser": "phantomjs --webdriver=4444",
-    "coverage": "istanbul cover _mocha"
+    "coverage": "istanbul cover _mocha",
+    "lint": "eslint ."
   },
   "pre-commit": [
-    "eslint ."
+    "npm run lint"
   ],
   "repository": {
     "type": "git",
