@@ -73,7 +73,7 @@ describe('Suite', function() {
     mugshot.test(captureItem, function(error, result) {
       expect(error).to.be.null;
 
-      expect(result).to.be.true;
+      expect(result.isEqual).to.be.true;
 
       done();
     });
