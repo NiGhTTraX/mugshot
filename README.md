@@ -80,7 +80,7 @@ describe('Suite', function() {
   });
 
   after(function() {
-    return webdriverio.end();
+    return webdriverioInstance.end();
   });
 });
 ```
