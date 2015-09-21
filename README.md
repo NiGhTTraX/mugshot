@@ -54,7 +54,7 @@ describe('Suite', function() {
       .url('http://example.com')
       .then(function() {
         // 2. Create an adapter over it.
-        var browser = new WebdriverIOAdaptor(webdriverioInstance);
+        var browser = new WebdriverIOAdapter(webdriverioInstance);
 
         // 3. Hand it over to Mugshot.
         mugshot = new Mugshot(browser);
