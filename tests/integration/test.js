@@ -15,7 +15,7 @@ function cleanUp() {
   for (var i = 0; i < paths.length; i++) {
     try {
       fs.unlinkSync(paths[i]);
-    } catch(error) {
+    } catch (error) {
       if (error.code !== 'ENOENT') {
         throw error;
       }
@@ -24,7 +24,7 @@ function cleanUp() {
 
   try {
     fs.rmdirSync(dir);
-  } catch(error) {
+  } catch (error) {
     if (error.code !== 'ENOENT') {
       throw error;
     }
