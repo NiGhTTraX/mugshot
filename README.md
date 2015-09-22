@@ -54,7 +54,7 @@ describe('Suite', function() {
       .url('http://example.com')
       .then(function() {
         // 2. Create an adapter over it.
-        var browser = new WebdriverIOAdaptor(webdriverioInstance);
+        var browser = new WebdriverIOAdapter(webdriverioInstance);
 
         // 3. Hand it over to Mugshot.
         mugshot = new Mugshot(browser);
@@ -73,14 +73,14 @@ describe('Suite', function() {
     mugshot.test(captureItem, function(error, result) {
       expect(error).to.be.null;
 
-      expect(result).to.be.true;
+      expect(result.isEqual).to.be.true;
 
       done();
     });
   });
 
   after(function() {
-    return webdriverio.end();
+    return webdriverioInstance.end();
   });
 });
 ```
@@ -140,6 +140,12 @@ system and will receive 2 arguments:
 
 - **error** - `null` in case there's no error, otherwise holds an `Error`
   instance
-- **result** - Boolean indicating whether the test passed or not; if it's
-  `false` then you can find the `.diff.png` and `.new.png` files on the file
-  system.
+- **result** - An `object` with the following properties:
+  - **isEqual** - Boolean indicating whether the test passed or not; if it's
+    `false` then you can find the `.diff.png` and `.new.png` files on the file
+    system.
+  - **baseline** - String indicating the path of the baseline on disk.
+  - **screenshot** - String indicating the path of the screenshot on disk; only 
+    if `isEqual` is `false`, else `undefined`.
+  - **diff** - String indicating the path of the diff on disk; only if `isEqual`
+    is `false`, else `undefined`.
