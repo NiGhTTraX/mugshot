@@ -106,6 +106,8 @@ The options object is optional and has the following keys:
   interface](lib/interfaces/png-processor.js),
 - **rootDirectory** - the path where the screenshots and diffs will be saved;
   defaults to `visual-tests`.
+- **acceptFirstBaseline** - whether the test should pass if the selector is
+  tested for the first time. Defaults to `true`.
 
 If any of the implementations are not provided, Mugshot's defaults are used.
 
@@ -129,7 +131,8 @@ Mugshot will use the provided name to create the following files:
 - **<name>.diff.png** - the diff between the above two.
 
 If testing a selector for the first time, the baseline screenshot will be saved
-and the test will pass. If the baseline is found on the file system, a new
+and the test will pass if `acceptFirstBaseline` is set to true.
+If the baseline is found on the file system, a new
 screenshot will be taken and compared with it. If and **only if** there are
 differences, the other 2 files will be saved to the file sysem. If there are no
 differences, the files will be cleaned up from the file system so that you're
@@ -145,7 +148,7 @@ system and will receive 2 arguments:
     `false` then you can find the `.diff.png` and `.new.png` files on the file
     system.
   - **baseline** - String indicating the path of the baseline on disk.
-  - **screenshot** - String indicating the path of the screenshot on disk; only 
+  - **screenshot** - String indicating the path of the screenshot on disk; only
     if `isEqual` is `false`, else `undefined`.
   - **diff** - String indicating the path of the diff on disk; only if `isEqual`
     is `false`, else `undefined`.
