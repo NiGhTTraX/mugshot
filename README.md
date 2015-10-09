@@ -107,7 +107,8 @@ The options object is optional and has the following keys:
 - **rootDirectory** - the path where the screenshots and diffs will be saved;
   defaults to `visual-tests`.
 - **acceptFirstBaseline** - whether the test should pass if the selector is
-  tested for the first time. Defaults to `true`.
+  tested for the first time. The baseline will be saved to the file system
+  regardless of this option. Defaults to `true`.
 
 If any of the implementations are not provided, Mugshot's defaults are used.
 
