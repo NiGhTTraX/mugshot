@@ -129,3 +129,65 @@ describe('Mugshot integration', function() {
     return wdioInstance.end();
   });
 });
+
+describe('Mugshot integration with disabled acceptFirstBaseline', function() {
+  this.timeout(0);
+
+  var url = 'file://' + path.join(__dirname, 'test.html'),
+      noDifferencesSelector = {
+        name: name,
+        selector: '#rectangle'
+      },
+      noBaselineResult = {
+        isEqual: false,
+        baseline: paths[0]
+      },
+      wdioInstance, mugshot;
+
+  before(function() {
+    var options = {
+      desiredCapabilities: {
+        browserName: 'phantomjs'
+      }
+    };
+
+    var mugshotOptions = {
+      acceptFirstBaseline: false
+    };
+
+    return wdioInstance = wdio.remote(options).init().url(url).then(function() {
+      var browser = new WdioAdapter(this);
+      mugshot = new Mugshot(browser, mugshotOptions);
+    });
+  });
+
+  beforeEach(function(done) {
+    cleanUp();
+
+    mugshot.test(noDifferencesSelector, function(error) {
+      if (error) {
+        throw error;
+      }
+
+      done();
+    });
+  });
+
+
+  it('should be false and contain only baseline path if there is no previous ' +
+     'baseline', function(done) {
+    cleanUp();
+
+    mugshot.test(noDifferencesSelector, function(error, result) {
+      expect(error).to.be.null;
+      expect(result).to.be.deep.equal(noBaselineResult);
+
+      done();
+    });
+  });
+
+  after(function() {
+    cleanUp();
+    return wdioInstance.end();
+  });
+});
