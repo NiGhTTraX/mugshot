@@ -6,7 +6,7 @@ Mugshot is a library for visual regression testing. It helps you identify the
 parts of your product that have unexpected visual changes.
 
 The beauty of Mugshot comes from its independence of any browser,
-test-runner, diffing tool etc. It achieves this through interfaces over
+test-runner, diffing tool, etc. It achieves this through interfaces over
 these dependencies and comes with some implementations of its own. You can
 easily [write your
 own](https://github.com/uberVU/mugshot/wiki/Mugshot-Adapters) over the
