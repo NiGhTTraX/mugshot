@@ -1,5 +1,6 @@
 # Mugshot
 
+
 [![Build Status](https://travis-ci.org/uberVU/mugshot.svg?branch=master)](https://travis-ci.org/uberVU/mugshot)
 
 Mugshot is a library for visual regression testing. It helps you identify the
