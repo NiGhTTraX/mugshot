@@ -1,6 +1,6 @@
 {
   "name": "mugshot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "visual regression testing",
   "main": "index.js",
   "directories": {
@@ -18,6 +18,7 @@
     "eslint-plugin-ubervu": "0.1.0",
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
+    "phantomjs-prebuilt": "2.1.7",
     "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",
