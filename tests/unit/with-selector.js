@@ -22,7 +22,7 @@ describe('With selector', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       baselinePath = path.join(process.cwd(), rootDirectory,
-        withSelector.name + extension),
+          withSelector.name + extension),
       callback, mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {
@@ -54,7 +54,7 @@ describe('With selector', function() {
     mugshot.test(withSelector, callback);
 
     expect(browser.getBoundingClientRect).to.have.been.calledWith(
-      withSelector.selector, sinon.match.func);
+        withSelector.selector, sinon.match.func);
   });
 
   it('should call the cb with error if the bounding rect couldn\'t be ' +
@@ -72,18 +72,18 @@ describe('With selector', function() {
     mugshot.test(withSelector, callback);
 
     expect(PNGProcessor.crop).to.have.been.calledWith(screenshot, rect,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should call the cb with error if the screenshot couldn\'t be cropped',
-     function() {
-    browser.getBoundingClientRect.yields(null, rect);
-    PNGProcessor.crop.yields(error);
+      function() {
+        browser.getBoundingClientRect.yields(null, rect);
+        PNGProcessor.crop.yields(error);
 
-    mugshot.test(withSelector, callback);
+        mugshot.test(withSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should check if a baseline exists', function() {
     browser.getBoundingClientRect.yields(null, rect);

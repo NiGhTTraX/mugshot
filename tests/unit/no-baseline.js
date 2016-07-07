@@ -13,7 +13,7 @@ describe('No baseline', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       baselinePath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + extension),
+          noSelector.name + extension),
       result = {
         isEqual: true,
         baseline: baselinePath
@@ -62,17 +62,17 @@ describe('No baseline', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(baselinePath, screenshot,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should call the cb with error if the screenshot cannot be written',
-     function() {
-    FS.writeFile.yields(error);
+      function() {
+        FS.writeFile.yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should return true and only baseline path through the cb', function() {
     FS.writeFile.yields(null);
