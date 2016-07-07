@@ -1,6 +1,6 @@
 {
   "name": "mugshot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "visual regression testing",
   "main": "index.js",
   "directories": {
@@ -20,7 +20,7 @@
     "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",
-    "webdriverio": "^3.2.0"
+    "webdriverio": "^4.1.1"
   },
   "scripts": {
     "test": "mocha tests/unit --recursive",
