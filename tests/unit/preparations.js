@@ -36,23 +36,23 @@ describe('Preparations', function() {
   });
 
   it('should not call the cb with error if the rootDirectory already exists',
-     function() {
-    var error = {code: 'EEXIST'};
-    FS.mkdir.yields(error);
+      function() {
+        var error = {code: 'EEXIST'};
+        FS.mkdir.yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.not.called;
-  });
+        expect(callback).to.have.been.not.called;
+      });
 
   it('should call the cb with error if mkdir callback receives another error',
-     function() {
-    FS.mkdir.yields(error);
+      function() {
+        FS.mkdir.yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should call the browser to take a screenshot', function() {
     FS.mkdir.yields(null);

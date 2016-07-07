@@ -23,9 +23,9 @@ describe('Parameters checking', function() {
   });
 
   it('should throw an error if the captureItem has no name property',
-     function() {
-    expect(mugshot.test.bind(mugshot, {}, callback)).to.throw(Error);
-  });
+      function() {
+        expect(mugshot.test.bind(mugshot, {}, callback)).to.throw(Error);
+      });
 
   it('should throw an error if no callback is provided', function() {
     expect(mugshot.test.bind(mugshot, noSelector)).to.throw(Error);

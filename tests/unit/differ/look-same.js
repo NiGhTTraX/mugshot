@@ -30,19 +30,19 @@ describe('LooksSame Adapter Constructor', function() {
   });
 
   it('should always return a buffer even if the user provides a diff path',
-     function(done) {
-    var options = {
-          diff: 'path'
-        },
-        adapter = new LooksSameAdapter(options);
+      function(done) {
+        var options = {
+              diff: 'path'
+            },
+            adapter = new LooksSameAdapter(options);
 
-    adapter.createDiff(tall, wide, function(error, diff) {
-      expect(error).to.be.null;
-      expect(diff).to.be.an.instanceof(Buffer);
+        adapter.createDiff(tall, wide, function(error, diff) {
+          expect(error).to.be.null;
+          expect(diff).to.be.an.instanceof(Buffer);
 
-      done();
-    });
-  });
+          done();
+        });
+      });
 
   it('should set strict to false if it receives a tolerance', function(done) {
     var options = {

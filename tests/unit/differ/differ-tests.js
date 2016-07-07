@@ -44,15 +44,15 @@ function differTests(getDifferInstance) {
     });
 
     it('should also return false if differences are unnoticeable',
-      function(done) {
+        function(done) {
 
-        differInstance.isEqual(same, unnoticeable, function(error, equal) {
-          expect(error).to.be.null;
-          expect(equal).to.be.false;
+          differInstance.isEqual(same, unnoticeable, function(error, equal) {
+            expect(error).to.be.null;
+            expect(equal).to.be.false;
 
-          done();
-        });
-      }
+            done();
+          });
+        }
     );
 
     it('should return false for images of different sizes', function(done) {
@@ -81,20 +81,20 @@ function differTests(getDifferInstance) {
     });
 
     it('should also create a proper diff if the differences are unnoticeable',
-       function(done) {
+        function(done) {
 
-      differInstance.createDiff(same, unnoticeable, function(error, data) {
-        expect(error).to.be.null;
+          differInstance.createDiff(same, unnoticeable, function(error, data) {
+            expect(error).to.be.null;
 
-        differInstance.isEqual(strictUnnoticeable, data,
-         function(error, equal) {
-          expect(error).to.be.null;
-          expect(equal).to.be.equal(true);
+            differInstance.isEqual(strictUnnoticeable, data,
+                function(error, equal) {
+                  expect(error).to.be.null;
+                  expect(equal).to.be.equal(true);
 
-          done();
+                  done();
+                });
+          });
         });
-      });
-    });
 
     it('should create a diff for images of different sizes', function(done) {
 

@@ -12,11 +12,11 @@ describe('No differences', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       screenshotPath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + '.new' + extension),
+          noSelector.name + '.new' + extension),
       diffPath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + '.diff' + extension),
+          noSelector.name + '.diff' + extension),
       baselinePath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + extension),
+          noSelector.name + extension),
       result = {
         isEqual: true,
         baseline: baselinePath
@@ -61,17 +61,17 @@ describe('No differences', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.unlink).to.have.been.calledWith(screenshotPath,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should try to unlink old diff',
-     function() {
-    FS.unlink.onFirstCall().yields(null);
+      function() {
+        FS.unlink.onFirstCall().yields(null);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(FS.unlink).to.have.been.calledWith(diffPath, sinon.match.func);
-  });
+        expect(FS.unlink).to.have.been.calledWith(diffPath, sinon.match.func);
+      });
 
   it('should not throw an error if the screenshot is not there', function() {
     var error = {code: 'ENOENT'};
@@ -93,23 +93,23 @@ describe('No differences', function() {
   });
 
   it('should throw an error if the screenshot couldn\'t be unlinked',
-     function() {
-    FS.unlink.onFirstCall().yields(error);
+      function() {
+        FS.unlink.onFirstCall().yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should throw an error if the diff couldn\'t be unlinked',
-     function() {
-    FS.unlink.onFirstCall().yields(null);
-    FS.unlink.onSecondCall().yields(error);
+      function() {
+        FS.unlink.onFirstCall().yields(null);
+        FS.unlink.onSecondCall().yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should return true and only baseline path through the cb', function() {
     FS.unlink.yields(null);

@@ -15,11 +15,11 @@ describe('With differences', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       screenshotPath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + '.new' + extension),
+          noSelector.name + '.new' + extension),
       diffPath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + '.diff' + extension),
+          noSelector.name + '.diff' + extension),
       baselinePath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + extension),
+          noSelector.name + extension),
       result = {
         isEqual: false,
         baseline: baselinePath,
@@ -60,7 +60,7 @@ describe('With differences', function() {
     mugshot.test(noSelector, callback);
 
     expect(differ.createDiff).to.have.been.calledWith(baseline, screenshot,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should call the cb with error if the diff building fails', function() {
@@ -83,7 +83,7 @@ describe('With differences', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(screenshotPath, screenshot,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should throw an error if the screenshot cannot be written', function() {
@@ -102,7 +102,7 @@ describe('With differences', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.writeFile).to.have.been.calledWith(diffPath, diff,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should throw an error if the diff cannot be written', function() {
@@ -116,12 +116,12 @@ describe('With differences', function() {
   });
 
   it('should return false and all images paths through the callback',
-     function() {
-    differ.createDiff.yields(null, diff);
-    FS.writeFile.yields(null);
+      function() {
+        differ.createDiff.yields(null, diff);
+        FS.writeFile.yields(null);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(null, result);
-  });
+        expect(callback).to.have.been.calledWithExactly(null, result);
+      });
 });

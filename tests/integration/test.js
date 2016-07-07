@@ -115,14 +115,14 @@ describe('Mugshot integration', function() {
   });
 
   it('should be false and contain all images paths if there are differences',
-     function(done) {
-    mugshot.test(differencesSelector, function(error, result) {
-      expect(error).to.be.null;
-      expect(result).to.be.deep.equal(differencesResult);
+      function(done) {
+        mugshot.test(differencesSelector, function(error, result) {
+          expect(error).to.be.null;
+          expect(result).to.be.deep.equal(differencesResult);
 
-      done();
-    });
-  });
+          done();
+        });
+      });
 
   after(function() {
     cleanUp();
