@@ -35,11 +35,11 @@ describe('No selector', function() {
   });
 
   it('should not get the bounding rect if no selector is provided',
-     function() {
-    mugshot.test(noSelector, callback);
+      function() {
+        mugshot.test(noSelector, callback);
 
-    expect(browser.getBoundingClientRect).to.not.have.been.called;
-  });
+        expect(browser.getBoundingClientRect).to.not.have.been.called;
+      });
 
   it('should not crop the image if there is no selector', function() {
     mugshot.test(noSelector, callback);

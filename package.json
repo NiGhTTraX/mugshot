@@ -14,9 +14,11 @@
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "eslint": "1.4.3",
+    "eslint": "3.0.1",
+    "eslint-plugin-ubervu": "0.1.0",
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
+    "phantomjs-prebuilt": "2.1.7",
     "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",

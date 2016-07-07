@@ -14,7 +14,7 @@ describe('With baseline', function() {
       rootDirectory = 'visual-tests',
       extension = '.png',
       baselinePath = path.join(process.cwd(), rootDirectory,
-        noSelector.name + extension),
+          noSelector.name + extension),
       callback, mugshot, browser, FS, differ;
 
   beforeEach(function() {
@@ -44,27 +44,27 @@ describe('With baseline', function() {
   });
 
   it('should not write the screenshot on disk',
-     function() {
-    mugshot.test(noSelector, callback);
+      function() {
+        mugshot.test(noSelector, callback);
 
-    expect(FS.writeFile).to.not.have.been.called;
-  });
+        expect(FS.writeFile).to.not.have.been.called;
+      });
 
   it('should read the baseline from disk', function() {
     mugshot.test(noSelector, callback);
 
     expect(FS.readFile).to.have.been.calledWith(baselinePath,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should call the cb with error if the baseline cannot be read',
-     function() {
-    FS.readFile.yields(error);
+      function() {
+        FS.readFile.yields(error);
 
-    mugshot.test(noSelector, callback);
+        mugshot.test(noSelector, callback);
 
-    expect(callback).to.have.been.calledWithExactly(error);
-  });
+        expect(callback).to.have.been.calledWithExactly(error);
+      });
 
   it('should compare the baseline and the screenshot', function() {
     FS.readFile.yields(null, baseline);
@@ -72,7 +72,7 @@ describe('With baseline', function() {
     mugshot.test(noSelector, callback);
 
     expect(differ.isEqual).to.have.been.calledWith(baseline, screenshot,
-      sinon.match.func);
+        sinon.match.func);
   });
 
   it('should call the cb with error if the comparison fails', function() {
