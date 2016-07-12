@@ -35,6 +35,10 @@ describe('Mugshot integration', function() {
   this.timeout(0);
 
   var url = 'file://' + path.join(__dirname, 'test.html'),
+      notUniqueSelector = {
+        name: name,
+        selector: 'li'
+      },
       brokenSelector = {
         name: name,
         selector: 'anything'
@@ -78,6 +82,15 @@ describe('Mugshot integration', function() {
       if (error) {
         throw error;
       }
+
+      done();
+    });
+  });
+
+  it('should call the cb with error', function(done) {
+    mugshot.test(notUniqueSelector, function(error, result) {
+      expect(error).to.be.an.instanceof(Error);
+      expect(result).to.be.undefined;
 
       done();
     });
