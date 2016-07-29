@@ -1,7 +1,7 @@
 var Mugshot = require('./lib/mugshot.js');
 
 Mugshot.adapters = {
-  WebdriverIO: require('./lib/adapters/webdriverio.js'),
+  WebdriverIO: require('./lib/adapters/webdriverio.js')
 };
 
 Mugshot.interfaces = {
