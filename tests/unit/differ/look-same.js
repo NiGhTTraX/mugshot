@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var LooksSameAdapter = require('../../../lib/adapters/looks-same.js');
+var LooksSameAdapter = require('mugshot-looks-same');
 var fs = require('fs');
 var path = require('path');
 
