@@ -1,5 +1,5 @@
 var tests = require('./differ-tests.js');
-var LooksSameAdapter = require('../../../lib/adapters/looks-same.js');
+var LooksSameAdapter = require('mugshot-looks-same');
 
 describe('LooksSame Adapter', function() {
   tests(function() {
