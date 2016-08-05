@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var wdio = require('webdriverio');
 var Mugshot = require('../../lib/mugshot.js');
-var WdioAdapter = require('../../lib/adapters/webdriverio.js');
+var WdioAdapter = require('mugshot-webdriverio');
 var path = require('path');
 var fs = require('fs');
 

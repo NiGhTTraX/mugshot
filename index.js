@@ -1,9 +1,5 @@
 var Mugshot = require('./lib/mugshot.js');
 
-Mugshot.adapters = {
-  WebdriverIO: require('./lib/adapters/webdriverio.js')
-};
-
 Mugshot.interfaces = {
   browser: require('./lib/interfaces/browser.js'),
   differ: require('./lib/interfaces/differ.js'),

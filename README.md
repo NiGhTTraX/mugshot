@@ -36,7 +36,7 @@ npm install --save-dev mugshot
 ```js
 var expect = require('chai').expect;
 var Mugshot = require('mugshot');
-var WebdriverIOAdapter = Mugshot.adapters.WebdriverIO;
+var WebdriverIOAdapter = require('mugshot-webdriverio');
 var webdriverio = require('webdriverio');
 
 describe('Suite', function() {
@@ -153,3 +153,10 @@ system and will receive 2 arguments:
     if `isEqual` is `false`, else `undefined`.
   - **diff** - String indicating the path of the diff on disk; only if `isEqual`
     is `false`, else `undefined`.
+
+## Adapters
+
+* [Mugshot-WebdriverIO](https://github.com/uberVU/mugshot-webdriverio) - WebdriverIO adapter.
+* [Mugshot-Looks-Same](https://github.com/uberVU/mugshot-looks-same) - LooksSame adapter for image compare.
+* [Chai-Mugshot](https://github.com/uberVU/chai-mugshot) - Chai plugin.
+* [Mocha-Mugshot-Reporter](https://github.com/uberVU/mocha-mugshot-reporter) - Mocha reporter.
