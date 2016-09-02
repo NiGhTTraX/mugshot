@@ -21,8 +21,7 @@ describe('With selector', function() {
       error = new Error('Fatal Error'),
       rootDirectory = 'visual-tests',
       extension = '.png',
-      baselinePath = path.join(process.cwd(), rootDirectory,
-          withSelector.name + extension),
+      baselinePath = path.join(rootDirectory, withSelector.name + extension),
       callback, mugshot, browser, PNGProcessor, FS;
 
   beforeEach(function() {
