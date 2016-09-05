@@ -58,7 +58,7 @@
     'camelcase': [2, {'properties': 'never'}],
     'comma-spacing': 2,
     'eol-last': 2,
-    'indent': [2, 2, {'VariableDeclarator': 2, 'SwitchCase': 1}],
+    'indent': [2, 2, {'VariableDeclarator': { 'var': 2, 'let': 2, 'const': 3 }, 'SwitchCase': 1}],
     'key-spacing': [2, {'beforeColon': false, 'afterColon': true}],
     'new-cap': 2,
     'no-mixed-spaces-and-tabs': [2, 'smart-tabs'],
