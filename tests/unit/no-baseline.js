@@ -81,8 +81,8 @@ describe('No baseline', function() {
     expect(callback).to.have.been.calledWithExactly(null, result);
   });
 
-  it('should return false when acceptFirstBaseline is disabled and baseline ' +
-     'doesn\'t exist.', function() {
+  it('should throw an error when acceptFirstBaseline is disabled and ' +
+     'baseline doesn\'t exist.', function() {
     FS.writeFile.yields(null);
 
     var options = {
@@ -93,12 +93,9 @@ describe('No baseline', function() {
 
     // create local mugshot instance with different options
     var mugshot = new Mugshot(browser, options);
-    var result = {
-      isEqual: false,
-      baseline: baselinePath
-    };
 
     mugshot.test(noSelector, callback);
-    expect(callback).to.have.been.calledWithExactly(null, result);
+    expect(callback)
+        .to.have.been.calledWith(new Error('Baseline missing'));
   });
 });
