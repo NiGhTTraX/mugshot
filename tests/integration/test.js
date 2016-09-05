@@ -5,11 +5,46 @@ var WdioAdapter = require('mugshot-webdriverio');
 var path = require('path');
 var fs = require('fs');
 
-var name = 'great',
-    ext = '.png',
-    dir = 'visual-tests',
-    paths = [path.join(dir, name + ext), path.join(dir, name + '.new' + ext),
-             path.join(dir, name + '.diff' + ext)];
+const URL = 'file://' + path.join(__dirname, 'test.html');
+
+const BROWSER_OPTIONS = {
+  desiredCapabilities: {
+    browserName: 'phantomjs'
+  }
+};
+
+const name = 'great',
+      ext = '.png',
+      dir = 'visual-tests',
+      paths = [path.join(dir, name + ext),
+               path.join(dir, name + '.new' + ext),
+               path.join(dir, name + '.diff' + ext)];
+
+const notUniqueSelector = {
+        name: name,
+        selector: 'li'
+      },
+      brokenSelector = {
+        name: name,
+        selector: 'anything'
+      },
+      differencesSelector = {
+        name: name
+      },
+      noDifferencesSelector = {
+        name: name,
+        selector: '#rectangle'
+      },
+      noDifferencesResult = {
+        isEqual: true,
+        baseline: paths[0]
+      },
+      differencesResult = {
+        isEqual: false,
+        baseline: paths[0],
+        screenshot: paths[1],
+        diff: paths[2]
+      };
 
 function cleanUp() {
   for (var i = 0; i < paths.length; i++) {
@@ -34,45 +69,15 @@ function cleanUp() {
 describe('Mugshot integration', function() {
   this.timeout(0);
 
-  var url = 'file://' + path.join(__dirname, 'test.html'),
-      notUniqueSelector = {
-        name: name,
-        selector: 'li'
-      },
-      brokenSelector = {
-        name: name,
-        selector: 'anything'
-      },
-      differencesSelector = {
-        name: name
-      },
-      noDifferencesSelector = {
-        name: name,
-        selector: '#rectangle'
-      },
-      noDifferencesResult = {
-        isEqual: true,
-        baseline: paths[0]
-      },
-      differencesResult = {
-        isEqual: false,
-        baseline: paths[0],
-        screenshot: paths[1],
-        diff: paths[2]
-      },
-      wdioInstance, mugshot;
+  var wdioInstance, mugshot;
 
   before(function() {
-    var options = {
-      desiredCapabilities: {
-        browserName: 'phantomjs'
-      }
-    };
 
-    return wdioInstance = wdio.remote(options).init().url(url).then(function() {
-      var browser = new WdioAdapter(this);
-      mugshot = new Mugshot(browser);
-    });
+    return wdioInstance =
+        wdio.remote(BROWSER_OPTIONS).init().url(URL).then(function() {
+          var browser = new WdioAdapter(this);
+          mugshot = new Mugshot(browser);
+        });
   });
 
   beforeEach(function(done) {
@@ -146,28 +151,19 @@ describe('Mugshot integration', function() {
 describe('Mugshot integration with disabled acceptFirstBaseline', function() {
   this.timeout(0);
 
-  var url = 'file://' + path.join(__dirname, 'test.html'),
-      noDifferencesSelector = {
-        name: name,
-        selector: '#rectangle'
-      },
-      wdioInstance, mugshot;
+  var wdioInstance, mugshot;
 
   before(function() {
-    var options = {
-      desiredCapabilities: {
-        browserName: 'phantomjs'
-      }
-    };
 
     var mugshotOptions = {
       acceptFirstBaseline: false
     };
 
-    return wdioInstance = wdio.remote(options).init().url(url).then(function() {
-      var browser = new WdioAdapter(this);
-      mugshot = new Mugshot(browser, mugshotOptions);
-    });
+    return wdioInstance =
+        wdio.remote(BROWSER_OPTIONS).init().url(URL).then(function() {
+          var browser = new WdioAdapter(this);
+          mugshot = new Mugshot(browser, mugshotOptions);
+        });
   });
 
   beforeEach(function(done) {
