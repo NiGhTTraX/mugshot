@@ -151,10 +151,6 @@ describe('Mugshot integration with disabled acceptFirstBaseline', function() {
         name: name,
         selector: '#rectangle'
       },
-      noBaselineResult = {
-        isEqual: false,
-        baseline: paths[0]
-      },
       wdioInstance, mugshot;
 
   before(function() {
@@ -176,24 +172,16 @@ describe('Mugshot integration with disabled acceptFirstBaseline', function() {
 
   beforeEach(function(done) {
     cleanUp();
-
-    mugshot.test(noDifferencesSelector, function(error) {
-      if (error) {
-        throw error;
-      }
-
-      done();
-    });
+    done();
   });
 
-
-  it('should be false and contain only baseline path if there is no previous ' +
-     'baseline', function(done) {
+  it('should throw an error and results to be undefined if there is no' +
+  ' baseline', function(done) {
     cleanUp();
 
     mugshot.test(noDifferencesSelector, function(error, result) {
-      expect(error).to.be.null;
-      expect(result).to.be.deep.equal(noBaselineResult);
+      expect(error).to.be.an.instanceof(Error);
+      expect(result).to.be.undefined;
 
       done();
     });
