@@ -12,6 +12,7 @@
     "mugshot-webdriverio": "^1.0.0",
     "object-assign": "^3.0.0",
     "png-crop": "0.0.0",
+    "mkdirp": "~0.5.1",
     "mugshot-looks-same": "^1.0.0"
   },
   "devDependencies": {
