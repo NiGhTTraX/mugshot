@@ -7,7 +7,7 @@ var fs = require('fs');
 
 var name = 'great',
     ext = '.png',
-    dir = path.join(__dirname, '..', '..', 'visual-tests'),
+    dir = 'visual-tests',
     paths = [path.join(dir, name + ext), path.join(dir, name + '.new' + ext),
              path.join(dir, name + '.diff' + ext)];
 
