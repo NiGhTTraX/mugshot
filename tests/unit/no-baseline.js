@@ -96,6 +96,6 @@ describe('No baseline', function() {
 
     mugshot.test(noSelector, callback);
     expect(callback)
-        .to.have.been.calledWithExactly(new Error('Baseline missing'));
+        .to.have.been.calledWith(new Error('Baseline missing'));
   });
 });
