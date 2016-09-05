@@ -175,13 +175,11 @@ describe('Mugshot integration with disabled acceptFirstBaseline', function() {
     done();
   });
 
-  it('should throw an error and results to be undefined if there is no' +
-  ' baseline', function(done) {
+  it('should throw an error if there is no baseline', function(done) {
     cleanUp();
 
-    mugshot.test(noDifferencesSelector, function(error, result) {
+    mugshot.test(noDifferencesSelector, function(error) {
       expect(error).to.be.an.instanceof(Error);
-      expect(result).to.be.undefined;
 
       done();
     });
