@@ -148,10 +148,10 @@ system and will receive 2 arguments:
   - **isEqual** - Boolean indicating whether the test passed or not; if it's
     `false` then you can find the `.diff.png` and `.new.png` files on the file
     system.
-  - **baseline** - String indicating the path of the baseline on disk.
-  - **screenshot** - String indicating the path of the screenshot on disk; only
+  - **baseline** - String indicating the relative path of the baseline.
+  - **screenshot** - String indicating the relative path of the screenshot; only
     if `isEqual` is `false`, else `undefined`.
-  - **diff** - String indicating the path of the diff on disk; only if `isEqual`
+  - **diff** - String indicating the relative path of the diff; only if `isEqual`
     is `false`, else `undefined`.
 
 ## Adapters
