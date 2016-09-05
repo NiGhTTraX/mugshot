@@ -25,6 +25,7 @@
     "pre-git": "^0.6.2",
     "sinon": "^1.15.4",
     "sinon-chai": "^2.8.0",
+    "tmp": "0.0.28",
     "webdriverio": "^4.1.1"
   },
   "scripts": {
