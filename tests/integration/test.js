@@ -73,12 +73,11 @@ describe('Mugshot integration', function() {
   var wdioInstance, mugshot;
   before(function() {
 
-    return wdioInstance =
-        wdio.remote(BROWSER_OPTIONS).init().url(URL)
-            .then(function() {
-              var browser = new WdioAdapter(this);
-              mugshot = new Mugshot(browser);
-            });
+    return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+        .then(function() {
+          var browser = new WdioAdapter(this);
+          mugshot = new Mugshot(browser);
+        });
   });
 
   beforeEach(function(done) {
@@ -158,8 +157,8 @@ describe('Mugshot integration with disabled acceptFirstBaseline', function() {
       acceptFirstBaseline: false
     };
 
-    return wdioInstance =
-        wdio.remote(BROWSER_OPTIONS).init().url(URL).then(function() {
+    return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+        .then(function() {
           var browser = new WdioAdapter(this);
           mugshot = new Mugshot(browser, mugshotOptions);
         });
@@ -192,11 +191,10 @@ describe('Mugshot integration with recursive rootDirectory', function() {
   var wdioInstance, browser;
   before(function() {
 
-    return wdioInstance =
-        wdio.remote(BROWSER_OPTIONS).init().url(URL)
-            .then(function() {
-              browser = new WdioAdapter(this);
-            });
+    return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+        .then(function() {
+          browser = new WdioAdapter(this);
+        });
   });
 
   it('should create the desired rootDirectory', function(done) {
