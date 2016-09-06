@@ -18,18 +18,17 @@ const EXPECTED = [{
 describe('Mugshot interfaces', function() {
   EXPECTED.forEach(function(item) {
     var currentInterface = item.interface;
-    describe(`Interface ${currentInterface}`, function() {
 
-      it(`should export the ${currentInterface} interface`, function() {
-        expect(interfaces).to.have.property(currentInterface);
-      });
+    it(`should contain the ${currentInterface} interface`, function() {
+      expect(interfaces).to.have.property(currentInterface);
+    });
 
+    describe(`${currentInterface}`, function() {
       item.functions.forEach(function(f) {
         it(`should have the ${f} function`, function() {
           expect(interfaces[currentInterface][f]).to.be.an.instanceof(Function);
         });
       });
-
     });
   });
 });
