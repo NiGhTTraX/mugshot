@@ -205,11 +205,11 @@ describe('Mugshot integration with recursive rootDirectory', function() {
             });
   });
 
-  it('should create the desired rootDirectory', function() {
+  it('should create the desired rootDirectory', function(done) {
 
     // unsafeCleanup is needed for tmp to clean even if the folder is not empty
     tmp.dir({unsafeCleanup: true},
-        function _tempDirCreated(error, tempPath, cleanupCallback) {
+        function _tempDirCreated(error, tempPath) {
           if (error) {
             throw error;
           }
@@ -228,8 +228,7 @@ describe('Mugshot integration with recursive rootDirectory', function() {
             expect(error).to.be.null;
             expect(result).to.be.deep.equal(expected);
 
-            // Manual cleanup
-            cleanupCallback();
+            done();
           });
         });
   });
