@@ -76,10 +76,11 @@ describe('Mugshot integration', function() {
   before(function() {
 
     return wdioInstance =
-        wdio.remote(BROWSER_OPTIONS).init().url(URL).then(function() {
-          var browser = new WdioAdapter(this);
-          mugshot = new Mugshot(browser);
-        });
+        wdio.remote(BROWSER_OPTIONS).init().url(URL)
+            .then(function() {
+              var browser = new WdioAdapter(this);
+              mugshot = new Mugshot(browser);
+            });
   });
 
   beforeEach(function(done) {
@@ -198,9 +199,10 @@ describe('Mugshot integration with recursive rootDirectory', function() {
   before(function() {
 
     return wdioInstance =
-        wdio.remote(BROWSER_OPTIONS).init().url(URL).then(function() {
-          browser = new WdioAdapter(this);
-        });
+        wdio.remote(BROWSER_OPTIONS).init().url(URL)
+            .then(function() {
+              browser = new WdioAdapter(this);
+            });
   });
 
   it('should create the desired rootDirectory', function() {
