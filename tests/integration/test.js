@@ -70,9 +70,7 @@ function cleanUp() {
 
 describe('Mugshot integration', function() {
   this.timeout(0);
-
   var wdioInstance, mugshot;
-
   before(function() {
 
     return wdioInstance =
@@ -153,9 +151,7 @@ describe('Mugshot integration', function() {
 
 describe('Mugshot integration with disabled acceptFirstBaseline', function() {
   this.timeout(0);
-
   var wdioInstance, mugshot;
-
   before(function() {
 
     var mugshotOptions = {
@@ -193,9 +189,7 @@ describe('Mugshot integration with disabled acceptFirstBaseline', function() {
 
 describe('Mugshot integration with recursive rootDirectory', function() {
   this.timeout(0);
-
   var wdioInstance, browser;
-
   before(function() {
 
     return wdioInstance =
