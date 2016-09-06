@@ -144,41 +144,41 @@ describe('Mugshot integration', function() {
     cleanUp();
     return wdioInstance.end();
   });
-});
 
-describe('Mugshot integration with disabled acceptFirstBaseline', function() {
-  this.timeout(0);
-  var wdioInstance, mugshot;
-  before(function() {
+  describe('disabled acceptFirstBaseline', function() {
+    this.timeout(0);
+    var wdioInstance, mugshot;
+    before(function() {
 
-    var mugshotOptions = {
-      acceptFirstBaseline: false
-    };
+      var mugshotOptions = {
+        acceptFirstBaseline: false
+      };
 
-    return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
-        .then(function() {
-          var browser = new WdioAdapter(this);
-          mugshot = new Mugshot(browser, mugshotOptions);
-        });
-  });
+      return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+          .then(function() {
+            var browser = new WdioAdapter(this);
+            mugshot = new Mugshot(browser, mugshotOptions);
+          });
+    });
 
-  beforeEach(function(done) {
-    cleanUp();
-    done();
-  });
-
-  it('should throw an error if there is no baseline', function(done) {
-    cleanUp();
-
-    mugshot.test(noDifferencesSelector, function(error) {
-      expect(error).to.be.an.instanceof(Error);
-
+    beforeEach(function(done) {
+      cleanUp();
       done();
     });
-  });
 
-  after(function() {
-    cleanUp();
-    return wdioInstance.end();
+    it('should throw an error if there is no baseline', function(done) {
+      cleanUp();
+
+      mugshot.test(noDifferencesSelector, function(error) {
+        expect(error).to.be.an.instanceof(Error);
+
+        done();
+      });
+    });
+
+    after(function() {
+      cleanUp();
+      return wdioInstance.end();
+    });
   });
 });
