@@ -5,37 +5,22 @@ var WdioAdapter = require('mugshot-webdriverio');
 var path = require('path');
 var fs = require('fs');
 
-var name = 'great',
-    ext = '.png',
-    dir = 'visual-tests',
-    paths = [path.join(dir, name + ext), path.join(dir, name + '.new' + ext),
-             path.join(dir, name + '.diff' + ext)];
+const URL = 'file://' + path.join(__dirname, 'test.html');
 
-function cleanUp() {
-  for (var i = 0; i < paths.length; i++) {
-    try {
-      fs.unlinkSync(paths[i]);
-    } catch (error) {
-      if (error.code !== 'ENOENT') {
-        throw error;
-      }
-    }
+const BROWSER_OPTIONS = {
+  desiredCapabilities: {
+    browserName: 'phantomjs'
   }
+};
 
-  try {
-    fs.rmdirSync(dir);
-  } catch (error) {
-    if (error.code !== 'ENOENT') {
-      throw error;
-    }
-  }
-}
+const name = 'great',
+      ext = '.png',
+      dir = 'visual-tests',
+      paths = [path.join(dir, name + ext),
+               path.join(dir, name + '.new' + ext),
+               path.join(dir, name + '.diff' + ext)];
 
-describe('Mugshot integration', function() {
-  this.timeout(0);
-
-  var url = 'file://' + path.join(__dirname, 'test.html'),
-      notUniqueSelector = {
+const notUniqueSelector = {
         name: name,
         selector: 'li'
       },
@@ -59,20 +44,38 @@ describe('Mugshot integration', function() {
         baseline: paths[0],
         screenshot: paths[1],
         diff: paths[2]
-      },
-      wdioInstance, mugshot;
+      };
 
-  before(function() {
-    var options = {
-      desiredCapabilities: {
-        browserName: 'phantomjs'
+function cleanUp() {
+  for (var i = 0; i < paths.length; i++) {
+    try {
+      fs.unlinkSync(paths[i]);
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        throw error;
       }
-    };
+    }
+  }
 
-    return wdioInstance = wdio.remote(options).init().url(url).then(function() {
-      var browser = new WdioAdapter(this);
-      mugshot = new Mugshot(browser);
-    });
+  try {
+    fs.rmdirSync(dir);
+  } catch (error) {
+    if (error.code !== 'ENOENT') {
+      throw error;
+    }
+  }
+}
+
+describe('Mugshot integration', function() {
+  this.timeout(0);
+  var wdioInstance, mugshot;
+  before(function() {
+
+    return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+        .then(function() {
+          var browser = new WdioAdapter(this);
+          mugshot = new Mugshot(browser);
+        });
   });
 
   beforeEach(function(done) {
@@ -141,52 +144,41 @@ describe('Mugshot integration', function() {
     cleanUp();
     return wdioInstance.end();
   });
-});
 
-describe('Mugshot integration with disabled acceptFirstBaseline', function() {
-  this.timeout(0);
+  describe('disabled acceptFirstBaseline', function() {
+    this.timeout(0);
+    var wdioInstance, mugshot;
+    before(function() {
 
-  var url = 'file://' + path.join(__dirname, 'test.html'),
-      noDifferencesSelector = {
-        name: name,
-        selector: '#rectangle'
-      },
-      wdioInstance, mugshot;
+      var mugshotOptions = {
+        acceptFirstBaseline: false
+      };
 
-  before(function() {
-    var options = {
-      desiredCapabilities: {
-        browserName: 'phantomjs'
-      }
-    };
-
-    var mugshotOptions = {
-      acceptFirstBaseline: false
-    };
-
-    return wdioInstance = wdio.remote(options).init().url(url).then(function() {
-      var browser = new WdioAdapter(this);
-      mugshot = new Mugshot(browser, mugshotOptions);
+      return wdioInstance = wdio.remote(BROWSER_OPTIONS).init().url(URL)
+          .then(function() {
+            var browser = new WdioAdapter(this);
+            mugshot = new Mugshot(browser, mugshotOptions);
+          });
     });
-  });
 
-  beforeEach(function(done) {
-    cleanUp();
-    done();
-  });
-
-  it('should throw an error if there is no baseline', function(done) {
-    cleanUp();
-
-    mugshot.test(noDifferencesSelector, function(error) {
-      expect(error).to.be.an.instanceof(Error);
-
+    beforeEach(function(done) {
+      cleanUp();
       done();
     });
-  });
 
-  after(function() {
-    cleanUp();
-    return wdioInstance.end();
+    it('should throw an error if there is no baseline', function(done) {
+      cleanUp();
+
+      mugshot.test(noDifferencesSelector, function(error) {
+        expect(error).to.be.an.instanceof(Error);
+
+        done();
+      });
+    });
+
+    after(function() {
+      cleanUp();
+      return wdioInstance.end();
+    });
   });
 });
