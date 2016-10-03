@@ -2,6 +2,11 @@
   "name": "mugshot",
   "version": "0.3.1",
   "description": "visual regression testing",
+  "contributors": [{
+    "name": "Florentin Simion"
+  }, {
+    "name": "Adela Istrate"
+  }],
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -48,7 +53,6 @@
     "visual",
     "test"
   ],
-  "author": "Florentin Simion",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/uberVU/mugshot/issues"
