@@ -15,7 +15,7 @@
     "concat-stream": "^1.5.0",
     "looks-same": "^2.1.0",
     "object-assign": "^3.0.0",
-    "png-crop": "0.0.0",
+    "png-crop": "0.0.1",
     "mkdirp": "~0.5.1"
   },
   "devDependencies": {
