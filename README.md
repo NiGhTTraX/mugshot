@@ -1,8 +1,10 @@
-# Mugshot
+# ![mughsot](./mugshot-logo.png)
+
+> Visual regression testing library
 
 [![Build Status](https://travis-ci.org/uberVU/mugshot.svg?branch=master)](https://travis-ci.org/uberVU/mugshot)
 
-Mugshot is a library for visual regression testing. It helps you identify the
+Use Mugshot to identify the
 parts of your product that have unexpected visual changes.
 
 The beauty of Mugshot comes from its independence of any browser,
@@ -160,3 +162,8 @@ system and will receive 2 arguments:
 * [Mugshot-Looks-Same](https://github.com/uberVU/mugshot-looks-same) - LooksSame adapter for image compare.
 * [Chai-Mugshot](https://github.com/uberVU/chai-mugshot) - Chai plugin.
 * [Mocha-Mugshot-Reporter](https://github.com/uberVU/mocha-mugshot-reporter) - Mocha reporter.
+
+
+----
+
+Logo provided by Andrei Picus ([@NiGhTTraX](https://github.com/NiGhTTraX)) under the MIT license.
