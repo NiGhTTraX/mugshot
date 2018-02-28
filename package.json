@@ -14,9 +14,10 @@
   "dependencies": {
     "concat-stream": "^1.5.0",
     "looks-same": "^2.1.0",
+    "mkdirp": "~0.5.1",
+    "mugshot-looks-same": "~1.0.0",
     "object-assign": "^3.0.0",
-    "png-crop": "0.0.1",
-    "mkdirp": "~0.5.1"
+    "png-crop": "0.0.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
@@ -24,7 +25,6 @@
     "eslint-plugin-ubervu": "0.1.0",
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
-    "mugshot-looks-same": "~1.0.0",
     "mugshot-webdriverio": "~1.0.0",
     "phantomjs-prebuilt": "2.1.7",
     "pre-git": "^0.6.2",
