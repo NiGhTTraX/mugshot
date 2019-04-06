@@ -1,9 +1,13 @@
 language: node_js
 node_js:
-  - "5"
+- 10
+sudo: required
+services:
+- docker
+
 script:
-  - npm run lint
-  - npm test
-  - npm run browser &
-  - sleep 3
-  - npm run test-integration
+- npm run lint
+- npm run test
+
+after_script:
+- npm run report-coverage

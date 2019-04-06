@@ -1,0 +1,20 @@
+version: '2.1'
+
+services:
+  selenium:
+    image: selenium/hub:3.14.0-gallium
+    ports:
+      - '4444:4444'
+    devices:
+      # Try to prevent Selenium from blocking when creating sessions due to
+      # limited entropy.
+      - /dev/urandom:/dev/random
+
+  chrome:
+    image: selenium/node-chrome:3.14.0-gallium
+
+  firefox:
+    image: selenium/node-firefox:3.14.0-gallium
+
+  debug_node:
+    image: "selenium/node-${BROWSER:-chrome}-debug:3.14.0-gallium"
