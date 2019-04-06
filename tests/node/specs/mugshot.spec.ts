@@ -3,24 +3,25 @@ import Mugshot, { Browser, Differ, FileSystem } from '../../../src';
 import { Mock } from 'typemoq';
 
 describe('Mugshot', () => {
-  it('should pass for an existing identical screenshot', async () => {
-    const base = 'abc';
+  const blackPixel = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+  const whitePixel = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
 
+  it('should pass for an existing identical screenshot', async () => {
     const browser = Mock.ofType<Browser>();
     browser
       .setup(b => b.takeScreenshot())
-      .returns(() => Promise.resolve(base))
+      .returns(() => Promise.resolve(blackPixel))
       .verifiable();
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.read('existing-identical'))
-      .returns(() => Promise.resolve(base))
+      .setup(f => f.readFile('existing-identical'))
+      .returns(() => Promise.resolve(Buffer.from(blackPixel)))
       .verifiable();
 
     const differ = Mock.ofType<Differ>();
     differ
-      .setup(d => d.compare(base, base))
+      .setup(d => d.compare(Buffer.from(blackPixel), Buffer.from(blackPixel)))
       .returns(() => Promise.resolve(true))
       .verifiable();
 
@@ -39,24 +40,21 @@ describe('Mugshot', () => {
   });
 
   it('should fail for an existing diff screenshot', async () => {
-    const base = 'abc';
-    const screenshot = 'not-abc';
-
     const browser = Mock.ofType<Browser>();
     browser
       .setup(b => b.takeScreenshot())
-      .returns(() => Promise.resolve(screenshot))
+      .returns(() => Promise.resolve(blackPixel))
       .verifiable();
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.read('existing-diff'))
-      .returns(() => Promise.resolve(base))
+      .setup(f => f.readFile('existing-diff'))
+      .returns(() => Promise.resolve(Buffer.from(whitePixel)))
       .verifiable();
 
     const differ = Mock.ofType<Differ>();
     differ
-      .setup(d => d.compare(base, screenshot))
+      .setup(d => d.compare(Buffer.from(whitePixel), Buffer.from(blackPixel)))
       .returns(() => Promise.resolve(false))
       .verifiable();
 

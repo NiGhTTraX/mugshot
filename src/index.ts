@@ -12,11 +12,11 @@ export interface Browser {
 }
 
 export interface FileSystem {
-  read: (name: string) => Promise<string>;
+  readFile: (name: string) => Promise<Buffer>;
 }
 
 export interface Differ {
-  compare: (base: string, screenshot: string) => Promise<boolean>;
+  compare: (base: Buffer, screenshot: Buffer) => Promise<boolean>;
 }
 
 interface MugshotOptions {
@@ -38,8 +38,8 @@ export default class Mugshot implements VisualRegressionTester {
   }
 
   check = async (name: string) => {
-    const screenshot = await this.browser.takeScreenshot();
-    const base = await this.fs.read(name);
+    const screenshot = Buffer.from(await this.browser.takeScreenshot());
+    const base = await this.fs.readFile(name);
 
     return Promise.resolve({
       matches: await this.differ.compare(base, screenshot)
