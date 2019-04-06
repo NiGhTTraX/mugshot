@@ -7,6 +7,7 @@ export interface VisualRegressionTester {
 }
 
 export interface Browser {
+  // https://w3c.github.io/webdriver/#take-screenshot
   takeScreenshot: () => Promise<string>;
 }
 
