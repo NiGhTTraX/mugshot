@@ -13,7 +13,6 @@ export interface Browser {
 
 export interface FileSystem {
   read: (name: string) => Promise<string>;
-  write: (name: string) => Promise<string>;
 }
 
 export interface Differ {
