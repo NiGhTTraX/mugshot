@@ -24,7 +24,10 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(true))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, fs.object, differ.object);
+    const mugshot = new Mugshot(browser.object, {
+      fs: fs.object,
+      differ: differ.object
+    });
 
     const result = await mugshot.check('existing-identical');
 
@@ -57,7 +60,10 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(false))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, fs.object, differ.object);
+    const mugshot = new Mugshot(browser.object, {
+      fs: fs.object,
+      differ: differ.object
+    });
 
     const result = await mugshot.check('existing-diff');
 
