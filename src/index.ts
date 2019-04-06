@@ -16,20 +16,29 @@ export interface FileSystem {
   write: (name: string) => Promise<string>;
 }
 
+export interface Differ {
+  compare: (a: string, b: string) => Promise<boolean>;
+}
+
 export default class Mugshot implements VisualRegressionTester {
   private browser: Browser;
 
   private fs: FileSystem;
 
-  constructor(browser: Browser, storage: FileSystem) {
+  private differ: Differ;
+
+  constructor(browser: Browser, storage: FileSystem, differ: Differ) {
     this.browser = browser;
     this.fs = storage;
+    this.differ = differ;
   }
 
   check = async (name: string) => {
     const screenshot = await this.browser.takeScreenshot();
     const base = await this.fs.read(name);
 
-    return Promise.resolve({ matches: screenshot === base });
+    return Promise.resolve({
+      matches: await this.differ.compare(base, screenshot)
+    });
   };
 }

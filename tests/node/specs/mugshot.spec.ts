@@ -1,5 +1,5 @@
 import { describe, it, expect } from '../suite';
-import Mugshot, { Browser, FileSystem } from '../../../src';
+import Mugshot, { Browser, Differ, FileSystem } from '../../../src';
 import { Mock } from 'typemoq';
 
 describe('Mugshot', () => {
@@ -18,7 +18,13 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(base))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, fs.object);
+    const differ = Mock.ofType<Differ>();
+    differ
+      .setup(d => d.compare(base, base))
+      .returns(() => Promise.resolve(true))
+      .verifiable();
+
+    const mugshot = new Mugshot(browser.object, fs.object, differ.object);
 
     const result = await mugshot.check('existing-identical');
 
@@ -26,6 +32,7 @@ describe('Mugshot', () => {
 
     browser.verifyAll();
     fs.verifyAll();
+    differ.verifyAll();
   });
 
   it('should fail for an existing diff screenshot', async () => {
@@ -44,7 +51,13 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(base))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, fs.object);
+    const differ = Mock.ofType<Differ>();
+    differ
+      .setup(d => d.compare(base, screenshot))
+      .returns(() => Promise.resolve(false))
+      .verifiable();
+
+    const mugshot = new Mugshot(browser.object, fs.object, differ.object);
 
     const result = await mugshot.check('existing-diff');
 
@@ -52,5 +65,6 @@ describe('Mugshot', () => {
 
     browser.verifyAll();
     fs.verifyAll();
+    differ.verifyAll();
   });
 });
