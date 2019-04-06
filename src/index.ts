@@ -16,7 +16,7 @@ export interface FileSystem {
 }
 
 export interface Differ {
-  compare: (a: string, b: string) => Promise<boolean>;
+  compare: (base: string, screenshot: string) => Promise<boolean>;
 }
 
 interface MugshotOptions {
