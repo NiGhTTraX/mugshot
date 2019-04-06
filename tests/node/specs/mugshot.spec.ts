@@ -32,11 +32,11 @@ describe('Mugshot', () => {
 
     const result = await mugshot.check('existing-identical');
 
-    expect(result.matches).to.be.true;
-
     browser.verifyAll();
     fs.verifyAll();
     differ.verifyAll();
+
+    expect(result.matches).to.be.true;
   });
 
   it('should fail for an existing diff screenshot', async () => {
@@ -65,10 +65,10 @@ describe('Mugshot', () => {
 
     const result = await mugshot.check('existing-diff');
 
-    expect(result.matches).to.be.false;
-
     browser.verifyAll();
     fs.verifyAll();
     differ.verifyAll();
+
+    expect(result.matches).to.be.false;
   });
 });
