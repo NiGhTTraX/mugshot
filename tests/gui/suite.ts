@@ -1,10 +1,6 @@
-import { remote, Client, RawResult } from 'webdriverio';
-// @ts-ignore because no types
-import Mugshot from 'mugshot';
-// @ts-ignore because no types
-import WebdriverIOAdapter from 'mugshot-webdriverio';
-import path from 'path';
+import { remote } from 'webdriverio';
 import fs from 'fs';
+import path from 'path';
 import { expect } from 'chai';
 import {
   runnerAfter,
@@ -13,18 +9,26 @@ import {
   runnerIt,
   runnerDescribe
 } from '../mocha-runner';
+// import Browser = WebdriverIOAsync.Browser;
 
-export type TestDefinition = (browser: Client<RawResult<null>>) => Promise<any> | void;
+export { expect };
+
+type Browser = ReturnType<typeof remote>;
+export type TestDefinition = (browser: Browser) => Promise<any> | void;
 
 const { BROWSER = 'chrome', SELENIUM_HOST = 'localhost' } = process.env;
 
 let suiteNesting = 0;
-
 // These will hold root suite level instances. Since most, if not all test
 // runners run tests inside of a suite sequentially and since we only set
-// up the browser once per root test suite, these should be "thread safe".
-let rootSuiteBrowser: Client<RawResult<null>> & RawResult<null>, rootSuiteMugshot: any;
 
+// up the browser once per root test suite, these should be "thread safe".
+let rootSuiteBrowser: Browser;
+
+export async function loadFixture(name: string) {
+  await rootSuiteBrowser.url(`file:///var/www/html/${name}.html`);
+  await rootSuiteBrowser.setWindowSize(1024, 768);
+}
 /**
  * Run your gui tests in a fresh Selenium session.
  *
@@ -67,52 +71,6 @@ export function it(name: string, definition: TestDefinition = () => {}) {
 }
 
 /**
- * Perform a visual test alongside a normal test.
- *
- * The visual test will not be performed if the test in `definition` fails.
- *
- * @param {String} name The name of the test. The screenshot will be taken under
- *   the full test name (including any parent suite's name(s)).
- * @param definition
- * @param selector
- */
-export function vit(name: string, definition: TestDefinition, selector:string = '#root > *') {
-  runnerIt(name, testName => {
-    let promise = Promise.resolve(definition(rootSuiteBrowser));
-
-    // Don't want to make debugging tests more noisy than it needs to be.
-    if (!process.env.DEBUG) {
-      promise = promise.then(() => checkForVisualChanges(testName, selector));
-    }
-
-    if (process.env.COVERAGE) {
-      promise = promise.then(() => collectCoverage(testName));
-    }
-
-    return promise;
-  });
-}
-
-export { expect };
-
-function checkForVisualChanges(name: string, selector:string = 'body > *') {
-  return new Promise((resolve, reject) => {
-    rootSuiteMugshot.test(
-      { name: getSafeFilename(name), selector },
-      (err: Error, result: { isEqual: boolean }) => {
-        if (err) {
-          return reject(err);
-        }
-
-        expect(result.isEqual, 'Visual changes detected. Check screenshots').to.be.true;
-
-        return resolve();
-      }
-    );
-  });
-}
-
-/**
  * @param {string} testName
  */
 function collectCoverage(testName: string): Promise<void> {
@@ -121,7 +79,7 @@ function collectCoverage(testName: string): Promise<void> {
   return Promise.resolve(rootSuiteBrowser.execute(function getCoverage() {
     // @ts-ignore because `__coverage__` is added by nyc
     return JSON.stringify(window.__coverage__);
-  })).then(({ value: coverage }) => {
+  })).then(coverage => {
     fs.writeFileSync(
       path.join(__dirname, 'results', 'coverage', `${BROWSER}_${safeTestName}.json`),
       coverage
@@ -129,9 +87,6 @@ function collectCoverage(testName: string): Promise<void> {
   });
 }
 
-/**
- * Turn the given file name into something that's safe to save on the FS.
- */
 function getSafeFilename(fileName: string): string {
   return fileName
     .replace(/\//g, '_')
@@ -140,26 +95,19 @@ function getSafeFilename(fileName: string): string {
 }
 
 function setupHooks() {
-  runnerBefore(function connectToSelenium() {
-    const options: WebdriverIO.Options = {
-      host: SELENIUM_HOST,
-      desiredCapabilities: { browserName: BROWSER },
-      deprecationWarnings: false
+  runnerBefore(async function connectToSelenium() {
+    const options: WebDriver.Options = {
+      hostname: SELENIUM_HOST,
+      capabilities: { browserName: BROWSER },
+      logLevel: 'error'
     };
 
-    rootSuiteBrowser = remote(options).init();
-
-    const adapter = new WebdriverIOAdapter(rootSuiteBrowser);
-
-    rootSuiteMugshot = new Mugshot(adapter, {
-      rootDirectory: path.join(__dirname, 'screenshots', BROWSER),
-      acceptFirstBaseline: false
-    });
+    rootSuiteBrowser = await remote(options);
 
     return rootSuiteBrowser;
   });
 
   runnerAfter(function endSession() {
-    return rootSuiteBrowser.end();
+    return rootSuiteBrowser.deleteSession();
   });
 }

@@ -12,9 +12,15 @@ services:
 
   chrome:
     image: selenium/node-chrome:3.14.0-gallium
+    volumes:
+      - ./fixtures:/var/www/html
 
   firefox:
     image: selenium/node-firefox:3.14.0-gallium
+    volumes:
+      - ./fixtures:/var/www/html
 
   debug_node:
     image: "selenium/node-${BROWSER:-chrome}-debug:3.14.0-gallium"
+    volumes:
+      - ./fixtures:/var/www/html
