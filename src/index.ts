@@ -1,3 +1,5 @@
+import { PNGEditor } from './jimp-editor';
+
 export interface Result {
   matches: boolean;
 }
@@ -7,6 +9,7 @@ export interface VisualRegressionTester {
 }
 
 export interface Browser {
+  // Take a full page screenshot and return a base64 string.
   // https://w3c.github.io/webdriver/#take-screenshot
   takeScreenshot: () => Promise<string>;
 }
@@ -15,13 +18,9 @@ export interface FileSystem {
   readFile: (name: string) => Promise<Buffer>;
 }
 
-export interface Differ {
-  compare: (base: Buffer, screenshot: Buffer) => Promise<boolean>;
-}
-
 interface MugshotOptions {
   fs: FileSystem;
-  differ: Differ;
+  pngEditor: PNGEditor;
 }
 
 export default class Mugshot implements VisualRegressionTester {
@@ -29,20 +28,20 @@ export default class Mugshot implements VisualRegressionTester {
 
   private fs: FileSystem;
 
-  private differ: Differ;
+  private pngEditor: PNGEditor;
 
-  constructor(browser: Browser, { fs, differ }: MugshotOptions) {
+  constructor(browser: Browser, { fs, pngEditor }: MugshotOptions) {
     this.browser = browser;
     this.fs = fs;
-    this.differ = differ;
+    this.pngEditor = pngEditor;
   }
 
   check = async (name: string) => {
-    const screenshot = Buffer.from(await this.browser.takeScreenshot());
+    const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const base = await this.fs.readFile(name);
 
     return Promise.resolve({
-      matches: await this.differ.compare(base, screenshot)
+      matches: await this.pngEditor.compare(base, screenshot)
     });
   };
 }
