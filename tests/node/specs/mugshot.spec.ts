@@ -2,13 +2,9 @@ import { describe, expect, it } from '../suite';
 import Mugshot, { Browser, FileSystem } from '../../../src';
 import { Mock } from 'typemoq';
 import { PNGEditor } from '../../../src/jimp-editor';
+import { blackPixelB64, blackPixelBuffer, whitePixelBuffer } from '../fixtures';
 
 describe('Mugshot', () => {
-  const blackPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
-  const whitePixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
-  const blackPixelBuffer = Buffer.from(blackPixelB64, 'base64');
-  const whitePixelBuffer = Buffer.from(whitePixelB64, 'base64');
-
   it('should pass for an existing identical screenshot', async () => {
     const browser = Mock.ofType<Browser>();
     browser
