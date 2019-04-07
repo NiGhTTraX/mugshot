@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { describe, expect, it, loadFixture } from '../suite';
 import Mugshot from '../../../src';
-import JimpEditor from '../../../src/jimp-editor';
+import jimpEditor from '../../../src/jimp-editor';
 
 describe('Mugshot', () => {
   it('should pass when identical', async browser => {
@@ -10,7 +10,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser, {
       fs,
-      pngEditor: new JimpEditor()
+      pngEditor: jimpEditor
     });
 
     const result = await mugshot.check(
@@ -25,7 +25,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser, {
       fs,
-      pngEditor: new JimpEditor()
+      pngEditor: jimpEditor
     });
 
     const result = await mugshot.check(

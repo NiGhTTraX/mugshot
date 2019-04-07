@@ -1,17 +1,15 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { describe, expect, it } from '../suite';
-import JimpEditor from '../../../src/jimp-editor';
+import jimpEditor from '../../../src/jimp-editor';
 
-describe('JimpEditor', () => {
+describe('jimpEditor', () => {
   it('should compare identical buffers', async () => {
     const buffer = await fs.readFile(
       path.join(__dirname, '../../gui/fixtures/simple.png')
     );
 
-    const editor = new JimpEditor();
-
-    expect(await editor.compare(
+    expect(await jimpEditor.compare(
       buffer,
       buffer
     )).to.be.true;
@@ -26,9 +24,7 @@ describe('JimpEditor', () => {
       path.join(__dirname, '../../gui/fixtures/simple2.png')
     );
 
-    const editor = new JimpEditor();
-
-    expect(await editor.compare(
+    expect(await jimpEditor.compare(
       buffer1,
       buffer2
     )).to.be.false;
