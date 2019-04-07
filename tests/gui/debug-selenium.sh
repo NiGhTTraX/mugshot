@@ -6,7 +6,7 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 
 # Check if the hub is already ready form a previous run.
 set +e
-./wait-for-nodes.sh 1 0 2>&1 > /dev/null
+./wait-for-nodes.sh 2 0 2>&1 > /dev/null
 if [[ $? == 0 ]]; then
     echo Hub was already ready.
     exit 0

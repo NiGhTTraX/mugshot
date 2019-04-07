@@ -14,7 +14,7 @@ describe('Mugshot', () => {
     });
 
     const result = await mugshot.check(
-      path.join(__dirname, '../screenshots/chrome/simple.png')
+      path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`)
     );
 
     expect(result.matches).to.be.true;
@@ -29,7 +29,7 @@ describe('Mugshot', () => {
     });
 
     const result = await mugshot.check(
-      path.join(__dirname, '../screenshots/chrome/simple.png')
+      path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`)
     );
 
     expect(result.matches).to.be.false;
