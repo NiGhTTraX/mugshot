@@ -1,3 +1,4 @@
+import path from 'path';
 import PNGEditor from './interfaces/png-editor';
 
 export interface Result {
@@ -24,21 +25,26 @@ interface MugshotOptions {
 }
 
 export default class Mugshot implements VisualRegressionTester {
-  private browser: Browser;
+  private readonly browser: Browser;
 
-  private fs: FileSystem;
+  private readonly resultsPath: string;
 
-  private pngEditor: PNGEditor;
+  private readonly fs: FileSystem;
 
-  constructor(browser: Browser, { fs, pngEditor }: MugshotOptions) {
+  private readonly pngEditor: PNGEditor;
+
+  constructor(browser: Browser, resultsPath: string, { fs, pngEditor }: MugshotOptions) {
     this.browser = browser;
+    this.resultsPath = resultsPath;
     this.fs = fs;
     this.pngEditor = pngEditor;
   }
 
   check = async (name: string) => {
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-    const base = await this.fs.readFile(name);
+    const base = await this.fs.readFile(
+      path.join(this.resultsPath, name)
+    );
 
     return Promise.resolve({
       matches: await this.pngEditor.compare(base, screenshot)

@@ -14,7 +14,7 @@ describe('Mugshot', () => {
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.readFile('existing-identical'))
+      .setup(f => f.readFile('results/existing-identical'))
       .returns(() => Promise.resolve(blackPixelBuffer))
       .verifiable();
 
@@ -24,7 +24,7 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(true))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, {
+    const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
       pngEditor: differ.object
     });
@@ -47,7 +47,7 @@ describe('Mugshot', () => {
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.readFile('existing-diff'))
+      .setup(f => f.readFile('results/existing-diff'))
       .returns(() => Promise.resolve(whitePixelBuffer))
       .verifiable();
 
@@ -57,7 +57,7 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve(false))
       .verifiable();
 
-    const mugshot = new Mugshot(browser.object, {
+    const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
       pngEditor: differ.object
     });
