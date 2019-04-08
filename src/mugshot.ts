@@ -40,10 +40,16 @@ export default class Mugshot implements VisualRegressionTester {
     this.pngEditor = pngEditor;
   }
 
+  /**
+   * Check for visual regressions.
+   *
+   * @param name Mugshot will look for a baseline named `${name}.png` in the
+   *   `resultsPath` folder.
+   */
   check = async (name: string) => {
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const base = await this.fs.readFile(
-      path.join(this.resultsPath, name)
+      path.join(this.resultsPath, `${name}.png`)
     );
 
     return Promise.resolve({

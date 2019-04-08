@@ -15,7 +15,7 @@ describe('Mugshot', () => {
       pngEditor: jimpEditor
     });
 
-    const result = await mugshot.check('simple.png');
+    const result = await mugshot.check('simple');
 
     expect(result.matches).to.be.true;
   });
@@ -28,7 +28,7 @@ describe('Mugshot', () => {
       pngEditor: jimpEditor
     });
 
-    const result = await mugshot.check('simple.png');
+    const result = await mugshot.check('simple');
 
     expect(result.matches).to.be.false;
   });

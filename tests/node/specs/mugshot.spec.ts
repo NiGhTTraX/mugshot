@@ -14,7 +14,7 @@ describe('Mugshot', () => {
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.readFile('results/existing-identical'))
+      .setup(f => f.readFile('results/existing-identical.png'))
       .returns(() => Promise.resolve(blackPixelBuffer))
       .verifiable();
 
@@ -47,7 +47,7 @@ describe('Mugshot', () => {
 
     const fs = Mock.ofType<FileSystem>();
     fs
-      .setup(f => f.readFile('results/existing-diff'))
+      .setup(f => f.readFile('results/existing-diff.png'))
       .returns(() => Promise.resolve(whitePixelBuffer))
       .verifiable();
 
