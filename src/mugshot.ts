@@ -17,6 +17,7 @@ export interface Browser {
 
 export interface FileSystem {
   readFile: (name: string) => Promise<Buffer>;
+  pathExists: (path: string) => Promise<boolean>;
 }
 
 interface MugshotOptions {
@@ -47,10 +48,15 @@ export default class Mugshot implements VisualRegressionTester {
    *   `resultsPath` folder.
    */
   check = async (name: string) => {
+    const basePath = path.join(this.resultsPath, `${name}.png`);
+    const baseExists = await this.fs.pathExists(basePath);
+
+    if (!baseExists) {
+      return Promise.resolve({ matches: false });
+    }
+
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-    const base = await this.fs.readFile(
-      path.join(this.resultsPath, `${name}.png`)
-    );
+    const base = await this.fs.readFile(basePath);
 
     return Promise.resolve({
       matches: await this.pngEditor.compare(base, screenshot)
