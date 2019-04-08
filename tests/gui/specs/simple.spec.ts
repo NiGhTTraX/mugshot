@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { describe, expect, it, loadFixture } from '../suite';
-import Mugshot from '../../../src';
+import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/jimp-editor';
 
 describe('Mugshot', () => {
