@@ -1,8 +1,5 @@
 import jimp from 'jimp';
-
-export interface PNGEditor {
-  compare: (base: Buffer, screenshot: Buffer) => Promise<boolean>;
-}
+import PNGEditor from '../interfaces/png-editor';
 
 const jimpEditor: PNGEditor = {
   compare: async (base: Buffer, screenshot: Buffer) => jimp.diff(

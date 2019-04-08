@@ -1,7 +1,7 @@
 import { describe, expect, it } from '../suite';
 import Mugshot, { Browser, FileSystem } from '../../../src/mugshot';
 import { Mock } from 'typemoq';
-import { PNGEditor } from '../../../src/jimp-editor';
+import PNGEditor from '../../../src/interfaces/png-editor';
 import { blackPixelB64, blackPixelBuffer, whitePixelBuffer } from '../fixtures';
 
 describe('Mugshot', () => {

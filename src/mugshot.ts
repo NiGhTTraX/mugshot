@@ -1,4 +1,4 @@
-import { PNGEditor } from './jimp-editor';
+import PNGEditor from './interfaces/png-editor';
 
 export interface Result {
   matches: boolean;
