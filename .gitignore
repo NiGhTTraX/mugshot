@@ -1,9 +1,4 @@
 node_modules
-package-lock.json
 dist
 results
 .nyc_output
-fixtures.json
-.idea
-*.diff.png
-*.new.png

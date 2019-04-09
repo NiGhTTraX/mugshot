@@ -1,11 +1,22 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { describe, expect, it, loadFixture } from '../suite';
+import { beforeEach, describe, expect, it, loadFixture } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/lib/jimp-editor';
 
 describe('Mugshot', () => {
-  const resultsPath = path.join(__dirname, `../screenshots/${process.env.BROWSER}`);
+  let resultsPath!: string;
+
+  beforeEach(async () => {
+    const browser = process.env.BROWSER;
+
+    resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
+
+    await fs.copyFile(
+      path.join(__dirname, `../screenshots/${browser}/simple.png`),
+      path.join(resultsPath, 'simple.png')
+    );
+  });
 
   it('should pass when identical', async browser => {
     await loadFixture('simple');
