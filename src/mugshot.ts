@@ -18,11 +18,20 @@ export interface Browser {
 export interface FileSystem {
   readFile: (name: string) => Promise<Buffer>;
   pathExists: (path: string) => Promise<boolean>;
+  writeFile: (path: string, data: Buffer) => Promise<void>;
 }
 
 interface MugshotOptions {
   fs: FileSystem;
   pngEditor: PNGEditor;
+
+  /**
+   * If set to true `Mugshot.check` will pass if a baseline is not
+   * found and it will create the baseline from the screenshot it
+   * takes. It is recommended to set this to false when running in
+   * CI and to true when running locally.
+   */
+  createBaselines?: boolean;
 }
 
 export default class Mugshot implements VisualRegressionTester {
@@ -34,11 +43,26 @@ export default class Mugshot implements VisualRegressionTester {
 
   private readonly pngEditor: PNGEditor;
 
-  constructor(browser: Browser, resultsPath: string, { fs, pngEditor }: MugshotOptions) {
+  private readonly writeBaselines: boolean;
+
+  /**
+   *
+   * @param browser WHAT
+   * @param resultsPath
+   * @param fs
+   * @param pngEditor
+   * @param createBaselines
+   */
+  constructor(
+    browser: Browser,
+    resultsPath: string,
+    { fs, pngEditor, createBaselines = false }: MugshotOptions
+  ) {
     this.browser = browser;
     this.resultsPath = resultsPath;
     this.fs = fs;
     this.pngEditor = pngEditor;
+    this.writeBaselines = createBaselines;
   }
 
   /**
@@ -52,6 +76,13 @@ export default class Mugshot implements VisualRegressionTester {
     const baseExists = await this.fs.pathExists(basePath);
 
     if (!baseExists) {
+      if (this.writeBaselines) {
+        const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+        await this.fs.writeFile(basePath, screenshot);
+
+        return Promise.resolve({ matches: true });
+      }
+
       return Promise.resolve({ matches: false });
     }
 

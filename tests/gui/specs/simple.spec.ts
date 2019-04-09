@@ -41,11 +41,12 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser, resultsPath, {
       fs,
-      pngEditor: jimpEditor
+      pngEditor: jimpEditor,
+      createBaselines: true
     });
 
     const resultWhenMissingBaseline = await mugshot.check('new');
-    expect(resultWhenMissingBaseline.matches).to.be.false;
+    expect(resultWhenMissingBaseline.matches).to.be.true;
     expect(
       await fs.pathExists(baselinePath),
       'Baseline wasn\'t written'

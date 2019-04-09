@@ -113,7 +113,8 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object
+      pngEditor: pngEditor.object,
+      createBaselines: false
     });
 
     const result = await mugshot.check('missing');
@@ -123,5 +124,35 @@ describe('Mugshot', () => {
     pngEditor.verifyAll();
 
     expect(result.matches).to.be.false;
+  });
+
+  it('should write missing baseline and pass', async () => {
+    const pngEditor = Mock.ofType<PNGEditor>();
+    pngEditor.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
+
+    const browser = getBrowserWithScreenshot(blackPixelB64);
+
+    const fs = getFsWithMissingBaseline(
+      'results/missing.png',
+    );
+
+    fs
+      .setup(f => f.writeFile('results/missing.png', blackPixelBuffer))
+      .returns(() => Promise.resolve())
+      .verifiable();
+
+    const mugshot = new Mugshot(browser.object, 'results', {
+      fs: fs.object,
+      pngEditor: pngEditor.object,
+      createBaselines: true
+    });
+
+    const result = await mugshot.check('missing');
+
+    browser.verifyAll();
+    fs.verifyAll();
+    pngEditor.verifyAll();
+
+    expect(result.matches).to.be.true;
   });
 });
