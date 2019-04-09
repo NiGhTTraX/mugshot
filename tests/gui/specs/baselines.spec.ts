@@ -1,17 +1,20 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { describe, expect, it, loadFixture } from '../suite';
+import { describe, expect, it, beforeEach, loadFixture } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/lib/jimp-editor';
 
-describe('Mugshot', () => {
-  const resultsPath = path.join(__dirname, `../screenshots/${process.env.BROWSER}`);
+describe('Mugshot', async () => {
+  let resultsPath!: string;
+
+  beforeEach(async () => {
+    resultsPath = await fs.mkdtemp(`/tmp/mugshot-${process.env.BROWSER}`);
+  });
 
   it('should write first baseline', async browser => {
     await loadFixture('simple2');
 
     const baselinePath = path.join(resultsPath, 'new.png');
-    await fs.remove(baselinePath);
 
     const mugshot = new Mugshot(browser, resultsPath, {
       fs,
@@ -34,7 +37,6 @@ describe('Mugshot', () => {
     await loadFixture('simple2');
 
     const baselinePath = path.join(resultsPath, 'foo/bar/new.png');
-    await fs.remove(baselinePath);
 
     const mugshot = new Mugshot(browser, resultsPath, {
       fs,
