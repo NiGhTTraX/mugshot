@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import jimp from 'jimp';
-import { describe, expect, it, beforeEach, loadFixture } from '../suite';
+import { describe, expect, it, beforeEach, loadFixture, checkVisual } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/lib/jimp-editor';
 
@@ -38,11 +37,11 @@ describe('Mugshot', async () => {
     ).to.be.true;
 
     expect(
-      (await jimp.diff(
-        await jimp.read(diffPath),
-        await jimp.read(path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.diff.png`))
-      )).percent,
+      await checkVisual(
+        diffPath,
+        path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.diff.png`)
+      ),
       `The written diff ${diffPath} doesn't match expected one`
-    ).to.equal(0);
+    ).to.be.true;
   });
 });

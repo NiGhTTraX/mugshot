@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import jimp from 'jimp';
-import { beforeEach, describe, expect, it, loadFixture } from '../suite';
+import { beforeEach, checkVisual, describe, expect, it, loadFixture } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/lib/jimp-editor';
 
@@ -31,15 +30,15 @@ describe('Mugshot', async () => {
     ).to.be.true;
 
     expect(
-      (await jimp.diff(
-        await jimp.read(path.join(resultsPath, 'new.png')),
-        await jimp.read(path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`))
-      )).percent,
+      await checkVisual(
+        path.join(resultsPath, 'new.png'),
+        path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`)
+      ),
       `The written baseline ${baselinePath} doesn't match expected one`
-    ).to.equal(0);
+    ).to.be.true;
   });
 
-  it('should write create parent folder when writing baseline', async browser => {
+  it('should create parent folders when writing baseline', async browser => {
     await loadFixture('simple');
 
     const mugshot = new Mugshot(browser, resultsPath, {

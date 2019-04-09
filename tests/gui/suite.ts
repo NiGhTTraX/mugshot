@@ -2,6 +2,7 @@ import { remote } from 'webdriverio';
 import fs from 'fs';
 import path from 'path';
 import { expect } from 'chai';
+import jimp from 'jimp';
 import {
   runnerAfter,
   runnerBefore,
@@ -9,7 +10,6 @@ import {
   runnerIt,
   runnerDescribe
 } from '../mocha-runner';
-// import Browser = WebdriverIOAsync.Browser;
 
 export { expect };
 
@@ -35,6 +35,15 @@ export async function setWindowSize(width: number, height: number) {
     // eslint-disable-next-line no-empty
   } catch (e) {
   }
+}
+
+export async function checkVisual(base: string, screenshot: string) {
+  const result = await jimp.diff(
+    await jimp.read(base),
+    await jimp.read(screenshot)
+  );
+
+  return result.percent === 0;
 }
 
 export async function loadFixture(name: string) {
