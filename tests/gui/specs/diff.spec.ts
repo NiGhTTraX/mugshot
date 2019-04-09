@@ -42,7 +42,7 @@ describe('Mugshot', async () => {
         await jimp.read(diffPath),
         await jimp.read(path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.diff.png`))
       )).percent,
-      'The written baseline doesn\'t match expected one'
+      `The written diff ${diffPath} doesn't match expected one`
     ).to.equal(0);
   });
 });

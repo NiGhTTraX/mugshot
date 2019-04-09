@@ -35,7 +35,7 @@ describe('Mugshot', async () => {
         await jimp.read(path.join(resultsPath, 'new.png')),
         await jimp.read(path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`))
       )).percent,
-      'The written baseline doesn\'t match expected one'
+      `The written baseline ${baselinePath} doesn't match expected one`
     ).to.equal(0);
   });
 
