@@ -137,7 +137,7 @@ describe('Mugshot', () => {
     );
 
     fs
-      .setup(f => f.writeFile('results/missing.png', blackPixelBuffer))
+      .setup(f => f.outputFile('results/missing.png', blackPixelBuffer))
       .returns(() => Promise.resolve())
       .verifiable();
 

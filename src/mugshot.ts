@@ -18,7 +18,11 @@ export interface Browser {
 export interface FileSystem {
   readFile: (name: string) => Promise<Buffer>;
   pathExists: (path: string) => Promise<boolean>;
-  writeFile: (path: string, data: Buffer) => Promise<void>;
+
+  /**
+   * (Over)write a file and create its parent folder structure if missing.
+   */
+  outputFile: (path: string, data: Buffer) => Promise<void>;
 }
 
 interface MugshotOptions {
@@ -78,7 +82,7 @@ export default class Mugshot implements VisualRegressionTester {
     if (!baseExists) {
       if (this.writeBaselines) {
         const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-        await this.fs.writeFile(basePath, screenshot);
+        await this.fs.outputFile(basePath, screenshot);
 
         return Promise.resolve({ matches: true });
       }
