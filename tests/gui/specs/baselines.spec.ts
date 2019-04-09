@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { describe, expect, it, beforeEach, loadFixture } from '../suite';
+import jimp from 'jimp';
+import { beforeEach, describe, expect, it, loadFixture } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpEditor from '../../../src/lib/jimp-editor';
 
@@ -12,7 +13,7 @@ describe('Mugshot', async () => {
   });
 
   it('should write first baseline', async browser => {
-    await loadFixture('simple2');
+    await loadFixture('simple');
 
     const baselinePath = path.join(resultsPath, 'new.png');
 
@@ -29,14 +30,17 @@ describe('Mugshot', async () => {
       'Baseline wasn\'t written'
     ).to.be.true;
 
-    const resultWhenExistingBaseline = await mugshot.check('new');
-    expect(resultWhenExistingBaseline.matches).to.be.true;
+    expect(
+      (await jimp.diff(
+        await jimp.read(path.join(resultsPath, 'new.png')),
+        await jimp.read(path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`))
+      )).percent,
+      'The written baseline doesn\'t match expected one'
+    ).to.equal(0);
   });
 
-  it('should write first baseline and parent folder', async browser => {
-    await loadFixture('simple2');
-
-    const baselinePath = path.join(resultsPath, 'foo/bar/new.png');
+  it('should write create parent folder when writing baseline', async browser => {
+    await loadFixture('simple');
 
     const mugshot = new Mugshot(browser, resultsPath, {
       fs,
@@ -44,14 +48,11 @@ describe('Mugshot', async () => {
       createBaselines: true
     });
 
-    const resultWhenMissingBaseline = await mugshot.check('foo/bar/new');
-    expect(resultWhenMissingBaseline.matches).to.be.true;
-    expect(
-      await fs.pathExists(baselinePath),
-      'Baseline wasn\'t written'
-    ).to.be.true;
+    await mugshot.check('foo/bar/new');
 
-    const resultWhenExistingBaseline = await mugshot.check('foo/bar/new');
-    expect(resultWhenExistingBaseline.matches).to.be.true;
+    expect(
+      await fs.pathExists(path.join(resultsPath, 'foo/bar')),
+      'Baseline folder structure wasn\'t created'
+    ).to.be.true;
   });
 });
