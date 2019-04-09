@@ -25,9 +25,22 @@ let suiteNesting = 0;
 // up the browser once per root test suite, these should be "thread safe".
 let rootSuiteBrowser: Browser;
 
+export async function setWindowSize(width: number, height: number) {
+  // Chrome...
+  await rootSuiteBrowser.setWindowSize(width, height);
+
+  // Firefox...
+  try {
+    await rootSuiteBrowser.setWindowRect(0, 0, width, height);
+    // eslint-disable-next-line no-empty
+  } catch (e) {
+  }
+}
+
 export async function loadFixture(name: string) {
   await rootSuiteBrowser.url(`file:///var/www/html/${name}.html`);
-  await rootSuiteBrowser.setWindowSize(1024, 768);
+
+  await setWindowSize(1024, 768);
 }
 /**
  * Run your gui tests in a fresh Selenium session.
