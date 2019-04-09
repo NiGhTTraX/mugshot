@@ -76,7 +76,11 @@ export default class Mugshot implements VisualRegressionTester {
    * Check for visual regressions.
    *
    * @param name Mugshot will look for a baseline named `${name}.png` in the
-   *   `resultsPath` folder.
+   *   `resultsPath` folder. If one is not found and `writeBaselines`
+   *   is true then Mugshot will create a new baseline and pass the test.
+   *   If a baseline is found then it will be compared with the screenshot
+   *   taken from `browser`. If differences are found the test will fail
+   *   and a `${name}.diff.png` will be created in `resultsPath`.
    */
   check = async (name: string): Promise<MugshotResult> => {
     const basePath = path.join(this.resultsPath, `${name}.png`);
