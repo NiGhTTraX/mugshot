@@ -1,19 +1,43 @@
 import { describe, expect, it } from '../../suite';
 import jimpEditor from '../../../../src/lib/jimp-editor';
-import { blackPixelBuffer, whitePixelBuffer } from '../../fixtures';
+import { blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../fixtures';
 
 describe('jimpEditor', () => {
   it('should compare identical buffers', async () => {
-    expect(await jimpEditor.compare(
+    const result = await jimpEditor.compare(
       blackPixelBuffer,
       blackPixelBuffer
-    )).to.be.true;
+    );
+
+    expect(result.matches).to.be.true;
+  });
+
+  it('should not create a diff for identical buffers', async () => {
+    const result = await jimpEditor.compare(
+      blackPixelBuffer,
+      blackPixelBuffer
+    );
+
+    // @ts-ignore
+    expect(result.diff).to.be.undefined;
   });
 
   it('should compare different buffers', async () => {
-    expect(await jimpEditor.compare(
+    const result = await jimpEditor.compare(
       blackPixelBuffer,
       whitePixelBuffer
-    )).to.be.false;
+    );
+
+    expect(result.matches).to.be.false;
+  });
+
+  it('should create a diff for different buffers', async () => {
+    const result = await jimpEditor.compare(
+      blackPixelBuffer,
+      whitePixelBuffer
+    );
+
+    // @ts-ignore
+    expect(result.diff).to.deep.equal(blackWhiteDiffBuffer);
   });
 });

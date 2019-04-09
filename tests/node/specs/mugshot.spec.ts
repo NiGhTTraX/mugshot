@@ -1,8 +1,8 @@
 import { describe, expect, it } from '../suite';
 import Mugshot, { Browser, FileSystem } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
-import PNGEditor from '../../../src/interfaces/png-editor';
-import { blackPixelB64, blackPixelBuffer, whitePixelBuffer } from '../fixtures';
+import PNGEditor, { DiffResult } from '../../../src/interfaces/png-editor';
+import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
 
 describe('Mugshot', () => {
   function getFsWithExistingBaseline(path: string, base: Buffer) {
@@ -39,7 +39,7 @@ describe('Mugshot', () => {
     return browser;
   }
 
-  function getDifferWithResult(base: Buffer, screenshot: Buffer, result: boolean) {
+  function getDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
     const pngEditor = Mock.ofType<PNGEditor>();
     pngEditor
       .setup(e => e.compare(base, screenshot))
@@ -57,7 +57,7 @@ describe('Mugshot', () => {
     const pngEditor = getDifferWithResult(
       blackPixelBuffer,
       blackPixelBuffer,
-      true
+      { matches: true }
     );
 
     const mugshot = new Mugshot(browser.object, 'results', {
@@ -83,7 +83,7 @@ describe('Mugshot', () => {
     const pngEditor = getDifferWithResult(
       whitePixelBuffer,
       blackPixelBuffer,
-      false
+      { matches: false, diff: Buffer.from(':irrelevant:') }
     );
 
     const mugshot = new Mugshot(browser.object, 'results', {
@@ -154,5 +154,37 @@ describe('Mugshot', () => {
     pngEditor.verifyAll();
 
     expect(result.matches).to.be.true;
+  });
+
+  it('should create diff', async () => {
+    const browser = getBrowserWithScreenshot(blackPixelB64);
+
+    const fs = getFsWithExistingBaseline(
+      'results/existing-diff.png',
+      whitePixelBuffer
+    );
+    fs
+      .setup(f => f.outputFile('results/existing-diff.diff.png', blackWhiteDiffBuffer))
+      .returns(() => Promise.resolve())
+      .verifiable();
+
+    const pngEditor = getDifferWithResult(
+      whitePixelBuffer,
+      blackPixelBuffer,
+      { matches: false, diff: blackWhiteDiffBuffer }
+    );
+
+    const mugshot = new Mugshot(browser.object, 'results', {
+      fs: fs.object,
+      pngEditor: pngEditor.object
+    });
+
+    const result = await mugshot.check('existing-diff');
+
+    browser.verifyAll();
+    fs.verifyAll();
+    pngEditor.verifyAll();
+
+    expect(result.matches).to.be.false;
   });
 });

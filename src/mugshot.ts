@@ -1,12 +1,15 @@
 import path from 'path';
 import PNGEditor from './interfaces/png-editor';
 
-export interface Result {
-  matches: boolean;
+export type MugshotResult = {
+  matches: true;
+} | {
+  matches: false;
+  diff: Buffer;
 }
 
 export interface VisualRegressionTester {
-  check: (name: string) => Promise<Result>;
+  check: (name: string) => Promise<MugshotResult>;
 }
 
 export interface Browser {
@@ -75,7 +78,7 @@ export default class Mugshot implements VisualRegressionTester {
    * @param name Mugshot will look for a baseline named `${name}.png` in the
    *   `resultsPath` folder.
    */
-  check = async (name: string) => {
+  check = async (name: string): Promise<MugshotResult> => {
     const basePath = path.join(this.resultsPath, `${name}.png`);
     const baseExists = await this.fs.pathExists(basePath);
 
@@ -87,14 +90,26 @@ export default class Mugshot implements VisualRegressionTester {
         return Promise.resolve({ matches: true });
       }
 
-      return Promise.resolve({ matches: false });
+      return Promise.resolve({ matches: false, diff: Buffer.from('') });
     }
 
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const base = await this.fs.readFile(basePath);
 
-    return Promise.resolve({
-      matches: await this.pngEditor.compare(base, screenshot)
-    });
+    const result = await this.pngEditor.compare(base, screenshot);
+
+    if (!result.matches) {
+      await this.fs.outputFile(
+        path.join(this.resultsPath, `${name}.diff.png`),
+        result.diff
+      );
+
+      await this.fs.outputFile(
+        path.join(this.resultsPath, `${name}.new.png`),
+        screenshot
+      );
+    }
+
+    return Promise.resolve(result);
   };
 }
