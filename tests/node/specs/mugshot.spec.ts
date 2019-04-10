@@ -185,6 +185,7 @@ describe('Mugshot', () => {
     fs.verifyAll();
     pngEditor.verifyAll();
 
-    expect(result.matches).to.be.false;
+    // @ts-ignore
+    expect(result.diff).to.deep.equal(blackWhiteDiffBuffer);
   });
 });
