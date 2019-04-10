@@ -61,7 +61,7 @@ export async function loadFixture(name: string) {
 export function describe(name: string, definition: () => void) {
   suiteNesting++;
 
-  runnerDescribe(name, function() {
+  runnerDescribe(suiteNesting === 1 ? `${name}:${BROWSER}` : name, function() {
     // We only want to set up hooks once - for the root suite.
     suiteNesting === 1 && setupHooks();
 
