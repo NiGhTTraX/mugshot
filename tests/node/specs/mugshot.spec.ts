@@ -1,7 +1,7 @@
 import { describe, expect, it } from '../suite';
 import Mugshot, { Browser, FileSystem } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
-import PNGEditor, { DiffResult } from '../../../src/interfaces/png-editor';
+import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
 
 describe('Mugshot', () => {
@@ -40,7 +40,7 @@ describe('Mugshot', () => {
   }
 
   function getDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
-    const pngEditor = Mock.ofType<PNGEditor>();
+    const pngEditor = Mock.ofType<PNGDiffer>();
     pngEditor
       .setup(e => e.compare(base, screenshot))
       .returns(() => Promise.resolve(result))
@@ -62,7 +62,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object
+      pngDiffer: pngEditor.object
     });
 
     const result = await mugshot.check('existing-identical');
@@ -88,7 +88,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object
+      pngDiffer: pngEditor.object
     });
 
     const result = await mugshot.check('existing-diff');
@@ -104,7 +104,7 @@ describe('Mugshot', () => {
     const browser = Mock.ofType<Browser>();
     browser.setup(b => b.takeScreenshot()).verifiable(Times.never());
 
-    const pngEditor = Mock.ofType<PNGEditor>();
+    const pngEditor = Mock.ofType<PNGDiffer>();
     pngEditor.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
     const fs = getFsWithMissingBaseline(
@@ -113,7 +113,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object,
+      pngDiffer: pngEditor.object,
       createBaselines: false
     });
 
@@ -127,7 +127,7 @@ describe('Mugshot', () => {
   });
 
   it('should write missing baseline and pass', async () => {
-    const pngEditor = Mock.ofType<PNGEditor>();
+    const pngEditor = Mock.ofType<PNGDiffer>();
     pngEditor.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
     const browser = getBrowserWithScreenshot(blackPixelB64);
@@ -143,7 +143,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object,
+      pngDiffer: pngEditor.object,
       createBaselines: true
     });
 
@@ -176,7 +176,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngEditor: pngEditor.object
+      pngDiffer: pngEditor.object
     });
 
     const result = await mugshot.check('existing-diff');

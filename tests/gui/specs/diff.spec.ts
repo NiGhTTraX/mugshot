@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { describe, expect, it, beforeEach, loadFixture, checkVisual } from '../suite';
 import Mugshot from '../../../src/mugshot';
-import jimpEditor from '../../../src/lib/jimp-editor';
+import jimpDiffer from '../../../src/lib/jimp-differ';
 
 describe('Mugshot', async () => {
   let resultsPath!: string;
@@ -25,7 +25,7 @@ describe('Mugshot', async () => {
 
     const mugshot = new Mugshot(browser, resultsPath, {
       fs,
-      pngEditor: jimpEditor,
+      pngDiffer: jimpDiffer,
       createBaselines: true
     });
 

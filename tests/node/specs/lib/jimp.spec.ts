@@ -1,10 +1,10 @@
 import { describe, expect, it } from '../../suite';
-import jimpEditor from '../../../../src/lib/jimp-editor';
+import jimpDiffer from '../../../../src/lib/jimp-differ';
 import { blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../fixtures';
 
-describe('jimpEditor', () => {
+describe('jimpDiffer', () => {
   it('should compare identical buffers', async () => {
-    const result = await jimpEditor.compare(
+    const result = await jimpDiffer.compare(
       blackPixelBuffer,
       blackPixelBuffer
     );
@@ -13,7 +13,7 @@ describe('jimpEditor', () => {
   });
 
   it('should not create a diff for identical buffers', async () => {
-    const result = await jimpEditor.compare(
+    const result = await jimpDiffer.compare(
       blackPixelBuffer,
       blackPixelBuffer
     );
@@ -23,7 +23,7 @@ describe('jimpEditor', () => {
   });
 
   it('should compare different buffers', async () => {
-    const result = await jimpEditor.compare(
+    const result = await jimpDiffer.compare(
       blackPixelBuffer,
       whitePixelBuffer
     );
@@ -32,7 +32,7 @@ describe('jimpEditor', () => {
   });
 
   it('should create a diff for different buffers', async () => {
-    const result = await jimpEditor.compare(
+    const result = await jimpDiffer.compare(
       blackPixelBuffer,
       whitePixelBuffer
     );

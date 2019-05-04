@@ -1,7 +1,7 @@
 import jimp from 'jimp';
-import PNGEditor from '../interfaces/png-editor';
+import PNGDiffer from '../interfaces/png-differ';
 
-const jimpEditor: PNGEditor = {
+const jimpDiffer: PNGDiffer = {
   compare: async (base: Buffer, screenshot: Buffer) => {
     const result = jimp.diff(
       await jimp.read(base),
@@ -21,4 +21,4 @@ const jimpEditor: PNGEditor = {
   }
 };
 
-export default jimpEditor;
+export default jimpDiffer;

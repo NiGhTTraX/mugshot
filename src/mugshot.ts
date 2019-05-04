@@ -1,5 +1,5 @@
 import path from 'path';
-import PNGEditor from './interfaces/png-editor';
+import PNGDiffer from './interfaces/png-differ';
 
 export type MugshotResult = {
   matches: true;
@@ -30,7 +30,7 @@ export interface FileSystem {
 
 interface MugshotOptions {
   fs: FileSystem;
-  pngEditor: PNGEditor;
+  pngDiffer: PNGDiffer;
 
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
@@ -48,27 +48,19 @@ export default class Mugshot implements VisualRegressionTester {
 
   private readonly fs: FileSystem;
 
-  private readonly pngEditor: PNGEditor;
+  private readonly pngDiffer: PNGDiffer;
 
   private readonly writeBaselines: boolean;
 
-  /**
-   *
-   * @param browser WHAT
-   * @param resultsPath
-   * @param fs
-   * @param pngEditor
-   * @param createBaselines
-   */
   constructor(
     browser: Browser,
     resultsPath: string,
-    { fs, pngEditor, createBaselines = false }: MugshotOptions
+    { fs, pngDiffer, createBaselines = false }: MugshotOptions
   ) {
     this.browser = browser;
     this.resultsPath = resultsPath;
     this.fs = fs;
-    this.pngEditor = pngEditor;
+    this.pngDiffer = pngDiffer;
     this.writeBaselines = createBaselines;
   }
 
@@ -100,7 +92,7 @@ export default class Mugshot implements VisualRegressionTester {
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const base = await this.fs.readFile(basePath);
 
-    const result = await this.pngEditor.compare(base, screenshot);
+    const result = await this.pngDiffer.compare(base, screenshot);
 
     if (!result.matches) {
       await this.fs.outputFile(
