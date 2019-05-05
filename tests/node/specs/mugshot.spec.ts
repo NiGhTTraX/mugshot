@@ -1,4 +1,4 @@
-import { describe, expect, it } from '../suite';
+import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
 import Mugshot, { VisualRegressionTester } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
@@ -8,8 +8,23 @@ import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 
 describe('Mugshot', () => {
-  function getFsWithExistingBaseline(path: string, base: Buffer) {
-    const fs = Mock.ofType<FileSystem>();
+  const fs = Mock.ofType<FileSystem>();
+  const browser = Mock.ofType<Browser>();
+  const pngDiffer = Mock.ofType<PNGDiffer>();
+
+  beforeEach(() => {
+    fs.reset();
+    browser.reset();
+    pngDiffer.reset();
+  });
+
+  afterEach(() => {
+    browser.verifyAll();
+    fs.verifyAll();
+    pngDiffer.verifyAll();
+  });
+
+  function setupFsWithExistingBaseline(path: string, base: Buffer) {
     fs
       .setup(f => f.pathExists(path))
       .returns(() => Promise.resolve(true))
@@ -18,11 +33,9 @@ describe('Mugshot', () => {
       .setup(f => f.readFile(path))
       .returns(() => Promise.resolve(base))
       .verifiable();
-    return fs;
   }
 
-  function getFsWithMissingBaseline(path: string) {
-    const fs = Mock.ofType<FileSystem>();
+  function setupFsWithMissingBaseline(path: string) {
     fs
       .setup(f => f.pathExists(path))
       .returns(() => Promise.resolve(false))
@@ -30,25 +43,20 @@ describe('Mugshot', () => {
     fs
       .setup(f => f.readFile(path))
       .verifiable(Times.never());
-    return fs;
   }
 
-  function getBrowserWithScreenshot(base64: string) {
-    const browser = Mock.ofType<Browser>();
+  function setupBrowserWithScreenshot(base64: string) {
     browser
       .setup(b => b.takeScreenshot())
       .returns(() => Promise.resolve(base64))
       .verifiable();
-    return browser;
   }
 
-  function getDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
-    const pngEditor = Mock.ofType<PNGDiffer>();
-    pngEditor
+  function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
+    pngDiffer
       .setup(e => e.compare(base, screenshot))
       .returns(() => Promise.resolve(result))
       .verifiable();
-    return pngEditor;
   }
 
   async function expectError(
@@ -74,12 +82,12 @@ describe('Mugshot', () => {
   }
 
   it('should pass for an existing identical screenshot', async () => {
-    const browser = getBrowserWithScreenshot(blackPixelB64);
-    const fs = getFsWithExistingBaseline(
+    setupBrowserWithScreenshot(blackPixelB64);
+    setupFsWithExistingBaseline(
       'results/existing-identical.png',
       blackPixelBuffer
     );
-    const pngEditor = getDifferWithResult(
+    setupDifferWithResult(
       blackPixelBuffer,
       blackPixelBuffer,
       { matches: true }
@@ -87,22 +95,18 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngDiffer: pngEditor.object
+      pngDiffer: pngDiffer.object
     });
 
     const result = await mugshot.check('existing-identical');
-
-    browser.verifyAll();
-    fs.verifyAll();
-    pngEditor.verifyAll();
 
     expect(result.matches).to.be.true;
   });
 
   it('should fail and create diff', async () => {
-    const browser = getBrowserWithScreenshot(blackPixelB64);
+    setupBrowserWithScreenshot(blackPixelB64);
 
-    const fs = getFsWithExistingBaseline(
+    setupFsWithExistingBaseline(
       'results/existing-diff.png',
       whitePixelBuffer
     );
@@ -111,7 +115,7 @@ describe('Mugshot', () => {
       .returns(() => Promise.resolve())
       .verifiable();
 
-    const pngEditor = getDifferWithResult(
+    setupDifferWithResult(
       whitePixelBuffer,
       blackPixelBuffer,
       { matches: false, diff: blackWhiteDiffBuffer }
@@ -119,33 +123,27 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngDiffer: pngEditor.object
+      pngDiffer: pngDiffer.object
     });
 
     await expectError(
       mugshot.check('existing-diff'),
       blackWhiteDiffBuffer
     );
-
-    browser.verifyAll();
-    fs.verifyAll();
-    pngEditor.verifyAll();
   });
 
   it('should fail for a missing baseline', async () => {
-    const browser = Mock.ofType<Browser>();
     browser.setup(b => b.takeScreenshot()).verifiable(Times.never());
 
-    const pngEditor = Mock.ofType<PNGDiffer>();
-    pngEditor.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
+    pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
-    const fs = getFsWithMissingBaseline(
+    setupFsWithMissingBaseline(
       'results/missing.png',
     );
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngDiffer: pngEditor.object,
+      pngDiffer: pngDiffer.object,
       createBaselines: false
     });
 
@@ -153,19 +151,14 @@ describe('Mugshot', () => {
       mugshot.check('missing'),
       Buffer.from('')
     );
-
-    browser.verifyAll();
-    fs.verifyAll();
-    pngEditor.verifyAll();
   });
 
   it('should write missing baseline and pass', async () => {
-    const pngEditor = Mock.ofType<PNGDiffer>();
-    pngEditor.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
+    pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
-    const browser = getBrowserWithScreenshot(blackPixelB64);
+    setupBrowserWithScreenshot(blackPixelB64);
 
-    const fs = getFsWithMissingBaseline(
+    setupFsWithMissingBaseline(
       'results/missing.png',
     );
 
@@ -176,15 +169,11 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(browser.object, 'results', {
       fs: fs.object,
-      pngDiffer: pngEditor.object,
+      pngDiffer: pngDiffer.object,
       createBaselines: true
     });
 
     const result = await mugshot.check('missing');
-
-    browser.verifyAll();
-    fs.verifyAll();
-    pngEditor.verifyAll();
 
     expect(result.matches).to.be.true;
   });
