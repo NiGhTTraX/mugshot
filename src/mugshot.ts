@@ -41,6 +41,16 @@ interface MugshotOptions {
   createBaselines?: boolean;
 }
 
+class MugshotError extends Error {
+  public diff: Buffer;
+
+  constructor(diff: Buffer) {
+    super('Visual changes detected');
+
+    this.diff = diff;
+  }
+}
+
 export default class Mugshot implements VisualRegressionTester {
   private readonly browser: Browser;
 
@@ -86,7 +96,8 @@ export default class Mugshot implements VisualRegressionTester {
         return Promise.resolve({ matches: true });
       }
 
-      return Promise.resolve({ matches: false, diff: Buffer.from('') });
+      // TODO: what should it return when there's no diff?
+      return Promise.reject(new MugshotError(Buffer.from('')));
     }
 
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
@@ -104,6 +115,8 @@ export default class Mugshot implements VisualRegressionTester {
         path.join(this.resultsPath, `${name}.new.png`),
         screenshot
       );
+
+      return Promise.reject(new MugshotError(result.diff));
     }
 
     return Promise.resolve(result);

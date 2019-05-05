@@ -1,5 +1,6 @@
 import { describe, expect, it } from '../suite';
-import Mugshot, { Browser, FileSystem } from '../../../src/mugshot';
+import { AssertionError } from 'chai';
+import Mugshot, { Browser, FileSystem, VisualRegressionTester } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
@@ -48,6 +49,28 @@ describe('Mugshot', () => {
     return pngEditor;
   }
 
+  async function expectError(
+    checkCall: ReturnType<VisualRegressionTester['check']>,
+    diff?: Buffer
+  ) {
+    let errored = 0;
+
+    try {
+      await checkCall;
+    } catch (result) {
+      errored = 1;
+
+      expect(result).to.be.instanceOf(Error);
+      expect(result.message).to.contain('Visual changes detected');
+
+      expect(result.diff).to.deep.equal(diff);
+    }
+
+    if (!errored) {
+      throw new AssertionError('Expected Mugshot to throw an error');
+    }
+  }
+
   it('should pass for an existing identical screenshot', async () => {
     const browser = getBrowserWithScreenshot(blackPixelB64);
     const fs = getFsWithExistingBaseline(
@@ -74,16 +97,22 @@ describe('Mugshot', () => {
     expect(result.matches).to.be.true;
   });
 
-  it('should fail for an existing diff screenshot', async () => {
+  it('should fail and create diff', async () => {
     const browser = getBrowserWithScreenshot(blackPixelB64);
+
     const fs = getFsWithExistingBaseline(
       'results/existing-diff.png',
       whitePixelBuffer
     );
+    fs
+      .setup(f => f.outputFile('results/existing-diff.diff.png', blackWhiteDiffBuffer))
+      .returns(() => Promise.resolve())
+      .verifiable();
+
     const pngEditor = getDifferWithResult(
       whitePixelBuffer,
       blackPixelBuffer,
-      { matches: false, diff: Buffer.from(':irrelevant:') }
+      { matches: false, diff: blackWhiteDiffBuffer }
     );
 
     const mugshot = new Mugshot(browser.object, 'results', {
@@ -91,13 +120,14 @@ describe('Mugshot', () => {
       pngDiffer: pngEditor.object
     });
 
-    const result = await mugshot.check('existing-diff');
+    await expectError(
+      mugshot.check('existing-diff'),
+      blackWhiteDiffBuffer
+    );
 
     browser.verifyAll();
     fs.verifyAll();
     pngEditor.verifyAll();
-
-    expect(result.matches).to.be.false;
   });
 
   it('should fail for a missing baseline', async () => {
@@ -117,13 +147,14 @@ describe('Mugshot', () => {
       createBaselines: false
     });
 
-    const result = await mugshot.check('missing');
+    await expectError(
+      mugshot.check('missing'),
+      Buffer.from('')
+    );
 
     browser.verifyAll();
     fs.verifyAll();
     pngEditor.verifyAll();
-
-    expect(result.matches).to.be.false;
   });
 
   it('should write missing baseline and pass', async () => {
@@ -154,38 +185,5 @@ describe('Mugshot', () => {
     pngEditor.verifyAll();
 
     expect(result.matches).to.be.true;
-  });
-
-  it('should create diff', async () => {
-    const browser = getBrowserWithScreenshot(blackPixelB64);
-
-    const fs = getFsWithExistingBaseline(
-      'results/existing-diff.png',
-      whitePixelBuffer
-    );
-    fs
-      .setup(f => f.outputFile('results/existing-diff.diff.png', blackWhiteDiffBuffer))
-      .returns(() => Promise.resolve())
-      .verifiable();
-
-    const pngEditor = getDifferWithResult(
-      whitePixelBuffer,
-      blackPixelBuffer,
-      { matches: false, diff: blackWhiteDiffBuffer }
-    );
-
-    const mugshot = new Mugshot(browser.object, 'results', {
-      fs: fs.object,
-      pngDiffer: pngEditor.object
-    });
-
-    const result = await mugshot.check('existing-diff');
-
-    browser.verifyAll();
-    fs.verifyAll();
-    pngEditor.verifyAll();
-
-    // @ts-ignore
-    expect(result.diff).to.deep.equal(blackWhiteDiffBuffer);
   });
 });
