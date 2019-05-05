@@ -1,5 +1,7 @@
 import path from 'path';
 import PNGDiffer from './interfaces/png-differ';
+import Browser from './interfaces/browser';
+import FileSystem from './interfaces/file-system';
 
 export type MugshotResult = {
   matches: true;
@@ -10,22 +12,6 @@ export type MugshotResult = {
 
 export interface VisualRegressionTester {
   check: (name: string) => Promise<MugshotResult>;
-}
-
-export interface Browser {
-  // Take a full page screenshot and return a base64 string.
-  // https://w3c.github.io/webdriver/#take-screenshot
-  takeScreenshot: () => Promise<string>;
-}
-
-export interface FileSystem {
-  readFile: (name: string) => Promise<Buffer>;
-  pathExists: (path: string) => Promise<boolean>;
-
-  /**
-   * (Over)write a file and create its parent folder structure if missing.
-   */
-  outputFile: (path: string, data: Buffer) => Promise<void>;
 }
 
 interface MugshotOptions {

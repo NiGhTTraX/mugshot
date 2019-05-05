@@ -1,9 +1,11 @@
 import { describe, expect, it } from '../suite';
 import { AssertionError } from 'chai';
-import Mugshot, { Browser, FileSystem, VisualRegressionTester } from '../../../src/mugshot';
+import Mugshot, { VisualRegressionTester } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
+import Browser from '../../../src/interfaces/browser';
+import FileSystem from '../../../src/interfaces/file-system';
 
 describe('Mugshot', () => {
   function getFsWithExistingBaseline(path: string, base: Buffer) {
