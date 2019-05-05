@@ -7,6 +7,9 @@ export type MugshotResult = {
   matches: true;
 } | {
   matches: false;
+  /**
+   * A PNG MIME encoded buffer of the diff image.
+   */
   diff: Buffer;
 }
 
@@ -28,6 +31,9 @@ interface MugshotOptions {
 }
 
 class MugshotError extends Error {
+  /**
+   * A PNG MIME encoded buffer of the diff image.
+   */
   public diff: Buffer;
 
   constructor(diff: Buffer) {
