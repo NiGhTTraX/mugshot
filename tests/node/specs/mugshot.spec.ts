@@ -1,11 +1,11 @@
 import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
-import Mugshot, { VisualRegressionTester } from '../../../src/mugshot';
 import { It, Mock, Times } from 'typemoq';
+import Mugshot, { VisualRegressionTester } from '../../../src/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
-import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
+import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
 
 describe('Mugshot', () => {
   const fs = Mock.ofType<FileSystem>();
