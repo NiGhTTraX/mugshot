@@ -71,6 +71,7 @@ export default class Mugshot implements VisualRegressionTester {
     this.resultsPath = resultsPath;
     this.fs = fs;
     this.pngDiffer = pngDiffer;
+    // TODO: use https://www.npmjs.com/package/is-ci
     this.writeBaselines = createBaselines;
   }
 
