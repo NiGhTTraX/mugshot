@@ -116,41 +116,41 @@ export default class Mugshot implements VisualRegressionTester {
     const result = await this.pngDiffer.compare(baseline, actual);
 
     if (!result.matches) {
-      return this.diff(name, result.diff, actual);
+      throw await this.getDiffError(name, result.diff, actual);
     }
 
-    return Promise.resolve({
+    return {
       baselinePath,
       baseline
-    });
+    };
   };
 
-  private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
+  private async missingBaseline(baselinePath: string) {
     if (this.writeBaselines) {
       const baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
       await this.fs.outputFile(baselinePath, baseline);
 
-      return Promise.resolve({
+      return {
         baselinePath,
         baseline
-      });
+      };
     }
 
-    return Promise.reject(new MugshotMissingBaselineError());
+    throw new MugshotMissingBaselineError();
   }
 
-  private async diff(name: string, diff: Buffer, actual: Buffer) {
+  private async getDiffError(name: string, diff: Buffer, actual: Buffer) {
     const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
     const actualPath = path.join(this.resultsPath, `${name}.new.png`);
 
     await this.fs.outputFile(diffPath, diff);
     await this.fs.outputFile(actualPath, actual);
 
-    return Promise.reject(new MugshotDiffError(
+    return new MugshotDiffError(
       'Visual changes detected',
       diffPath, diff,
       actualPath, actual
-    ));
+    );
   }
 }
