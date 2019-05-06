@@ -22,7 +22,19 @@ export class MugshotDiffError extends Error {
   // A PNG MIME encoded buffer of the diff image.
   public diff?: Buffer;
 
-  constructor(message: string, diffPath?: string, diff?: Buffer) {
+  // The FS path of the actual screenshot.
+  public actualPath?: string;
+
+  // A PNG MIME encoded buffer of the actual screenshot.
+  public actual?: Buffer;
+
+  constructor(
+    message: string,
+    diffPath?: string,
+    diff?: Buffer,
+    actualPath?: string,
+    actual?: Buffer
+  ) {
     super(message);
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
@@ -30,6 +42,8 @@ export class MugshotDiffError extends Error {
 
     this.diff = diff;
     this.diffPath = diffPath;
+    this.actualPath = actualPath;
+    this.actual = actual;
   }
 }
 
@@ -88,12 +102,12 @@ export default class Mugshot implements VisualRegressionTester {
       return this.missingBaseline(baselinePath);
     }
 
-    const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+    const actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const baseline = await this.fs.readFile(baselinePath);
-    const result = await this.pngDiffer.compare(baseline, screenshot);
+    const result = await this.pngDiffer.compare(baseline, actual);
 
     if (!result.matches) {
-      return this.diff(name, result.diff, screenshot);
+      return this.diff(name, result.diff, actual);
     }
 
     return Promise.resolve({
@@ -117,13 +131,17 @@ export default class Mugshot implements VisualRegressionTester {
     return Promise.reject(new MugshotDiffError('Missing baseline'));
   }
 
-  private async diff(name: string, diff: Buffer, screenshot: Buffer) {
+  private async diff(name: string, diff: Buffer, actual: Buffer) {
     const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
-    const newPath = path.join(this.resultsPath, `${name}.new.png`);
+    const actualPath = path.join(this.resultsPath, `${name}.new.png`);
 
     await this.fs.outputFile(diffPath, diff);
-    await this.fs.outputFile(newPath, screenshot);
+    await this.fs.outputFile(actualPath, actual);
 
-    return Promise.reject(new MugshotDiffError('Visual changes detected', diffPath, diff));
+    return Promise.reject(new MugshotDiffError(
+      'Visual changes detected',
+      diffPath, diff,
+      actualPath, actual
+    ));
   }
 }

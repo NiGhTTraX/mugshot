@@ -63,7 +63,9 @@ describe('Mugshot', () => {
     checkCall: Promise<MugshotIdenticalResult>,
     message: string,
     diffPath?: string,
-    diff?: Buffer
+    diff?: Buffer,
+    actualPath?: string,
+    actual?: Buffer
   ) {
     let diffError = 0;
 
@@ -76,6 +78,8 @@ describe('Mugshot', () => {
         expect(result.message).to.contain(message);
         expect(result.diffPath).to.equal(diffPath);
         expect(result.diff).to.deep.equal(diff);
+        expect(result.actualPath).to.equal(actualPath);
+        expect(result.actual).to.deep.equal(actual);
       } else {
         throw result;
       }
@@ -148,7 +152,9 @@ describe('Mugshot', () => {
       mugshot.check('existing-diff'),
       'Visual changes detected',
       'results/existing-diff.diff.png',
-      blackWhiteDiffBuffer
+      blackWhiteDiffBuffer,
+      'results/existing-diff.new.png',
+      blackPixelBuffer
     );
   });
 
