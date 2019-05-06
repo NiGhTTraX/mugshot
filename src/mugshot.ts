@@ -5,13 +5,7 @@ import FileSystem from './interfaces/file-system';
 
 export type MugshotResult = {
   matches: true;
-} | {
-  matches: false;
-  /**
-   * A PNG MIME encoded buffer of the diff image.
-   */
-  diff: Buffer;
-}
+};
 
 export interface VisualRegressionTester {
   check: (name: string) => Promise<MugshotResult>;
