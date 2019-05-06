@@ -11,6 +11,22 @@ export interface VisualRegressionTester {
   check: (name: string) => Promise<MugshotResult>;
 }
 
+export class MugshotError extends Error {
+  /**
+   * A PNG MIME encoded buffer of the diff image.
+   */
+  public diff: Buffer;
+
+  constructor(diff: Buffer) {
+    super('Visual changes detected');
+
+    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
+    Object.setPrototypeOf(this, MugshotError.prototype);
+
+    this.diff = diff;
+  }
+}
+
 interface MugshotOptions {
   fs: FileSystem;
   pngDiffer: PNGDiffer;
@@ -22,19 +38,6 @@ interface MugshotOptions {
    * CI and to true when running locally.
    */
   createBaselines?: boolean;
-}
-
-class MugshotError extends Error {
-  /**
-   * A PNG MIME encoded buffer of the diff image.
-   */
-  public diff: Buffer;
-
-  constructor(diff: Buffer) {
-    super('Visual changes detected');
-
-    this.diff = diff;
-  }
 }
 
 export default class Mugshot implements VisualRegressionTester {

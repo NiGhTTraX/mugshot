@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
 import { It, Mock, Times } from 'typemoq';
-import Mugshot, { VisualRegressionTester } from '../../../src/mugshot';
+import Mugshot, { MugshotError, VisualRegressionTester } from '../../../src/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
@@ -68,12 +68,14 @@ describe('Mugshot', () => {
     try {
       await checkCall;
     } catch (result) {
-      errored = 1;
+      if (result instanceof MugshotError) {
+        errored = 1;
 
-      expect(result).to.be.instanceOf(Error);
-      expect(result.message).to.contain('Visual changes detected');
-
-      expect(result.diff).to.deep.equal(diff);
+        expect(result.message).to.contain('Visual changes detected');
+        expect(result.diff).to.deep.equal(diff);
+      } else {
+        throw result;
+      }
     }
 
     if (!errored) {
