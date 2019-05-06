@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
 import { It, Mock, Times } from 'typemoq';
-import Mugshot, { MugshotError, VisualRegressionTester } from '../../../src/mugshot';
+import Mugshot, { MugshotError, MugshotResult, VisualRegressionTester } from '../../../src/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
@@ -60,7 +60,7 @@ describe('Mugshot', () => {
   }
 
   async function expectError(
-    checkCall: ReturnType<VisualRegressionTester['check']>,
+    checkCall: Promise<MugshotResult>,
     message: string, diff?: Buffer
   ) {
     let errored = 0;
@@ -83,6 +83,18 @@ describe('Mugshot', () => {
     }
   }
 
+  async function expectSuccess(
+    checkCall: Promise<MugshotResult>,
+    baselinePath: string,
+    baseline: Buffer
+  ) {
+    const result = await checkCall;
+
+    expect(result.matches).to.be.true;
+    expect(result.baselinePath).to.equal(baselinePath);
+    expect(result.baseline).to.deep.equal(baseline);
+  }
+
   it('should pass for an existing identical screenshot', async () => {
     setupBrowserWithScreenshot(blackPixelB64);
     setupFsWithExistingBaseline(
@@ -100,9 +112,11 @@ describe('Mugshot', () => {
       pngDiffer: pngDiffer.object
     });
 
-    const result = await mugshot.check('existing-identical');
-
-    expect(result.matches).to.be.true;
+    await expectSuccess(
+      mugshot.check('existing-identical'),
+      'results/existing-identical.png',
+      blackPixelBuffer
+    );
   });
 
   it('should fail and create diff', async () => {
@@ -161,9 +175,7 @@ describe('Mugshot', () => {
 
     setupBrowserWithScreenshot(blackPixelB64);
 
-    setupFsWithMissingBaseline(
-      'results/missing.png',
-    );
+    setupFsWithMissingBaseline('results/missing.png',);
 
     fs
       .setup(f => f.outputFile('results/missing.png', blackPixelBuffer))
@@ -176,8 +188,10 @@ describe('Mugshot', () => {
       createBaselines: true
     });
 
-    const result = await mugshot.check('missing');
-
-    expect(result.matches).to.be.true;
+    await expectSuccess(
+      mugshot.check('missing'),
+      'results/missing.png',
+      blackPixelBuffer
+    );
   });
 });

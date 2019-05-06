@@ -4,7 +4,12 @@ import Browser from './interfaces/browser';
 import FileSystem from './interfaces/file-system';
 
 export type MugshotResult = {
+  // TODO: remove this because it's a constant
   matches: true;
+  // The FS path where the baseline image is stored.
+  baselinePath: string;
+  // A PNG MIME encoded buffer of the baseline image.
+  baseline: Buffer;
 };
 
 export interface VisualRegressionTester {
@@ -75,30 +80,39 @@ export default class Mugshot implements VisualRegressionTester {
    *   and a `${name}.diff.png` will be created in `resultsPath`.
    */
   check = async (name: string): Promise<MugshotResult> => {
-    const basePath = path.join(this.resultsPath, `${name}.png`);
-    const baseExists = await this.fs.pathExists(basePath);
+    const baselinePath = path.join(this.resultsPath, `${name}.png`);
+    const baselineExists = await this.fs.pathExists(baselinePath);
 
-    if (!baseExists) {
-      return this.missingBaseline(basePath);
+    if (!baselineExists) {
+      return this.missingBaseline(baselinePath);
     }
 
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-    const base = await this.fs.readFile(basePath);
-    const result = await this.pngDiffer.compare(base, screenshot);
+    const baseline = await this.fs.readFile(baselinePath);
+    const result = await this.pngDiffer.compare(baseline, screenshot);
 
     if (!result.matches) {
       return this.diff(name, result.diff, screenshot);
     }
 
-    return Promise.resolve(result);
+    return Promise.resolve({
+      matches: true,
+      baselinePath,
+      baseline
+    });
   };
 
-  private async missingBaseline(basePath: string): Promise<MugshotResult> {
+  private async missingBaseline(baselinePath: string): Promise<MugshotResult> {
     if (this.writeBaselines) {
-      const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-      await this.fs.outputFile(basePath, screenshot);
+      const baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
-      return Promise.resolve({ matches: true });
+      await this.fs.outputFile(baselinePath, baseline);
+
+      return Promise.resolve({
+        matches: true,
+        baselinePath,
+        baseline
+      });
     }
 
     return Promise.reject(new MugshotError('Missing baseline'));
