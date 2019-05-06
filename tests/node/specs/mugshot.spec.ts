@@ -61,7 +61,9 @@ describe('Mugshot', () => {
 
   async function expectError(
     checkCall: Promise<MugshotIdenticalResult>,
-    message: string, diff?: Buffer
+    message: string,
+    diffPath?: string,
+    diff?: Buffer
   ) {
     let diffError = 0;
 
@@ -72,6 +74,7 @@ describe('Mugshot', () => {
         diffError = 1;
 
         expect(result.message).to.contain(message);
+        expect(result.diffPath).to.equal(diffPath);
         expect(result.diff).to.deep.equal(diff);
       } else {
         throw result;
@@ -144,6 +147,7 @@ describe('Mugshot', () => {
     await expectError(
       mugshot.check('existing-diff'),
       'Visual changes detected',
+      'results/existing-diff.diff.png',
       blackWhiteDiffBuffer
     );
   });

@@ -16,18 +16,20 @@ export interface VisualRegressionTester {
 }
 
 export class MugshotDiffError extends Error {
-  /**
-   * A PNG MIME encoded buffer of the diff image.
-   */
+  // The FS path of the diff image.
+  public diffPath?: string;
+
+  // A PNG MIME encoded buffer of the diff image.
   public diff?: Buffer;
 
-  constructor(message: string, diff?: Buffer) {
+  constructor(message: string, diffPath?: string, diff?: Buffer) {
     super(message);
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
     Object.setPrototypeOf(this, MugshotDiffError.prototype);
 
     this.diff = diff;
+    this.diffPath = diffPath;
   }
 }
 
@@ -116,16 +118,12 @@ export default class Mugshot implements VisualRegressionTester {
   }
 
   private async diff(name: string, diff: Buffer, screenshot: Buffer) {
-    await this.fs.outputFile(
-      path.join(this.resultsPath, `${name}.diff.png`),
-      diff
-    );
+    const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
+    const newPath = path.join(this.resultsPath, `${name}.new.png`);
 
-    await this.fs.outputFile(
-      path.join(this.resultsPath, `${name}.new.png`),
-      screenshot
-    );
+    await this.fs.outputFile(diffPath, diff);
+    await this.fs.outputFile(newPath, screenshot);
 
-    return Promise.reject(new MugshotDiffError('Visual changes detected', diff));
+    return Promise.reject(new MugshotDiffError('Visual changes detected', diffPath, diff));
   }
 }
