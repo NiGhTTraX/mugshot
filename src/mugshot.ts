@@ -79,35 +79,42 @@ export default class Mugshot implements VisualRegressionTester {
     const baseExists = await this.fs.pathExists(basePath);
 
     if (!baseExists) {
-      if (this.writeBaselines) {
-        const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-        await this.fs.outputFile(basePath, screenshot);
-
-        return Promise.resolve({ matches: true });
-      }
-
-      return Promise.reject(new MugshotError('Missing baseline'));
+      return this.missingBaseline(basePath);
     }
 
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
     const base = await this.fs.readFile(basePath);
-
     const result = await this.pngDiffer.compare(base, screenshot);
 
     if (!result.matches) {
-      await this.fs.outputFile(
-        path.join(this.resultsPath, `${name}.diff.png`),
-        result.diff
-      );
-
-      await this.fs.outputFile(
-        path.join(this.resultsPath, `${name}.new.png`),
-        screenshot
-      );
-
-      return Promise.reject(new MugshotError('Visual changes detected', result.diff));
+      return this.diff(name, result.diff, screenshot);
     }
 
     return Promise.resolve(result);
   };
+
+  private async missingBaseline(basePath: string): Promise<MugshotResult> {
+    if (this.writeBaselines) {
+      const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+      await this.fs.outputFile(basePath, screenshot);
+
+      return Promise.resolve({ matches: true });
+    }
+
+    return Promise.reject(new MugshotError('Missing baseline'));
+  }
+
+  private async diff(name: string, diff: Buffer, screenshot: Buffer) {
+    await this.fs.outputFile(
+      path.join(this.resultsPath, `${name}.diff.png`),
+      diff
+    );
+
+    await this.fs.outputFile(
+      path.join(this.resultsPath, `${name}.new.png`),
+      screenshot
+    );
+
+    return Promise.reject(new MugshotError('Visual changes detected', diff));
+  }
 }
