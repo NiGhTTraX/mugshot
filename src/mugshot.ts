@@ -29,9 +29,11 @@ export type MugshotDiffResult = {
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
+export type MugshotSelector = string;
+
 // TODO: this is only used in the Mugshot class, should we inline it?
 export interface VisualRegressionTester {
-  check: (name: string) => Promise<MugshotResult>;
+  check: (name: string, selector?: MugshotSelector) => Promise<MugshotResult>;
 }
 
 export class MugshotMissingBaselineError extends Error {
@@ -89,8 +91,12 @@ export default class Mugshot implements VisualRegressionTester {
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `browser`. If differences are found the test will fail
    *   and a `${name}.diff.png` will be created in `resultsPath`.
+   * @param selector If given Mugshot will take a screenshot of the
+   *   visible region encompassed by the bounding rectangle of the
+   *   element identified by this selector. If missing Mugshot will
+   *   take a full page screenshot.
    */
-  check = async (name: string): Promise<MugshotResult> => {
+  check = async (name: string, selector?: MugshotSelector): Promise<MugshotResult> => {
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
     const baselineExists = await this.fs.pathExists(baselinePath);
 
@@ -98,7 +104,7 @@ export default class Mugshot implements VisualRegressionTester {
       return this.missingBaseline(baselinePath);
     }
 
-    const actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+    const actual = Buffer.from(await (selector ? this.browser.takeElementScreenshot(selector) : this.browser.takeScreenshot()), 'base64');
     const baseline = await this.fs.readFile(baselinePath);
     const result = await this.pngDiffer.compare(baseline, actual);
 
