@@ -10,6 +10,7 @@ export type MugshotIdenticalResult = {
   baseline: Buffer;
 };
 
+// TODO: this is only used in the Mugshot class, should we inline it?
 export interface VisualRegressionTester {
   check: (name: string) => Promise<MugshotIdenticalResult>;
 }
