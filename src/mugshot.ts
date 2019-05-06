@@ -15,25 +15,34 @@ export interface VisualRegressionTester {
   check: (name: string) => Promise<MugshotIdenticalResult>;
 }
 
+export class MugshotMissingBaselineError extends Error {
+  constructor() {
+    super('Missing baseline');
+
+    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
+    Object.setPrototypeOf(this, MugshotMissingBaselineError.prototype);
+  }
+}
+
 export class MugshotDiffError extends Error {
   // The FS path of the diff image.
-  public diffPath?: string;
+  public diffPath: string;
 
   // A PNG MIME encoded buffer of the diff image.
-  public diff?: Buffer;
+  public diff: Buffer;
 
   // The FS path of the actual screenshot.
-  public actualPath?: string;
+  public actualPath: string;
 
   // A PNG MIME encoded buffer of the actual screenshot.
-  public actual?: Buffer;
+  public actual: Buffer;
 
   constructor(
     message: string,
-    diffPath?: string,
-    diff?: Buffer,
-    actualPath?: string,
-    actual?: Buffer
+    diffPath: string,
+    diff: Buffer,
+    actualPath: string,
+    actual: Buffer
   ) {
     super(message);
 
@@ -128,7 +137,7 @@ export default class Mugshot implements VisualRegressionTester {
       });
     }
 
-    return Promise.reject(new MugshotDiffError('Missing baseline'));
+    return Promise.reject(new MugshotMissingBaselineError());
   }
 
   private async diff(name: string, diff: Buffer, actual: Buffer) {
