@@ -2,9 +2,7 @@ import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
 import { It, Mock, Times } from 'typemoq';
 import Mugshot, {
-  MugshotDiffError,
-  MugshotIdenticalResult,
-  MugshotMissingBaselineError
+  MugshotMissingBaselineError, MugshotResult
 } from '../../../src/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
@@ -63,8 +61,39 @@ describe('Mugshot', () => {
       .verifiable();
   }
 
+  async function expectIdenticalResult(
+    checkCall: Promise<MugshotResult>,
+    baselinePath: string,
+    baseline: Buffer
+  ) {
+    const result = await checkCall;
+
+    expect(result.matches).to.be.true;
+    expect(result.baselinePath).to.equal(baselinePath);
+    expect(result.baseline).to.deep.equal(baseline);
+  }
+
+  async function expectDiffResult(
+    checkCall: Promise<MugshotResult>,
+    diffPath: string,
+    diff: Buffer,
+    actualPath: string,
+    actual: Buffer
+  ) {
+    const result = await checkCall;
+
+    if (!result.matches) {
+      expect(result.diffPath).to.equal(diffPath);
+      expect(result.diff).to.deep.equal(diff);
+      expect(result.actualPath).to.equal(actualPath);
+      expect(result.actual).to.deep.equal(actual);
+    } else {
+      throw new AssertionError('Expected Mugshot to return a diff result');
+    }
+  }
+
   async function expectError<E extends Error>(
-    checkCall: Promise<MugshotIdenticalResult>,
+    checkCall: Promise<MugshotResult>,
     expectedError: new (...args: any) => E,
     runExpectations: (error: E) => void
   ) {
@@ -87,28 +116,8 @@ describe('Mugshot', () => {
     }
   }
 
-  async function expectDiffError(
-    checkCall: Promise<MugshotIdenticalResult>,
-    diffPath: string,
-    diff: Buffer,
-    actualPath: string,
-    actual: Buffer
-  ) {
-    return expectError(
-      checkCall,
-      MugshotDiffError,
-      error => {
-        expect(error.message).to.contain('Visual changes detected');
-        expect(error.diffPath).to.equal(diffPath);
-        expect(error.diff).to.deep.equal(diff);
-        expect(error.actualPath).to.equal(actualPath);
-        expect(error.actual).to.deep.equal(actual);
-      }
-    );
-  }
-
   async function expectMissingBaselineError(
-    checkCall: Promise<MugshotIdenticalResult>
+    checkCall: Promise<MugshotResult>
   ) {
     return expectError(
       checkCall,
@@ -117,17 +126,6 @@ describe('Mugshot', () => {
         expect(error.message).to.contain('Missing baseline');
       }
     );
-  }
-
-  async function expectSuccess(
-    checkCall: Promise<MugshotIdenticalResult>,
-    baselinePath: string,
-    baseline: Buffer
-  ) {
-    const result = await checkCall;
-
-    expect(result.baselinePath).to.equal(baselinePath);
-    expect(result.baseline).to.deep.equal(baseline);
   }
 
   it('should pass for an existing identical screenshot', async () => {
@@ -147,7 +145,7 @@ describe('Mugshot', () => {
       pngDiffer: pngDiffer.object
     });
 
-    await expectSuccess(
+    await expectIdenticalResult(
       mugshot.check('existing-identical'),
       'results/existing-identical.png',
       blackPixelBuffer
@@ -177,7 +175,7 @@ describe('Mugshot', () => {
       pngDiffer: pngDiffer.object
     });
 
-    await expectDiffError(
+    await expectDiffResult(
       mugshot.check('existing-diff'),
       'results/existing-diff.diff.png', blackWhiteDiffBuffer,
       'results/existing-diff.new.png', blackPixelBuffer
@@ -222,7 +220,7 @@ describe('Mugshot', () => {
       createBaselines: true
     });
 
-    await expectSuccess(
+    await expectIdenticalResult(
       mugshot.check('missing'),
       'results/missing.png',
       blackPixelBuffer

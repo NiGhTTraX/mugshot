@@ -4,15 +4,34 @@ import Browser from './interfaces/browser';
 import FileSystem from './interfaces/file-system';
 
 export type MugshotIdenticalResult = {
+  matches: true;
   // The FS path where the baseline image is stored.
   baselinePath: string;
   // A PNG MIME encoded buffer of the baseline image.
   baseline: Buffer;
 };
 
+export type MugshotDiffResult = {
+  matches: false;
+  // The FS path of the baseline image.
+  baselinePath: string;
+  // A PNG MIME encoded buffer of the baseline image.
+  baseline: Buffer;
+  // The FS path of the diff image.
+  diffPath: string;
+  // A PNG MIME encoded buffer of the diff image.
+  diff: Buffer;
+  // The FS path of the actual screenshot.
+  actualPath: string;
+  // A PNG MIME encoded buffer of the actual screenshot.
+  actual: Buffer;
+};
+
+export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
+
 // TODO: this is only used in the Mugshot class, should we inline it?
 export interface VisualRegressionTester {
-  check: (name: string) => Promise<MugshotIdenticalResult>;
+  check: (name: string) => Promise<MugshotResult>;
 }
 
 export class MugshotMissingBaselineError extends Error {
@@ -21,38 +40,6 @@ export class MugshotMissingBaselineError extends Error {
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
     Object.setPrototypeOf(this, MugshotMissingBaselineError.prototype);
-  }
-}
-
-export class MugshotDiffError extends Error {
-  // The FS path of the diff image.
-  public diffPath: string;
-
-  // A PNG MIME encoded buffer of the diff image.
-  public diff: Buffer;
-
-  // The FS path of the actual screenshot.
-  public actualPath: string;
-
-  // A PNG MIME encoded buffer of the actual screenshot.
-  public actual: Buffer;
-
-  constructor(
-    message: string,
-    diffPath: string,
-    diff: Buffer,
-    actualPath: string,
-    actual: Buffer
-  ) {
-    super(message);
-
-    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    Object.setPrototypeOf(this, MugshotDiffError.prototype);
-
-    this.diff = diff;
-    this.diffPath = diffPath;
-    this.actualPath = actualPath;
-    this.actual = actual;
   }
 }
 
@@ -103,7 +90,7 @@ export default class Mugshot implements VisualRegressionTester {
    *   taken from `browser`. If differences are found the test will fail
    *   and a `${name}.diff.png` will be created in `resultsPath`.
    */
-  check = async (name: string): Promise<MugshotIdenticalResult> => {
+  check = async (name: string): Promise<MugshotResult> => {
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
     const baselineExists = await this.fs.pathExists(baselinePath);
 
@@ -116,22 +103,24 @@ export default class Mugshot implements VisualRegressionTester {
     const result = await this.pngDiffer.compare(baseline, actual);
 
     if (!result.matches) {
-      throw await this.getDiffError(name, result.diff, actual);
+      return this.diff(name, baselinePath, baseline, result.diff, actual);
     }
 
     return {
+      matches: true,
       baselinePath,
       baseline
     };
   };
 
-  private async missingBaseline(baselinePath: string) {
+  private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
     if (this.writeBaselines) {
       const baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
       await this.fs.outputFile(baselinePath, baseline);
 
       return {
+        matches: true,
         baselinePath,
         baseline
       };
@@ -140,17 +129,27 @@ export default class Mugshot implements VisualRegressionTester {
     throw new MugshotMissingBaselineError();
   }
 
-  private async getDiffError(name: string, diff: Buffer, actual: Buffer) {
+  private async diff(
+    name: string,
+    baselinePath: string,
+    baseline: Buffer,
+    diff: Buffer,
+    actual: Buffer
+  ): Promise<MugshotDiffResult> {
     const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
     const actualPath = path.join(this.resultsPath, `${name}.new.png`);
 
     await this.fs.outputFile(diffPath, diff);
     await this.fs.outputFile(actualPath, actual);
 
-    return new MugshotDiffError(
-      'Visual changes detected',
-      diffPath, diff,
-      actualPath, actual
-    );
+    return {
+      matches: false,
+      baselinePath,
+      baseline,
+      diffPath,
+      diff,
+      actualPath,
+      actual
+    };
   }
 }
