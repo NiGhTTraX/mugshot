@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach, afterEach } from '../suite';
 import { AssertionError } from 'chai';
 import { It, Mock, Times } from 'typemoq';
-import Mugshot, { MugshotError, MugshotResult, VisualRegressionTester } from '../../../src/mugshot';
+import Mugshot, { MugshotDiffError, MugshotIdenticalResult } from '../../../src/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
@@ -60,16 +60,16 @@ describe('Mugshot', () => {
   }
 
   async function expectError(
-    checkCall: Promise<MugshotResult>,
+    checkCall: Promise<MugshotIdenticalResult>,
     message: string, diff?: Buffer
   ) {
-    let errored = 0;
+    let diffError = 0;
 
     try {
       await checkCall;
     } catch (result) {
-      if (result instanceof MugshotError) {
-        errored = 1;
+      if (result instanceof MugshotDiffError) {
+        diffError = 1;
 
         expect(result.message).to.contain(message);
         expect(result.diff).to.deep.equal(diff);
@@ -78,19 +78,18 @@ describe('Mugshot', () => {
       }
     }
 
-    if (!errored) {
-      throw new AssertionError('Expected Mugshot to throw an error');
+    if (!diffError) {
+      throw new AssertionError('Expected Mugshot to throw a diff error');
     }
   }
 
   async function expectSuccess(
-    checkCall: Promise<MugshotResult>,
+    checkCall: Promise<MugshotIdenticalResult>,
     baselinePath: string,
     baseline: Buffer
   ) {
     const result = await checkCall;
 
-    expect(result.matches).to.be.true;
     expect(result.baselinePath).to.equal(baselinePath);
     expect(result.baseline).to.deep.equal(baseline);
   }

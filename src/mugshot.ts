@@ -3,9 +3,7 @@ import PNGDiffer from './interfaces/png-differ';
 import Browser from './interfaces/browser';
 import FileSystem from './interfaces/file-system';
 
-export type MugshotResult = {
-  // TODO: remove this because it's a constant
-  matches: true;
+export type MugshotIdenticalResult = {
   // The FS path where the baseline image is stored.
   baselinePath: string;
   // A PNG MIME encoded buffer of the baseline image.
@@ -13,10 +11,10 @@ export type MugshotResult = {
 };
 
 export interface VisualRegressionTester {
-  check: (name: string) => Promise<MugshotResult>;
+  check: (name: string) => Promise<MugshotIdenticalResult>;
 }
 
-export class MugshotError extends Error {
+export class MugshotDiffError extends Error {
   /**
    * A PNG MIME encoded buffer of the diff image.
    */
@@ -26,7 +24,7 @@ export class MugshotError extends Error {
     super(message);
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    Object.setPrototypeOf(this, MugshotError.prototype);
+    Object.setPrototypeOf(this, MugshotDiffError.prototype);
 
     this.diff = diff;
   }
@@ -79,7 +77,7 @@ export default class Mugshot implements VisualRegressionTester {
    *   taken from `browser`. If differences are found the test will fail
    *   and a `${name}.diff.png` will be created in `resultsPath`.
    */
-  check = async (name: string): Promise<MugshotResult> => {
+  check = async (name: string): Promise<MugshotIdenticalResult> => {
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
     const baselineExists = await this.fs.pathExists(baselinePath);
 
@@ -96,26 +94,24 @@ export default class Mugshot implements VisualRegressionTester {
     }
 
     return Promise.resolve({
-      matches: true,
       baselinePath,
       baseline
     });
   };
 
-  private async missingBaseline(baselinePath: string): Promise<MugshotResult> {
+  private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
     if (this.writeBaselines) {
       const baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
       await this.fs.outputFile(baselinePath, baseline);
 
       return Promise.resolve({
-        matches: true,
         baselinePath,
         baseline
       });
     }
 
-    return Promise.reject(new MugshotError('Missing baseline'));
+    return Promise.reject(new MugshotDiffError('Missing baseline'));
   }
 
   private async diff(name: string, diff: Buffer, screenshot: Buffer) {
@@ -129,6 +125,6 @@ export default class Mugshot implements VisualRegressionTester {
       screenshot
     );
 
-    return Promise.reject(new MugshotError('Visual changes detected', diff));
+    return Promise.reject(new MugshotDiffError('Visual changes detected', diff));
   }
 }
