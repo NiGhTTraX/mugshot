@@ -15,10 +15,10 @@ export class MugshotError extends Error {
   /**
    * A PNG MIME encoded buffer of the diff image.
    */
-  public diff: Buffer;
+  public diff?: Buffer;
 
-  constructor(diff: Buffer) {
-    super('Visual changes detected');
+  constructor(message: string, diff?: Buffer) {
+    super(message);
 
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
     Object.setPrototypeOf(this, MugshotError.prototype);
@@ -86,8 +86,7 @@ export default class Mugshot implements VisualRegressionTester {
         return Promise.resolve({ matches: true });
       }
 
-      // TODO: what should it return when there's no diff?
-      return Promise.reject(new MugshotError(Buffer.from('')));
+      return Promise.reject(new MugshotError('Missing baseline'));
     }
 
     const screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
@@ -106,7 +105,7 @@ export default class Mugshot implements VisualRegressionTester {
         screenshot
       );
 
-      return Promise.reject(new MugshotError(result.diff));
+      return Promise.reject(new MugshotError('Visual changes detected', result.diff));
     }
 
     return Promise.resolve(result);

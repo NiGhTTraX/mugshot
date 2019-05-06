@@ -61,7 +61,7 @@ describe('Mugshot', () => {
 
   async function expectError(
     checkCall: ReturnType<VisualRegressionTester['check']>,
-    diff?: Buffer
+    message: string, diff?: Buffer
   ) {
     let errored = 0;
 
@@ -71,7 +71,7 @@ describe('Mugshot', () => {
       if (result instanceof MugshotError) {
         errored = 1;
 
-        expect(result.message).to.contain('Visual changes detected');
+        expect(result.message).to.contain(message);
         expect(result.diff).to.deep.equal(diff);
       } else {
         throw result;
@@ -130,6 +130,7 @@ describe('Mugshot', () => {
 
     await expectError(
       mugshot.check('existing-diff'),
+      'Visual changes detected',
       blackWhiteDiffBuffer
     );
   });
@@ -151,7 +152,7 @@ describe('Mugshot', () => {
 
     await expectError(
       mugshot.check('missing'),
-      Buffer.from('')
+      'Missing baseline'
     );
   });
 
