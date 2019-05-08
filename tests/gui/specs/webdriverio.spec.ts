@@ -22,4 +22,20 @@ describe('webdriverio', () => {
 
     await compareScreenshot(screenshot, 'simple');
   });
+
+  it('should get bounding rect', async browser => {
+    await loadFixture('rect');
+
+    const element = await browser.$('.test');
+
+    const location = await element.getLocation();
+    // Include margin.
+    expect(location.x).to.equal(8 + 3);
+    expect(location.y).to.equal(10 + 3);
+
+    const size = await element.getSize();
+    // Include border and padding.
+    expect(size.width).to.equal(100 + 2 * 2 + 4 * 2);
+    expect(size.height).to.equal(100 + 2 * 2 + 4 * 2);
+  });
 });
