@@ -26,6 +26,7 @@ describe('webdriverio', () => {
   it('should get bounding rect', async browser => {
     await loadFixture('rect');
 
+    // TODO: replace with standard command (findElement?)
     const element = await browser.$('.test');
 
     const location = await element.getLocation();
