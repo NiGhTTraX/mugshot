@@ -23,7 +23,27 @@ describe('webdriverio', () => {
     await compareScreenshot(screenshot, 'simple');
   });
 
-  it('should get bounding rect', async browser => {
+  it('should get bounding rect using a script', async browser => {
+    await loadFixture('rect');
+
+    function getBoundingRect(selector: string): DOMRect {
+      // @ts-ignore
+      return document.querySelector(selector).getBoundingClientRect();
+    }
+
+    // @ts-ignore
+    const rect: DOMRect = await browser.execute(getBoundingRect, '.test');
+
+    // Include margin.
+    expect(rect.x).to.equal(8 + 3);
+    expect(rect.y).to.equal(10 + 3);
+
+    // Include border and padding.
+    expect(rect.width).to.equal(100 + 2 * 2 + 4 * 2);
+    expect(rect.height).to.equal(100 + 2 * 2 + 4 * 2);
+  });
+
+  it('should get bounding rect using browser.$', async browser => {
     await loadFixture('rect');
 
     // TODO: replace with standard command (findElement?)
