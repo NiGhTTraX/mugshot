@@ -43,10 +43,24 @@ describe('webdriverio', () => {
     expect(rect.height).to.equal(100 + 2 * 2 + 4 * 2);
   });
 
+  it('should get bounding rect of off-screen element', async browser => {
+    await loadFixture('rect-scroll');
+
+    function getBoundingRect(selector: string): DOMRect {
+      // @ts-ignore
+      return document.querySelector(selector).getBoundingClientRect();
+    }
+
+    // @ts-ignore
+    const rect: DOMRect = await browser.execute(getBoundingRect, '.test');
+
+    expect(rect.x).to.equal(2000);
+    expect(rect.y).to.equal(2000);
+  });
+
   it('should get bounding rect using browser.$', async browser => {
     await loadFixture('rect');
 
-    // TODO: replace with standard command (findElement?)
     const element = await browser.$('.test');
 
     const location = await element.getLocation();
