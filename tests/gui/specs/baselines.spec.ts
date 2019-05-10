@@ -1,6 +1,13 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { beforeEach, checkVisual, describe, expect, it, loadFixture } from '../suite';
+import {
+  beforeEach,
+  compareScreenshots,
+  describe,
+  expect,
+  it,
+  loadFixture
+} from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
 
@@ -29,13 +36,11 @@ describe('Mugshot', async () => {
       'Baseline wasn\'t written'
     ).to.be.true;
 
-    expect(
-      await checkVisual(
-        path.join(resultsPath, 'new.png'),
-        path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.png`)
-      ),
+    await compareScreenshots(
+      path.join(resultsPath, 'new.png'),
+      'simple',
       `The written baseline ${baselinePath} doesn't match expected one`
-    ).to.be.true;
+    );
   });
 
   it('should create parent folders when writing baseline', async browser => {

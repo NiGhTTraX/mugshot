@@ -1,6 +1,13 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { describe, expect, it, beforeEach, loadFixture, checkVisual } from '../suite';
+import {
+  describe,
+  expect,
+  it,
+  beforeEach,
+  loadFixture,
+  compareScreenshots
+} from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
 
@@ -36,12 +43,10 @@ describe('Mugshot', async () => {
       'Diff wasn\'t written'
     ).to.be.true;
 
-    expect(
-      await checkVisual(
-        diffPath,
-        path.join(__dirname, `../screenshots/${process.env.BROWSER}/simple.diff.png`)
-      ),
+    await compareScreenshots(
+      diffPath,
+      'simple.diff',
       `The written diff ${diffPath} doesn't match expected one`
-    ).to.be.true;
+    );
   });
 });

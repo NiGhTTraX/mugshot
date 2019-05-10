@@ -1,5 +1,5 @@
 import { remote } from 'webdriverio';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import { expect } from 'chai';
 import jimp from 'jimp';
@@ -37,13 +37,20 @@ export async function setWindowSize(width: number, height: number) {
   }
 }
 
-export async function checkVisual(base: string, screenshot: string) {
-  const result = await jimp.diff(
-    await jimp.read(base),
-    await jimp.read(screenshot)
+export async function compareScreenshots(
+  screenshot: Buffer | string,
+  baselineName: string,
+  message?: string
+) {
+  const result = jimp.diff(
+    await jimp.read(
+      await fs.readFile(path.join(__dirname, `./screenshots/${BROWSER}/${baselineName}.png`))
+    ),
+    // Type narrowing is needed to statically choose an overload.
+    await (typeof screenshot === 'string' ? jimp.read(screenshot) : jimp.read(screenshot))
   );
 
-  return result.percent === 0;
+  expect(result.percent, message).to.equal(0);
 }
 
 export async function loadFixture(name: string) {
