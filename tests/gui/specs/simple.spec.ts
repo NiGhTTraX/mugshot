@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import { beforeEach, describe, expect, it, loadFixture } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
+import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
 
 describe('Mugshot', () => {
   let resultsPath!: string;
@@ -21,7 +22,7 @@ describe('Mugshot', () => {
   it('should pass when identical', async browser => {
     await loadFixture('simple');
 
-    const mugshot = new Mugshot(browser, resultsPath, {
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
       pngDiffer: jimpDiffer
     });
@@ -34,7 +35,7 @@ describe('Mugshot', () => {
   it('should fail when different', async browser => {
     await loadFixture('simple2');
 
-    const mugshot = new Mugshot(browser, resultsPath, {
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
       pngDiffer: jimpDiffer
     });

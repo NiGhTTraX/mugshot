@@ -10,6 +10,7 @@ import {
 } from '../suite';
 import Mugshot from '../../../src/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
+import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
 
 describe('Mugshot', async () => {
   let resultsPath!: string;
@@ -23,7 +24,7 @@ describe('Mugshot', async () => {
 
     const baselinePath = path.join(resultsPath, 'new.png');
 
-    const mugshot = new Mugshot(browser, resultsPath, {
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
       pngDiffer: jimpDiffer,
       createBaselines: true
@@ -46,7 +47,7 @@ describe('Mugshot', async () => {
   it('should create parent folders when writing baseline', async browser => {
     await loadFixture('simple');
 
-    const mugshot = new Mugshot(browser, resultsPath, {
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
       pngDiffer: jimpDiffer,
       createBaselines: true
