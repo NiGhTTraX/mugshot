@@ -11,4 +11,25 @@ export default class WebdriverIOAdapter implements Browser {
   }
 
   takeScreenshot = async () => this.browser.takeScreenshot();
+
+  getElementRect = async (selector: string) => {
+    // @ts-ignore because the return type is not properly inferred
+    const rect: DOMRect = await this.browser.execute(
+      WebdriverIOAdapter.getBoundingRect,
+      selector
+    );
+
+    return {
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height
+    };
+  };
+
+  private static getBoundingRect(selector: string): DOMRect {
+    // @ts-ignore because querySelector can be null and we don't
+    // care about browsers that don't support it.
+    return document.querySelector(selector).getBoundingClientRect();
+  }
 }
