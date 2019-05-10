@@ -58,7 +58,7 @@ describe('webdriverio', () => {
     expect(rect.y).to.equal(2000);
   });
 
-  it('should get bounding rect using browser.$', async browser => {
+  it('should get bounding rect using element commands', async browser => {
     await loadFixture('rect');
 
     const element = await browser.$('.test');
