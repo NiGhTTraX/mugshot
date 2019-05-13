@@ -7,8 +7,8 @@ import {
   runnerAfter,
   runnerBefore,
   runnerBeforeEach,
-  runnerIt,
-  runnerDescribe
+  runnerDescribe,
+  runnerIt
 } from '../mocha-runner';
 
 export { expect };
@@ -88,40 +88,7 @@ export function beforeEach(definition: TestDefinition) {
  * Run a test with optional coverage report.
  */
 export function it(name: string, definition: TestDefinition = () => {}) {
-  runnerIt(name, testName => {
-    const promise = Promise.resolve(definition(rootSuiteBrowser));
-
-    if (!process.env.COVERAGE) {
-      return promise;
-    }
-
-    // TODO: remove
-    return promise.then(() => collectCoverage(testName));
-  });
-}
-
-/**
- * @param {string} testName
- */
-function collectCoverage(testName: string): Promise<void> {
-  const safeTestName = getSafeFilename(testName);
-
-  return Promise.resolve(rootSuiteBrowser.execute(function getCoverage() {
-    // @ts-ignore because `__coverage__` is added by nyc
-    return JSON.stringify(window.__coverage__);
-  })).then(coverage => {
-    fs.writeFileSync(
-      path.join(__dirname, 'results', 'coverage', `${BROWSER}_${safeTestName}.json`),
-      coverage
-    );
-  });
-}
-
-function getSafeFilename(fileName: string): string {
-  return fileName
-    .replace(/\//g, '_')
-    .replace(/ /g, '_')
-    .toLowerCase();
+  runnerIt(name, () => Promise.resolve(definition(rootSuiteBrowser)));
 }
 
 function setupHooks() {
