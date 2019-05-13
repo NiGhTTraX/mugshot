@@ -12,7 +12,7 @@
     "test:gui": "./tests/gui/run.sh",
     "test:gui:selenium": "./tests/gui/debug-selenium.sh",
     "test:gui:selenium:stop": "docker-compose -f tests/gui/docker-compose.debug.yml down",
-    "_test:gui": "TS_NODE_CACHE=0 mocha --opts tests/gui/mocha.opts",
+    "_test:gui": "TS_NODE_CACHE=0 COVERAGE=1 nyc mocha --opts tests/gui/mocha.coverage.opts",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
   },
   "husky": {

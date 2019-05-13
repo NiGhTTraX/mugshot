@@ -21,9 +21,8 @@ docker-compose up -d --force-recreate --remove-orphans selenium
 
 ./wait-for-nodes.sh 2
 
-npm run _test:gui:fixtures
-
 set +e
+# TODO: also run in firefox
 COVERAGE=1 BROWSER=chrome npm run _test:gui
 RESULT=$?
 set -e
