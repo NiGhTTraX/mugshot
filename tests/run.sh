@@ -13,9 +13,5 @@ rm -rf tests/node/results tests/gui/results .nyc_output
 npm run test:node:coverage --silent
 npm run test:gui --silent
 
-# Aggregate coverage results.
-mkdir .nyc_output
-cp tests/node/results/*.json tests/gui/results/*.json .nyc_output
-
 node_modules/.bin/nyc report
 node_modules/.bin/nyc check-coverage
