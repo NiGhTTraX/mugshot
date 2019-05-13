@@ -8,6 +8,9 @@ module.exports = {
       legacy: true
     }],
     '@babel/plugin-proposal-class-properties'
-  ]
+  ],
+  overrides: [{
+    test: /src/,
+    plugins: ['istanbul']
+  }]
 };
-
