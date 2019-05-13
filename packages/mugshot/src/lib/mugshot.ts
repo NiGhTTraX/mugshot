@@ -2,6 +2,8 @@ import path from 'path';
 import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
 import FileSystem from '../interfaces/file-system';
+import PNGProcessor from '../interfaces/png-processor';
+import JimpProcessor from './jimp-processor';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -29,6 +31,8 @@ export type MugshotDiffResult = {
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
+export type MugshotSelector = string;
+
 export class MugshotMissingBaselineError extends Error {
   constructor() {
     super('Missing baseline');
@@ -41,7 +45,7 @@ export class MugshotMissingBaselineError extends Error {
 interface MugshotOptions {
   fs: FileSystem;
   pngDiffer: PNGDiffer;
-
+  pngProcessor?: PNGProcessor;
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it
@@ -60,17 +64,25 @@ export default class Mugshot {
 
   private readonly pngDiffer: PNGDiffer;
 
+  private readonly pngProcessor: PNGProcessor;
+
   private readonly writeBaselines: boolean;
 
   constructor(
     browser: Browser,
     resultsPath: string,
-    { fs, pngDiffer, createBaselines = false }: MugshotOptions
+    {
+      fs,
+      pngDiffer,
+      pngProcessor = new JimpProcessor(),
+      createBaselines = false
+    }: MugshotOptions
   ) {
     this.browser = browser;
     this.resultsPath = resultsPath;
     this.fs = fs;
     this.pngDiffer = pngDiffer;
+    this.pngProcessor = pngProcessor;
     // TODO: use https://www.npmjs.com/package/is-ci
     this.writeBaselines = createBaselines;
   }
@@ -84,8 +96,10 @@ export default class Mugshot {
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `browser`. If differences are found the test will fail
    *   and a `${name}.diff.png` will be created in `resultsPath`.
+   * @param selector If given then Mugshot will screenshot the visible
+   *   region bounded by the element's rectangle.
    */
-  check = async (name: string): Promise<MugshotResult> => {
+  check = async (name: string, selector?: MugshotSelector): Promise<MugshotResult> => {
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
     const baselineExists = await this.fs.pathExists(baselinePath);
 
@@ -93,7 +107,13 @@ export default class Mugshot {
       return this.missingBaseline(baselinePath);
     }
 
-    const actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+    let actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+
+    if (selector) {
+      const rect = await this.browser.getElementRect(selector);
+      actual = await this.pngProcessor.crop(actual, rect.x, rect.y, rect.width, rect.height);
+    }
+
     const baseline = await this.fs.readFile(baselinePath);
     const result = await this.pngDiffer.compare(baseline, actual);
 
