@@ -9,9 +9,8 @@ set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-rm -rf ./results
+# Create this ourselves so that Docker doesn't fuck it up.
 mkdir -p screenshots
-mkdir -p ./results/coverage
 
 docker-compose build
 
