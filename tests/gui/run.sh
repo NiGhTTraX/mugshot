@@ -21,10 +21,17 @@ docker-compose up -d --force-recreate --remove-orphans selenium
 ./wait-for-nodes.sh 2
 
 set +e
-# TODO: also run in firefox
 COVERAGE=1 BROWSER=chrome npm run _test:gui
-RESULT=$?
+CHROME_RESULT=$?
 set -e
+
+set +e
+COVERAGE=1 BROWSER=firefox npm run _test:gui
+FIREFOX_RESULT=$?
+set -e
+
+# This assuming that we won't get -1 + 1.
+RESULT=$(($CHROME_RESULT + $FIREFOX_RESULT))
 
 if [[ ${RESULT} != 0 ]]; then
   echo Selenium logs:
