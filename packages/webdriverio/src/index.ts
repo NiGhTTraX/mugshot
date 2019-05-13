@@ -1,5 +1,12 @@
 import { Browser } from 'mugshot';
 
+/* istanbul ignore next because this will get stringified and sent to the browser */
+function getBoundingRect(selector: string): DOMRect {
+  // @ts-ignore because querySelector can be null and we don't
+  // care about browsers that don't support it.
+  return document.querySelector(selector).getBoundingClientRect();
+}
+
 /**
  * API adapter for WebdriverIO to make working with it saner.
  */
@@ -15,7 +22,7 @@ export default class WebdriverIOAdapter implements Browser {
   getElementRect = async (selector: string) => {
     // @ts-ignore because the return type is not properly inferred
     const rect: DOMRect = await this.browser.execute(
-      WebdriverIOAdapter.getBoundingRect,
+      getBoundingRect,
       selector
     );
 
@@ -26,10 +33,4 @@ export default class WebdriverIOAdapter implements Browser {
       height: rect.height
     };
   };
-
-  private static getBoundingRect(selector: string): DOMRect {
-    // @ts-ignore because querySelector can be null and we don't
-    // care about browsers that don't support it.
-    return document.querySelector(selector).getBoundingClientRect();
-  }
 }
