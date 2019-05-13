@@ -1,6 +1,6 @@
-import { describe, expect, it } from '../../suite';
+import { describe, expect, it } from '../../../../../../tests/node/suite';
 import jimpDiffer from '../../../../src/lib/jimp-differ';
-import { blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../fixtures';
+import { blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../../../../../tests/node/fixtures';
 
 describe('jimpDiffer', () => {
   it('should compare identical buffers', async () => {

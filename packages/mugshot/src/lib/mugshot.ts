@@ -1,7 +1,7 @@
 import path from 'path';
-import PNGDiffer from './interfaces/png-differ';
-import Browser from './interfaces/browser';
-import FileSystem from './interfaces/file-system';
+import PNGDiffer from '../interfaces/png-differ';
+import Browser from '../interfaces/browser';
+import FileSystem from '../interfaces/file-system';
 
 export type MugshotIdenticalResult = {
   matches: true;

@@ -7,10 +7,10 @@ import {
   expect,
   it,
   loadFixture
-} from '../suite';
-import Mugshot from '../../../src/mugshot';
+} from '../../../../../tests/gui/suite';
+import Mugshot from '../../../src/lib/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
-import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
+import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', async () => {
   let resultsPath!: string;

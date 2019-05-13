@@ -95,6 +95,7 @@ export function it(name: string, definition: TestDefinition = () => {}) {
       return promise;
     }
 
+    // TODO: remove
     return promise.then(() => collectCoverage(testName));
   });
 }

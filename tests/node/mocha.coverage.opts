@@ -1,1 +1,1 @@
-tests/node/**/*.spec.{ts,tsx}
+**/tests/node/**/*.spec.{ts,tsx}

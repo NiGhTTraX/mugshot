@@ -1,5 +1,5 @@
-import { describe, it, loadFixture, compareScreenshots } from '../../suite';
-import WebdriverIOAdapter from '../../../../src/lib/webdriverio-adapter';
+import { describe, it, loadFixture, compareScreenshots } from '../../../../../tests/gui/suite';
+import WebdriverIOAdapter from '../../../src';
 import { expect } from 'chai';
 
 describe('WebdriverIOAdapter', () => {

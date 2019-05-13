@@ -1,13 +1,13 @@
-import { describe, expect, it, beforeEach, afterEach } from '../suite';
+import { describe, expect, it, beforeEach, afterEach } from '../../../../../tests/node/suite';
 import { AssertionError } from 'chai';
 import { It, Mock, Times } from 'typemoq';
 import Mugshot, {
   MugshotMissingBaselineError, MugshotResult
-} from '../../../src/mugshot';
+} from '../../../src/lib/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
-import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../fixtures';
+import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 
 describe('Mugshot', () => {
   describe('Full page screenshots', () => {

@@ -1,2 +1,2 @@
 --require ts-node/register
-tests/node/**/*.spec.{ts,tsx}
+**/tests/node/**/*.spec.{ts,tsx}

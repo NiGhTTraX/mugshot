@@ -1,4 +1,4 @@
-import { compareScreenshots, describe, expect, it, loadFixture } from '../suite';
+import { compareScreenshots, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
 
 describe('webdriverio', () => {
   it('should take a full page screenshot', async browser => {

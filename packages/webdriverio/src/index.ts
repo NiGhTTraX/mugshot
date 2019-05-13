@@ -1,4 +1,4 @@
-import Browser from '../interfaces/browser';
+import { Browser } from 'mugshot';
 
 /**
  * API adapter for WebdriverIO to make working with it saner.

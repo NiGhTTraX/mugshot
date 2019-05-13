@@ -1,28 +1,30 @@
 {
   "name": "mugshot",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0-rc",
+  "description": "Visual regression testing library",
+  "keywords": [
+    "visual",
+    "regression",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uberVU/mugshot.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/mugshot",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
-    "pub": "lerna publish",
-    "prepublishOnly": "npm run build",
-    "lint": "eslint --ext ts,tsx,js .",
-    "test": "./tests/run.sh",
-    "test:node": "TS_NODE_CACHE=0 mocha --opts tests/node/mocha.opts",
-    "test:node:coverage": "TS_NODE_CACHE=0 COVERAGE=1 nyc mocha --opts tests/node/mocha.coverage.opts",
-    "test:gui": "./tests/gui/run.sh",
-    "test:gui:selenium": "./tests/gui/debug-selenium.sh",
-    "test:gui:selenium:stop": "docker-compose -f tests/gui/docker-compose.debug.yml down",
-    "_test:gui": "TS_NODE_CACHE=0 mocha --opts tests/gui/mocha.opts",
-    "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.tsx?": "eslint",
-    "*.js": "eslint"
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist"
   },
   "devDependencies": {
     "@babel/core": "~7.4.0",
@@ -31,6 +33,7 @@
     "@babel/preset-env": "~7.4.0",
     "@babel/preset-typescript": "~7.3.0",
     "@babel/register": "~7.4.0",
+    "@mugshot/webdriverio": "0.0.1",
     "@nighttrax/eslint-config-ts": "~1.0.0",
     "@types/chai": "~4.1.7",
     "@types/fs-extra": "~5.0.5",

@@ -1,6 +1,6 @@
-![logo](./logo.png)
+![logo](logo.png)
 
-> Visual testing library
+> Framework independent visual testing library
 
 ## Usage
 

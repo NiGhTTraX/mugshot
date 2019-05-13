@@ -2,6 +2,11 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "baseUrl": "./packages",
+    "paths": {
+      "mugshot": ["mugshot/src"],
+      "@mugshot/webdriverio": ["webdriverio/src"]
+    },
     "lib": ["es6", "es2017", "dom"],
     "types": ["node"],
     "skipLibCheck": true,
@@ -17,6 +22,6 @@
 
   "exclude": [
     "node_modules",
-    "build"
+    "dist"
   ]
 }

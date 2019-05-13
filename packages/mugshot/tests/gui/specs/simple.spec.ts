@@ -1,9 +1,9 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { beforeEach, describe, expect, it, loadFixture } from '../suite';
-import Mugshot from '../../../src/mugshot';
+import { beforeEach, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
+import Mugshot from '../../../src/lib/mugshot';
 import jimpDiffer from '../../../src/lib/jimp-differ';
-import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
+import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', () => {
   let resultsPath!: string;
