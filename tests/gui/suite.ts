@@ -25,13 +25,30 @@ let suiteNesting = 0;
 // up the browser once per root test suite, these should be "thread safe".
 let rootSuiteBrowser: Browser;
 
-export async function setWindowSize(width: number, height: number) {
+function getBrowserChromeSize() {
+  return {
+    width: window.outerWidth - window.innerWidth,
+    height: window.outerHeight - window.innerHeight
+  };
+}
+
+export async function setViewportSize(width: number, height: number) {
+  const {
+    // @ts-ignore because the return type is not properly inferred
+    width: chromeWidth,
+    // @ts-ignore
+    height: chromeHeight
+  } = await rootSuiteBrowser.execute(getBrowserChromeSize);
+
+  const actualWidth = width + chromeWidth;
+  const actualHeight = height + chromeHeight;
+
   // Chrome...
-  await rootSuiteBrowser.setWindowSize(width, height);
+  await rootSuiteBrowser.setWindowSize(actualWidth, actualHeight);
 
   // Firefox...
   try {
-    await rootSuiteBrowser.setWindowRect(0, 0, width, height);
+    await rootSuiteBrowser.setWindowRect(0, 0, actualWidth, actualHeight);
     // eslint-disable-next-line no-empty
   } catch (e) {
   }
@@ -56,7 +73,7 @@ export async function compareScreenshots(
 export async function loadFixture(name: string) {
   await rootSuiteBrowser.url(`file:///var/www/html/${name}.html`);
 
-  await setWindowSize(1024, 768);
+  await setViewportSize(1024, 768);
 }
 /**
  * Run your gui tests in a fresh Selenium session.
