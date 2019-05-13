@@ -14,7 +14,7 @@ describe('Mugshot', () => {
     resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
 
     await fs.copyFile(
-      path.join(__dirname, `../screenshots/${browser}/simple.png`),
+      path.join(__dirname, `../../../../../tests/gui/screenshots/${browser}/simple.png`),
       path.join(resultsPath, 'simple.png')
     );
   });

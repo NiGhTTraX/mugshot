@@ -49,6 +49,7 @@
     "mocha": "~6.0.2",
     "nyc": "~13.3.0",
     "ts-node": "~8.0.0",
+    "tsconfig-paths": "~3.8.0",
     "typemoq": "~2.1.0",
     "typescript": "~3.4.0",
     "webdriverio": "~5.7.9"

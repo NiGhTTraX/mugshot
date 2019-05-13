@@ -13,41 +13,43 @@ import jimpDiffer from '../../../src/lib/jimp-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', async () => {
-  let resultsPath!: string;
+  describe('diff', () => {
+    let resultsPath!: string;
 
-  beforeEach(async () => {
-    const browser = process.env.BROWSER;
+    beforeEach(async () => {
+      const browser = process.env.BROWSER;
 
-    resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
+      resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
 
-    await fs.copyFile(
-      path.join(__dirname, `../screenshots/${browser}/simple.png`),
-      path.join(resultsPath, 'simple.png')
-    );
-  });
-
-  it('should create diff', async browser => {
-    await loadFixture('simple2');
-
-    const diffPath = path.join(resultsPath, 'simple.diff.png');
-
-    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-      fs,
-      pngDiffer: jimpDiffer,
-      createBaselines: true
+      await fs.copyFile(
+        path.join(__dirname, `../../../../../tests/gui/screenshots/${browser}/simple.png`),
+        path.join(resultsPath, 'simple.png')
+      );
     });
 
-    await mugshot.check('simple');
+    it('should create diff', async browser => {
+      await loadFixture('simple2');
 
-    expect(
-      await fs.pathExists(diffPath),
-      'Diff wasn\'t written'
-    ).to.be.true;
+      const diffPath = path.join(resultsPath, 'simple.diff.png');
 
-    await compareScreenshots(
-      diffPath,
-      'simple.diff',
-      `The written diff ${diffPath} doesn't match expected one`
-    );
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+        fs,
+        pngDiffer: jimpDiffer,
+        createBaselines: true
+      });
+
+      await mugshot.check('simple');
+
+      expect(
+        await fs.pathExists(diffPath),
+        'Diff wasn\'t written'
+      ).to.be.true;
+
+      await compareScreenshots(
+        diffPath,
+        'simple.diff',
+        `The written diff ${diffPath} doesn't match expected one`
+      );
+    });
   });
 });

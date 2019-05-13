@@ -13,51 +13,53 @@ import jimpDiffer from '../../../src/lib/jimp-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', async () => {
-  let resultsPath!: string;
+  describe('baselines', () => {
+    let resultsPath!: string;
 
-  beforeEach(async () => {
-    resultsPath = await fs.mkdtemp(`/tmp/mugshot-${process.env.BROWSER}`);
-  });
-
-  it('should write first baseline', async browser => {
-    await loadFixture('simple');
-
-    const baselinePath = path.join(resultsPath, 'new.png');
-
-    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-      fs,
-      pngDiffer: jimpDiffer,
-      createBaselines: true
+    beforeEach(async () => {
+      resultsPath = await fs.mkdtemp(`/tmp/mugshot-${process.env.BROWSER}`);
     });
 
-    const resultWhenMissingBaseline = await mugshot.check('new');
-    expect(resultWhenMissingBaseline.matches).to.be.true;
-    expect(
-      await fs.pathExists(baselinePath),
-      'Baseline wasn\'t written'
-    ).to.be.true;
+    it('should write first baseline', async browser => {
+      await loadFixture('simple');
 
-    await compareScreenshots(
-      path.join(resultsPath, 'new.png'),
-      'simple',
-      `The written baseline ${baselinePath} doesn't match expected one`
-    );
-  });
+      const baselinePath = path.join(resultsPath, 'new.png');
 
-  it('should create parent folders when writing baseline', async browser => {
-    await loadFixture('simple');
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+        fs,
+        pngDiffer: jimpDiffer,
+        createBaselines: true
+      });
 
-    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-      fs,
-      pngDiffer: jimpDiffer,
-      createBaselines: true
+      const resultWhenMissingBaseline = await mugshot.check('new');
+      expect(resultWhenMissingBaseline.matches).to.be.true;
+      expect(
+        await fs.pathExists(baselinePath),
+        'Baseline wasn\'t written'
+      ).to.be.true;
+
+      await compareScreenshots(
+        path.join(resultsPath, 'new.png'),
+        'simple',
+        `The written baseline ${baselinePath} doesn't match expected one`
+      );
     });
 
-    await mugshot.check('foo/bar/new');
+    it('should create parent folders when writing baseline', async browser => {
+      await loadFixture('simple');
 
-    expect(
-      await fs.pathExists(path.join(resultsPath, 'foo/bar')),
-      'Baseline folder structure wasn\'t created'
-    ).to.be.true;
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+        fs,
+        pngDiffer: jimpDiffer,
+        createBaselines: true
+      });
+
+      await mugshot.check('foo/bar/new');
+
+      expect(
+        await fs.pathExists(path.join(resultsPath, 'foo/bar')),
+        'Baseline folder structure wasn\'t created'
+      ).to.be.true;
+    });
   });
 });
