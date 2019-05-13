@@ -29,11 +29,6 @@ export type MugshotDiffResult = {
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
-// TODO: this is only used in the Mugshot class, should we inline it?
-export interface VisualRegressionTester {
-  check: (name: string) => Promise<MugshotResult>;
-}
-
 export class MugshotMissingBaselineError extends Error {
   constructor() {
     super('Missing baseline');
@@ -56,7 +51,7 @@ interface MugshotOptions {
   createBaselines?: boolean;
 }
 
-export default class Mugshot implements VisualRegressionTester {
+export default class Mugshot {
   private readonly browser: Browser;
 
   private readonly resultsPath: string;
