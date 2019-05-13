@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   presets: [
     '@babel/typescript',
     ['@babel/env', { targets: { node: 'current' } }]
@@ -8,9 +8,14 @@ module.exports = {
       legacy: true
     }],
     '@babel/plugin-proposal-class-properties'
-  ],
-  overrides: [{
+  ]
+};
+
+if (process.env.COVERAGE) {
+  config.overrides = [{
     test: /src/,
     plugins: ['istanbul']
-  }]
-};
+  }];
+}
+
+module.exports = config;
