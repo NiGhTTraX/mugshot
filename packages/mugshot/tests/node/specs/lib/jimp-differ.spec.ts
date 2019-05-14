@@ -2,7 +2,7 @@ import { describe, expect, it } from '../../../../../../tests/node/suite';
 import jimpDiffer from '../../../../src/lib/jimp-differ';
 import { blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../../../../../tests/node/fixtures';
 
-describe('jimpDiffer', () => {
+describe('JimpDiffer', () => {
   it('should compare identical buffers', async () => {
     const result = await jimpDiffer.compare(
       blackPixelBuffer,
