@@ -8,7 +8,7 @@ import {
   blackSquare50x50Buffer, diffBlackSquare100x100BlackSquare100x50Buffer,
   diffBlackSquare100x100BlackSquare50x100Buffer,
   diffBlackSquare100x100BlackSquare50x50Buffer,
-  redPixelBuffer,
+  redPixelBuffer, redSquare100x100Buffer,
   whitePixelBuffer,
   whiteSquare100x100Buffer
 } from '../../../../../../tests/node/fixtures';
@@ -57,7 +57,7 @@ describe('JimpDiffer', () => {
   });
 
   // The target buffer is a subregion of the source buffer.
-  describe('subbuffers', () => {
+  describe('different sizes and same content', () => {
     it('with different width and height should create a diff', async () => {
       const result = await jimpDiffer.compare(
         blackSquare100x100Buffer,
@@ -97,6 +97,50 @@ describe('JimpDiffer', () => {
         // @ts-ignore
         result.diff,
         diffBlackSquare100x100BlackSquare100x50Buffer
+      );
+    });
+  });
+
+  describe('different sizes and different content', () => {
+    it('with different width and height should create a diff', async () => {
+      const result = await jimpDiffer.compare(
+        whiteSquare100x100Buffer,
+        blackSquare50x50Buffer
+      );
+
+      expect(result.matches).to.be.false;
+      await compareBuffers(
+        // @ts-ignore
+        result.diff,
+        redSquare100x100Buffer
+      );
+    });
+
+    it('with different width should create a diff', async () => {
+      const result = await jimpDiffer.compare(
+        whiteSquare100x100Buffer,
+        blackSquare50x100Buffer
+      );
+
+      expect(result.matches).to.be.false;
+      await compareBuffers(
+        // @ts-ignore
+        result.diff,
+        redSquare100x100Buffer
+      );
+    });
+
+    it('with different height should create a diff', async () => {
+      const result = await jimpDiffer.compare(
+        whiteSquare100x100Buffer,
+        blackSquare100x50Buffer
+      );
+
+      expect(result.matches).to.be.false;
+      await compareBuffers(
+        // @ts-ignore
+        result.diff,
+        redSquare100x100Buffer
       );
     });
   });
