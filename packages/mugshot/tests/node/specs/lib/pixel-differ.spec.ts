@@ -1,5 +1,5 @@
 import { compareBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
-import jimpDiffer from '../../../../src/lib/jimp-differ';
+import pixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   blackPixelBuffer,
   blackSquare100x100Buffer,
@@ -13,10 +13,10 @@ import {
   whiteSquare100x100Buffer
 } from '../../../../../../tests/node/fixtures';
 
-describe('JimpDiffer', () => {
+describe('PixelDiffer', () => {
   describe('same width and height', () => {
     it('should compare identical buffers', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         blackSquare100x100Buffer
       );
@@ -25,7 +25,7 @@ describe('JimpDiffer', () => {
     });
 
     it('should not create a diff for identical buffers', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         blackSquare100x100Buffer
       );
@@ -35,7 +35,7 @@ describe('JimpDiffer', () => {
     });
 
     it('should compare different buffers', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         whiteSquare100x100Buffer
       );
@@ -46,7 +46,7 @@ describe('JimpDiffer', () => {
     it('should create a diff for different buffers', async () => {
       // TODO: we're comparing single pixels here so we can compare the raw buffer result;
       // should we compare squares and do a diff on the result instead? inception expectation?
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackPixelBuffer,
         whitePixelBuffer
       );
@@ -59,7 +59,7 @@ describe('JimpDiffer', () => {
   // The target buffer is a subregion of the source buffer.
   describe('different sizes and same content', () => {
     it('with different width and height should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         blackSquare50x50Buffer
       );
@@ -73,7 +73,7 @@ describe('JimpDiffer', () => {
     });
 
     it('with different width should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         blackSquare50x100Buffer
       );
@@ -87,7 +87,7 @@ describe('JimpDiffer', () => {
     });
 
     it('with different height should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         blackSquare100x100Buffer,
         blackSquare100x50Buffer
       );
@@ -103,7 +103,7 @@ describe('JimpDiffer', () => {
 
   describe('different sizes and different content', () => {
     it('with different width and height should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         whiteSquare100x100Buffer,
         blackSquare50x50Buffer
       );
@@ -117,7 +117,7 @@ describe('JimpDiffer', () => {
     });
 
     it('with different width should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         whiteSquare100x100Buffer,
         blackSquare50x100Buffer
       );
@@ -131,7 +131,7 @@ describe('JimpDiffer', () => {
     });
 
     it('with different height should create a diff', async () => {
-      const result = await jimpDiffer.compare(
+      const result = await pixelDiffer.compare(
         whiteSquare100x100Buffer,
         blackSquare100x50Buffer
       );

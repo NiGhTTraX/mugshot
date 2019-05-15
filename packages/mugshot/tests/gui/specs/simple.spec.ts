@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { beforeEach, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
-import jimpDiffer from '../../../src/lib/jimp-differ';
+import pixelDiffer from '../../../src/lib/pixel-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', () => {
@@ -24,7 +24,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
-      pngDiffer: jimpDiffer
+      pngDiffer: pixelDiffer
     });
 
     const result = await mugshot.check('simple');
@@ -37,7 +37,7 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
       fs,
-      pngDiffer: jimpDiffer
+      pngDiffer: pixelDiffer
     });
 
     const result = await mugshot.check('simple');

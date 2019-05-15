@@ -1,7 +1,7 @@
 import Jimp from 'jimp';
 import PNGDiffer from '../interfaces/png-differ';
 
-const jimpDiffer: PNGDiffer = {
+const pixelDiffer: PNGDiffer = {
   compare: async (baseline: Buffer, screenshot: Buffer) => {
     const baselineJimp = await Jimp.read(baseline);
     const screenshotJimp = await Jimp.read(screenshot);
@@ -47,4 +47,4 @@ const jimpDiffer: PNGDiffer = {
   }
 };
 
-export default jimpDiffer;
+export default pixelDiffer;

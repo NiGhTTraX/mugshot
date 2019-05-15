@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { runnerAfterEach, runnerBeforeEach, runnerDescribe, runnerIt } from '../mocha-runner';
-import jimpDiffer from '../../packages/mugshot/src/lib/jimp-differ';
+import pixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 export { expect };
 
@@ -24,6 +24,6 @@ export function afterEach(definition: () => Promise<any>|void) {
 
 export async function compareBuffers(screenshot: Buffer, baseline: Buffer) {
   // We can't really compare the raw buffers because compression.
-  const result = await jimpDiffer.compare(screenshot, baseline);
+  const result = await pixelDiffer.compare(screenshot, baseline);
   expect(result.matches).to.be.true;
 }
