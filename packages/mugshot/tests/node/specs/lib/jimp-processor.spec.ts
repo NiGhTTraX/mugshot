@@ -1,4 +1,4 @@
-import { describe, expect, it } from '../../../../../../tests/node/suite';
+import { compareBuffers, describe, it } from '../../../../../../tests/node/suite';
 import JimpProcessor from '../../../../src/lib/jimp-processor';
 import {
   blueSquare50x50Buffer,
@@ -8,13 +8,6 @@ import {
   rgbySquare50x50Buffer,
   yellowSquare50x50Buffer
 } from '../../../../../../tests/node/fixtures';
-import jimpDiffer from '../../../../src/lib/jimp-differ';
-
-async function compareBuffers(cropped: Buffer, baseline: Buffer) {
-  // We can't really compare the raw buffers because compression.
-  const result = await jimpDiffer.compare(cropped, baseline);
-  expect(result.matches).to.be.true;
-}
 
 describe('JimpProcessor', () => {
   it('should crop the entire image', async () => {

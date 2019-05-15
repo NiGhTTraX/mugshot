@@ -3,7 +3,24 @@ export const blackPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0
 export const whitePixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
 export const blackPixelBuffer = Buffer.from(blackPixelB64, 'base64');
 export const whitePixelBuffer = Buffer.from(whitePixelB64, 'base64');
-export const blackWhiteDiffBuffer = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4AWP4z8DwHwAFAAH/e+m+7wAAAABJRU5ErkJggg==', 'base64');
+export const redPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4AWP4z8DwHwAFAAH/e+m+7wAAAABJRU5ErkJggg==';
+export const redPixelBuffer = Buffer.from(redPixelB64, 'base64');
+export const blackSquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAQAAADa613fAAAAaUlEQVR42u3PQREAAAgDoK1/aI3g34MGNJMXKiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJyWXmfZAEMq/KNAAAAAElFTkSuQmCC';
+export const blackSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAALUlEQVR42u3NMQEAAAgDoK1/aM3g4QcFaCbvKpFIJBKJRCKRSCQSiUQikUhuFtSIMgGG6wcKAAAAAElFTkSuQmCC';
+export const blackSquare100x100Buffer = Buffer.from(blackSquare100x100B64, 'base64');
+export const blackSquare50x50Buffer = Buffer.from(blackSquare50x50B64, 'base64');
+export const blackSquare100x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAQAAAAAPLY1AAAAQklEQVR42u3PQREAAAgDoK1/aM3g14MGNJMXKiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJysRFNMgH0RpujAAAAAElFTkSuQmCC';
+export const blackSquare100x50Buffer = Buffer.from(blackSquare100x50B64, 'base64');
+export const blackSquare50x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAABkCAQAAABu4avQAAAAP0lEQVR42u3NMQ0AAAgDsM2/aFDBQdIaaDM5V4lEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSP4nCzb0ZAFY3qrkAAAAAElFTkSuQmCC';
+export const blackSquare50x100Buffer = Buffer.from(blackSquare50x100B64, 'base64');
+export const whiteSquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAABkCAQAAABu4avQAAAAP0lEQVR42u3NMQ0AAAgDMOZf9FDBQdIaaNo5F4lEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSP4nC+E2x52qRBbhAAAAAElFTkSuQmCC';
+export const whiteSquare100x100Buffer = Buffer.from(whiteSquare100x100B64, 'base64');
+export const diffBlackSquare100x100BlackSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/AAD///9BHTQRAAAAG0lEQVQ4y2P4DwYHGMBglDfKG0K8UTAKhigAAOTvUGQ2gpfkAAAAAElFTkSuQmCC';
+export const diffBlackSquare100x100BlackSquare100x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/////AADrWueTAAAAGElEQVQ4y2MYBaNgqIL/SODDKG+UN3R4AHybhKeGLKJ5AAAAAElFTkSuQmCC';
+export const diffBlackSquare100x100BlackSquare50x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/////AADrWueTAAAAG0lEQVQ4y2OAAPv/IPBhlDfKG+WN8kZ5tOYBANt3aIe/WfG7AAAAAElFTkSuQmCC';
+export const diffBlackSquare100x100BlackSquare50x50Buffer = Buffer.from(diffBlackSquare100x100BlackSquare50x50B64, 'base64');
+export const diffBlackSquare100x100BlackSquare100x50Buffer = Buffer.from(diffBlackSquare100x100BlackSquare100x50B64, 'base64');
+export const diffBlackSquare100x100BlackSquare50x100Buffer = Buffer.from(diffBlackSquare100x100BlackSquare50x100B64, 'base64');
 
 // Generated from rgby.html and compressed using https://tinypng.com/.
 export const rgbySquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAgMAAAANjH3HAAAADFBMVEUAAP///wAAgAD/AAC01G5QAAAAKUlEQVRIx+3JIQEAAAjAMAwRKUlEDNh34LOLhWlwHMd5OJQFjuM4/+YApv/dW88J9vwAAAAASUVORK5CYII=';

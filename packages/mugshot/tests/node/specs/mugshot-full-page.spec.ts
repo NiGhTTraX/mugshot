@@ -7,7 +7,7 @@ import Mugshot, {
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
-import { blackPixelB64, blackPixelBuffer, blackWhiteDiffBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
+import { blackPixelB64, blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 
 describe('Mugshot', () => {
   describe('Full page screenshots', () => {
@@ -161,14 +161,14 @@ describe('Mugshot', () => {
         whitePixelBuffer
       );
       fs
-        .setup(f => f.outputFile('results/existing-diff.diff.png', blackWhiteDiffBuffer))
+        .setup(f => f.outputFile('results/existing-diff.diff.png', redPixelBuffer))
         .returns(() => Promise.resolve())
         .verifiable();
 
       setupDifferWithResult(
         whitePixelBuffer,
         blackPixelBuffer,
-        { matches: false, diff: blackWhiteDiffBuffer }
+        { matches: false, diff: redPixelBuffer }
       );
 
       const mugshot = new Mugshot(browser.object, 'results', {
@@ -178,7 +178,7 @@ describe('Mugshot', () => {
 
       await expectDiffResult(
         mugshot.check('existing-diff'),
-        'results/existing-diff.diff.png', blackWhiteDiffBuffer,
+        'results/existing-diff.diff.png', redPixelBuffer,
         'results/existing-diff.new.png', blackPixelBuffer
       );
     });
