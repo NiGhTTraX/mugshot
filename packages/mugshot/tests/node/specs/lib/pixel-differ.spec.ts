@@ -1,4 +1,4 @@
-import { compareBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
+import { expectIdenticalBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
 import pixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   blackPixelBuffer,
@@ -65,7 +65,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         diffBlackSquare100x100BlackSquare50x50Buffer
@@ -79,7 +79,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         diffBlackSquare100x100BlackSquare50x100Buffer
@@ -93,7 +93,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         diffBlackSquare100x100BlackSquare100x50Buffer
@@ -109,7 +109,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         redSquare100x100Buffer
@@ -123,7 +123,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         redSquare100x100Buffer
@@ -137,7 +137,7 @@ describe('PixelDiffer', () => {
       );
 
       expect(result.matches).to.be.false;
-      await compareBuffers(
+      await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
         redSquare100x100Buffer
