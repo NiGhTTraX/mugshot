@@ -66,7 +66,7 @@ export default class Mugshot {
 
   private readonly pngProcessor: PNGProcessor;
 
-  private readonly writeBaselines: boolean;
+  private readonly createBaselines: boolean;
 
   constructor(
     browser: Browser,
@@ -84,7 +84,7 @@ export default class Mugshot {
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
     // TODO: use https://www.npmjs.com/package/is-ci
-    this.writeBaselines = createBaselines;
+    this.createBaselines = createBaselines;
   }
 
   /**
@@ -129,7 +129,7 @@ export default class Mugshot {
   };
 
   private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
-    if (this.writeBaselines) {
+    if (this.createBaselines) {
       const baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
       await this.fs.outputFile(baselinePath, baseline);
