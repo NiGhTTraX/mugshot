@@ -1,39 +1,33 @@
+import fs from 'fs-extra';
+import path from 'path';
+
+export function getBufferFixture(name: string) {
+  return fs.readFileSync(path.join(__dirname, `fixtures/${name}.png`));
+}
+
+export function getBase64Fixture(name: string) {
+  return getBufferFixture(name).toString('base64');
+}
+
 // Generated with http://png-pixel.com/.
-export const blackPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
-export const whitePixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
-export const blackPixelBuffer = Buffer.from(blackPixelB64, 'base64');
-export const whitePixelBuffer = Buffer.from(whitePixelB64, 'base64');
-export const redPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4AWP4z8DwHwAFAAH/e+m+7wAAAABJRU5ErkJggg==';
-export const redPixelBuffer = Buffer.from(redPixelB64, 'base64');
-export const blackSquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAQAAADa613fAAAAaUlEQVR42u3PQREAAAgDoK1/aI3g34MGNJMXKiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJyWXmfZAEMq/KNAAAAAElFTkSuQmCC';
-export const blackSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAQAAAC0NkA6AAAALUlEQVR42u3NMQEAAAgDoK1/aM3g4QcFaCbvKpFIJBKJRCKRSCQSiUQikUhuFtSIMgGG6wcKAAAAAElFTkSuQmCC';
-export const blackSquare100x100Buffer = Buffer.from(blackSquare100x100B64, 'base64');
-export const blackSquare50x50Buffer = Buffer.from(blackSquare50x50B64, 'base64');
-export const blackSquare100x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAQAAAAAPLY1AAAAQklEQVR42u3PQREAAAgDoK1/aM3g14MGNJMXKiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJysRFNMgH0RpujAAAAAElFTkSuQmCC';
-export const blackSquare100x50Buffer = Buffer.from(blackSquare100x50B64, 'base64');
-export const blackSquare50x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAABkCAQAAABu4avQAAAAP0lEQVR42u3NMQ0AAAgDsM2/aFDBQdIaaDM5V4lEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSP4nCzb0ZAFY3qrkAAAAAElFTkSuQmCC';
-export const blackSquare50x100Buffer = Buffer.from(blackSquare50x100B64, 'base64');
-export const whiteSquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAQAAADa613fAAAAaUlEQVR42u3PQREAAAgDINc/9Izg34MGpJ0XIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiJyWYprx532021aAAAAAElFTkSuQmCC';
-export const whiteSquare100x100Buffer = Buffer.from(whiteSquare100x100B64, 'base64');
-export const diffBlackSquare100x100BlackSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/AAD///9BHTQRAAAAG0lEQVQ4y2P4DwYHGMBglDfKG0K8UTAKhigAAOTvUGQ2gpfkAAAAAElFTkSuQmCC';
-export const diffBlackSquare100x100BlackSquare100x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/////AADrWueTAAAAGElEQVQ4y2MYBaNgqIL/SODDKG+UN3R4AHybhKeGLKJ5AAAAAElFTkSuQmCC';
-export const diffBlackSquare100x100BlackSquare50x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX/////AADrWueTAAAAG0lEQVQ4y2OAAPv/IPBhlDfKG+WN8kZ5tOYBANt3aIe/WfG7AAAAAElFTkSuQmCC';
-export const diffBlackSquare100x100BlackSquare50x50Buffer = Buffer.from(diffBlackSquare100x100BlackSquare50x50B64, 'base64');
-export const diffBlackSquare100x100BlackSquare100x50Buffer = Buffer.from(diffBlackSquare100x100BlackSquare100x50B64, 'base64');
-export const diffBlackSquare100x100BlackSquare50x100Buffer = Buffer.from(diffBlackSquare100x100BlackSquare50x100B64, 'base64');
-export const redSquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=';
-export const redSquare100x100Buffer = Buffer.from(redSquare100x100B64, 'base64');
+export const blackPixelB64 = getBase64Fixture('black-pixel');
+export const blackPixelBuffer = getBufferFixture('black-pixel');
+export const whitePixelBuffer = getBufferFixture('white-pixel');
+export const redPixelBuffer = getBufferFixture('red-pixel');
+export const blackSquare100x100Buffer = getBufferFixture('black-square-100x100');
+export const blackSquare50x50Buffer = getBufferFixture('black-square-50x50');
+export const blackSquare100x50Buffer = getBufferFixture('black-square-100x50');
+export const blackSquare50x100Buffer = getBufferFixture('black-square-50x100');
+export const whiteSquare100x100Buffer = getBufferFixture('white-square-100x100');
+export const diffBlackSquare100x100BlackSquare50x50Buffer = getBufferFixture('diff-100x100-50x50');
+export const diffBlackSquare100x100BlackSquare100x50Buffer = getBufferFixture('diff-100x100-100x50');
+export const diffBlackSquare100x100BlackSquare50x100Buffer = getBufferFixture('diff-100x100-50x100');
+export const redSquare100x100Buffer = getBufferFixture('red-square-100x100');
 
 // Generated from rgby.html and compressed using https://tinypng.com/.
-export const rgbySquare100x100B64 = 'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAgMAAAANjH3HAAAADFBMVEUAAP///wAAgAD/AAC01G5QAAAAKUlEQVRIx+3JIQEAAAjAMAwRKUlEDNh34LOLhWlwHMd5OJQFjuM4/+YApv/dW88J9vwAAAAASUVORK5CYII=';
-export const redSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAARUlEQVR42u3PQQ0AAAjEMM6/aMACT5IuM9B01f6/gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIBcGuAsY8/q7uoYAAAAAElFTkSuQmCC';
-export const greenSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAARElEQVR42u3PMREAAAgEoLe5zTWDqwcNqHQmD5SIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIyMUCIn1LAc2ZY4gAAAAASUVORK5CYII=';
-export const blueSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAQ0lEQVR42u3PQREAAAgDoK1/aM3g14MGNJnJAxURERERERERERERERERERERERERERERERERERERERERERERERERuVh8kGPPziaQ7QAAAABJRU5ErkJggg==';
-export const yellowSquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAQ0lEQVR42u3PQREAAAgDINc/9Mzg14MGpJ3OAxERERERERERERERERERERERERERERERERERERERERERERERERERuVjg6JWdCD2ogQAAAABJRU5ErkJggg==';
-export const rgbySquare100x100Buffer = Buffer.from(rgbySquare100x100B64, 'base64');
-export const redSquare50x50Buffer = Buffer.from(redSquare50x50B64, 'base64');
-export const greenSquare50x50Buffer = Buffer.from(greenSquare50x50B64, 'base64');
-export const blueSquare50x50Buffer = Buffer.from(blueSquare50x50B64, 'base64');
-export const yellowSquare50x50Buffer = Buffer.from(yellowSquare50x50B64, 'base64');
-export const rgbySquare50x50B64 = 'iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAADFBMVEUAAP///wAAgAD/AAC01G5QAAAAHklEQVQoz2P4DwavVoHAglEelXkQIBoKAgGjPOryANkIQlTXgFKfAAAAAElFTkSuQmCC';
-export const rgbySquare50x50Buffer = Buffer.from(rgbySquare50x50B64, 'base64');
+export const rgbySquare100x100Buffer = getBufferFixture('rgby-square-100x100');
+export const redSquare50x50Buffer = getBufferFixture('red-square-50x50');
+export const greenSquare50x50Buffer = getBufferFixture('green-square-50x50');
+export const blueSquare50x50Buffer = getBufferFixture('blue-square-50x50');
+export const yellowSquare50x50Buffer = getBufferFixture('yellow-square-50x50');
+export const rgbySquare50x50Buffer = getBufferFixture('rgby-square-50x50');
