@@ -54,6 +54,8 @@ export async function setViewportSize(width: number, height: number) {
   }
 }
 
+// TODO: this has a bug when the screenshots have different sizes;
+// PixelDiffer solves this, should it be used here?
 export async function compareScreenshots(
   screenshot: Buffer | string,
   baselineName: string,
@@ -75,6 +77,7 @@ export async function loadFixture(name: string) {
 
   await setViewportSize(1024, 768);
 }
+
 /**
  * Run your gui tests in a fresh Selenium session.
  *
@@ -101,9 +104,6 @@ export function beforeEach(definition: TestDefinition) {
   });
 }
 
-/**
- * Run a test with optional coverage report.
- */
 export function it(name: string, definition: TestDefinition = () => {}) {
   runnerIt(name, () => Promise.resolve(definition(rootSuiteBrowser)));
 }

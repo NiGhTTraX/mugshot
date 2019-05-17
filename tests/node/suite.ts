@@ -22,6 +22,7 @@ export function afterEach(definition: () => Promise<any>|void) {
   runnerAfterEach(definition);
 }
 
+// TODO: is it ok to use PixelDiffer here?
 export async function compareBuffers(screenshot: Buffer, baseline: Buffer) {
   // We can't really compare the raw buffers because compression.
   const result = await pixelDiffer.compare(screenshot, baseline);
