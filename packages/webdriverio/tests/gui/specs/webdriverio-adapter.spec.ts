@@ -12,6 +12,16 @@ describe('WebdriverIOAdapter', () => {
     await compareScreenshots(screenshot, 'simple');
   });
 
+  // TODO: Firefox is failing this
+  it('should take a full page screenshot with absolutely positioned elements', async browser => {
+    await loadFixture('rect');
+
+    const browserAdapter = new WebdriverIOAdapter(browser);
+    const screenshot = Buffer.from(await browserAdapter.takeScreenshot(), 'base64');
+
+    await compareScreenshots(screenshot, 'full-absolute');
+  });
+
   it('should get bounding rect of element', async browser => {
     await loadFixture('rect');
 
