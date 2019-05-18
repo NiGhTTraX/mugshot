@@ -1,6 +1,25 @@
 import Jimp from 'jimp';
 import PNGDiffer from '../interfaces/png-differ';
 
+/**
+ * Replace the white@90% with white@100% in the Jimp diff image.
+ */
+function makeJimpDiffWhiter(diffJimp: Jimp) {
+  for (let x = 0; x < diffJimp.getWidth(); x++) {
+    for (let y = 0; y < diffJimp.getHeight(); y++) {
+      const pixelColor = Jimp.intToRGBA(diffJimp.getPixelColor(x, y));
+
+      if (pixelColor.a === 255
+          && pixelColor.r === pixelColor.g
+          && pixelColor.g === pixelColor.b
+          && pixelColor.b === 229
+      ) {
+        diffJimp.setPixelColor(4294967295, x, y);
+      }
+    }
+  }
+}
+
 const pixelDiffer: PNGDiffer = {
   compare: async (baseline: Buffer, screenshot: Buffer) => {
     const baselineJimp = await Jimp.read(baseline);
@@ -23,6 +42,8 @@ const pixelDiffer: PNGDiffer = {
       baselineJimp,
       screenshotJimp
     );
+
+    makeJimpDiffWhiter(result.image);
 
     const matches = result.percent === 0;
 
