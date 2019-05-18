@@ -4,9 +4,9 @@
 
 ## Usage
 
-Mugshot doesn't aim to replace your testing framework. It aims to add visual testing capabilities to it. As such, you have full control over how you spin up browsers and how you control them. When you've reached the desired state (browser open, navigated to page, scrolled to element, hovered over tooltip, dropdown opened etc.) you can then use Mugshot to take a screenshot and compare it to your baseline.
+Since different Webdriver libraries have different API and semantics, you will most likely need a wrapper over it to pass it to Mugshot.
 
-Since different Webdriver libraries have different API and semantics, you will most likely need a wrapper over it to pass it to Mugshot. Below is an example of using the [WebdriverIO](https://webdriver.io/) adapter:
+Here is an example of using the [WebdriverIO](https://webdriver.io/) adapter:
 
 ```typescript
 import Mugshot from 'mugshot';
