@@ -1,15 +1,14 @@
 import { expectIdenticalBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
 import pixelDiffer from '../../../../src/lib/pixel-differ';
 import {
-  blackPixelBuffer,
   blackSquare100x100Buffer,
   blackSquare100x50Buffer,
   blackSquare50x100Buffer,
-  blackSquare50x50Buffer, diffBlackSquare100x100BlackSquare100x50Buffer,
+  blackSquare50x50Buffer,
+  diffBlackSquare100x100BlackSquare100x50Buffer,
   diffBlackSquare100x100BlackSquare50x100Buffer,
   diffBlackSquare100x100BlackSquare50x50Buffer,
-  redPixelBuffer, redSquare100x100Buffer,
-  whitePixelBuffer,
+  redSquare100x100Buffer,
   whiteSquare100x100Buffer
 } from '../../../../../../tests/node/fixtures';
 
@@ -44,15 +43,16 @@ describe('PixelDiffer', () => {
     });
 
     it('should create a diff for different buffers', async () => {
-      // TODO: we're comparing single pixels here so we can compare the raw buffer result;
-      // should we compare squares and do a diff on the result instead? inception expectation?
       const result = await pixelDiffer.compare(
-        blackPixelBuffer,
-        whitePixelBuffer
+        blackSquare100x100Buffer,
+        whiteSquare100x100Buffer
       );
 
-      // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
-      expect(result.diff).to.deep.equal(redPixelBuffer);
+      await expectIdenticalBuffers(
+        // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
+        result.diff,
+        redSquare100x100Buffer
+      );
     });
   });
 
