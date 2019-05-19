@@ -3,6 +3,9 @@ import PNGDiffer from '../interfaces/png-differ';
 
 /**
  * Replace the white@90% with white@100% in the Jimp diff image.
+ *
+ * TODO: this is slow; maybe we should inline pixelmatch and modify
+ * it to allow custom colors? see https://github.com/mapbox/pixelmatch/pull/46
  */
 function makeJimpDiffWhiter(diffJimp: Jimp) {
   for (let x = 0; x < diffJimp.getWidth(); x++) {
