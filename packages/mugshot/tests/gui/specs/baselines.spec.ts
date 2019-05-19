@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import {
   beforeEach,
-  compareScreenshots,
+  expectIdenticalScreenshots,
   describe,
   expect,
   it,
@@ -38,7 +38,7 @@ describe('Mugshot', async () => {
         'Baseline wasn\'t written'
       ).to.be.true;
 
-      await compareScreenshots(
+      await expectIdenticalScreenshots(
         path.join(resultsPath, 'new.png'),
         'simple',
         `The written baseline ${baselinePath} doesn't match expected one`

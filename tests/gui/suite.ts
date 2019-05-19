@@ -2,7 +2,6 @@ import { remote } from 'webdriverio';
 import fs from 'fs-extra';
 import path from 'path';
 import { expect } from 'chai';
-import jimp from 'jimp';
 import {
   runnerAfter,
   runnerBefore,
@@ -10,6 +9,7 @@ import {
   runnerDescribe,
   runnerIt
 } from '../mocha-runner';
+import pixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 export { expect };
 
@@ -54,22 +54,22 @@ export async function setViewportSize(width: number, height: number) {
   }
 }
 
-// TODO: this has a bug when the screenshots have different sizes;
-// PixelDiffer solves this, should it be used here?
-export async function compareScreenshots(
+/**
+ * Use PixelDiffer to compare two screenshots. Assume that PixelDiffer passes all of its tests.
+ */
+export async function expectIdenticalScreenshots(
   screenshot: Buffer | string,
   baselineName: string,
   message?: string
 ) {
-  const result = jimp.diff(
-    await jimp.read(
-      await fs.readFile(path.join(__dirname, `./screenshots/${BROWSER}/${baselineName}.png`))
-    ),
-    // Type narrowing is needed to statically choose an overload.
-    await (typeof screenshot === 'string' ? jimp.read(screenshot) : jimp.read(screenshot))
-  );
+  const baseline = await fs.readFile(path.join(__dirname, `./screenshots/${BROWSER}/${baselineName}.png`));
 
-  expect(result.percent, message).to.equal(0);
+  if (typeof screenshot === 'string') {
+    // eslint-disable-next-line no-param-reassign
+    screenshot = await fs.readFile(screenshot);
+  }
+
+  expect((await pixelDiffer.compare(baseline, screenshot)).matches, message).to.be.true;
 }
 
 export async function loadFixture(name: string) {

@@ -6,7 +6,7 @@ import {
   it,
   beforeEach,
   loadFixture,
-  compareScreenshots
+  expectIdenticalScreenshots
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import pixelDiffer from '../../../src/lib/pixel-differ';
@@ -45,7 +45,7 @@ describe('Mugshot', async () => {
         'Diff wasn\'t written'
       ).to.be.true;
 
-      await compareScreenshots(
+      await expectIdenticalScreenshots(
         diffPath,
         'simple.diff',
         `The written diff ${diffPath} doesn't match expected one`

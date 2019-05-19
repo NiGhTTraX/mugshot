@@ -1,4 +1,4 @@
-import { compareScreenshots, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
+import { expectIdenticalScreenshots, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
 
 describe('webdriverio', () => {
   it('should take a full page screenshot', async browser => {
@@ -6,7 +6,7 @@ describe('webdriverio', () => {
 
     const screenshot = Buffer.from(await browser.takeScreenshot(), 'base64');
 
-    await compareScreenshots(screenshot, 'simple');
+    await expectIdenticalScreenshots(screenshot, 'simple');
   });
 
   it('should get bounding rect using a script', async browser => {

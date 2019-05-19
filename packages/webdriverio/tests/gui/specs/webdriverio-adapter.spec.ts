@@ -1,4 +1,4 @@
-import { describe, it, loadFixture, compareScreenshots } from '../../../../../tests/gui/suite';
+import { describe, it, loadFixture, expectIdenticalScreenshots } from '../../../../../tests/gui/suite';
 import WebdriverIOAdapter from '../../../src';
 import { expect } from 'chai';
 
@@ -9,7 +9,7 @@ describe('WebdriverIOAdapter', () => {
     const browserAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(await browserAdapter.takeScreenshot(), 'base64');
 
-    await compareScreenshots(screenshot, 'simple');
+    await expectIdenticalScreenshots(screenshot, 'simple');
   });
 
   // TODO: Firefox is failing this
@@ -19,7 +19,7 @@ describe('WebdriverIOAdapter', () => {
     const browserAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(await browserAdapter.takeScreenshot(), 'base64');
 
-    await compareScreenshots(screenshot, 'full-absolute');
+    await expectIdenticalScreenshots(screenshot, 'full-absolute');
   });
 
   it('should get bounding rect of element', async browser => {
