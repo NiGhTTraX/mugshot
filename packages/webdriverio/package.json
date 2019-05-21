@@ -32,7 +32,7 @@
   },
   "peerDependencies": {
     "mugshot": "1.0.0-rc",
-    "webdriverio": "~5.8.3"
+    "webdriverio": "^5.8.3"
   },
   "devDependencies": {
     "mugshot": "^1.0.0-rc.5",
