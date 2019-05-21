@@ -27,7 +27,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
+    "compile": "tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
