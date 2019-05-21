@@ -24,9 +24,10 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist"
+    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@mugshot/webdriverio": "0.0.1"
+    "@mugshot/webdriverio": "1.0.0-rc.2"
   }
 }

@@ -27,14 +27,15 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project ../../tsconfig.json --declaration --outDir ./dist"
+    "compile": "tsc --project ../../tsconfig.json --declaration --outDir ./dist",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "mugshot": "1.0.0-rc",
     "webdriverio": "~5.8.3"
   },
   "devDependencies": {
-    "mugshot": "1.0.0-rc",
+    "mugshot": "1.0.0-rc.2",
     "webdriverio": "~5.8.3"
   }
 }
