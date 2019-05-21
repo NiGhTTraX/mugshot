@@ -1,27 +1,13 @@
 import Jimp from 'jimp';
+// @ts-ignore because no type defs
+import configure from '@jimp/custom';
+import pluginCrop from './jimp-crop';
 import PNGDiffer from '../interfaces/png-differ';
+import pixelmatch from './pixelmatch';
 
-/**
- * Replace the white@90% with white@100% in the Jimp diff image.
- *
- * TODO: this is slow; maybe we should inline pixelmatch and modify
- * it to allow custom colors? see https://github.com/mapbox/pixelmatch/pull/46
- */
-function makeJimpDiffWhiter(diffJimp: Jimp) {
-  for (let x = 0; x < diffJimp.getWidth(); x++) {
-    for (let y = 0; y < diffJimp.getHeight(); y++) {
-      const pixelColor = Jimp.intToRGBA(diffJimp.getPixelColor(x, y));
-
-      if (pixelColor.a === 255
-          && pixelColor.r === pixelColor.g
-          && pixelColor.g === pixelColor.b
-          && pixelColor.b === 229
-      ) {
-        diffJimp.setPixelColor(4294967295, x, y);
-      }
-    }
-  }
-}
+configure({
+  plugins: [pluginCrop]
+});
 
 const pixelDiffer: PNGDiffer = {
   compare: async (baseline: Buffer, screenshot: Buffer) => {
@@ -41,22 +27,25 @@ const pixelDiffer: PNGDiffer = {
       screenshotJimp.crop(0, 0, smallestWidth, smallestHeight);
     }
 
-    const result = Jimp.diff(
-      baselineJimp,
-      screenshotJimp
+    const diff = new Jimp(smallestWidth, smallestHeight, 0xffffffff);
+
+    const numDiffPixels = pixelmatch(
+      baselineJimp.bitmap.data,
+      screenshotJimp.bitmap.data,
+      diff.bitmap.data, // this will be modified
+      smallestWidth,
+      smallestHeight
     );
 
-    makeJimpDiffWhiter(result.image);
-
-    const matches = result.percent === 0;
+    const matches = numDiffPixels === 0;
 
     if (differentSize) {
-      const diff = new Jimp(biggestWidth, biggestHeight, '#ff0000');
-      await diff.composite(result.image, 0, 0);
+      const wholeDiff = new Jimp(biggestWidth, biggestHeight, '#ff0000');
+      await wholeDiff.composite(diff, 0, 0);
 
       return {
         matches: false,
-        diff: await diff.getBufferAsync(Jimp.MIME_PNG)
+        diff: await wholeDiff.getBufferAsync(Jimp.MIME_PNG)
       };
     }
 
@@ -66,7 +55,7 @@ const pixelDiffer: PNGDiffer = {
 
     return {
       matches: false,
-      diff: await result.image.getBufferAsync(Jimp.MIME_PNG)
+      diff: await diff.getBufferAsync(Jimp.MIME_PNG)
     };
   }
 };
