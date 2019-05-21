@@ -1,9 +1,11 @@
 import path from 'path';
+import fsExtra from 'fs-extra';
 import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
 import FileSystem from '../interfaces/file-system';
 import PNGProcessor from '../interfaces/png-processor';
 import JimpProcessor from './jimp-processor';
+import pixelDiffer from './pixel-differ';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -43,8 +45,8 @@ export class MugshotMissingBaselineError extends Error {
 }
 
 interface MugshotOptions {
-  fs: FileSystem;
-  pngDiffer: PNGDiffer;
+  fs?: FileSystem;
+  pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
@@ -72,11 +74,11 @@ export default class Mugshot {
     browser: Browser,
     resultsPath: string,
     {
-      fs,
-      pngDiffer,
+      fs = fsExtra,
+      pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
       createBaselines = false
-    }: MugshotOptions
+    }: MugshotOptions = {}
   ) {
     this.browser = browser;
     this.resultsPath = resultsPath;

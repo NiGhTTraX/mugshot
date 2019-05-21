@@ -2,7 +2,6 @@ import path from 'path';
 import fs from 'fs-extra';
 import { beforeEach, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
-import pixelDiffer from '../../../src/lib/pixel-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', () => {
@@ -24,10 +23,7 @@ describe('Mugshot', () => {
     it('should take a screenshot of an absolutely positioned element', async browser => {
       await loadFixture('rect');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        fs,
-        pngDiffer: pixelDiffer
-      });
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath);
 
       const result = await mugshot.check('rect', '.test');
 

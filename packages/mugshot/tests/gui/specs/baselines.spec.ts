@@ -9,7 +9,6 @@ import {
   loadFixture
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
-import pixelDiffer from '../../../src/lib/pixel-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', async () => {
@@ -26,8 +25,6 @@ describe('Mugshot', async () => {
       const baselinePath = path.join(resultsPath, 'new.png');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        fs,
-        pngDiffer: pixelDiffer,
         createBaselines: true
       });
 
@@ -49,8 +46,6 @@ describe('Mugshot', async () => {
       await loadFixture('simple');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        fs,
-        pngDiffer: pixelDiffer,
         createBaselines: true
       });
 

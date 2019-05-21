@@ -9,7 +9,6 @@ import {
   expectIdenticalScreenshots
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
-import pixelDiffer from '../../../src/lib/pixel-differ';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
 describe('Mugshot', async () => {
@@ -33,8 +32,6 @@ describe('Mugshot', async () => {
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        fs,
-        pngDiffer: pixelDiffer,
         createBaselines: true
       });
 
