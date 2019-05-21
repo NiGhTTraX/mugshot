@@ -5,6 +5,9 @@ sudo: required
 services:
 - docker
 
+before_script:
+- npm run bootstrap
+
 script:
 - npm run lint
 - npm run test
