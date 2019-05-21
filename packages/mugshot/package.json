@@ -28,6 +28,12 @@
     "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "@types/fs-extra": "~5.0.5",
+    "@types/node": "~10.12.2",
+    "fs-extra": "~7.0.1",
+    "jimp": "~0.6.1"
+  },
   "devDependencies": {
     "typescript": "~3.4.5"
   }
