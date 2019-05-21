@@ -1,13 +1,14 @@
 {
+  "all": true,
+  "extension": [".ts", ".tsx"],
   "include": [
-    "**/src/**/*.{ts,tsx}"
+    "**/src/**/*"
   ],
   "exclude": [
     "**/*.d.ts",
-    "**/tests/**/*"
+    "**/tests/**/*",
+    "**/vendor/**/*"
   ],
-  "extension": [".ts", ".tsx"],
-  "all": true,
 
   "sourceMap": false,
   "instrument": false,

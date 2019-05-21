@@ -1,6 +1,6 @@
 import PNGDiffer from '../interfaces/png-differ';
-import pixelmatch from './pixelmatch';
-import CustomJimp from './custom-jimp';
+import pixelmatch from '../vendor/pixelmatch';
+import CustomJimp from '../vendor/custom-jimp';
 
 const pixelDiffer: PNGDiffer = {
   compare: async (baseline: Buffer, screenshot: Buffer) => {

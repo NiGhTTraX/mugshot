@@ -1,5 +1,5 @@
 import PNGProcessor from '../interfaces/png-processor';
-import CustomJimp from './custom-jimp';
+import CustomJimp from '../vendor/custom-jimp';
 
 export default class JimpProcessor implements PNGProcessor {
   crop = async (img: Buffer, x: number, y: number, w: number, h: number) => {

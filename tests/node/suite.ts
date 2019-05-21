@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { runnerAfterEach, runnerBeforeEach, runnerDescribe, runnerIt } from '../mocha-runner';
-import CustomJimp from 'mugshot/src/lib/custom-jimp';
+import CustomJimp from 'mugshot/src/vendor/custom-jimp';
 
 export { expect };
 
