@@ -12,11 +12,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uberVU/mugshot.git"
+    "url": "git+https://github.com/NiGhTTraX/mugshot.git"
   },
   "author": "Andrei Picus",
   "license": "MIT",
-  "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/mugshot",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/mugshot",
   "main": "dist/index",
   "types": "dist/index",
   "files": [
