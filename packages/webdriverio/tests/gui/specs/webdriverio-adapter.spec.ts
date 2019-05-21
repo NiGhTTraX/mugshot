@@ -1,6 +1,6 @@
 import { describe, it, loadFixture, expectIdenticalScreenshots } from '../../../../../tests/gui/suite';
-import WebdriverIOAdapter from '../../../src';
 import { expect } from 'chai';
+import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
 
 describe('WebdriverIOAdapter', () => {
   it('should take a full page screenshot', async browser => {
