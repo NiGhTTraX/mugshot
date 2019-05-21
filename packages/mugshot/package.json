@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.3",
   "description": "Visual regression testing library",
   "keywords": [
     "visual",
@@ -24,9 +24,10 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist"
+    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@mugshot/webdriverio": "0.0.1"
+    "@mugshot/webdriverio": "^1.0.0-rc.3"
   }
 }
