@@ -33,3 +33,10 @@ import path from 'path';
   console.log(result.matches);
 })();
 ```
+
+
+### `check(name, selector?)`
+
+The first argument is the name of the baseline screenshot - Mugshot will look for a file named `${name}.png` located in `resultsPath` that was passed in the constructor. If this file is missing, and `createBaselines` is `false`, then Mugshot will throw an error. If the file is found it will be compared against the fresh screenshot taken from the browser. If any differences are found then a `${name}.new.png` and a `${name}.diff.png` will be created in `resultsPath` and Mugshot will return a result with `{ matches: false }`.
+
+A selector can be passed as the second argument and will tell Mugshot to only screenshot the corresponding element.

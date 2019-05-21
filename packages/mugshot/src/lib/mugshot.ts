@@ -93,13 +93,19 @@ export default class Mugshot {
    * Check for visual regressions.
    *
    * @param name Mugshot will look for a baseline named `${name}.png` in the
-   *   `resultsPath` folder. If one is not found and `writeBaselines`
-   *   is true then Mugshot will create a new baseline and pass the test.
+   *   `resultsPath` folder. If one is not found and `createBaselines`
+   *   is true then Mugshot will create a new baseline and pass the test. <br>
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `browser`. If differences are found the test will fail
    *   and a `${name}.diff.png` will be created in `resultsPath`.
+   *
    * @param selector If given then Mugshot will screenshot the visible
-   *   region bounded by the element's rectangle.
+   *   region bounded by the element's rectangle. <br>
+   *   If the element is not in the viewport then, depending on the
+   *   browser WebDriver implementation, a screenshot might fail.
+   *   It is up to you to appropriately scroll the viewport
+   *   before calling Mugshot. <br>
+   *   If the element is not found an error will be thrown.
    */
   check = async (name: string, selector?: MugshotSelector): Promise<MugshotResult> => {
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
