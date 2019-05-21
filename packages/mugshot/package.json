@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0-rc.4",
   "description": "Visual regression testing library",
   "keywords": [
     "visual",
@@ -29,6 +29,6 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@mugshot/webdriverio": "^1.0.0-rc.3"
+    "@mugshot/webdriverio": "^1.0.0-rc.4"
   }
 }
