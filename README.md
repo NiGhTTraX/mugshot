@@ -1,4 +1,4 @@
-![logo](packages/mugshot/logo.png)
+![logo](logo.png)
 
 > Framework independent visual testing library
 
