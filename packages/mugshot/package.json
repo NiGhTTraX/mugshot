@@ -14,6 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/uberVU/mugshot.git"
   },
+  "author": "Andrei Picus",
   "license": "MIT",
   "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/mugshot",
   "main": "dist/index",
@@ -26,5 +27,8 @@
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
     "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "~3.4.5"
   }
 }
