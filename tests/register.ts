@@ -3,3 +3,4 @@ require('@babel/register')({
   extensions: ['.ts', '.tsx', '.js'],
   rootMode: 'upward'
 });
+require('tsconfig-paths').register();

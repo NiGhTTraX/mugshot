@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Jimp from 'jimp';
 import { runnerAfterEach, runnerBeforeEach, runnerDescribe, runnerIt } from '../mocha-runner';
+import CustomJimp from 'mugshot/src/lib/custom-jimp';
 
 export { expect };
 
@@ -26,8 +26,8 @@ export function afterEach(definition: () => Promise<any>|void) {
  * Do a slow pixel by pixel comparison between 2 buffers.
  */
 export async function expectIdenticalBuffers(screenshot: Buffer, baseline: Buffer) {
-  const screenshotJimp = await Jimp.read(screenshot);
-  const baselineJimp = await Jimp.read(baseline);
+  const screenshotJimp = await CustomJimp.read(screenshot);
+  const baselineJimp = await CustomJimp.read(baseline);
 
   const sWidth = screenshotJimp.getWidth();
   const sHeight = screenshotJimp.getHeight();
@@ -40,10 +40,10 @@ export async function expectIdenticalBuffers(screenshot: Buffer, baseline: Buffe
   for (let x = 0; x < sWidth; x++) {
     for (let y = 0; y < sHeight; y++) {
       expect(
-        Jimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
+        CustomJimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
         `Pixel at ${x}, ${y} has a different color`
       ).to.deep.equal(
-        Jimp.intToRGBA(baselineJimp.getPixelColor(x, y))
+        CustomJimp.intToRGBA(baselineJimp.getPixelColor(x, y))
       );
     }
   }

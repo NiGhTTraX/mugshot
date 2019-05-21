@@ -1,18 +1,11 @@
-import Jimp from 'jimp';
-// @ts-ignore because no type defs
-import configure from '@jimp/custom';
-import pluginCrop from './jimp-crop';
 import PNGDiffer from '../interfaces/png-differ';
 import pixelmatch from './pixelmatch';
-
-configure({
-  plugins: [pluginCrop]
-});
+import CustomJimp from './custom-jimp';
 
 const pixelDiffer: PNGDiffer = {
   compare: async (baseline: Buffer, screenshot: Buffer) => {
-    const baselineJimp = await Jimp.read(baseline);
-    const screenshotJimp = await Jimp.read(screenshot);
+    const baselineJimp = await CustomJimp.read(baseline);
+    const screenshotJimp = await CustomJimp.read(screenshot);
 
     const smallestWidth = Math.min(baselineJimp.getWidth(), screenshotJimp.getWidth());
     const smallestHeight = Math.min(baselineJimp.getHeight(), screenshotJimp.getHeight());
@@ -27,7 +20,7 @@ const pixelDiffer: PNGDiffer = {
       screenshotJimp.crop(0, 0, smallestWidth, smallestHeight);
     }
 
-    const diff = new Jimp(smallestWidth, smallestHeight, 0xffffffff);
+    const diff = new CustomJimp(smallestWidth, smallestHeight, 0xffffffff);
 
     const numDiffPixels = pixelmatch(
       baselineJimp.bitmap.data,
@@ -40,12 +33,12 @@ const pixelDiffer: PNGDiffer = {
     const matches = numDiffPixels === 0;
 
     if (differentSize) {
-      const wholeDiff = new Jimp(biggestWidth, biggestHeight, '#ff0000');
+      const wholeDiff = new CustomJimp(biggestWidth, biggestHeight, '#ff0000');
       await wholeDiff.composite(diff, 0, 0);
 
       return {
         matches: false,
-        diff: await wholeDiff.getBufferAsync(Jimp.MIME_PNG)
+        diff: await wholeDiff.getBufferAsync(CustomJimp.MIME_PNG)
       };
     }
 
@@ -55,7 +48,7 @@ const pixelDiffer: PNGDiffer = {
 
     return {
       matches: false,
-      diff: await diff.getBufferAsync(Jimp.MIME_PNG)
+      diff: await diff.getBufferAsync(CustomJimp.MIME_PNG)
     };
   }
 };
