@@ -19,10 +19,10 @@
   "author": "Andrei Picus",
   "license": "MIT",
   "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/webdriverio",
-  "main": "dist/index",
-  "types": "dist/index",
+  "main": "dist/webdriverio/src/index",
+  "types": "dist/webdriverio/src/index",
   "files": [
-    "dist"
+    "dist/webdriverio/src"
   ],
   "scripts": {
     "build": "npm run clean && npm run compile",
