@@ -1,0 +1,31 @@
+version: '2.1'
+
+services:
+  selenium:
+    image: selenium/hub:3.141.59-neon
+    ports:
+      - '4444:4444'
+    devices:
+      # Try to prevent Selenium from blocking when creating sessions due to
+      # limited entropy.
+      - /dev/urandom:/dev/random
+
+  chrome:
+    image: selenium/node-chrome:3.141.59-neon
+    volumes:
+      - ./fixtures:/var/www/html
+
+  firefox:
+    image: selenium/node-firefox:3.141.59-neon
+    volumes:
+      - ./fixtures:/var/www/html
+
+  debug_chrome:
+    image: "selenium/node-chrome-debug:3.141.59-neon"
+    volumes:
+      - ./fixtures:/var/www/html
+
+  debug_firefox:
+    image: "selenium/node-firefox-debug:3.141.59-neon"
+    volumes:
+      - ./fixtures:/var/www/html

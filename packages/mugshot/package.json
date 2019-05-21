@@ -1,0 +1,32 @@
+{
+  "name": "mugshot",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0-rc.1",
+  "description": "Visual regression testing library",
+  "keywords": [
+    "visual",
+    "regression",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uberVU/mugshot.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/mugshot",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc --project tsconfig.json --declaration --outDir ./dist"
+  },
+  "devDependencies": {
+    "@mugshot/webdriverio": "0.0.1"
+  }
+}
