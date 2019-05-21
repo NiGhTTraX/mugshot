@@ -12,7 +12,6 @@ describe('WebdriverIOAdapter', () => {
     await expectIdenticalScreenshots(screenshot, 'simple');
   });
 
-  // TODO: Firefox is failing this
   it('should take a full page screenshot with absolutely positioned elements', async browser => {
     await loadFixture('rect');
 
