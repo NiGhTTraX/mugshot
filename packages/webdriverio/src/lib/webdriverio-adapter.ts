@@ -1,4 +1,5 @@
 import { Browser } from 'mugshot';
+import 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function getBoundingRect(selector: string): DOMRect {
