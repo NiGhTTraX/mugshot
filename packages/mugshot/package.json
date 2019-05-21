@@ -26,8 +26,5 @@
     "clean": "rm -rf ./dist",
     "compile": "tsc --project tsconfig.json --declaration --outDir ./dist",
     "prepublishOnly": "npm run build"
-  },
-  "devDependencies": {
-    "@mugshot/webdriverio": "^1.0.0-rc.5"
   }
 }

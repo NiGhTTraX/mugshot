@@ -35,7 +35,6 @@
     "webdriverio": "^5.8.3"
   },
   "devDependencies": {
-    "mugshot": "^1.0.0-rc.5",
     "webdriverio": "~5.8.3"
   }
 }
