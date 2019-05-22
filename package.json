@@ -51,6 +51,6 @@
     "tsconfig-paths": "~3.8.0",
     "typemoq": "~2.1.0",
     "typescript": "~3.4.5",
-    "webdriverio": "~5.8.3"
+    "webdriverio": "~5.9.0"
   }
 }
