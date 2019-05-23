@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
+    "clean": "lerna run clean",
+    "build": "lerna run build",
     "pub": "lerna publish",
-    "prepublishOnly": "npm run build",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "./tests/run.sh",
     "test:node": "TS_NODE_CACHE=0 mocha --opts tests/node/mocha.opts",
