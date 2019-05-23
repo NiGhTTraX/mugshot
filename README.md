@@ -8,13 +8,44 @@
 
 > NOTICE: this project was previously hosted at [@uberVU](https://github.com/uberVU) but has been transferred to [@NiGhTTraX](https://github.com/NiGhTTraX). The licensing has not changed. The last version before the migration is `mugshot@0.3.2.`.
 
+
+## Features
+
+- Framework independent so you can choose your favorite tools or plug it into your existing testing suite.
+- Can screenshot the whole page or just an element.
+- Produces actual and diff images if a test fails.
+- Can work with any Webdriver implementation through an adapter.
+- Fails if baselines are missing (can be toggled through options).
+
+
 ## Intro
 
-Mugshot does not aim to replace your testing framework. It aims to add visual testing capabilities to it. As such, you have full control over how you spin up browsers and how you control them. When you've reached the desired state (browser open, navigated to page, scrolled to element, hovered over tooltip, dropdown opened etc.) you can then use Mugshot to take a screenshot and compare it to your baseline.
+Manually checking one component for unexpected visual changes is hard. Doing it across your entire UI is harder. Doing it in multiple browsers is even harder. Making sure that everyone on your team does it is the hardest.
+
+Mugshot aims to automate that process. It offers a simple API that lets you compare an existing baseline screenshot with a fresh screenshot taken from a browser instance and make sure they're identical. If they're not you'll get a diff image highlighting the differences. You can then commit them as the new baseline if they're expected, or fix the code and rerun the tests.
 
 Expected | Actual | Diff
 ---------|--------|-----
 ![expected](./expected.png) | ![actual](./actual.png) | ![diff](./diff.png)
+
+If you have an existing testing suite then it will be straightforward to add Mugshot to it. If you're starting from scratch with browser testing then you can choose your favorite tools, Mugshot doesn't impose anything on you. You will have full control over how you spin up browsers and how you control them. 
+
+You can think of Mugshot as providing an assertion - "expect this part of the UI to look the same as last time". A visual test would typically look like:
+
+1. Open the browser.
+2. Navigate to an URL.
+3. Interact with the UI (scroll, click a button, input some text in a form etc.).
+4. Run the Mugshot assertion.
+
+
+## Planned features
+
+- Taking screenshots at multiple resolutions (you can do this manually by setting the browser viewport size before calling Mugshot).
+- Perceptual diffing.
+- Taking screenshots of areas defined by x,y,w,h.
+- Ignoring elements/areas.
+- Reducing flakiness by turning off animations etc..
+- Exposing more options for the pixel differ (tolerance, diff colors etc.).
 
 
 ## Packages
