@@ -4,6 +4,7 @@
     "target": "es5",
     "lib": ["es6", "es2017", "dom"],
     "types": ["node"],
+    "declaration": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,

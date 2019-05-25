@@ -26,15 +26,16 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf ./dist && rm -rf tsconfig.build.tsbuildinfo",
-    "compile": "tsc -b tsconfig.build.json",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "mugshot": "1.0.0-rc",
+    "mugshot": "1.0.0-rc.8",
     "webdriverio": "^5.8.3"
   },
   "devDependencies": {
+    "mugshot": "1.0.0-rc.8",
     "typescript": "~3.4.5",
     "webdriverio": "~5.9.0"
   }
