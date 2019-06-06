@@ -36,6 +36,6 @@
   },
   "devDependencies": {
     "typescript": "~3.5.0",
-    "webdriverio": "~5.9.0"
+    "webdriverio": "~5.10.0"
   }
 }
