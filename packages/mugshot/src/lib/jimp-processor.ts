@@ -7,5 +7,8 @@ export default class JimpProcessor implements PNGProcessor {
     const cropped = j.crop(x, y, w, h);
 
     return cropped.getBufferAsync(CustomJimp.MIME_PNG);
-  }
+  };
+
+  // TODO: implement this
+  setColor = async (img: Buffer) => img;
 }

@@ -8,6 +8,7 @@ import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelB64, blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
+import PNGProcessor from '../../../src/interfaces/png-processor';
 
 describe('Mugshot', () => {
   describe('Full page screenshots', () => {
@@ -195,7 +196,7 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createBaselines: false
+        createMissingBaselines: false
       });
 
       await expectMissingBaselineError(
@@ -218,12 +219,50 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createBaselines: true
+        createMissingBaselines: true
       });
 
       await expectIdenticalResult(
         mugshot.check('missing'),
         'results/missing.png',
+        blackPixelBuffer
+      );
+    });
+
+    // TODO: separate fs from screenshot processing
+    it('should ignore an element with existing baseline', async () => {
+      setupBrowserWithScreenshot(blackPixelB64);
+      browser
+        .setup(b => b.getElementRect('.ignore'))
+        .returns(() => Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }))
+        .verifiable();
+
+      setupFsWithExistingBaseline(
+        'results/ignore.png',
+        blackPixelBuffer
+      );
+      setupDifferWithResult(
+        blackPixelBuffer,
+        blackPixelBuffer,
+        { matches: true }
+      );
+
+      // TODO: return a different buffer
+      const pngProcessor = Mock.ofType<PNGProcessor>();
+      pngProcessor
+        .setup(p => p.setColor(blackPixelBuffer, 1, 2, 3, 4, '#000'))
+        .returns(() => Promise.resolve(blackPixelBuffer))
+        .verifiable();
+
+      const mugshot = new Mugshot(browser.object, 'results', {
+        fs: fs.object,
+        pngDiffer: pngDiffer.object,
+        pngProcessor: pngProcessor.object
+      });
+
+      await expectIdenticalResult(
+        mugshot.check('ignore', { ignore: '.ignore' }),
+        'results/ignore.png',
         blackPixelBuffer
       );
     });
