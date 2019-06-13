@@ -35,7 +35,6 @@
     "jimp": "~0.6.1"
   },
   "devDependencies": {
-    "@mugshot/webdriverio": "1.0.0-rc.9",
     "typescript": "~3.4.5"
   }
 }
