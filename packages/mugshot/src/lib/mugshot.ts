@@ -4,8 +4,10 @@ import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
 import FileSystem from '../interfaces/file-system';
 import PNGProcessor from '../interfaces/png-processor';
+import { Screenshotter } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import pixelDiffer from './pixel-differ';
+import { ScreenshotOptions } from './mugshot-screenshotter';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -35,20 +37,11 @@ export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
 export type MugshotSelector = string;
 
-export type MugshotCheckOptions = {
-  /**
-   * The first element identified by this selector will be painted black
-   * before taking the screenshot.
-   * TODO: ignore all elements
-   * TODO: support rects
-   */
-  ignore?: string;
-}
-
 interface MugshotOptions {
   fs?: FileSystem;
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
+  screenshotter?: Screenshotter;
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it
@@ -78,6 +71,8 @@ export default class Mugshot {
 
   private readonly pngProcessor: PNGProcessor;
 
+  private readonly screenshotter: Screenshotter | undefined;
+
   private readonly createBaselines: boolean;
 
   constructor(
@@ -87,6 +82,7 @@ export default class Mugshot {
       fs = fsExtra,
       pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
+      screenshotter = undefined,
       createMissingBaselines = false
     }: MugshotOptions = {}
   ) {
@@ -95,6 +91,7 @@ export default class Mugshot {
     this.fs = fs;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
+    this.screenshotter = screenshotter;
     // TODO: use https://www.npmjs.com/package/is-ci
     this.createBaselines = createMissingBaselines;
   }
@@ -120,9 +117,9 @@ export default class Mugshot {
    * @param options
    */
   // eslint-disable-next-line max-len
-  check(name: string, selector: MugshotSelector, options?: MugshotCheckOptions): Promise<MugshotResult>;
+  check(name: string, selector: MugshotSelector, options?: ScreenshotOptions): Promise<MugshotResult>;
   // eslint-disable-next-line no-dupe-class-members,lines-between-class-members
-  check(name: string, options?: MugshotCheckOptions): Promise<MugshotResult>;
+  check(name: string, options?: ScreenshotOptions): Promise<MugshotResult>;
   // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
   async check(
     name: string,
@@ -130,7 +127,7 @@ export default class Mugshot {
     maybeOptions?: any
   ): Promise<MugshotResult> {
     let selector: string | undefined;
-    let options: MugshotCheckOptions = {};
+    let options: ScreenshotOptions = {};
 
     if (typeof selectorOrOptions === 'string') {
       selector = selectorOrOptions;
@@ -150,6 +147,10 @@ export default class Mugshot {
     }
 
     let actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+
+    if (this.screenshotter) {
+      actual = await this.screenshotter.getScreenshot();
+    }
 
     if (options.ignore) {
       const ignoreRect = await this.browser.getElementRect(options.ignore);

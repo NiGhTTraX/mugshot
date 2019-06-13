@@ -9,6 +9,7 @@ import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelB64, blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 import PNGProcessor from '../../../src/interfaces/png-processor';
+import { Screenshotter } from '../../../src/interfaces/screenshotter';
 
 describe('Mugshot', () => {
   describe('Full page screenshots', () => {
@@ -132,19 +133,28 @@ describe('Mugshot', () => {
 
     it('should pass for an existing identical screenshot', async () => {
       setupBrowserWithScreenshot(blackPixelB64);
+
       setupFsWithExistingBaseline(
         'results/existing-identical.png',
         blackPixelBuffer
       );
+
       setupDifferWithResult(
         blackPixelBuffer,
         blackPixelBuffer,
         { matches: true }
       );
 
+      const screenshotter = Mock.ofType<Screenshotter>();
+      screenshotter
+        .setup(s => s.getScreenshot())
+        .returns(() => Promise.resolve(blackPixelBuffer))
+        .verifiable();
+
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
-        pngDiffer: pngDiffer.object
+        pngDiffer: pngDiffer.object,
+        screenshotter: screenshotter.object
       });
 
       await expectIdenticalResult(
@@ -152,6 +162,8 @@ describe('Mugshot', () => {
         'results/existing-identical.png',
         blackPixelBuffer
       );
+
+      screenshotter.verifyAll();
     });
 
     it('should fail and create diff', async () => {
