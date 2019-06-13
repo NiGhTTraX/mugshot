@@ -35,6 +35,16 @@ export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
 export type MugshotSelector = string;
 
+export type MugshotCheckOptions = {
+  /**
+   * The first element identified by this selector will be painted black
+   * before taking the screenshot.
+   * TODO: ignore all elements
+   * TODO: support rects
+   */
+  ignore?: string;
+}
+
 export class MugshotMissingBaselineError extends Error {
   constructor() {
     super('Missing baseline');
@@ -106,8 +116,32 @@ export default class Mugshot {
    *   It is up to you to appropriately scroll the viewport
    *   before calling Mugshot. <br>
    *   If the element is not found an error will be thrown.
+   *
+   * @param options
    */
-  check = async (name: string, selector?: MugshotSelector): Promise<MugshotResult> => {
+  // eslint-disable-next-line max-len
+  check(name: string, selector: MugshotSelector, options?: MugshotCheckOptions): Promise<MugshotResult>;
+  // eslint-disable-next-line no-dupe-class-members,lines-between-class-members
+  check(name: string, options?: MugshotCheckOptions): Promise<MugshotResult>;
+  // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
+  async check(
+    name: string,
+    selectorOrOptions?: any,
+    maybeOptions?: any
+  ): Promise<MugshotResult> {
+    let selector: string | undefined;
+    let options: MugshotCheckOptions = {};
+
+    if (typeof selectorOrOptions === 'string') {
+      selector = selectorOrOptions;
+
+      if (maybeOptions) {
+        options = maybeOptions;
+      }
+    } else if (typeof selectorOrOptions === 'object') {
+      options = selectorOrOptions;
+    }
+
     const baselinePath = path.join(this.resultsPath, `${name}.png`);
     const baselineExists = await this.fs.pathExists(baselinePath);
 
@@ -116,6 +150,11 @@ export default class Mugshot {
     }
 
     let actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+
+    if (options.ignore) {
+      const ignoreRect = await this.browser.getElementRect(options.ignore);
+      actual = await this.pngProcessor.setColor(actual, ignoreRect.x, ignoreRect.y, ignoreRect.width, ignoreRect.height, '#000');
+    }
 
     if (selector) {
       const rect = await this.browser.getElementRect(selector);
@@ -134,7 +173,7 @@ export default class Mugshot {
       baselinePath,
       baseline
     };
-  };
+  }
 
   private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {

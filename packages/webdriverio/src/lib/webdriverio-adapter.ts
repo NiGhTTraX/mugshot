@@ -3,8 +3,7 @@ import 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function getBoundingRect(selector: string): DOMRect {
-  // @ts-ignore because querySelector can be null and we don't
-  // care about browsers that don't support it.
+  // @ts-ignore TODO: querySelector can return null
   return document.querySelector(selector).getBoundingClientRect();
 }
 
