@@ -195,7 +195,7 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createBaselines: false
+        createMissingBaselines: false
       });
 
       await expectMissingBaselineError(
@@ -218,7 +218,7 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createBaselines: true
+        createMissingBaselines: true
       });
 
       await expectIdenticalResult(

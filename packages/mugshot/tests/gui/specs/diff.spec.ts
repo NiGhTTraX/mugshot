@@ -32,7 +32,7 @@ describe('Mugshot', async () => {
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        createBaselines: true
+        createMissingBaselines: true
       });
 
       await mugshot.check('simple');

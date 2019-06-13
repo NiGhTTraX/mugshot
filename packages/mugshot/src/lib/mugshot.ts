@@ -51,10 +51,10 @@ interface MugshotOptions {
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it
-   * takes. It is recommended to set this to false when running in
-   * CI and to true when running locally.
+   * takes. It is recommended to set this to `false` when running in
+   * CI and to `true` when running locally.
    */
-  createBaselines?: boolean;
+  createMissingBaselines?: boolean;
 }
 
 export default class Mugshot {
@@ -77,7 +77,7 @@ export default class Mugshot {
       fs = fsExtra,
       pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
-      createBaselines = false
+      createMissingBaselines = false
     }: MugshotOptions = {}
   ) {
     this.browser = browser;
@@ -86,14 +86,14 @@ export default class Mugshot {
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
     // TODO: use https://www.npmjs.com/package/is-ci
-    this.createBaselines = createBaselines;
+    this.createBaselines = createMissingBaselines;
   }
 
   /**
    * Check for visual regressions.
    *
    * @param name Mugshot will look for a baseline named `${name}.png` in the
-   *   `resultsPath` folder. If one is not found and `createBaselines`
+   *   `resultsPath` folder. If one is not found and `createMissingBaselines`
    *   is true then Mugshot will create a new baseline and pass the test. <br>
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `browser`. If differences are found the test will fail

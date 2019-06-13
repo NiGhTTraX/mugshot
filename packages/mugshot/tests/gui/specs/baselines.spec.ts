@@ -25,7 +25,7 @@ describe('Mugshot', async () => {
       const baselinePath = path.join(resultsPath, 'new.png');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        createBaselines: true
+        createMissingBaselines: true
       });
 
       const resultWhenMissingBaseline = await mugshot.check('new');
@@ -46,7 +46,7 @@ describe('Mugshot', async () => {
       await loadFixture('simple');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
-        createBaselines: true
+        createMissingBaselines: true
       });
 
       await mugshot.check('foo/bar/new');
