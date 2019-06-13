@@ -45,15 +45,6 @@ export type MugshotCheckOptions = {
   ignore?: string;
 }
 
-export class MugshotMissingBaselineError extends Error {
-  constructor() {
-    super('Missing baseline');
-
-    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    Object.setPrototypeOf(this, MugshotMissingBaselineError.prototype);
-  }
-}
-
 interface MugshotOptions {
   fs?: FileSystem;
   pngDiffer?: PNGDiffer;
@@ -65,6 +56,15 @@ interface MugshotOptions {
    * CI and to `true` when running locally.
    */
   createMissingBaselines?: boolean;
+}
+
+export class MugshotMissingBaselineError extends Error {
+  constructor() {
+    super('Missing baseline');
+
+    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
+    Object.setPrototypeOf(this, MugshotMissingBaselineError.prototype);
+  }
 }
 
 export default class Mugshot {
