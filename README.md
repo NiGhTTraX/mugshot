@@ -38,16 +38,6 @@ You can think of Mugshot as providing an assertion - "expect this part of the UI
 4. Run the Mugshot assertion.
 
 
-## Planned features
-
-- Taking screenshots at multiple resolutions (you can do this manually by setting the browser viewport size before calling Mugshot).
-- Perceptual diffing.
-- Taking screenshots of areas defined by x,y,w,h.
-- Ignoring elements/areas.
-- Reducing flakiness by turning off animations etc..
-- Exposing more options for the pixel differ (tolerance, diff colors etc.).
-
-
 ## Packages
 
 Package | Version
