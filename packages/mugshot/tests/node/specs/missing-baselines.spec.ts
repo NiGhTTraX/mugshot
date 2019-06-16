@@ -7,7 +7,7 @@ import PNGDiffer from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
-import { Screenshotter } from '../../../src/interfaces/screenshotter';
+import Screenshotter from '../../../src/interfaces/screenshotter';
 import XMock from '../xmock';
 
 describe('Mugshot', () => {

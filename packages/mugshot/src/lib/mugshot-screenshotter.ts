@@ -1,17 +1,7 @@
 import Browser from '../interfaces/browser';
 import PNGProcessor from '../interfaces/png-processor';
 import { MugshotSelector } from './mugshot';
-import { Screenshotter } from '../interfaces/screenshotter';
-
-export type ScreenshotOptions = {
-  /**
-   * The first element identified by this selector will be painted black
-   * before taking the screenshot.
-   * TODO: ignore all elements
-   * TODO: support rects
-   */
-  ignore?: string;
-}
+import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 
 export default class MugshotScreenshotter implements Screenshotter {
   private browser: Browser;

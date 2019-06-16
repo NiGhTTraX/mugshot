@@ -1,7 +1,17 @@
+/* eslint-disable semi */
 import { MugshotSelector } from '../lib/mugshot';
-import { ScreenshotOptions } from '../lib/mugshot-screenshotter';
 
-export interface Screenshotter {
+export type ScreenshotOptions = {
+  /**
+   * The first element identified by this selector will be painted black
+   * before taking the screenshot.
+   * TODO: ignore all elements
+   * TODO: support rects
+   */
+  ignore?: string;
+}
+
+export default interface Screenshotter {
   /**
    * Take a viewport screenshot.
    */

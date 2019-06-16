@@ -4,10 +4,10 @@ import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
 import FileSystem from '../interfaces/file-system';
 import PNGProcessor from '../interfaces/png-processor';
-import { Screenshotter } from '../interfaces/screenshotter';
+import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import pixelDiffer from './pixel-differ';
-import MugshotScreenshotter, { ScreenshotOptions } from './mugshot-screenshotter';
+import MugshotScreenshotter from './mugshot-screenshotter';
 
 export type MugshotIdenticalResult = {
   matches: true;
