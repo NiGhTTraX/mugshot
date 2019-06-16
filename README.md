@@ -38,6 +38,24 @@ You can think of Mugshot as providing an assertion - "expect this part of the UI
 4. Run the Mugshot assertion.
 
 
+## Reducing flakiness
+
+A frequent source of flakiness in visual tests is dynamic data e.g. the current date or live API data. You can ignore elements that contain such data by by painting over them with a solid color square. See the [ignore option](./packages/mugshot/README.md#ignoring-elements) for more details.
+
+Other common sources are animations and the blinking cursor in input fields. There is a planned feature where Mugshot will inject a stylesheet into your page to try to turn them off, but until then you can do it manually by including something along the following lines:
+
+```css
+input {
+  caret-color: transparent;
+}
+
+*, *::before, *::after {
+  transition: none !important;
+  animation: none !important;
+}
+```
+
+
 ## Packages
 
 Package | Version
