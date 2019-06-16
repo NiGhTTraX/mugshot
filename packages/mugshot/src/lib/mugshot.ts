@@ -7,7 +7,7 @@ import PNGProcessor from '../interfaces/png-processor';
 import { Screenshotter } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import pixelDiffer from './pixel-differ';
-import { ScreenshotOptions } from './mugshot-screenshotter';
+import MugshotScreenshotter, { ScreenshotOptions } from './mugshot-screenshotter';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -71,7 +71,7 @@ export default class Mugshot {
 
   private readonly pngProcessor: PNGProcessor;
 
-  private readonly screenshotter: Screenshotter | undefined;
+  private readonly screenshotter: Screenshotter;
 
   private readonly createBaselines: boolean;
 
@@ -82,7 +82,7 @@ export default class Mugshot {
       fs = fsExtra,
       pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
-      screenshotter = undefined,
+      screenshotter = new MugshotScreenshotter(browser, pngProcessor),
       createMissingBaselines = false
     }: MugshotOptions = {}
   ) {
@@ -146,24 +146,12 @@ export default class Mugshot {
       return this.missingBaseline(baselinePath);
     }
 
-    let actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-
-    if (this.screenshotter) {
-      if (selector) {
-        actual = await this.screenshotter.getScreenshot(selector, options);
-      } else {
-        actual = await this.screenshotter.getScreenshot(options);
-      }
-    }
-
-    if (options.ignore) {
-      const ignoreRect = await this.browser.getElementRect(options.ignore);
-      actual = await this.pngProcessor.setColor(actual, ignoreRect.x, ignoreRect.y, ignoreRect.width, ignoreRect.height, '#000');
-    }
+    let actual: Buffer;
 
     if (selector) {
-      const rect = await this.browser.getElementRect(selector);
-      actual = await this.pngProcessor.crop(actual, rect.x, rect.y, rect.width, rect.height);
+      actual = await this.screenshotter.getScreenshot(selector, options);
+    } else {
+      actual = await this.screenshotter.getScreenshot(options);
     }
 
     const baseline = await this.fs.readFile(baselinePath);
@@ -182,11 +170,7 @@ export default class Mugshot {
 
   private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {
-      let baseline = Buffer.from(await this.browser.takeScreenshot(), 'base64');
-
-      if (this.screenshotter) {
-        baseline = await this.screenshotter.getScreenshot();
-      }
+      const baseline = await this.screenshotter.getScreenshot();
 
       await this.fs.outputFile(baselinePath, baseline);
 

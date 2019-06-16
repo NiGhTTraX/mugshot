@@ -7,8 +7,7 @@ import Mugshot, {
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
-import { blackPixelB64, blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
-import PNGProcessor from '../../../src/interfaces/png-processor';
+import { blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 import { Screenshotter } from '../../../src/interfaces/screenshotter';
 import XMock from '../xmock';
 
@@ -52,13 +51,6 @@ describe('Mugshot', () => {
       fs
         .setup(f => f.readFile(path))
         .verifiable(Times.never());
-    }
-
-    function setupBrowserWithScreenshot(base64: string) {
-      browser
-        .setup(b => b.takeScreenshot())
-        .returns(() => Promise.resolve(base64))
-        .verifiable();
     }
 
     function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
@@ -136,8 +128,6 @@ describe('Mugshot', () => {
     }
 
     it('should pass for an existing identical screenshot', async () => {
-      setupBrowserWithScreenshot(blackPixelB64);
-
       setupFsWithExistingBaseline(
         'results/existing-identical.png',
         blackPixelBuffer
@@ -167,8 +157,6 @@ describe('Mugshot', () => {
     });
 
     it('should fail and create diff', async () => {
-      setupBrowserWithScreenshot(blackPixelB64);
-
       screenshotter
         .when(s => s.getScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
@@ -225,8 +213,6 @@ describe('Mugshot', () => {
     it('should write missing baseline and pass', async () => {
       pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
-      setupBrowserWithScreenshot(blackPixelB64);
-
       screenshotter
         .when(s => s.getScreenshot())
         .returns(Promise.resolve(blackPixelBuffer));
@@ -254,12 +240,6 @@ describe('Mugshot', () => {
 
     // TODO: separate fs from screenshot processing
     it('should ignore an element with existing baseline', async () => {
-      setupBrowserWithScreenshot(blackPixelB64);
-      browser
-        .setup(b => b.getElementRect('.ignore'))
-        .returns(() => Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }))
-        .verifiable();
-
       screenshotter
         .when(s => s.getScreenshot({ ignore: '.ignore' }))
         .returns(Promise.resolve(blackPixelBuffer));
@@ -274,17 +254,9 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      // TODO: return a different buffer
-      const pngProcessor = Mock.ofType<PNGProcessor>();
-      pngProcessor
-        .setup(p => p.setColor(blackPixelBuffer, 1, 2, 3, 4, '#000'))
-        .returns(() => Promise.resolve(blackPixelBuffer))
-        .verifiable();
-
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        pngProcessor: pngProcessor.object,
         screenshotter: screenshotter.object
       });
 

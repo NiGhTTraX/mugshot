@@ -6,8 +6,7 @@ import Mugshot, {
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
-import { blackPixelB64, blackPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
-import PNGProcessor from '../../../src/interfaces/png-processor';
+import { blackPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 import XMock from '../xmock';
 import { Screenshotter } from '../../../src/interfaces/screenshotter';
 
@@ -44,13 +43,6 @@ describe('Mugshot', () => {
         .verifiable();
     }
 
-    function setupBrowserWithScreenshot(base64: string) {
-      browser
-        .setup(b => b.takeScreenshot())
-        .returns(() => Promise.resolve(base64))
-        .verifiable();
-    }
-
     function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
       pngDiffer
         .setup(e => e.compare(base, screenshot))
@@ -71,7 +63,6 @@ describe('Mugshot', () => {
     }
 
     it('should crop the full page screenshot to the element\'s rect and compare it to existing baseline', async () => {
-      setupBrowserWithScreenshot(blackPixelB64);
       setupFsWithExistingBaseline(
         'results/existing-identical.png',
         blackPixelBuffer
@@ -82,25 +73,13 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      browser
-        .setup(b => b.getElementRect('.test'))
-        .returns(() => Promise.resolve({ x: 10, y: 10, width: 100, height: 100 }))
-        .verifiable();
-
       screenshotter
         .when(s => s.getScreenshot('.test', {}))
-        .returns(Promise.resolve(blackPixelBuffer));
-
-      const pngProcessor = Mock.ofType<PNGProcessor>();
-      pngProcessor
-        .setup(p => p.crop(blackPixelBuffer, 10, 10, 100, 100))
-        .returns(() => Promise.resolve(whitePixelBuffer))
-        .verifiable();
+        .returns(Promise.resolve(whitePixelBuffer));
 
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        pngProcessor: pngProcessor.object,
         screenshotter: screenshotter.object
       });
 
