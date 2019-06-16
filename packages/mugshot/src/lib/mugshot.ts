@@ -143,7 +143,7 @@ export default class Mugshot {
     const baselineExists = await this.fs.pathExists(baselinePath);
 
     if (!baselineExists) {
-      return this.missingBaseline(baselinePath);
+      return this.missingBaseline(baselinePath, options);
     }
 
     let actual: Buffer;
@@ -168,9 +168,12 @@ export default class Mugshot {
     };
   }
 
-  private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
+  private async missingBaseline(
+    baselinePath: string,
+    options: ScreenshotOptions
+  ): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {
-      const baseline = await this.screenshotter.takeScreenshot();
+      const baseline = await this.screenshotter.takeScreenshot(options);
 
       await this.fs.outputFile(baselinePath, baseline);
 

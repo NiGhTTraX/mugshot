@@ -214,7 +214,7 @@ describe('Mugshot', () => {
       pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
       screenshotter
-        .when(s => s.takeScreenshot())
+        .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithMissingBaseline('results/missing.png',);
@@ -238,16 +238,16 @@ describe('Mugshot', () => {
       );
     });
 
-    // TODO: separate fs from screenshot processing
     it('should ignore an element with existing baseline', async () => {
-      screenshotter
-        .when(s => s.takeScreenshot({ ignore: '.ignore' }))
-        .returns(Promise.resolve(blackPixelBuffer));
-
       setupFsWithExistingBaseline(
         'results/ignore.png',
         blackPixelBuffer
       );
+
+      screenshotter
+        .when(s => s.takeScreenshot({ ignore: '.ignore' }))
+        .returns(Promise.resolve(blackPixelBuffer));
+
       setupDifferWithResult(
         blackPixelBuffer,
         blackPixelBuffer,
@@ -258,6 +258,29 @@ describe('Mugshot', () => {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
         screenshotter: screenshotter.object
+      });
+
+      await expectIdenticalResult(
+        mugshot.check('ignore', { ignore: '.ignore' }),
+        'results/ignore.png',
+        blackPixelBuffer
+      );
+    });
+
+    it('should ignore an element with missing baseline', async () => {
+      setupFsWithMissingBaseline(
+        'results/ignore.png'
+      );
+
+      screenshotter
+        .when(s => s.takeScreenshot({ ignore: '.ignore' }))
+        .returns(Promise.resolve(blackPixelBuffer));
+
+      const mugshot = new Mugshot(browser.object, 'results', {
+        fs: fs.object,
+        pngDiffer: pngDiffer.object,
+        screenshotter: screenshotter.object,
+        createMissingBaselines: true
       });
 
       await expectIdenticalResult(
