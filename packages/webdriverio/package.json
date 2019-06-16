@@ -31,7 +31,7 @@
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "mugshot": "1.0.0-rc.8",
+    "mugshot": "^2.0.0",
     "webdriverio": "^5.8.3"
   },
   "devDependencies": {
