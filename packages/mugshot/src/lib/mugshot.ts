@@ -149,7 +149,11 @@ export default class Mugshot {
     let actual = Buffer.from(await this.browser.takeScreenshot(), 'base64');
 
     if (this.screenshotter) {
-      actual = await this.screenshotter.getScreenshot(options);
+      if (selector) {
+        actual = await this.screenshotter.getScreenshot(selector, options);
+      } else {
+        actual = await this.screenshotter.getScreenshot(options);
+      }
     }
 
     if (options.ignore) {

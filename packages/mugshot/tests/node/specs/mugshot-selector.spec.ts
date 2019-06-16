@@ -8,22 +8,27 @@ import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelB64, blackPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 import PNGProcessor from '../../../src/interfaces/png-processor';
+import XMock from '../xmock';
+import { Screenshotter } from '../../../src/interfaces/screenshotter';
 
 describe('Mugshot', () => {
   describe('Selector screenshots', () => {
     const fs = Mock.ofType<FileSystem>();
     const browser = Mock.ofType<Browser>();
     const pngDiffer = Mock.ofType<PNGDiffer>();
+    const screenshotter = new XMock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
       browser.reset();
+      screenshotter.reset();
       pngDiffer.reset();
     });
 
     afterEach(() => {
-      browser.verifyAll();
       fs.verifyAll();
+      browser.verifyAll();
+      screenshotter.verifyAll();
       pngDiffer.verifyAll();
     });
 
@@ -82,6 +87,10 @@ describe('Mugshot', () => {
         .returns(() => Promise.resolve({ x: 10, y: 10, width: 100, height: 100 }))
         .verifiable();
 
+      screenshotter
+        .when(s => s.getScreenshot('.test', {}))
+        .returns(Promise.resolve(blackPixelBuffer));
+
       const pngProcessor = Mock.ofType<PNGProcessor>();
       pngProcessor
         .setup(p => p.crop(blackPixelBuffer, 10, 10, 100, 100))
@@ -91,7 +100,8 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        pngProcessor: pngProcessor.object
+        pngProcessor: pngProcessor.object,
+        screenshotter: screenshotter.object
       });
 
       await expectIdenticalResult(
