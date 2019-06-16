@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A WebdriverIO adapter for Mugshot",
   "keywords": [
     "mugshot",
@@ -35,7 +35,7 @@
     "webdriverio": "^5.8.3"
   },
   "devDependencies": {
-    "mugshot": "^1.0.0",
+    "mugshot": "^2.0.0",
     "typescript": "~3.5.0",
     "webdriverio": "~5.10.0"
   }
