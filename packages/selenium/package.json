@@ -1,10 +1,10 @@
 {
-  "name": "@mugshot/gui-tests",
+  "name": "@mugshot/selenium",
   "publishConfig": {
     "access": "public"
   },
   "version": "1.0.0",
-  "description": "Utils and infra for setting up a GUI test for Mugshot packages",
+  "description": "Spin up a Selenium grid for Mugshot tests",
   "keywords": [
     "selenium",
     "tests",
@@ -16,11 +16,11 @@
   },
   "author": "Andrei Picus",
   "license": "MIT",
-  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/gui-tests",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/selenium",
   "files": [
     "scripts"
   ],
   "bin": {
-    "mugshot-gui-tests": "./scripts/index.sh"
+    "mugshot-selenium": "./scripts/index.sh"
   }
 }
