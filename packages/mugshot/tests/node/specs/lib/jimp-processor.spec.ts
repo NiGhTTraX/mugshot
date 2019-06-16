@@ -1,8 +1,12 @@
 import { expectIdenticalBuffers, describe, it } from '../../../../../../tests/node/suite';
 import JimpProcessor from '../../../../src/lib/jimp-processor';
 import {
+  blackSquare50x50Buffer,
   blueSquare50x50Buffer,
+  diffBlackSquare100x100BlackSquare100x50Buffer,
+  diffBlackSquare100x100BlackSquare50x100Buffer,
   greenSquare50x50Buffer,
+  redSquare100x100Buffer,
   redSquare50x50Buffer,
   rgbySquare100x100Buffer,
   rgbySquare50x50Buffer,
@@ -51,5 +55,26 @@ describe('JimpProcessor', () => {
     const cropped = await processor.crop(rgbySquare100x100Buffer, 50, 50, 50, 50);
 
     await expectIdenticalBuffers(cropped, yellowSquare50x50Buffer);
+  });
+
+  it('should paint the entire square', async () => {
+    const processor = new JimpProcessor();
+    const painted = await processor.setColor(blueSquare50x50Buffer, 0, 0, 50, 50, '#000');
+
+    await expectIdenticalBuffers(painted, blackSquare50x50Buffer);
+  });
+
+  it('should paint a full width slice', async () => {
+    const processor = new JimpProcessor();
+    const painted = await processor.setColor(redSquare100x100Buffer, 0, 0, 100, 50, '#fff');
+
+    await expectIdenticalBuffers(painted, diffBlackSquare100x100BlackSquare100x50Buffer);
+  });
+
+  it('should paint a full height slice', async () => {
+    const processor = new JimpProcessor();
+    const painted = await processor.setColor(redSquare100x100Buffer, 0, 0, 50, 100, '#fff');
+
+    await expectIdenticalBuffers(painted, diffBlackSquare100x100BlackSquare50x100Buffer);
   });
 });
