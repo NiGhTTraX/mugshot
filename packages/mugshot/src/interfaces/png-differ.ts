@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 export type DiffResult = {
   matches: true
 } | {
@@ -8,7 +9,6 @@ export type DiffResult = {
   diff: Buffer;
 };
 
-/* eslint-disable semi */
 export default interface PNGDiffer {
   /**
    * Compare two PNG MIME encoded buffers.

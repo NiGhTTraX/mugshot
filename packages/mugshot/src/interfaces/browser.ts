@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 export type ElementRect = {
   x: number;
   y: number;
@@ -5,7 +6,6 @@ export type ElementRect = {
   height: number;
 };
 
-/* eslint-disable semi */
 export default interface Browser {
   // Take a full page screenshot and return a base64 string.
   // https://w3c.github.io/webdriver/#take-screenshot
