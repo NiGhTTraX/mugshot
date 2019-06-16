@@ -134,7 +134,7 @@ describe('Mugshot', () => {
       );
 
       screenshotter
-        .when(s => s.getScreenshot({}))
+        .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupDifferWithResult(
@@ -158,7 +158,7 @@ describe('Mugshot', () => {
 
     it('should fail and create diff', async () => {
       screenshotter
-        .when(s => s.getScreenshot({}))
+        .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithExistingBaseline(
@@ -214,7 +214,7 @@ describe('Mugshot', () => {
       pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
 
       screenshotter
-        .when(s => s.getScreenshot())
+        .when(s => s.takeScreenshot())
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithMissingBaseline('results/missing.png',);
@@ -241,7 +241,7 @@ describe('Mugshot', () => {
     // TODO: separate fs from screenshot processing
     it('should ignore an element with existing baseline', async () => {
       screenshotter
-        .when(s => s.getScreenshot({ ignore: '.ignore' }))
+        .when(s => s.takeScreenshot({ ignore: '.ignore' }))
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithExistingBaseline(

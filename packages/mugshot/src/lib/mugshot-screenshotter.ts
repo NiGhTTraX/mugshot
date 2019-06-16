@@ -23,12 +23,8 @@ export default class MugshotScreenshotter implements Screenshotter {
     this.pngProcessor = pngProcessor;
   }
 
-  async getScreenshot(options?: ScreenshotOptions): Promise<Buffer>;
-  // eslint-disable-next-line no-dupe-class-members,max-len,lines-between-class-members
-  async getScreenshot(selector?: MugshotSelector, options?: ScreenshotOptions): Promise<Buffer>;
-  // eslint-disable-next-line max-len
-  // eslint-disable-next-line no-dupe-class-members,lines-between-class-members,class-methods-use-this
-  async getScreenshot(
+  // eslint-disable-next-line class-methods-use-this
+  async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
     // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     options: ScreenshotOptions = {}

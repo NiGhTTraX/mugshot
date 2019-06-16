@@ -74,7 +74,7 @@ describe('Mugshot', () => {
       );
 
       screenshotter
-        .when(s => s.getScreenshot('.test', {}))
+        .when(s => s.takeScreenshot('.test', {}))
         .returns(Promise.resolve(whitePixelBuffer));
 
       const mugshot = new Mugshot(browser.object, 'results', {

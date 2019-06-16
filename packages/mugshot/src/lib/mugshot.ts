@@ -149,9 +149,9 @@ export default class Mugshot {
     let actual: Buffer;
 
     if (selector) {
-      actual = await this.screenshotter.getScreenshot(selector, options);
+      actual = await this.screenshotter.takeScreenshot(selector, options);
     } else {
-      actual = await this.screenshotter.getScreenshot(options);
+      actual = await this.screenshotter.takeScreenshot(options);
     }
 
     const baseline = await this.fs.readFile(baselinePath);
@@ -170,7 +170,7 @@ export default class Mugshot {
 
   private async missingBaseline(baselinePath: string): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {
-      const baseline = await this.screenshotter.getScreenshot();
+      const baseline = await this.screenshotter.takeScreenshot();
 
       await this.fs.outputFile(baselinePath, baseline);
 
