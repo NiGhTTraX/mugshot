@@ -1,8 +1,8 @@
 import { describe, expect, it, beforeEach, afterEach } from '../../../../../tests/node/suite';
 import { AssertionError } from 'chai';
-import { It, Mock, Times } from 'typemoq';
+import { Mock } from 'typemoq';
 import Mugshot, {
-  MugshotMissingBaselineError, MugshotResult
+  MugshotResult
 } from '../../../src/lib/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
@@ -12,7 +12,7 @@ import { Screenshotter } from '../../../src/interfaces/screenshotter';
 import XMock from '../xmock';
 
 describe('Mugshot', () => {
-  describe('Full page screenshots', () => {
+  describe('existing baselines', () => {
     const fs = Mock.ofType<FileSystem>();
     const browser = Mock.ofType<Browser>();
     const pngDiffer = Mock.ofType<PNGDiffer>();
@@ -41,16 +41,6 @@ describe('Mugshot', () => {
         .setup(f => f.readFile(path))
         .returns(() => Promise.resolve(base))
         .verifiable();
-    }
-
-    function setupFsWithMissingBaseline(path: string) {
-      fs
-        .setup(f => f.pathExists(path))
-        .returns(() => Promise.resolve(false))
-        .verifiable();
-      fs
-        .setup(f => f.readFile(path))
-        .verifiable(Times.never());
     }
 
     function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
@@ -90,46 +80,9 @@ describe('Mugshot', () => {
         throw new AssertionError('Expected Mugshot to return a diff result');
       }
     }
-
-    async function expectError<E extends Error>(
-      checkCall: Promise<MugshotResult>,
-      expectedError: new (...args: any) => E,
-      runExpectations: (error: E) => void
-    ) {
-      let threwExpectedError = 0;
-
-      try {
-        await checkCall;
-      } catch (error) {
-        if (error instanceof expectedError) {
-          threwExpectedError = 1;
-
-          runExpectations(error);
-        } else {
-          throw error;
-        }
-      }
-
-      if (!threwExpectedError) {
-        throw new AssertionError(`Expected Mugshot to throw a ${expectedError.constructor.name} error`);
-      }
-    }
-
-    async function expectMissingBaselineError(
-      checkCall: Promise<MugshotResult>
-    ) {
-      return expectError(
-        checkCall,
-        MugshotMissingBaselineError,
-        error => {
-          expect(error.message).to.contain('Missing baseline');
-        }
-      );
-    }
-
-    it('should pass for an existing identical screenshot', async () => {
+    it('should pass when identical', async () => {
       setupFsWithExistingBaseline(
-        'results/existing-identical.png',
+        'results/identical.png',
         blackPixelBuffer
       );
 
@@ -150,23 +103,23 @@ describe('Mugshot', () => {
       });
 
       await expectIdenticalResult(
-        mugshot.check('existing-identical'),
-        'results/existing-identical.png',
+        mugshot.check('identical'),
+        'results/identical.png',
         blackPixelBuffer
       );
     });
 
-    it('should fail and create diff', async () => {
+    it('should fail and create diff for an unexpected change', async () => {
       screenshotter
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithExistingBaseline(
-        'results/existing-diff.png',
+        'results/unexpected.png',
         whitePixelBuffer
       );
       fs
-        .setup(f => f.outputFile('results/existing-diff.diff.png', redPixelBuffer))
+        .setup(f => f.outputFile('results/unexpected.diff.png', redPixelBuffer))
         .returns(() => Promise.resolve())
         .verifiable();
 
@@ -183,62 +136,13 @@ describe('Mugshot', () => {
       });
 
       await expectDiffResult(
-        mugshot.check('existing-diff'),
-        'results/existing-diff.diff.png', redPixelBuffer,
-        'results/existing-diff.new.png', blackPixelBuffer
+        mugshot.check('unexpected'),
+        'results/unexpected.diff.png', redPixelBuffer,
+        'results/unexpected.new.png', blackPixelBuffer
       );
     });
 
-    it('should fail for a missing baseline', async () => {
-      browser.setup(b => b.takeScreenshot()).verifiable(Times.never());
-
-      pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
-
-      setupFsWithMissingBaseline(
-        'results/missing.png',
-      );
-
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        createMissingBaselines: false,
-        screenshotter: screenshotter.object
-      });
-
-      await expectMissingBaselineError(
-        mugshot.check('missing')
-      );
-    });
-
-    it('should write missing baseline and pass', async () => {
-      pngDiffer.setup(e => e.compare(It.isAny(), It.isAny())).verifiable(Times.never());
-
-      screenshotter
-        .when(s => s.takeScreenshot({}))
-        .returns(Promise.resolve(blackPixelBuffer));
-
-      setupFsWithMissingBaseline('results/missing.png',);
-
-      fs
-        .setup(f => f.outputFile('results/missing.png', blackPixelBuffer))
-        .returns(() => Promise.resolve())
-        .verifiable();
-
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        createMissingBaselines: true,
-        screenshotter: screenshotter.object
-      });
-
-      await expectIdenticalResult(
-        mugshot.check('missing'),
-        'results/missing.png',
-        blackPixelBuffer
-      );
-    });
-
-    it('should ignore an element with existing baseline', async () => {
+    it('should ignore an element', async () => {
       setupFsWithExistingBaseline(
         'results/ignore.png',
         blackPixelBuffer
@@ -267,25 +171,30 @@ describe('Mugshot', () => {
       );
     });
 
-    it('should ignore an element with missing baseline', async () => {
-      setupFsWithMissingBaseline(
-        'results/ignore.png'
+    it('should screenshot only an element', async () => {
+      setupFsWithExistingBaseline(
+        'results/element.png',
+        blackPixelBuffer
+      );
+      setupDifferWithResult(
+        blackPixelBuffer,
+        whitePixelBuffer,
+        { matches: true }
       );
 
       screenshotter
-        .when(s => s.takeScreenshot({ ignore: '.ignore' }))
-        .returns(Promise.resolve(blackPixelBuffer));
+        .when(s => s.takeScreenshot('.element', {}))
+        .returns(Promise.resolve(whitePixelBuffer));
 
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
-        createMissingBaselines: true
+        screenshotter: screenshotter.object
       });
 
       await expectIdenticalResult(
-        mugshot.check('ignore', { ignore: '.ignore' }),
-        'results/ignore.png',
+        mugshot.check('element', '.element'),
+        'results/element.png',
         blackPixelBuffer
       );
     });

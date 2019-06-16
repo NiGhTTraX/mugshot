@@ -139,16 +139,12 @@ export default class Mugshot {
     const baselineExists = await this.fs.pathExists(baselinePath);
 
     if (!baselineExists) {
-      return this.missingBaseline(baselinePath, options);
+      return this.missingBaseline(baselinePath, options, selector);
     }
 
-    let actual: Buffer;
-
-    if (selector) {
-      actual = await this.screenshotter.takeScreenshot(selector, options);
-    } else {
-      actual = await this.screenshotter.takeScreenshot(options);
-    }
+    const actual = selector
+      ? await this.screenshotter.takeScreenshot(selector, options)
+      : await this.screenshotter.takeScreenshot(options);
 
     const baseline = await this.fs.readFile(baselinePath);
     const result = await this.pngDiffer.compare(baseline, actual);
@@ -166,10 +162,13 @@ export default class Mugshot {
 
   private async missingBaseline(
     baselinePath: string,
-    options: ScreenshotOptions
+    options: ScreenshotOptions,
+    selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {
-      const baseline = await this.screenshotter.takeScreenshot(options);
+      const baseline = !selector
+        ? await this.screenshotter.takeScreenshot(options)
+        : await this.screenshotter.takeScreenshot(selector, options);
 
       await this.fs.outputFile(baselinePath, baseline);
 
