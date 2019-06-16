@@ -57,59 +57,57 @@ async function loadFixture(browser: BrowserToBeAdapted, name: string) {
   await setViewportSize(browser, 1024, 768);
 }
 
-export default function createTests() {
-  const tests: BrowserContractTest[] = [{
-    name: 'should take a full page screenshot',
-    getTest(browser: BrowserToBeAdapted, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, 'simple');
+const browserContractTests: BrowserContractTest[] = [{
+  name: 'should take a full page screenshot',
+  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+    return async () => {
+      await loadFixture(browser, 'simple');
 
-        const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
 
-        await expectIdenticalScreenshots(screenshot, 'simple');
-      };
-    }
-  }, {
-    name: 'should take a full page screenshot with absolutely positioned elements',
-    getTest(browser: BrowserToBeAdapted, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, 'rect');
+      await expectIdenticalScreenshots(screenshot, 'simple');
+    };
+  }
+}, {
+  name: 'should take a full page screenshot with absolutely positioned elements',
+  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+    return async () => {
+      await loadFixture(browser, 'rect');
 
-        const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
 
-        await expectIdenticalScreenshots(screenshot, 'full-absolute');
-      };
-    }
-  }, {
-    name: 'should get bounding rect of element',
-    getTest(browser: BrowserToBeAdapted, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, 'rect');
+      await expectIdenticalScreenshots(screenshot, 'full-absolute');
+    };
+  }
+}, {
+  name: 'should get bounding rect of element',
+  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+    return async () => {
+      await loadFixture(browser, 'rect');
 
-        const rect = await adapter.getElementRect('.test');
+      const rect = await adapter.getElementRect('.test');
 
-        // Include margin.
-        expect(rect.x).to.equal(8 + 3);
-        expect(rect.y).to.equal(10 + 3);
+      // Include margin.
+      expect(rect.x).to.equal(8 + 3);
+      expect(rect.y).to.equal(10 + 3);
 
-        // Include border and padding.
-        expect(rect.width).to.equal(100 + 2 * 2 + 4 * 2);
-        expect(rect.height).to.equal(100 + 2 * 2 + 4 * 2);
-      };
-    }
-  }, {
-    name: 'should get bounding rect of off-screen element',
-    getTest(browser: BrowserToBeAdapted, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, 'rect-scroll');
+      // Include border and padding.
+      expect(rect.width).to.equal(100 + 2 * 2 + 4 * 2);
+      expect(rect.height).to.equal(100 + 2 * 2 + 4 * 2);
+    };
+  }
+}, {
+  name: 'should get bounding rect of off-screen element',
+  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+    return async () => {
+      await loadFixture(browser, 'rect-scroll');
 
-        const rect = await adapter.getElementRect('.test');
+      const rect = await adapter.getElementRect('.test');
 
-        expect(rect.x).to.equal(2000);
-        expect(rect.y).to.equal(2000);
-      };
-    }
-  }];
+      expect(rect.x).to.equal(2000);
+      expect(rect.y).to.equal(2000);
+    };
+  }
+}];
 
-  return tests;
-}
+export default browserContractTests;

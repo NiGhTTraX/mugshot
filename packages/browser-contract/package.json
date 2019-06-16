@@ -1,5 +1,5 @@
 {
-  "name": "@mugshot/browser-tests",
+  "name": "@mugshot/browser-contract",
   "publishConfig": {
     "access": "public"
   },
@@ -16,7 +16,7 @@
   },
   "author": "Andrei Picus",
   "license": "MIT",
-  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/browser-tests",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/browser-contract",
   "main": "dist/index",
   "types": "dist/index",
   "files": [
