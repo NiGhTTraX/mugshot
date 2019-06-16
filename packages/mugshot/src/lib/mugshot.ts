@@ -123,10 +123,10 @@ export default class Mugshot {
   // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
   async check(
     name: string,
-    selectorOrOptions?: any,
+    selectorOrOptions?: MugshotSelector | ScreenshotOptions,
     options: ScreenshotOptions = {}
   ): Promise<MugshotResult> {
-    let selector: string | undefined;
+    let selector: MugshotSelector | undefined;
 
     if (typeof selectorOrOptions === 'string') {
       selector = selectorOrOptions;
