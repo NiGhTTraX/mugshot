@@ -12,7 +12,7 @@
 ## Features
 
 - Framework independent so you can choose your favorite tools or plug it into your existing testing suite.
-- Can screenshot the whole page or just an element.
+- Can screenshot the whole viewport or just an element.
 - Produces actual and diff images if a test fails.
 - Can work with any Webdriver implementation through an adapter.
 - Fails if baselines are missing (can be toggled through options).
