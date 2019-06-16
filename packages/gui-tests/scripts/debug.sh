@@ -14,6 +14,6 @@ fi
 set -e
 
 docker-compose -f docker-compose.debug.yml build
-docker-compose -f docker-compose.debug.yml up -d selenium
+COMPOSE_PROJECT_NAME=mugshot:debug docker-compose -f docker-compose.debug.yml up -d selenium
 
 ./wait-for-nodes.sh 1

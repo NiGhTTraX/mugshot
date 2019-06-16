@@ -2,9 +2,9 @@ import path from 'path';
 import fs from 'fs-extra';
 import {
   beforeEach,
-  expectIdenticalScreenshots,
   describe,
   expect,
+  expectIdenticalScreenshots,
   it,
   loadFixture
 } from '../../../../../tests/gui/suite';

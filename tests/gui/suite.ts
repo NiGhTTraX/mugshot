@@ -54,24 +54,6 @@ export async function setViewportSize(width: number, height: number) {
   }
 }
 
-/**
- * Use PixelDiffer to compare two screenshots. Assume that PixelDiffer passes all of its tests.
- */
-export async function expectIdenticalScreenshots(
-  screenshot: Buffer | string,
-  baselineName: string,
-  message?: string
-) {
-  const baseline = await fs.readFile(path.join(__dirname, `./screenshots/${BROWSER}/${baselineName}.png`));
-
-  if (typeof screenshot === 'string') {
-    // eslint-disable-next-line no-param-reassign
-    screenshot = await fs.readFile(screenshot);
-  }
-
-  expect((await pixelDiffer.compare(baseline, screenshot)).matches, message).to.be.true;
-}
-
 export async function loadFixture(name: string) {
   await rootSuiteBrowser.url(`file:///var/www/html/${name}.html`);
 
@@ -88,9 +70,11 @@ export async function loadFixture(name: string) {
 export function describe(name: string, definition: () => void) {
   suiteNesting++;
 
-  runnerDescribe(suiteNesting === 1 ? `${name}:${BROWSER}` : name, function() {
+  runnerDescribe(suiteNesting === 1 ? `${name}:${BROWSER}` : name, () => {
     // We only want to set up hooks once - for the root suite.
-    suiteNesting === 1 && setupHooks();
+    if (suiteNesting === 1) {
+      setupHooks();
+    }
 
     definition();
   });
@@ -99,9 +83,7 @@ export function describe(name: string, definition: () => void) {
 }
 
 export function beforeEach(definition: TestDefinition) {
-  runnerBeforeEach(function() {
-    return definition(rootSuiteBrowser);
-  });
+  runnerBeforeEach(() => definition(rootSuiteBrowser));
 }
 
 export function it(name: string, definition: TestDefinition = () => {}) {
@@ -125,3 +107,25 @@ function setupHooks() {
     return rootSuiteBrowser.deleteSession();
   });
 }
+
+/**
+ * Use PixelDiffer to compare two screenshots. Assume that PixelDiffer passes all of its tests.
+ */
+export async function expectIdenticalScreenshots(
+  screenshot: Buffer | string,
+  baselineName: string,
+  message?: string
+) {
+  const baseline = await fs.readFile(
+    path.join(__dirname, `screenshots/${BROWSER}/${baselineName}.png`)
+  );
+
+  if (typeof screenshot === 'string') {
+    // eslint-disable-next-line no-param-reassign
+    screenshot = await fs.readFile(screenshot);
+  }
+
+  expect((await pixelDiffer.compare(baseline, screenshot)).matches, message).to.be.true;
+}
+
+export const screenshotsPath = path.join(__dirname, 'screenshots');

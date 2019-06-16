@@ -1,6 +1,13 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { beforeEach, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+  loadFixture,
+  screenshotsPath
+} from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
@@ -14,7 +21,7 @@ describe('Mugshot', () => {
       resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
 
       await fs.copyFile(
-        path.join(__dirname, `../../../../../tests/gui/screenshots/${browser}/ignore.png`),
+        path.join(screenshotsPath, `${browser}/ignore.png`),
         path.join(resultsPath, 'ignore.png')
       );
     });

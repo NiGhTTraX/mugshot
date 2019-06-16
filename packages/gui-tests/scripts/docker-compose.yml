@@ -3,7 +3,7 @@ version: '2.1'
 services:
   selenium:
     extends:
-      file: ./docker-compose.base.yml
+      file: docker-compose.base.yml
       service: selenium
     depends_on:
       - chrome
@@ -11,7 +11,7 @@ services:
 
   chrome:
     extends:
-      file: ./docker-compose.base.yml
+      file: docker-compose.base.yml
       service: chrome
     environment:
       # These are legacy compose links env vars that the image is relying on.
@@ -20,7 +20,7 @@ services:
 
   firefox:
     extends:
-      file: ./docker-compose.base.yml
+      file: docker-compose.base.yml
       service: firefox
     environment:
       # These are legacy compose links env vars that the image is relying on.

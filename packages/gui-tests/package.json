@@ -1,0 +1,26 @@
+{
+  "name": "@mugshot/gui-tests",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "description": "Utils and infra for setting up a GUI test for Mugshot packages",
+  "keywords": [
+    "selenium",
+    "tests",
+    "docker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiGhTTraX/mugshot.git"
+  },
+  "author": "Andrei Picus",
+  "license": "MIT",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/gui-tests",
+  "files": [
+    "scripts"
+  ],
+  "bin": {
+    "mugshot-gui-tests": "./scripts/index.sh"
+  }
+}

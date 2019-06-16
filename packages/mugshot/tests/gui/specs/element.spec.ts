@@ -1,6 +1,13 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { beforeEach, describe, expect, it, loadFixture } from '../../../../../tests/gui/suite';
+import {
+  beforeEach,
+  describe,
+  expect,
+  it,
+  loadFixture,
+  screenshotsPath
+} from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 
@@ -15,7 +22,7 @@ describe('Mugshot', () => {
 
       // TODO: create a helper for this
       await fs.copyFile(
-        path.join(__dirname, `../../../../../tests/gui/screenshots/${browser}/rect.png`),
+        path.join(screenshotsPath, `${browser}/rect.png`),
         path.join(resultsPath, 'rect.png')
       );
     });

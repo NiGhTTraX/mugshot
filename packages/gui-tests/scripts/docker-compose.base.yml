@@ -13,19 +13,19 @@ services:
   chrome:
     image: selenium/node-chrome:3.141.59-neon
     volumes:
-      - ./fixtures:/var/www/html
+      - ../fixtures:/var/www/html
 
   firefox:
     image: selenium/node-firefox:3.141.59-neon
     volumes:
-      - ./fixtures:/var/www/html
+      - ../fixtures:/var/www/html
 
   debug_chrome:
     image: "selenium/node-chrome-debug:3.141.59-neon"
     volumes:
-      - ./fixtures:/var/www/html
+      - ../fixtures:/var/www/html
 
   debug_firefox:
     image: "selenium/node-firefox-debug:3.141.59-neon"
     volumes:
-      - ./fixtures:/var/www/html
+      - ../fixtures:/var/www/html
