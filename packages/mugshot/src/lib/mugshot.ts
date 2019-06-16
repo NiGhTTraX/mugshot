@@ -73,7 +73,7 @@ export default class Mugshot {
 
   private readonly screenshotter: Screenshotter;
 
-  private readonly createBaselines: boolean;
+  private readonly createMissingBaselines: boolean;
 
   constructor(
     browser: Browser,
@@ -93,7 +93,7 @@ export default class Mugshot {
     this.pngProcessor = pngProcessor;
     this.screenshotter = screenshotter;
     // TODO: use https://www.npmjs.com/package/is-ci
-    this.createBaselines = createMissingBaselines;
+    this.createMissingBaselines = createMissingBaselines;
   }
 
   /**
@@ -165,7 +165,7 @@ export default class Mugshot {
     options: ScreenshotOptions,
     selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
-    if (this.createBaselines) {
+    if (this.createMissingBaselines) {
       const expected = !selector
         ? await this.screenshotter.takeScreenshot(options)
         : await this.screenshotter.takeScreenshot(selector, options);
