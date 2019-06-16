@@ -59,21 +59,21 @@ describe('JimpProcessor', () => {
 
   it('should paint the entire square', async () => {
     const processor = new JimpProcessor();
-    const painted = await processor.setColor(blueSquare50x50Buffer, 0, 0, 50, 50, '#000');
+    const painted = await processor.paint(blueSquare50x50Buffer, 0, 0, 50, 50, '#000');
 
     await expectIdenticalBuffers(painted, blackSquare50x50Buffer);
   });
 
   it('should paint a full width slice', async () => {
     const processor = new JimpProcessor();
-    const painted = await processor.setColor(redSquare100x100Buffer, 0, 0, 100, 50, '#fff');
+    const painted = await processor.paint(redSquare100x100Buffer, 0, 0, 100, 50, '#fff');
 
     await expectIdenticalBuffers(painted, diffBlackSquare100x100BlackSquare100x50Buffer);
   });
 
   it('should paint a full height slice', async () => {
     const processor = new JimpProcessor();
-    const painted = await processor.setColor(redSquare100x100Buffer, 0, 0, 50, 100, '#fff');
+    const painted = await processor.paint(redSquare100x100Buffer, 0, 0, 50, 100, '#fff');
 
     await expectIdenticalBuffers(painted, diffBlackSquare100x100BlackSquare50x100Buffer);
   });

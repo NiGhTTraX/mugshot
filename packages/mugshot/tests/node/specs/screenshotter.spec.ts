@@ -75,7 +75,7 @@ describe('Screenshotter', () => {
       .returns(Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }));
 
     pngProcessor
-      .when(p => p.setColor(blackPixelBuffer, 1, 2, 3, 4, '#000'))
+      .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
       .returns(Promise.resolve(whitePixelBuffer));
 
     const screenshotter = new MugshotScreenshotter(
@@ -103,7 +103,7 @@ describe('Screenshotter', () => {
       .when(p => p.crop(blackPixelBuffer, 0, 0, 10, 10))
       .returns(Promise.resolve(whitePixelBuffer));
     pngProcessor
-      .when(p => p.setColor(whitePixelBuffer, 1, 1, 4, 4, '#000'))
+      .when(p => p.paint(whitePixelBuffer, 1, 1, 4, 4, '#000'))
       .returns(Promise.resolve(redPixelBuffer));
 
     const screenshotter = new MugshotScreenshotter(

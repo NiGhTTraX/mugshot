@@ -58,6 +58,6 @@ export default class MugshotScreenshotter implements Screenshotter {
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
     const rect = await this.browser.getElementRect(selector);
 
-    return this.pngProcessor.setColor(screenshot, rect.x, rect.y, rect.width, rect.height, '#000');
+    return this.pngProcessor.paint(screenshot, rect.x, rect.y, rect.width, rect.height, '#000');
   }
 }

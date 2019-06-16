@@ -10,7 +10,7 @@ export default class JimpProcessor implements PNGProcessor {
     return j.getBufferAsync(CustomJimp.MIME_PNG);
   };
 
-  setColor = async (img: Buffer, x: number, y: number, w: number, h: number, c: string) => {
+  paint = async (img: Buffer, x: number, y: number, w: number, h: number, c: string) => {
     const j = await CustomJimp.read(img);
     const colorSquare = new CustomJimp(w, h, c);
 
