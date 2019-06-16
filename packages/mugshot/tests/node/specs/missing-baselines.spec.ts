@@ -45,8 +45,8 @@ describe('Mugshot', () => {
       const result = await checkCall;
 
       expect(result.matches).to.be.true;
-      expect(result.baselinePath).to.equal(baselinePath);
-      expect(result.baseline).to.deep.equal(baseline);
+      expect(result.expectedPath).to.equal(baselinePath);
+      expect(result.expected).to.deep.equal(baseline);
     }
 
     async function expectError<E extends Error>(

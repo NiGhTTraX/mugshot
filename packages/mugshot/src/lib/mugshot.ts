@@ -12,25 +12,25 @@ import MugshotScreenshotter from './mugshot-screenshotter';
 export type MugshotIdenticalResult = {
   matches: true;
   // The FS path where the baseline image is stored.
-  baselinePath: string;
+  expectedPath: string;
   // A PNG MIME encoded buffer of the baseline image.
-  baseline: Buffer;
+  expected: Buffer;
 };
 
 export type MugshotDiffResult = {
   matches: false;
-  // The FS path of the baseline image.
-  baselinePath: string;
   // A PNG MIME encoded buffer of the baseline image.
-  baseline: Buffer;
-  // The FS path of the diff image.
-  diffPath: string;
-  // A PNG MIME encoded buffer of the diff image.
-  diff: Buffer;
-  // The FS path of the actual screenshot.
-  actualPath: string;
+  expected: Buffer;
   // A PNG MIME encoded buffer of the actual screenshot.
   actual: Buffer;
+  // A PNG MIME encoded buffer of the diff image.
+  diff: Buffer;
+  // The FS path of the baseline image.
+  expectedPath: string;
+  // The FS path of the actual screenshot.
+  actualPath: string;
+  // The FS path of the diff image.
+  diffPath: string;
 };
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
@@ -135,47 +135,47 @@ export default class Mugshot {
       options = selectorOrOptions;
     }
 
-    const baselinePath = path.join(this.resultsPath, `${name}.png`);
-    const baselineExists = await this.fs.pathExists(baselinePath);
+    const expectedPath = path.join(this.resultsPath, `${name}.png`);
+    const baselineExists = await this.fs.pathExists(expectedPath);
 
     if (!baselineExists) {
-      return this.missingBaseline(baselinePath, options, selector);
+      return this.missingBaseline(expectedPath, options, selector);
     }
 
     const actual = selector
       ? await this.screenshotter.takeScreenshot(selector, options)
       : await this.screenshotter.takeScreenshot(options);
 
-    const baseline = await this.fs.readFile(baselinePath);
-    const result = await this.pngDiffer.compare(baseline, actual);
+    const expected = await this.fs.readFile(expectedPath);
+    const result = await this.pngDiffer.compare(expected, actual);
 
     if (!result.matches) {
-      return this.diff(name, baselinePath, baseline, result.diff, actual);
+      return this.diff(name, expectedPath, expected, result.diff, actual);
     }
 
     return {
       matches: true,
-      baselinePath,
-      baseline
+      expected,
+      expectedPath
     };
   }
 
   private async missingBaseline(
-    baselinePath: string,
+    expectedPath: string,
     options: ScreenshotOptions,
     selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
     if (this.createBaselines) {
-      const baseline = !selector
+      const expected = !selector
         ? await this.screenshotter.takeScreenshot(options)
         : await this.screenshotter.takeScreenshot(selector, options);
 
-      await this.fs.outputFile(baselinePath, baseline);
+      await this.fs.outputFile(expectedPath, expected);
 
       return {
         matches: true,
-        baselinePath,
-        baseline
+        expected,
+        expectedPath
       };
     }
 
@@ -184,25 +184,25 @@ export default class Mugshot {
 
   private async diff(
     name: string,
-    baselinePath: string,
-    baseline: Buffer,
+    expectedPath: string,
+    expected: Buffer,
     diff: Buffer,
     actual: Buffer
   ): Promise<MugshotDiffResult> {
     const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
-    const actualPath = path.join(this.resultsPath, `${name}.new.png`);
+    const actualPath = path.join(this.resultsPath, `${name}.actual.png`);
 
     await this.fs.outputFile(diffPath, diff);
     await this.fs.outputFile(actualPath, actual);
 
     return {
       matches: false,
-      baselinePath,
-      baseline,
-      diffPath,
+      expected,
+      actual,
       diff,
-      actualPath,
-      actual
+      expectedPath,
+      diffPath,
+      actualPath
     };
   }
 }
