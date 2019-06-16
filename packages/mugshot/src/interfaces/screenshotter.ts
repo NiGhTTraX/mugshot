@@ -8,6 +8,6 @@ export interface Screenshotter {
 
   getScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
-    options: ScreenshotOptions
+    options?: ScreenshotOptions
   ): Promise<Buffer>;
 }

@@ -10,22 +10,26 @@ import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelB64, blackPixelBuffer, redPixelBuffer, whitePixelBuffer } from '../../../../../tests/node/fixtures';
 import PNGProcessor from '../../../src/interfaces/png-processor';
 import { Screenshotter } from '../../../src/interfaces/screenshotter';
+import XMock from '../xmock';
 
 describe('Mugshot', () => {
   describe('Full page screenshots', () => {
     const fs = Mock.ofType<FileSystem>();
     const browser = Mock.ofType<Browser>();
     const pngDiffer = Mock.ofType<PNGDiffer>();
+    const screenshotter = new XMock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
       browser.reset();
+      screenshotter.reset();
       pngDiffer.reset();
     });
 
     afterEach(() => {
-      browser.verifyAll();
       fs.verifyAll();
+      browser.verifyAll();
+      screenshotter.verifyAll();
       pngDiffer.verifyAll();
     });
 
@@ -139,17 +143,15 @@ describe('Mugshot', () => {
         blackPixelBuffer
       );
 
+      screenshotter
+        .when(s => s.getScreenshot({}))
+        .returns(Promise.resolve(blackPixelBuffer));
+
       setupDifferWithResult(
         blackPixelBuffer,
         blackPixelBuffer,
         { matches: true }
       );
-
-      const screenshotter = Mock.ofType<Screenshotter>();
-      screenshotter
-        .setup(s => s.getScreenshot())
-        .returns(() => Promise.resolve(blackPixelBuffer))
-        .verifiable();
 
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
@@ -162,12 +164,14 @@ describe('Mugshot', () => {
         'results/existing-identical.png',
         blackPixelBuffer
       );
-
-      screenshotter.verifyAll();
     });
 
     it('should fail and create diff', async () => {
       setupBrowserWithScreenshot(blackPixelB64);
+
+      screenshotter
+        .when(s => s.getScreenshot({}))
+        .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithExistingBaseline(
         'results/existing-diff.png',
@@ -186,7 +190,8 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
-        pngDiffer: pngDiffer.object
+        pngDiffer: pngDiffer.object,
+        screenshotter: screenshotter.object
       });
 
       await expectDiffResult(
@@ -208,7 +213,8 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createMissingBaselines: false
+        createMissingBaselines: false,
+        screenshotter: screenshotter.object
       });
 
       await expectMissingBaselineError(
@@ -221,6 +227,10 @@ describe('Mugshot', () => {
 
       setupBrowserWithScreenshot(blackPixelB64);
 
+      screenshotter
+        .when(s => s.getScreenshot())
+        .returns(Promise.resolve(blackPixelBuffer));
+
       setupFsWithMissingBaseline('results/missing.png',);
 
       fs
@@ -231,7 +241,8 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        createMissingBaselines: true
+        createMissingBaselines: true,
+        screenshotter: screenshotter.object
       });
 
       await expectIdenticalResult(
@@ -248,6 +259,10 @@ describe('Mugshot', () => {
         .setup(b => b.getElementRect('.ignore'))
         .returns(() => Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }))
         .verifiable();
+
+      screenshotter
+        .when(s => s.getScreenshot({ ignore: '.ignore' }))
+        .returns(Promise.resolve(blackPixelBuffer));
 
       setupFsWithExistingBaseline(
         'results/ignore.png',
@@ -269,7 +284,8 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(browser.object, 'results', {
         fs: fs.object,
         pngDiffer: pngDiffer.object,
-        pngProcessor: pngProcessor.object
+        pngProcessor: pngProcessor.object,
+        screenshotter: screenshotter.object
       });
 
       await expectIdenticalResult(
