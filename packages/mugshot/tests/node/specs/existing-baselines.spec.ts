@@ -1,6 +1,5 @@
 import { describe, expect, it, beforeEach, afterEach } from '../../../../../tests/node/suite';
 import { AssertionError } from 'chai';
-import { Mock } from 'typemoq';
 import Mugshot, {
   MugshotResult
 } from '../../../src/lib/mugshot';
@@ -13,9 +12,9 @@ import XMock from '../xmock';
 
 describe('Mugshot', () => {
   describe('existing baselines', () => {
-    const fs = Mock.ofType<FileSystem>();
-    const browser = Mock.ofType<Browser>();
-    const pngDiffer = Mock.ofType<PNGDiffer>();
+    const fs = new XMock<FileSystem>();
+    const browser = new XMock<Browser>();
+    const pngDiffer = new XMock<PNGDiffer>();
     const screenshotter = new XMock<Screenshotter>();
 
     beforeEach(() => {
@@ -34,20 +33,17 @@ describe('Mugshot', () => {
 
     function setupFsWithExistingBaseline(path: string, base: Buffer) {
       fs
-        .setup(f => f.pathExists(path))
-        .returns(() => Promise.resolve(true))
-        .verifiable();
+        .when(f => f.pathExists(path))
+        .returns(Promise.resolve(true));
       fs
-        .setup(f => f.readFile(path))
-        .returns(() => Promise.resolve(base))
-        .verifiable();
+        .when(f => f.readFile(path))
+        .returns(Promise.resolve(base));
     }
 
     function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
       pngDiffer
-        .setup(e => e.compare(base, screenshot))
-        .returns(() => Promise.resolve(result))
-        .verifiable();
+        .when(e => e.compare(base, screenshot))
+        .returns(Promise.resolve(result));
     }
 
     async function expectIdenticalResult(
@@ -119,9 +115,11 @@ describe('Mugshot', () => {
         whitePixelBuffer
       );
       fs
-        .setup(f => f.outputFile('results/unexpected.diff.png', redPixelBuffer))
-        .returns(() => Promise.resolve())
-        .verifiable();
+        .when(f => f.outputFile('results/unexpected.actual.png', blackPixelBuffer))
+        .returns(Promise.resolve());
+      fs
+        .when(f => f.outputFile('results/unexpected.diff.png', redPixelBuffer))
+        .returns(Promise.resolve());
 
       setupDifferWithResult(
         whitePixelBuffer,

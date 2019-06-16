@@ -47,11 +47,13 @@ export class PropertyExpectation<T> implements Expectation<T> {
  * Replacement mocking library for typemoq with better error messages
  * (includes function names and stringified arguments).
  *
- * TODO: implement It.isAny
+ * Mocks are strict by default - an unexpected call will throw an error
+ * and so will a call with more params than expected.
  */
 export default class XMock<T> {
   private expectations: Map<string, Expectation<T>[]> = new Map();
 
+  // TODO: implement It.isAny
   when<R>(cb: (s: T) => R): Stub<T, R> {
     let expectedArgs: any[] | undefined;
     let expectedProperty: string;
