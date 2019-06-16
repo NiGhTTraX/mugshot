@@ -1,0 +1,45 @@
+{
+  "name": "@mugshot/browser-tests",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "description": "Contract tests for Mugshot's Browser interface",
+  "keywords": [
+    "visual",
+    "regression",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiGhTTraX/mugshot.git"
+  },
+  "author": "Andrei Picus",
+  "license": "MIT",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/browser-tests",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "mugshot": "^2.0.0"
+  },
+  "dependencies": {
+    "@types/chai": "~4.1.7",
+    "@types/fs-extra": "~7.0.0",
+    "@types/node": "~10.12.2",
+    "chai": "~4.2.0",
+    "fs-extra": "~8.0.0"
+  },
+  "devDependencies": {
+    "mugshot": "^2.0.0",
+    "typescript": "~3.5.0"
+  }
+}
