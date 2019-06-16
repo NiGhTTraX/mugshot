@@ -25,9 +25,9 @@ export function afterEach(definition: () => Promise<any>|void) {
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.
  */
-export async function expectIdenticalBuffers(screenshot: Buffer, baseline: Buffer) {
-  const screenshotJimp = await CustomJimp.read(screenshot);
-  const baselineJimp = await CustomJimp.read(baseline);
+export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
+  const screenshotJimp = await CustomJimp.read(actual);
+  const baselineJimp = await CustomJimp.read(expected);
 
   const sWidth = screenshotJimp.getWidth();
   const sHeight = screenshotJimp.getHeight();

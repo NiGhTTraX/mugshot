@@ -23,14 +23,11 @@ export default class MugshotScreenshotter implements Screenshotter {
     this.pngProcessor = pngProcessor;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
-    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     options: ScreenshotOptions = {}
   ): Promise<Buffer> {
-    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-    let selector: string | undefined;
+    let selector: MugshotSelector | undefined;
 
     if (typeof selectorOrOptions === 'string') {
       selector = selectorOrOptions;
@@ -39,6 +36,28 @@ export default class MugshotScreenshotter implements Screenshotter {
       options = selectorOrOptions;
     }
 
-    return Buffer.from('');
+    let screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+
+    if (selector) {
+      screenshot = await this.crop(selector, screenshot);
+    }
+
+    if (options.ignore) {
+      screenshot = await this.ignore(options.ignore, screenshot);
+    }
+
+    return screenshot;
+  }
+
+  private async crop(selector: MugshotSelector, screenshot: Buffer) {
+    const rect = await this.browser.getElementRect(selector);
+
+    return this.pngProcessor.crop(screenshot, rect.x, rect.y, rect.width, rect.height);
+  }
+
+  private async ignore(selector: MugshotSelector, screenshot: Buffer) {
+    const rect = await this.browser.getElementRect(selector);
+
+    return this.pngProcessor.setColor(screenshot, rect.x, rect.y, rect.width, rect.height, '#000');
   }
 }
