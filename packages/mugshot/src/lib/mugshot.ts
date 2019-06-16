@@ -124,18 +124,14 @@ export default class Mugshot {
   async check(
     name: string,
     selectorOrOptions?: any,
-    maybeOptions?: any
+    options: ScreenshotOptions = {}
   ): Promise<MugshotResult> {
     let selector: string | undefined;
-    let options: ScreenshotOptions = {};
 
     if (typeof selectorOrOptions === 'string') {
       selector = selectorOrOptions;
-
-      if (maybeOptions) {
-        options = maybeOptions;
-      }
     } else if (typeof selectorOrOptions === 'object') {
+      // eslint-disable-next-line no-param-reassign
       options = selectorOrOptions;
     }
 
