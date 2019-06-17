@@ -22,6 +22,7 @@ export type BrowserContractTest = {
   getTest: (browser: BrowserToBeAdapted, adapter: Browser) => () => Promise<void>;
 }
 
+/* istanbul ignore next because it will be stringified */
 function getBrowserChromeSize() {
   return {
     width: window.outerWidth - window.innerWidth,

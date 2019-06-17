@@ -8,7 +8,7 @@ import { pixelDiffer } from 'mugshot';
  */
 // TODO: dedupe with gui/suite
 export async function expectIdenticalScreenshots(
-  screenshot: Buffer | string,
+  screenshot: Buffer,
   baselineName: string,
   message?: string
 ) {
@@ -17,11 +17,6 @@ export async function expectIdenticalScreenshots(
   const baseline = await fs.readFile(
     path.join(__dirname, `./screenshots/${BROWSER}/${baselineName}.png`)
   );
-
-  if (typeof screenshot === 'string') {
-    // eslint-disable-next-line no-param-reassign
-    screenshot = await fs.readFile(screenshot);
-  }
 
   // eslint-disable-next-line no-unused-expressions
   expect((await pixelDiffer.compare(baseline, screenshot)).matches, message).to.be.true;

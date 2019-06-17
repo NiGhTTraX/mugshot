@@ -4,6 +4,6 @@ import browserContractTests from '@mugshot/browser-contract';
 
 describe('WebdriverIOAdapter', () => {
   browserContractTests.forEach(test => {
-    it(test.name, async browser => test.getTest(browser, new WebdriverIOAdapter(browser)));
+    it(test.name, async browser => test.getTest(browser, new WebdriverIOAdapter(browser))());
   });
 });
