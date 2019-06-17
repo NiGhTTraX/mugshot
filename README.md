@@ -102,9 +102,10 @@ input {
 ```
 
 
-## Packages
+## Framework adapters
 
 Package | Version
 --------|--------
-[mugshot](./packages/mugshot) | ![npm](https://img.shields.io/npm/v/mugshot.svg)
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
+
+If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](./packages/mugshot/src/interfaces/browser.ts). To validate your implementation you can use the [contract tests package](./packages/browser-contract).
