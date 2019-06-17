@@ -16,7 +16,7 @@ Spin up a Selenium server listening at `0.0.0.0:4444` and 2 browser nodes (Chrom
 npx @mugshot/selenium start
 ```
 
-Spin up a Selenium server listening at `0.0.0.0:4444` and 2 debug nodes (Chrome and Firefox) that have VNC listening at `0.0.0.0:5900` and ``0.0.0.0:5901`:
+Spin up a Selenium server listening at `0.0.0.0:4444` and 2 debug nodes (Chrome and Firefox) that have VNC listening at `0.0.0.0:5900` and `0.0.0.0:5901`:
 
 ```sh
 npx @mugshot/selenium debug
