@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Contract tests for Mugshot's Browser interface",
   "keywords": [
     "visual",
@@ -39,7 +39,7 @@
     "fs-extra": "~8.0.0"
   },
   "devDependencies": {
-    "mugshot": "^2.0.0",
+    "mugshot": "^2.0.1",
     "typescript": "~3.5.0"
   }
 }
