@@ -5,7 +5,7 @@
     "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "pub": "lerna publish && npm run clean",
+    "pub": "npm run build && lerna publish --ignore-scripts && npm run clean",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "./tests/run.sh",
     "test:node": "TS_NODE_CACHE=0 mocha --opts tests/node/mocha.opts",
