@@ -8,7 +8,7 @@ export type ElementRect = {
 
 export default interface Browser {
   /**
-   * Take a full page screenshot and return a base64 string.
+   * Take a viewport screenshot and return a base64 string.
    *
    * @see https://w3c.github.io/webdriver/#take-screenshot
    */
@@ -22,6 +22,15 @@ export default interface Browser {
    * Should throw `ElementNotFound` if the element is not found.
    */
   getElementRect: (selector: string) => Promise<ElementRect>;
+
+  /**
+   * Set the size of the __viewport__ (meaning window minus chrome).
+   *
+   * This is unlike setWindowRect which doesn't take the chrome into account.
+   *
+   * @see https://w3c.github.io/webdriver/#set-window-rect
+   */
+  setViewportSize: (width: number, height: number) => Promise<void>;
 }
 
 export class ElementNotFound extends Error {

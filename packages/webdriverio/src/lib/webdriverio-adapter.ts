@@ -13,6 +13,14 @@ function getBoundingRect(selector: string): DOMRect | null {
   return element.getBoundingClientRect() as DOMRect;
 }
 
+/* istanbul ignore next because this will get stringified and sent to the browser */
+function getBrowserChromeSize() {
+  return {
+    width: window.outerWidth - window.innerWidth,
+    height: window.outerHeight - window.innerHeight
+  };
+}
+
 /**
  * API adapter for WebdriverIO to make working with it saner.
  */
@@ -41,5 +49,27 @@ export default class WebdriverIOAdapter implements Browser {
       width: rect.width,
       height: rect.height
     };
+  };
+
+  setViewportSize = async (width: number, height: number) => {
+    const {
+      // @ts-ignore because the return type is not properly inferred
+      width: chromeWidth,
+      // @ts-ignore
+      height: chromeHeight
+    } = await this.browser.execute(getBrowserChromeSize);
+
+    const actualWidth = width + chromeWidth;
+    const actualHeight = height + chromeHeight;
+
+    // Chrome...
+    await this.browser.setWindowSize(actualWidth, actualHeight);
+
+    // Firefox...
+    try {
+      await this.browser.setWindowRect(0, 0, actualWidth, actualHeight);
+      // eslint-disable-next-line no-empty
+    } catch (e) {
+    }
   };
 }

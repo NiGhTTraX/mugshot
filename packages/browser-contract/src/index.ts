@@ -1,13 +1,23 @@
 import { Browser } from 'mugshot';
 import { expect } from 'chai';
 import Jimp from 'jimp';
+import fs from 'fs-extra';
+import path from 'path';
 import { ElementNotFound } from '../../mugshot/src/interfaces/browser';
 
 export interface BrowserToBeAdapted {
+  /**
+   * Navigate to an URL.
+   */
   url: (path: string) => Promise<any>;
-  execute: (func: (...args: any[]) => any) => Promise<any>;
-  setWindowSize: (width: number, height: number) => Promise<any>;
-  setWindowRect: (x: number, y: number, width: number, height: number) => Promise<any>;
+
+  /**
+   * Execute JS in the active page.
+   *
+   * @param func Should be stringified and sent to the browser.
+   * @param args Should be stringified and passed to func.
+   */
+  execute: (func: (...args: any[]) => any, ...args: any[]) => Promise<any>;
 }
 
 export type BrowserContractTest = {
@@ -23,47 +33,27 @@ export type BrowserContractTest = {
   getTest: (browser: BrowserToBeAdapted, adapter: Browser) => () => Promise<void>;
 }
 
-/* istanbul ignore next because it will be stringified */
-function getBrowserChromeSize() {
-  return {
-    width: window.outerWidth - window.innerWidth,
-    height: window.outerHeight - window.innerHeight
-  };
-}
+async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: string) {
+  const fixtureContent = await fs.readFile(
+    // resolve will give us the location of the root index.js.
+    path.join(require.resolve('@mugshot/selenium'), `../fixtures/${name}.html`),
+    { encoding: 'utf8' }
+  );
 
-async function setViewportSize(browser: BrowserToBeAdapted, width: number, height: number) {
-  const {
-    // @ts-ignore because the return type is not properly inferred
-    width: chromeWidth,
-    // @ts-ignore
-    height: chromeHeight
-  } = await browser.execute(getBrowserChromeSize);
+  await browser.url('about:blank');
 
-  const actualWidth = width + chromeWidth;
-  const actualHeight = height + chromeHeight;
+  await browser.execute(function createFixture(html: string) {
+    document.write(html);
+  }, fixtureContent);
 
-  // Chrome...
-  await browser.setWindowSize(actualWidth, actualHeight);
-
-  // Firefox...
-  try {
-    await browser.setWindowRect(0, 0, actualWidth, actualHeight);
-    // eslint-disable-next-line no-empty
-  } catch (e) {
-  }
-}
-
-async function loadFixture(browser: BrowserToBeAdapted, name: string) {
-  await browser.url(`file:///var/www/html/${name}.html`);
-
-  await setViewportSize(browser, 1024, 768);
+  await adapter.setViewportSize(1024, 768);
 }
 
 const browserContractTests: BrowserContractTest[] = [{
   name: 'should take a viewport screenshot',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
-      await loadFixture(browser, 'simple');
+      await loadFixture(browser, adapter, 'simple');
 
       const screenshot = await Jimp.read(Buffer.from(await adapter.takeScreenshot(), 'base64'));
 
@@ -75,7 +65,7 @@ const browserContractTests: BrowserContractTest[] = [{
   name: 'should take a viewport screenshot with absolutely positioned elements',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
-      await loadFixture(browser, 'rect');
+      await loadFixture(browser, adapter, 'rect');
 
       const screenshot = await Jimp.read(Buffer.from(await adapter.takeScreenshot(), 'base64'));
 
@@ -87,7 +77,7 @@ const browserContractTests: BrowserContractTest[] = [{
   name: 'should get bounding rect of element',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
-      await loadFixture(browser, 'rect');
+      await loadFixture(browser, adapter, 'rect');
 
       const rect = await adapter.getElementRect('.test');
 
@@ -104,7 +94,7 @@ const browserContractTests: BrowserContractTest[] = [{
   name: 'should get bounding rect of off-screen element',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
-      await loadFixture(browser, 'rect-scroll');
+      await loadFixture(browser, adapter, 'rect-scroll');
 
       const rect = await adapter.getElementRect('.test');
 
@@ -116,7 +106,7 @@ const browserContractTests: BrowserContractTest[] = [{
   name: 'should get bounding rect of missing element',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
-      await loadFixture(browser, 'rect-scroll');
+      await loadFixture(browser, adapter, 'rect-scroll');
 
       let caughtError!: ElementNotFound;
 

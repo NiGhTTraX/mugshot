@@ -17,9 +17,6 @@
   "author": "Andrei Picus",
   "license": "MIT",
   "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/selenium",
-  "files": [
-    "scripts"
-  ],
   "bin": {
     "mugshot-selenium": "./scripts/index.sh"
   }
