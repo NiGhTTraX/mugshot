@@ -21,3 +21,5 @@ describe('MyAdapter', () => {
   });
 });
 ```
+
+You can use [@mugshot/selenium](../selenium) to get a Selenium grid with Chrome and Firefox to run your tests.
