@@ -85,7 +85,7 @@ describe('Mugshot', () => {
       );
     }
 
-    it('should fail', async () => {
+    it('should fail when told to not create', async () => {
       setupFsWithMissingBaseline(
         'results/missing.png',
       );
@@ -102,7 +102,7 @@ describe('Mugshot', () => {
       );
     });
 
-    it('should write missing baseline and pass', async () => {
+    it('should write missing baseline and pass when told to create', async () => {
       screenshotter
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
@@ -126,7 +126,7 @@ describe('Mugshot', () => {
       );
     });
 
-    it('should ignore an element', async () => {
+    it('should ignore an element when told to create', async () => {
       setupFsWithMissingBaseline(
         'results/ignore.png'
       );
@@ -152,7 +152,7 @@ describe('Mugshot', () => {
       );
     });
 
-    it('should screenshot only an element', async () => {
+    it('should screenshot only an element when told to create', async () => {
       setupFsWithMissingBaseline(
         'results/element.png'
       );
@@ -174,6 +174,31 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('element', '.element'),
         'results/element.png',
+        blackPixelBuffer
+      );
+    });
+
+    it('should write missing baseline and pass when told to update', async () => {
+      screenshotter
+        .when(s => s.takeScreenshot({}))
+        .returns(Promise.resolve(blackPixelBuffer));
+
+      setupFsWithMissingBaseline('results/missing.png',);
+      fs
+        .when(f => f.outputFile('results/missing.png', blackPixelBuffer))
+        .returns(Promise.resolve());
+
+      const mugshot = new Mugshot(browser.object, 'results', {
+        fs: fs.object,
+        pngDiffer: pngDiffer.object,
+        screenshotter: screenshotter.object,
+        createMissingBaselines: false,
+        updateBaselines: true
+      });
+
+      await expectIdenticalResult(
+        mugshot.check('missing'),
+        'results/missing.png',
         blackPixelBuffer
       );
     });

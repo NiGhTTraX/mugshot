@@ -76,6 +76,7 @@ describe('Mugshot', () => {
         throw new AssertionError('Expected Mugshot to return a diff result');
       }
     }
+
     it('should pass when identical', async () => {
       setupFsWithExistingBaseline(
         'results/identical.png',
@@ -194,6 +195,32 @@ describe('Mugshot', () => {
         mugshot.check('element', '.element'),
         'results/element.png',
         blackPixelBuffer
+      );
+    });
+
+    it('should update when told to', async () => {
+      fs
+        .when(f => f.pathExists('results/update.png'))
+        .returns(Promise.resolve(true));
+      fs
+        .when(f => f.outputFile('results/update.png', whitePixelBuffer))
+        .returns(Promise.resolve());
+
+      screenshotter
+        .when(s => s.takeScreenshot({}))
+        .returns(Promise.resolve(whitePixelBuffer));
+
+      const mugshot = new Mugshot(browser.object, 'results', {
+        fs: fs.object,
+        pngDiffer: pngDiffer.object,
+        screenshotter: screenshotter.object,
+        updateBaselines: true
+      });
+
+      await expectIdenticalResult(
+        mugshot.check('update'),
+        'results/update.png',
+        whitePixelBuffer
       );
     });
   });

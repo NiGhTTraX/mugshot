@@ -49,6 +49,13 @@ interface MugshotOptions {
    * takes.
    */
   createMissingBaselines?: boolean;
+
+  /**
+   * When set to true Mugshot will overwrite any existing baselines
+   * and will create missing ones (equivalent to setting
+   * `createMissingBaselines: true`).
+   */
+  updateBaselines?: boolean;
 }
 
 export class MugshotMissingBaselineError extends Error {
@@ -75,6 +82,8 @@ export default class Mugshot {
 
   private readonly createMissingBaselines: boolean;
 
+  private updateBaselines: boolean;
+
   /**
    * @param browser
    * @param resultsPath
@@ -83,6 +92,7 @@ export default class Mugshot {
    * @param pngProcessor
    * @param screenshotter
    * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
+   * @param updateBaselines
    */
   constructor(
     browser: Browser,
@@ -92,7 +102,8 @@ export default class Mugshot {
       pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),
-      createMissingBaselines = !isCI
+      createMissingBaselines = !isCI,
+      updateBaselines = false
     }: MugshotOptions = {}
   ) {
     this.browser = browser;
@@ -102,6 +113,7 @@ export default class Mugshot {
     this.pngProcessor = pngProcessor;
     this.screenshotter = screenshotter;
     this.createMissingBaselines = createMissingBaselines;
+    this.updateBaselines = updateBaselines;
   }
 
   /**
@@ -147,7 +159,13 @@ export default class Mugshot {
     const baselineExists = await this.fs.pathExists(expectedPath);
 
     if (!baselineExists) {
-      return this.missingBaseline(expectedPath, options, selector);
+      if (this.createMissingBaselines || this.updateBaselines) {
+        return this.writeBaseline(expectedPath, options, selector);
+      }
+
+      throw new MugshotMissingBaselineError();
+    } else if (this.updateBaselines) {
+      return this.writeBaseline(expectedPath, options, selector);
     }
 
     const actual = selector
@@ -168,26 +186,22 @@ export default class Mugshot {
     };
   }
 
-  private async missingBaseline(
+  private async writeBaseline(
     expectedPath: string,
     options: ScreenshotOptions,
     selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
-    if (this.createMissingBaselines) {
-      const expected = !selector
-        ? await this.screenshotter.takeScreenshot(options)
-        : await this.screenshotter.takeScreenshot(selector, options);
+    const expected = !selector
+      ? await this.screenshotter.takeScreenshot(options)
+      : await this.screenshotter.takeScreenshot(selector, options);
 
-      await this.fs.outputFile(expectedPath, expected);
+    await this.fs.outputFile(expectedPath, expected);
 
-      return {
-        matches: true,
-        expected,
-        expectedPath
-      };
-    }
-
-    throw new MugshotMissingBaselineError();
+    return {
+      matches: true,
+      expected,
+      expectedPath
+    };
   }
 
   private async diff(
