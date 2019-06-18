@@ -22,7 +22,7 @@
   "main": "dist/index",
   "types": "dist/index",
   "files": [
-    "dist/webdriverio/src"
+    "dist"
   ],
   "scripts": {
     "build": "npm run clean && npm run compile",
