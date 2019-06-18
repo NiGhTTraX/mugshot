@@ -2,6 +2,11 @@
 
 ----
 
+## Requirements
+
+Use [@mugshot/selenium](../selenium) to get a Selenium grid with Chrome and Firefox up and running. That package provides the test fixtures used by these tests.
+
+
 ## Usage
 
 ```typescript
@@ -21,5 +26,3 @@ describe('MyAdapter', () => {
   });
 });
 ```
-
-You can use [@mugshot/selenium](../selenium) to get a Selenium grid with Chrome and Firefox to run your tests.
