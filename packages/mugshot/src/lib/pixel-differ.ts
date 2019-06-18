@@ -3,29 +3,29 @@ import pixelmatch from '../vendor/pixelmatch';
 import CustomJimp from '../vendor/custom-jimp';
 
 const pixelDiffer: PNGDiffer = {
-  compare: async (baseline: Buffer, screenshot: Buffer) => {
-    const baselineJimp = await CustomJimp.read(baseline);
-    const screenshotJimp = await CustomJimp.read(screenshot);
+  compare: async (expected: Buffer, actual: Buffer) => {
+    const expectedJimp = await CustomJimp.read(expected);
+    const actualJimp = await CustomJimp.read(actual);
 
-    const smallestWidth = Math.min(baselineJimp.getWidth(), screenshotJimp.getWidth());
-    const smallestHeight = Math.min(baselineJimp.getHeight(), screenshotJimp.getHeight());
-    const biggestWidth = Math.max(baselineJimp.getWidth(), screenshotJimp.getWidth());
-    const biggestHeight = Math.max(baselineJimp.getHeight(), screenshotJimp.getHeight());
+    const smallestWidth = Math.min(expectedJimp.getWidth(), actualJimp.getWidth());
+    const smallestHeight = Math.min(expectedJimp.getHeight(), actualJimp.getHeight());
+    const biggestWidth = Math.max(expectedJimp.getWidth(), actualJimp.getWidth());
+    const biggestHeight = Math.max(expectedJimp.getHeight(), actualJimp.getHeight());
 
-    const differentSize = baselineJimp.getWidth() !== screenshotJimp.getWidth()
-      || baselineJimp.getHeight() !== screenshotJimp.getHeight();
+    const differentSize = expectedJimp.getWidth() !== actualJimp.getWidth()
+      || expectedJimp.getHeight() !== actualJimp.getHeight();
 
     if (differentSize) {
-      baselineJimp.crop(0, 0, smallestWidth, smallestHeight);
-      screenshotJimp.crop(0, 0, smallestWidth, smallestHeight);
+      expectedJimp.crop(0, 0, smallestWidth, smallestHeight);
+      actualJimp.crop(0, 0, smallestWidth, smallestHeight);
     }
 
-    const diff = new CustomJimp(smallestWidth, smallestHeight, 0xffffffff);
+    const diffJimp = new CustomJimp(smallestWidth, smallestHeight, 0xffffffff);
 
     const numDiffPixels = pixelmatch(
-      baselineJimp.bitmap.data,
-      screenshotJimp.bitmap.data,
-      diff.bitmap.data, // this will be modified
+      expectedJimp.bitmap.data,
+      actualJimp.bitmap.data,
+      diffJimp.bitmap.data, // this will be modified
       smallestWidth,
       smallestHeight
     );
@@ -33,12 +33,12 @@ const pixelDiffer: PNGDiffer = {
     const matches = numDiffPixels === 0;
 
     if (differentSize) {
-      const wholeDiff = new CustomJimp(biggestWidth, biggestHeight, '#ff0000');
-      await wholeDiff.composite(diff, 0, 0);
+      const wholeDiffJimp = new CustomJimp(biggestWidth, biggestHeight, '#ff0000');
+      await wholeDiffJimp.composite(diffJimp, 0, 0);
 
       return {
         matches: false,
-        diff: await wholeDiff.getBufferAsync(CustomJimp.MIME_PNG)
+        diff: await wholeDiffJimp.getBufferAsync(CustomJimp.MIME_PNG)
       };
     }
 
@@ -48,7 +48,7 @@ const pixelDiffer: PNGDiffer = {
 
     return {
       matches: false,
-      diff: await diff.getBufferAsync(CustomJimp.MIME_PNG)
+      diff: await diffJimp.getBufferAsync(CustomJimp.MIME_PNG)
     };
   }
 };
