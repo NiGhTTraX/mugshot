@@ -1,6 +1,7 @@
 import { Browser } from 'mugshot';
 import { expect } from 'chai';
 import Jimp from 'jimp';
+import { ElementNotFound } from '../../mugshot/src/interfaces/browser';
 
 export interface BrowserToBeAdapted {
   url: (path: string) => Promise<any>;
@@ -109,6 +110,24 @@ const browserContractTests: BrowserContractTest[] = [{
 
       expect(rect.x).to.equal(2000);
       expect(rect.y).to.equal(2000);
+    };
+  }
+}, {
+  name: 'should get bounding rect of missing element',
+  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+    return async () => {
+      await loadFixture(browser, 'rect-scroll');
+
+      let caughtError!: ElementNotFound;
+
+      try {
+        await adapter.getElementRect('.missing');
+      } catch (e) {
+        caughtError = e;
+      }
+
+      expect(caughtError).to.be.instanceOf(ElementNotFound);
+      expect(caughtError.message).to.contain('.missing');
     };
   }
 }];
