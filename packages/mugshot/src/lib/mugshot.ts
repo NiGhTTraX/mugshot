@@ -43,6 +43,7 @@ interface MugshotOptions {
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
   screenshotter?: Screenshotter;
+
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it

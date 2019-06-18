@@ -68,6 +68,11 @@ import { remote } from 'webdriverio';
 })();
 ```
 
+### Config
+
+- `createMissingBaselines?`: If set to true `Mugshot.check` will pass if a baseline is not found and it will create the baseline from the screenshot it takes.
+- `updateBaselines`: When set to true Mugshot will overwrite any existing baselines and will create missing ones (equivalent to setting `createMissingBaselines: true`).
+
 
 ### `check(name, selector?, options?)`
 
