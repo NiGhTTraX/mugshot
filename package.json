@@ -2,7 +2,7 @@
   "name": "mugshot",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "pub": "npm run build && lerna publish --ignore-scripts && npm run clean",
