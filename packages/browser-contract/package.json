@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Contract tests for Mugshot's Browser interface",
   "keywords": [
     "visual",
@@ -32,7 +32,7 @@
     "mugshot": "^2.0.1"
   },
   "dependencies": {
-    "@mugshot/selenium": "~1.0.1",
+    "@mugshot/selenium": "^1.0.2",
     "@types/chai": "~4.1.7",
     "@types/fs-extra": "~7.0.0",
     "@types/node": "~12.0.8",
@@ -41,7 +41,7 @@
     "jimp": "~0.6.1"
   },
   "devDependencies": {
-    "mugshot": "^2.0.1",
+    "mugshot": "^2.1.0",
     "typescript": "~3.5.0"
   }
 }
