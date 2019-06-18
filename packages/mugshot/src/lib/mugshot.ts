@@ -168,9 +168,7 @@ export default class Mugshot {
       return this.writeBaseline(expectedPath, options, selector);
     }
 
-    const actual = selector
-      ? await this.screenshotter.takeScreenshot(selector, options)
-      : await this.screenshotter.takeScreenshot(options);
+    const actual = await this.getScreenshot(selector, options);
 
     const expected = await this.fs.readFile(expectedPath);
     const result = await this.pngDiffer.compare(expected, actual);
@@ -191,9 +189,7 @@ export default class Mugshot {
     options: ScreenshotOptions,
     selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
-    const expected = !selector
-      ? await this.screenshotter.takeScreenshot(options)
-      : await this.screenshotter.takeScreenshot(selector, options);
+    const expected = await this.getScreenshot(selector, options);
 
     await this.fs.outputFile(expectedPath, expected);
 
@@ -226,5 +222,14 @@ export default class Mugshot {
       diffPath,
       actualPath
     };
+  }
+
+  private async getScreenshot(selector: MugshotSelector | undefined, options: ScreenshotOptions) {
+    return selector
+      // TODO: because WebStorm really wants it
+      // eslint-disable-next-line no-return-await
+      ? await this.screenshotter.takeScreenshot(selector, options)
+      // eslint-disable-next-line no-return-await
+      : await this.screenshotter.takeScreenshot(options);
   }
 }
