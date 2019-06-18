@@ -6,7 +6,7 @@ services:
 - docker
 
 before_script:
-- npm run bootstrap
+- npm run bootstrap --  --no-ci
 
 script:
 - npm run lint
