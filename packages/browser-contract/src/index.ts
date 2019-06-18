@@ -1,6 +1,6 @@
 import { Browser } from 'mugshot';
 import { expect } from 'chai';
-import { expectIdenticalScreenshots } from './expectations';
+import Jimp from 'jimp';
 
 export interface BrowserToBeAdapted {
   url: (path: string) => Promise<any>;
@@ -59,25 +59,27 @@ async function loadFixture(browser: BrowserToBeAdapted, name: string) {
 }
 
 const browserContractTests: BrowserContractTest[] = [{
-  name: 'should take a full page screenshot',
+  name: 'should take a viewport screenshot',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
       await loadFixture(browser, 'simple');
 
-      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = await Jimp.read(Buffer.from(await adapter.takeScreenshot(), 'base64'));
 
-      await expectIdenticalScreenshots(screenshot, 'simple');
+      expect(screenshot.getWidth()).to.equal(1024);
+      expect(screenshot.getHeight()).to.equal(768);
     };
   }
 }, {
-  name: 'should take a full page screenshot with absolutely positioned elements',
+  name: 'should take a viewport screenshot with absolutely positioned elements',
   getTest(browser: BrowserToBeAdapted, adapter: Browser) {
     return async () => {
       await loadFixture(browser, 'rect');
 
-      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = await Jimp.read(Buffer.from(await adapter.takeScreenshot(), 'base64'));
 
-      await expectIdenticalScreenshots(screenshot, 'full-absolute');
+      expect(screenshot.getWidth()).to.equal(1024);
+      expect(screenshot.getHeight()).to.equal(768);
     };
   }
 }, {
