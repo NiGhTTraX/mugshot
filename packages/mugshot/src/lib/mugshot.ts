@@ -1,5 +1,6 @@
 import path from 'path';
 import fsExtra from 'fs-extra';
+import isCI from 'is-ci';
 import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
 import FileSystem from '../interfaces/file-system';
@@ -45,8 +46,7 @@ interface MugshotOptions {
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it
-   * takes. It is recommended to set this to `false` when running in
-   * CI and to `true` when running locally.
+   * takes.
    */
   createMissingBaselines?: boolean;
 }
@@ -75,6 +75,15 @@ export default class Mugshot {
 
   private readonly createMissingBaselines: boolean;
 
+  /**
+   * @param browser
+   * @param resultsPath
+   * @param fs
+   * @param pngDiffer
+   * @param pngProcessor
+   * @param screenshotter
+   * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
+   */
   constructor(
     browser: Browser,
     resultsPath: string,
@@ -83,7 +92,7 @@ export default class Mugshot {
       pngDiffer = pixelDiffer,
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),
-      createMissingBaselines = false
+      createMissingBaselines = !isCI
     }: MugshotOptions = {}
   ) {
     this.browser = browser;
@@ -92,7 +101,6 @@ export default class Mugshot {
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
     this.screenshotter = screenshotter;
-    // TODO: use https://www.npmjs.com/package/is-ci
     this.createMissingBaselines = createMissingBaselines;
   }
 
