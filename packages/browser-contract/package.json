@@ -28,6 +28,9 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
+  "peerDependencies": {
+    "mugshot": "^2.0.1"
+  },
   "dependencies": {
     "@mugshot/selenium": "~1.0.1",
     "@types/chai": "~4.1.7",
@@ -38,6 +41,7 @@
     "jimp": "~0.6.1"
   },
   "devDependencies": {
+    "mugshot": "^2.0.1",
     "typescript": "~3.5.0"
   }
 }
