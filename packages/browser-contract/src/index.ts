@@ -33,6 +33,11 @@ export type BrowserContractTest = {
   getTest: (browser: BrowserToBeAdapted, adapter: Browser) => () => Promise<void>;
 }
 
+/* istanbul ignore next because this will get stringified and sent to the browser */
+function createFixture(html: string) {
+  document.write(html);
+}
+
 async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: string) {
   const fixtureContent = await fs.readFile(
     // resolve will give us the location of the root index.js.
@@ -42,9 +47,7 @@ async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: 
 
   await browser.url('about:blank');
 
-  await browser.execute(function createFixture(html: string) {
-    document.write(html);
-  }, fixtureContent);
+  await browser.execute(createFixture, fixtureContent);
 
   await adapter.setViewportSize(1024, 768);
 }
