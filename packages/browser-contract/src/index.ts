@@ -34,7 +34,8 @@ export type BrowserContractTest = {
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function createFixture(html: string) {
-  document.write(html);
+  // This should use `document.write` instead but Firefox gives an "insecure operation" error.
+  document.body.innerHTML = html;
 }
 
 async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: string) {
