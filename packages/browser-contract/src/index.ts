@@ -1,9 +1,8 @@
-import { Browser } from 'mugshot';
+import { Browser, ElementNotFound } from 'mugshot';
 import { expect } from 'chai';
 import Jimp from 'jimp';
 import fs from 'fs-extra';
 import path from 'path';
-import { ElementNotFound } from '../../mugshot/src/interfaces/browser';
 
 export interface BrowserToBeAdapted {
   /**
