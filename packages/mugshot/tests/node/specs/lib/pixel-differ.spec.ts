@@ -1,5 +1,5 @@
 import { expectIdenticalBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
-import pixelDiffer from '../../../../src/lib/pixel-differ';
+import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   blackSquare100x100Buffer,
   blackSquare100x50Buffer,
@@ -15,7 +15,7 @@ import {
 describe('PixelDiffer', () => {
   describe('same width and height', () => {
     it('should compare identical buffers', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         blackSquare100x100Buffer
       );
@@ -24,7 +24,7 @@ describe('PixelDiffer', () => {
     });
 
     it('should not create a diff for identical buffers', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         blackSquare100x100Buffer
       );
@@ -34,7 +34,7 @@ describe('PixelDiffer', () => {
     });
 
     it('should compare different buffers', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         whiteSquare100x100Buffer
       );
@@ -43,7 +43,7 @@ describe('PixelDiffer', () => {
     });
 
     it('should create a diff for different buffers', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         whiteSquare100x100Buffer
       );
@@ -59,7 +59,7 @@ describe('PixelDiffer', () => {
   // The target buffer is a subregion of the source buffer.
   describe('different sizes and same content', () => {
     it('with different width and height should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         blackSquare50x50Buffer
       );
@@ -73,7 +73,7 @@ describe('PixelDiffer', () => {
     });
 
     it('with different width should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         blackSquare50x100Buffer
       );
@@ -87,7 +87,7 @@ describe('PixelDiffer', () => {
     });
 
     it('with different height should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         blackSquare100x100Buffer,
         blackSquare100x50Buffer
       );
@@ -103,7 +103,7 @@ describe('PixelDiffer', () => {
 
   describe('different sizes and different content', () => {
     it('with different width and height should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         whiteSquare100x100Buffer,
         blackSquare50x50Buffer
       );
@@ -117,7 +117,7 @@ describe('PixelDiffer', () => {
     });
 
     it('with different width should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         whiteSquare100x100Buffer,
         blackSquare50x100Buffer
       );
@@ -131,7 +131,7 @@ describe('PixelDiffer', () => {
     });
 
     it('with different height should create a diff', async () => {
-      const result = await pixelDiffer.compare(
+      const result = await new PixelDiffer().compare(
         whiteSquare100x100Buffer,
         blackSquare100x50Buffer
       );

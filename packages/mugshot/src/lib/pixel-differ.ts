@@ -1,9 +1,9 @@
-import PNGDiffer from '../interfaces/png-differ';
+import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
 import pixelmatch from '../vendor/pixelmatch';
 import CustomJimp from '../vendor/custom-jimp';
 
-const pixelDiffer: PNGDiffer = {
-  compare: async (expected: Buffer, actual: Buffer) => {
+export default class PixelDiffer implements PNGDiffer {
+  compare = async (expected: Buffer, actual: Buffer): Promise<DiffResult> => {
     const expectedJimp = await CustomJimp.read(expected);
     const actualJimp = await CustomJimp.read(actual);
 
@@ -51,6 +51,4 @@ const pixelDiffer: PNGDiffer = {
       diff: await diffJimp.getBufferAsync(CustomJimp.MIME_PNG)
     };
   }
-};
-
-export default pixelDiffer;
+}

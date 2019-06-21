@@ -4,7 +4,7 @@ import PNGProcessor from './interfaces/png-processor';
 import PNGDiffer from './interfaces/png-differ';
 import FileSystem from './interfaces/file-system';
 import Screenshotter from './interfaces/screenshotter';
-import pixelDiffer from './lib/pixel-differ';
+import PixelDiffer from './lib/pixel-differ';
 
 export default Mugshot;
 
@@ -14,6 +14,6 @@ export {
   PNGProcessor,
   FileSystem,
   Screenshotter,
-  pixelDiffer,
+  PixelDiffer,
   ElementNotFound
 };
