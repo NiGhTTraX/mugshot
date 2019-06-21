@@ -7,7 +7,7 @@ import FileSystem from '../interfaces/file-system';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
-import pixelDiffer from './pixel-differ';
+import PixelDiffer from './pixel-differ';
 import MugshotScreenshotter from './mugshot-screenshotter';
 
 export type MugshotIdenticalResult = {
@@ -100,7 +100,7 @@ export default class Mugshot {
     resultsPath: string,
     {
       fs = fsExtra,
-      pngDiffer = pixelDiffer,
+      pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),
       createMissingBaselines = !isCI,

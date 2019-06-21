@@ -23,6 +23,7 @@ export const diffBlackSquare100x100BlackSquare50x50Buffer = getBufferFixture('di
 export const diffBlackSquare100x100BlackSquare100x50Buffer = getBufferFixture('diff-100x100-100x50');
 export const diffBlackSquare100x100BlackSquare50x100Buffer = getBufferFixture('diff-100x100-50x100');
 export const redSquare100x100Buffer = getBufferFixture('red-square-100x100');
+export const black90Square50x50Buffer = getBufferFixture('black90-square-50x50');
 
 // Generated from rgby.html and compressed using https://tinypng.com/.
 export const rgbySquare100x100Buffer = getBufferFixture('rgby-square-100x100');

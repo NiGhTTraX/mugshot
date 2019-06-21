@@ -1,9 +1,37 @@
-import PNGDiffer from '../interfaces/png-differ';
-import pixelmatch from '../vendor/pixelmatch';
+import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
+import pixelmatch, { Color } from '../vendor/pixelmatch';
 import CustomJimp from '../vendor/custom-jimp';
 
-const pixelDiffer: PNGDiffer = {
-  compare: async (expected: Buffer, actual: Buffer) => {
+interface PixelDifferOptions {
+  /**
+   * The color used to mark different pixels.
+   */
+  diffColor?: Color;
+
+  /**
+   * A number between 0 and 1 representing the max difference in %
+   * between 2 pixels to be considered identical. 0 means the pixel
+   * need to be identical, 1 means two completely different images
+   * will be identical. 0.1 means black (#000) and 90% gray (0a0a0a)
+   * will be identical.
+   */
+  threshold?: number;
+}
+
+export default class PixelDiffer implements PNGDiffer {
+  private readonly diffColor: Color;
+
+  private readonly threshold: number;
+
+  constructor({
+    diffColor = { r: 255, g: 0, b: 0 },
+    threshold = 0
+  }: PixelDifferOptions = {}) {
+    this.diffColor = diffColor;
+    this.threshold = threshold;
+  }
+
+  compare = async (expected: Buffer, actual: Buffer): Promise<DiffResult> => {
     const expectedJimp = await CustomJimp.read(expected);
     const actualJimp = await CustomJimp.read(actual);
 
@@ -27,7 +55,12 @@ const pixelDiffer: PNGDiffer = {
       actualJimp.bitmap.data,
       diffJimp.bitmap.data, // this will be modified
       smallestWidth,
-      smallestHeight
+      smallestHeight,
+      // TODO: set threshold to 0
+      {
+        diffColor: this.diffColor,
+        threshold: this.threshold
+      }
     );
 
     const matches = numDiffPixels === 0;
@@ -51,6 +84,4 @@ const pixelDiffer: PNGDiffer = {
       diff: await diffJimp.getBufferAsync(CustomJimp.MIME_PNG)
     };
   }
-};
-
-export default pixelDiffer;
+}

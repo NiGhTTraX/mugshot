@@ -67,8 +67,11 @@ import { remote } from 'webdriverio';
 
 ### Config
 
-- `createMissingBaselines?`: If set to true `Mugshot.check` will pass if a baseline is not found and it will create the baseline from the screenshot it takes.
+- `createMissingBaselines`: If set to true `Mugshot.check` will pass if a baseline is not found and it will create the baseline from the screenshot it takes.
 - `updateBaselines`: When set to true Mugshot will overwrite any existing baselines and will create missing ones (equivalent to setting `createMissingBaselines: true`).
+- `pngDiffer`: Will be used to compare images and create diffs. By default it uses [PixelDiffer](./README.md#pixeldiffer).
+- `fs`: Will be used to read baselines and write results. By default it uses [fs-extra](https://www.npmjs.com/package/fs-extra).
+- `pngProcessor`: Will be used to process the screenshots e.g. crop them, paint over them etc. By default it uses [jimp](https://github.com/oliver-moran/jimp).
 
 
 ### `check(name, selector?, options?)`
@@ -84,6 +87,16 @@ A selector can be passed as the second argument and will tell Mugshot to only sc
 #### Ignoring elements
 
 You can ignore a single element on the page (for now, ignoring multiple elements is a planned feature) by passing a selector through the `ignore` option. The first element identified by that selector will be painted black before taking any screenshots.
+
+
+## PixelDiffer
+
+Default differ implementation that compares images pixel by pixel.
+
+### Config
+
+- `threshold`: A number between 0 and 1 representing the max difference in % between 2 pixels to be considered identical. 0 means the pixel need to be identical, 1 means two completely different images will be identical. 0.1 means black (#000) and 90% gray (0a0a0a) will be identical. Defaults to 0.
+- `diffColor`: The color used to mark different pixels. Defaults to red.
 
 
 ## Reducing flakiness
