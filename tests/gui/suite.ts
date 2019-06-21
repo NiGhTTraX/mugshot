@@ -9,7 +9,7 @@ import {
   runnerDescribe,
   runnerIt
 } from '../mocha-runner';
-import pixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
+import PixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 export { expect };
 
@@ -125,7 +125,8 @@ export async function expectIdenticalScreenshots(
     screenshot = await fs.readFile(screenshot);
   }
 
-  expect((await pixelDiffer.compare(baseline, screenshot)).matches, message).to.be.true;
+  const differ = new PixelDiffer({ threshold: 0 });
+  expect((await differ.compare(baseline, screenshot)).matches, message).to.be.true;
 }
 
 export const screenshotsPath = path.join(__dirname, 'screenshots');
