@@ -3,7 +3,18 @@ import pixelmatch, { Color } from '../vendor/pixelmatch';
 import CustomJimp from '../vendor/custom-jimp';
 
 interface PixelDifferOptions {
+  /**
+   * The color used to mark different pixels.
+   */
   diffColor?: Color;
+
+  /**
+   * A number between 0 and 1 representing the max difference in %
+   * between 2 pixels to be considered identical. 0 means the pixel
+   * need to be identical, 1 means two completely different images
+   * will be identical. 0.1 means black (#000) and 90% gray (0a0a0a)
+   * will be identical.
+   */
   threshold?: number;
 }
 
