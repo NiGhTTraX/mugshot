@@ -4,11 +4,11 @@ import {
   blackSquare100x100Buffer,
   blackSquare100x50Buffer,
   blackSquare50x100Buffer,
-  blackSquare50x50Buffer,
+  blackSquare50x50Buffer, blueSquare50x50Buffer,
   diffBlackSquare100x100BlackSquare100x50Buffer,
   diffBlackSquare100x100BlackSquare50x100Buffer,
   diffBlackSquare100x100BlackSquare50x50Buffer,
-  redSquare100x100Buffer,
+  redSquare100x100Buffer, redSquare50x50Buffer,
   whiteSquare100x100Buffer
 } from '../../../../../../tests/node/fixtures';
 
@@ -141,6 +141,21 @@ describe('PixelDiffer', () => {
         // @ts-ignore
         result.diff,
         redSquare100x100Buffer
+      );
+    });
+  });
+
+  describe('config', () => {
+    it('should apply custom diff color', async () => {
+      const result = await new PixelDiffer({ diffColor: { r: 0, g: 0, b: 255 } }).compare(
+        blackSquare50x50Buffer,
+        redSquare50x50Buffer
+      );
+
+      await expectIdenticalBuffers(
+        // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
+        result.diff,
+        blueSquare50x50Buffer
       );
     });
   });

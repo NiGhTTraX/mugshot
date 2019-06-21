@@ -1,4 +1,16 @@
 /* eslint-disable */
+export type Color = {
+  r: number;
+  g: number;
+  b: number;
+}
+
+export type PixelmatchOptions = {
+  threshold?: number;
+  includeAA?: boolean;
+  diffColor?: Color;
+}
+
 // TODO: pull in package after https://github.com/mapbox/pixelmatch/pull/46 is applied.
 export default function pixelmatch(
   img1: Buffer,
@@ -6,15 +18,16 @@ export default function pixelmatch(
   output: Buffer,
   width: number,
   height: number,
-  options?: { threshold?: any; includeAA?: any; }
+  {
+    threshold = 0.1,
+    includeAA = false,
+    diffColor = { r: 255, g: 0, b: 0 }
+  }: PixelmatchOptions = {}
 ) {
   if (img1.length !== img2.length) {
     throw new Error('Image sizes do not match.');
   }
 
-  if (!options) options = {};
-
-  const threshold = options.threshold === undefined ? 0.1 : options.threshold;
   // TODO: turn this into a param along with diff and AA colors
   const alpha = 0;
 
@@ -34,13 +47,13 @@ export default function pixelmatch(
       // the color difference is above the threshold
       if (delta > maxDelta) {
         // check it's a real rendering difference or just anti-aliasing
-        if (!options.includeAA && (antialiased(img1, x, y, width, height, img2)
+        if (!includeAA && (antialiased(img1, x, y, width, height, img2)
           || antialiased(img2, x, y, width, height, img1))) {
           // one of the pixels is anti-aliasing; draw as yellow and do not count as difference
           if (output) drawPixel(output, pos, 255, 255, 0);
         } else {
           // found substantial difference not caused by anti-aliasing; draw it as red
-          if (output) drawPixel(output, pos, 255, 0, 0);
+          if (output) drawPixel(output, pos, diffColor.r, diffColor.g, diffColor.b);
           diff++;
         }
       } else if (output) {

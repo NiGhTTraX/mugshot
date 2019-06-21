@@ -1,8 +1,18 @@
 import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
-import pixelmatch from '../vendor/pixelmatch';
+import pixelmatch, { Color } from '../vendor/pixelmatch';
 import CustomJimp from '../vendor/custom-jimp';
 
+interface PixelDifferOptions {
+  diffColor?: Color;
+}
+
 export default class PixelDiffer implements PNGDiffer {
+  private readonly diffColor: Color;
+
+  constructor({ diffColor = { r: 255, g: 0, b: 0 } }: PixelDifferOptions = {}) {
+    this.diffColor = diffColor;
+  }
+
   compare = async (expected: Buffer, actual: Buffer): Promise<DiffResult> => {
     const expectedJimp = await CustomJimp.read(expected);
     const actualJimp = await CustomJimp.read(actual);
@@ -27,7 +37,8 @@ export default class PixelDiffer implements PNGDiffer {
       actualJimp.bitmap.data,
       diffJimp.bitmap.data, // this will be modified
       smallestWidth,
-      smallestHeight
+      smallestHeight,
+      { diffColor: this.diffColor }
     );
 
     const matches = numDiffPixels === 0;
