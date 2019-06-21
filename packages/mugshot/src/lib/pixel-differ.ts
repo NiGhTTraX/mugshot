@@ -4,13 +4,20 @@ import CustomJimp from '../vendor/custom-jimp';
 
 interface PixelDifferOptions {
   diffColor?: Color;
+  threshold?: number;
 }
 
 export default class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
 
-  constructor({ diffColor = { r: 255, g: 0, b: 0 } }: PixelDifferOptions = {}) {
+  private readonly threshold: number;
+
+  constructor({
+    diffColor = { r: 255, g: 0, b: 0 },
+    threshold = 0
+  }: PixelDifferOptions = {}) {
     this.diffColor = diffColor;
+    this.threshold = threshold;
   }
 
   compare = async (expected: Buffer, actual: Buffer): Promise<DiffResult> => {
@@ -39,7 +46,10 @@ export default class PixelDiffer implements PNGDiffer {
       smallestWidth,
       smallestHeight,
       // TODO: set threshold to 0
-      { diffColor: this.diffColor }
+      {
+        diffColor: this.diffColor,
+        threshold: this.threshold
+      }
     );
 
     const matches = numDiffPixels === 0;

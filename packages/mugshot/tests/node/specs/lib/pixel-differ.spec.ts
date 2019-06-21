@@ -1,6 +1,7 @@
 import { expectIdenticalBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
 import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
+  black90Square50x50Buffer,
   blackSquare100x100Buffer,
   blackSquare100x50Buffer,
   blackSquare50x100Buffer,
@@ -53,6 +54,15 @@ describe('PixelDiffer', () => {
         result.diff,
         redSquare100x100Buffer
       );
+    });
+
+    it('should have 0 threshold by default', async () => {
+      const result = await new PixelDiffer().compare(
+        blackSquare50x50Buffer,
+        black90Square50x50Buffer
+      );
+
+      expect(result.matches).to.be.false;
     });
   });
 
@@ -157,6 +167,15 @@ describe('PixelDiffer', () => {
         result.diff,
         blueSquare50x50Buffer
       );
+    });
+
+    it('should apply custom threshold', async () => {
+      const result = await new PixelDiffer({ threshold: 0.1 }).compare(
+        blackSquare50x50Buffer,
+        black90Square50x50Buffer
+      );
+
+      expect(result.matches).to.be.true;
     });
   });
 });
