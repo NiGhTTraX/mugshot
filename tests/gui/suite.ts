@@ -129,4 +129,22 @@ export async function expectIdenticalScreenshots(
   expect((await differ.compare(baseline, screenshot)).matches, message).to.be.true;
 }
 
-export const screenshotsPath = path.join(__dirname, 'screenshots');
+/**
+ * Create a temp folder with a single baseline in it.
+ *
+ * @param baseline The name of the baseline, without the extension.
+ *
+ * @return The path to the temp folder.
+ */
+export async function createResultsDirWithBaseline(baseline: string) {
+  const browser = process.env.BROWSER;
+
+  const resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
+
+  await fs.copyFile(
+    path.join(__dirname, `screenshots/${browser}/${baseline}.png`),
+    path.join(resultsPath, `${baseline}.png`)
+  );
+
+  return resultsPath;
+}

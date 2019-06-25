@@ -6,7 +6,8 @@ import {
   it,
   beforeEach,
   loadFixture,
-  expectIdenticalScreenshots, screenshotsPath
+  expectIdenticalScreenshots,
+  createResultsDirWithBaseline
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
@@ -16,14 +17,7 @@ describe('Mugshot', async () => {
     let resultsPath!: string;
 
     beforeEach(async () => {
-      const browser = process.env.BROWSER;
-
-      resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
-
-      await fs.copyFile(
-        path.join(screenshotsPath, `${browser}/simple.png`),
-        path.join(resultsPath, 'simple.png')
-      );
+      resultsPath = await createResultsDirWithBaseline('simple');
     });
 
     it('should create diff', async browser => {

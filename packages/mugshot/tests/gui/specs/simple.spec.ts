@@ -1,12 +1,10 @@
-import path from 'path';
-import fs from 'fs-extra';
 import {
   beforeEach,
+  createResultsDirWithBaseline,
   describe,
   expect,
   it,
-  loadFixture,
-  screenshotsPath
+  loadFixture
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
@@ -15,14 +13,7 @@ describe('Mugshot', () => {
   let resultsPath!: string;
 
   beforeEach(async () => {
-    const browser = process.env.BROWSER;
-
-    resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
-
-    await fs.copyFile(
-      path.join(screenshotsPath, `${browser}/simple.png`),
-      path.join(resultsPath, 'simple.png')
-    );
+    resultsPath = await createResultsDirWithBaseline('simple');
   });
 
   it('should pass when identical', async browser => {

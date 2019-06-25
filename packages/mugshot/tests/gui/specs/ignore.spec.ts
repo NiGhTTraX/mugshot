@@ -1,12 +1,10 @@
-import path from 'path';
-import fs from 'fs-extra';
 import {
   beforeEach,
+  createResultsDirWithBaseline,
   describe,
   expect,
   it,
-  loadFixture,
-  screenshotsPath
+  loadFixture
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
@@ -16,14 +14,7 @@ describe('Mugshot', () => {
     let resultsPath!: string;
 
     beforeEach(async () => {
-      const browser = process.env.BROWSER;
-
-      resultsPath = await fs.mkdtemp(`/tmp/mugshot-${browser}`);
-
-      await fs.copyFile(
-        path.join(screenshotsPath, `${browser}/ignore.png`),
-        path.join(resultsPath, 'ignore.png')
-      );
+      resultsPath = await createResultsDirWithBaseline('ignore');
     });
 
     it('should ignore an element', async browser => {
