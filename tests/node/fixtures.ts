@@ -1,16 +1,5 @@
-import fs from 'fs-extra';
-import path from 'path';
-
-export function getBufferFixture(name: string) {
-  return fs.readFileSync(path.join(__dirname, `fixtures/${name}.png`));
-}
-
-export function getBase64Fixture(name: string) {
-  return getBufferFixture(name).toString('base64');
-}
-
 // Generated with http://png-pixel.com/.
-export const blackPixelB64 = getBase64Fixture('black-pixel');
-export const blackPixelBuffer = getBufferFixture('black-pixel');
-export const whitePixelBuffer = getBufferFixture('white-pixel');
-export const redPixelBuffer = getBufferFixture('red-pixel');
+export const blackPixelB64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+export const blackPixelBuffer = Buffer.from(blackPixelB64, 'base64');
+export const whitePixelBuffer = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sA AAAASUVORK5CYII=', 'base64');
+export const redPixelBuffer = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4AWP4z8DwHwAFAAH/e+m+ 7wAAAABJRU5ErkJggg==', 'base64');
