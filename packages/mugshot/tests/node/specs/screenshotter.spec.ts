@@ -1,9 +1,9 @@
 import {
-  describe,
-  it,
-  beforeEach,
   afterEach,
-  expectIdenticalBuffers
+  beforeEach,
+  describe,
+  expectIdenticalBuffers,
+  it
 } from '../../../../../tests/node/suite';
 import XMock from '../xmock';
 import Browser from '../../../src/interfaces/browser';
@@ -11,7 +11,8 @@ import PNGProcessor from '../../../src/interfaces/png-processor';
 import MugshotScreenshotter from '../../../src/lib/mugshot-screenshotter';
 import {
   blackPixelB64,
-  blackPixelBuffer, redPixelBuffer,
+  blackPixelBuffer,
+  redPixelBuffer,
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
 

@@ -1,4 +1,4 @@
-import { expectIdenticalBuffers, describe, it } from '../../../../../../tests/node/suite';
+import { describe, expectIdenticalBuffers, it } from '../../../../../../tests/node/suite';
 import JimpProcessor from '../../../../src/lib/jimp-processor';
 import {
   blackSquare50x50Buffer,

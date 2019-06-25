@@ -1,13 +1,13 @@
 import path from 'path';
 import fs from 'fs-extra';
 import {
+  beforeEach,
+  createResultsDirWithBaseline,
   describe,
   expect,
-  it,
-  beforeEach,
-  loadFixture,
   expectIdenticalScreenshots,
-  createResultsDirWithBaseline
+  it,
+  loadFixture
 } from '../../../../../tests/gui/suite';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';

@@ -1,15 +1,17 @@
-import { expectIdenticalBuffers, describe, expect, it } from '../../../../../../tests/node/suite';
+import { describe, expect, expectIdenticalBuffers, it } from '../../../../../../tests/node/suite';
 import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   black90Square50x50Buffer,
   blackSquare100x100Buffer,
   blackSquare100x50Buffer,
   blackSquare50x100Buffer,
-  blackSquare50x50Buffer, blueSquare50x50Buffer,
+  blackSquare50x50Buffer,
+  blueSquare50x50Buffer,
   diffBlackSquare100x100BlackSquare100x50Buffer,
   diffBlackSquare100x100BlackSquare50x100Buffer,
   diffBlackSquare100x100BlackSquare50x50Buffer,
-  redSquare100x100Buffer, redSquare50x50Buffer,
+  redSquare100x100Buffer,
+  redSquare50x50Buffer,
   whiteSquare100x100Buffer
 } from '../../../../../../tests/node/fixtures';
 

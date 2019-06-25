@@ -1,8 +1,6 @@
-import { describe, expect, it, beforeEach, afterEach } from '../../../../../tests/node/suite';
+import { afterEach, beforeEach, describe, expect, it } from '../../../../../tests/node/suite';
 import { AssertionError } from 'chai';
-import Mugshot, {
-  MugshotMissingBaselineError, MugshotResult
-} from '../../../src/lib/mugshot';
+import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
 import PNGDiffer from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
