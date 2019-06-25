@@ -56,7 +56,6 @@ export default class PixelDiffer implements PNGDiffer {
       diffJimp.bitmap.data, // this will be modified
       smallestWidth,
       smallestHeight,
-      // TODO: set threshold to 0
       {
         diffColor: this.diffColor,
         threshold: this.threshold
