@@ -49,6 +49,7 @@
     "lint-staged": "~8.2.0",
     "mocha": "~6.1.0",
     "nyc": "~14.1.0",
+    "strong-mock": "~1.0.0",
     "ts-node": "~8.3.0",
     "tsconfig-paths": "~3.8.0",
     "typescript": "~3.5.0",

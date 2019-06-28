@@ -10,14 +10,14 @@ import {
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
 import Screenshotter from '../../../src/interfaces/screenshotter';
-import XMock from '../xmock';
+import Mock from 'strong-mock';
 
 describe('Mugshot', () => {
   describe('existing baselines', () => {
-    const fs = new XMock<FileSystem>();
-    const browser = new XMock<Browser>();
-    const pngDiffer = new XMock<PNGDiffer>();
-    const screenshotter = new XMock<Screenshotter>();
+    const fs = new Mock<FileSystem>();
+    const browser = new Mock<Browser>();
+    const pngDiffer = new Mock<PNGDiffer>();
+    const screenshotter = new Mock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
@@ -95,10 +95,10 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub
       });
 
       await expectIdenticalResult(
@@ -130,10 +130,10 @@ describe('Mugshot', () => {
         { matches: false, diff: redPixelBuffer }
       );
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub
       });
 
       await expectDiffResult(
@@ -159,10 +159,10 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub
       });
 
       await expectIdenticalResult(
@@ -187,10 +187,10 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot('.element', {}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub
       });
 
       await expectIdenticalResult(
@@ -212,10 +212,10 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         updateBaselines: true
       });
 

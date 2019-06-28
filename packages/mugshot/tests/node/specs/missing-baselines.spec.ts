@@ -6,14 +6,14 @@ import Browser from '../../../src/interfaces/browser';
 import FileSystem from '../../../src/interfaces/file-system';
 import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
 import Screenshotter from '../../../src/interfaces/screenshotter';
-import XMock from '../xmock';
+import Mock from 'strong-mock';
 
 describe('Mugshot', () => {
   describe('missing baselines', () => {
-    const fs = new XMock<FileSystem>();
-    const browser = new XMock<Browser>();
-    const pngDiffer = new XMock<PNGDiffer>();
-    const screenshotter = new XMock<Screenshotter>();
+    const fs = new Mock<FileSystem>();
+    const browser = new Mock<Browser>();
+    const pngDiffer = new Mock<PNGDiffer>();
+    const screenshotter = new Mock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
@@ -88,10 +88,10 @@ describe('Mugshot', () => {
         'results/missing.png',
       );
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         createMissingBaselines: false
       });
 
@@ -110,10 +110,10 @@ describe('Mugshot', () => {
         .when(f => f.outputFile('results/missing.png', blackPixelBuffer))
         .returns(Promise.resolve());
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         createMissingBaselines: true
       });
 
@@ -136,10 +136,10 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({ ignore: '.ignore' }))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         createMissingBaselines: true
       });
 
@@ -162,10 +162,10 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot('.element', {}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         createMissingBaselines: true
       });
 
@@ -186,10 +186,10 @@ describe('Mugshot', () => {
         .when(f => f.outputFile('results/missing.png', blackPixelBuffer))
         .returns(Promise.resolve());
 
-      const mugshot = new Mugshot(browser.object, 'results', {
-        fs: fs.object,
-        pngDiffer: pngDiffer.object,
-        screenshotter: screenshotter.object,
+      const mugshot = new Mugshot(browser.stub, 'results', {
+        fs: fs.stub,
+        pngDiffer: pngDiffer.stub,
+        screenshotter: screenshotter.stub,
         createMissingBaselines: false,
         updateBaselines: true
       });

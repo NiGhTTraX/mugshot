@@ -5,7 +5,7 @@ import {
   expectIdenticalBuffers,
   it
 } from '../../../../../tests/node/suite';
-import XMock from '../xmock';
+import Mock from 'strong-mock';
 import Browser from '../../../src/interfaces/browser';
 import PNGProcessor from '../../../src/interfaces/png-processor';
 import MugshotScreenshotter from '../../../src/lib/mugshot-screenshotter';
@@ -17,8 +17,8 @@ import {
 } from '../../../../../tests/node/fixtures';
 
 describe('Screenshotter', () => {
-  const browser = new XMock<Browser>();
-  const pngProcessor = new XMock<PNGProcessor>();
+  const browser = new Mock<Browser>();
+  const pngProcessor = new Mock<PNGProcessor>();
 
   beforeEach(() => {
     browser.reset();
@@ -36,8 +36,8 @@ describe('Screenshotter', () => {
       .returns(Promise.resolve(blackPixelB64));
 
     const screenshotter = new MugshotScreenshotter(
-      browser.object,
-      pngProcessor.object
+      browser.stub,
+      pngProcessor.stub
     );
 
     const screenshot = await screenshotter.takeScreenshot();
@@ -58,8 +58,8 @@ describe('Screenshotter', () => {
       .returns(Promise.resolve(whitePixelBuffer));
 
     const screenshotter = new MugshotScreenshotter(
-      browser.object,
-      pngProcessor.object
+      browser.stub,
+      pngProcessor.stub
     );
 
     const screenshot = await screenshotter.takeScreenshot('.test');
@@ -80,8 +80,8 @@ describe('Screenshotter', () => {
       .returns(Promise.resolve(whitePixelBuffer));
 
     const screenshotter = new MugshotScreenshotter(
-      browser.object,
-      pngProcessor.object
+      browser.stub,
+      pngProcessor.stub
     );
 
     const screenshot = await screenshotter.takeScreenshot({ ignore: '.ignore' });
@@ -108,8 +108,8 @@ describe('Screenshotter', () => {
       .returns(Promise.resolve(redPixelBuffer));
 
     const screenshotter = new MugshotScreenshotter(
-      browser.object,
-      pngProcessor.object
+      browser.stub,
+      pngProcessor.stub
     );
 
     const screenshot = await screenshotter.takeScreenshot('.test', { ignore: '.ignore' });
