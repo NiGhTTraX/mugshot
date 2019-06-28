@@ -29,10 +29,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@types/fs-extra": "~7.0.0",
+    "@types/fs-extra": "~8.0.0",
     "@types/is-ci": "~2.0.0",
     "@types/node": "~10.12.2",
-    "fs-extra": "~8.0.0",
+    "fs-extra": "~8.1.0",
     "is-ci": "~2.0.0",
     "jimp": "~0.6.1"
   },
