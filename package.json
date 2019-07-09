@@ -53,6 +53,6 @@
     "ts-node": "~8.3.0",
     "tsconfig-paths": "~3.8.0",
     "typescript": "~3.5.0",
-    "webdriverio": "~5.10.0"
+    "webdriverio": "~5.11.0"
   }
 }
