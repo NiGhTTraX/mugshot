@@ -1,5 +1,4 @@
 {
-  "name": "mugshot",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
