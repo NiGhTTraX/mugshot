@@ -4,4 +4,4 @@ set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-./"$1".sh
+./"$1".sh "${@:2}"
