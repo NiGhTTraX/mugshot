@@ -25,8 +25,8 @@ nodes_connected() {
   fi
   set -e
 
-  echo ${status} | python -c \
-    'import json,sys;obj=json.load(sys.stdin);print obj["slotCounts"]["free"]'
+  echo ${status} | node -e \
+    "const fs=require('fs');console.log(JSON.parse(fs.readFileSync(0, 'utf-8')).slotCounts.free)"
 }
 
 echo Waiting for ${EXPECTED_BROWSERS} browsers to connect to the Selenium hub...
@@ -40,9 +40,9 @@ while true; do
     exit 0
   fi
 
-  PINGS=$((PINGS+1))
+  PINGS=$((PINGS + 1))
 
-  if [ ${PINGS} -gt ${WAIT} ] ; then
+  if [ ${PINGS} -gt ${WAIT} ]; then
     printf "\n"
     echo Waited ${WAIT} seconds and the hub was still not ready. Exiting.
     exit 1
@@ -51,4 +51,3 @@ while true; do
   printf "."
   sleep 1
 done
-
