@@ -7,12 +7,12 @@
     "pub": "npm run build && lerna publish && npm run clean",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "./tests/run.sh",
-    "test:node": "TS_NODE_CACHE=0 mocha --opts tests/node/mocha.opts",
-    "test:node:coverage": "TS_NODE_CACHE=0 COVERAGE=1 nyc --silent mocha --opts tests/node/mocha.coverage.opts",
+    "test:node": "mocha --opts tests/node/mocha.opts",
+    "test:node:coverage": "COVERAGE=1 nyc --silent mocha --opts tests/node/mocha.coverage.opts",
     "test:gui": "./tests/gui/run.sh",
     "test:gui:selenium": "packages/selenium/scripts/debug.sh",
     "test:gui:selenium:stop": "packages/selenium/scripts/stop.sh",
-    "_test:gui": "TS_NODE_CACHE=0 COVERAGE=1 nyc --silent --no-clean mocha --opts tests/gui/mocha.coverage.opts",
+    "_test:gui": "COVERAGE=1 nyc --silent --no-clean mocha --opts tests/gui/mocha.coverage.opts",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
   },
   "husky": {
