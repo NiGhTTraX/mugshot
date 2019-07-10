@@ -1,26 +1,14 @@
 import { expect } from 'chai';
-import { runnerAfterEach, runnerBeforeEach, runnerDescribe, runnerIt } from '../mocha-runner';
 import CustomJimp from 'mugshot/src/vendor/custom-jimp';
 
 export { expect };
 
-export function describe(name: string, definition: () => void) {
-  runnerDescribe(name, () => {
-    definition();
-  });
-}
-
-export function it(name: string, definition?: () => Promise<any>|void) {
-  runnerIt(name, definition);
-}
-
-export function beforeEach(definition: () => Promise<any>|void) {
-  runnerBeforeEach(definition);
-}
-
-export function afterEach(definition: () => Promise<any>|void) {
-  runnerAfterEach(definition);
-}
+export {
+  runnerIt as it,
+  runnerAfterEach as afterEach,
+  runnerBeforeEach as beforeEach,
+  runnerDescribe as describe
+} from '../mocha-runner';
 
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.
