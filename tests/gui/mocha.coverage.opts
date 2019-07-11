@@ -1,3 +1,0 @@
---require tsconfig-paths/register
---timeout 20000
-**/tests/gui/**/*.spec.ts

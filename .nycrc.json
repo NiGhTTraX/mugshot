@@ -10,14 +10,8 @@
     "**/vendor/**/*"
   ],
 
-  "sourceMap": false,
-  "instrument": false,
-  "require": [
-    "./tests/register.ts"
-  ],
-
   "reporter": ["html", "text"],
-  "report-dir": "tests/results/coverage",
+  "report-dir": "tests/results",
 
   "lines": 100,
   "branches": 100,

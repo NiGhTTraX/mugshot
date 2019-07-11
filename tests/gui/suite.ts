@@ -8,7 +8,7 @@ import {
   runnerBeforeEach,
   runnerDescribe,
   runnerIt
-} from '../mocha-runner';
+} from '../jest-runner';
 import PixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 export { expect };

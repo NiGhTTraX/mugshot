@@ -8,7 +8,7 @@ export {
   runnerAfterEach as afterEach,
   runnerBeforeEach as beforeEach,
   runnerDescribe as describe
-} from '../mocha-runner';
+} from '../jest-runner';
 
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.

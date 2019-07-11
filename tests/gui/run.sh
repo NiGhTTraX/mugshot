@@ -9,7 +9,11 @@ set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-../../packages/selenium/scripts/index.sh start
+../../packages/selenium/scripts/index.sh start 4
 
-COVERAGE=1 BROWSER=chrome npm run _test:gui
-COVERAGE=1 BROWSER=firefox npm run _test:gui
+BROWSERS=(chrome firefox)
+
+for browser in "${BROWSERS[@]}"; do
+  BROWSER=${browser} npm run _test:gui
+  cp results/coverage-final.json ../../.nyc_output/${browser}.json
+done
