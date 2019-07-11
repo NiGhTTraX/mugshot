@@ -6,7 +6,7 @@ set -e
 EXPECTED_BROWSERS=$1
 
 # How many seconds should we wait for the browsers to connect?
-WAIT=${2:-10}
+WAIT=${2:-15}
 
 # Selenium hub hostname.
 HOST=${3:-localhost}
