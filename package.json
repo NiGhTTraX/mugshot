@@ -11,7 +11,7 @@
     "test:gui": "./tests/gui/run.sh",
     "test:gui:selenium": "packages/selenium/scripts/debug.sh",
     "test:gui:selenium:stop": "packages/selenium/scripts/stop.sh",
-    "_test:gui": "jest --config=tests/gui/jest.config.js --maxWorkers=4 --coverage",
+    "_test:gui": "jest --config=tests/gui/jest.config.js --coverage",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
   },
   "husky": {
