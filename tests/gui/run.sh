@@ -9,20 +9,11 @@ set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-NODES=4
-if npx is-ci ; then
-  NODES=1
-fi
-../../packages/selenium/scripts/index.sh start ${NODES}
+../../packages/selenium/scripts/index.sh start 4
 
 BROWSERS=(chrome firefox)
 
 for browser in "${BROWSERS[@]}"; do
-  if npx is-ci ; then
-    BROWSER=${browser} npm run _test:gui -- --runInBand
-  else
-    BROWSER=${browser} npm run _test:gui -- --maxWorkers=${NODES}
-  fi
-
+  BROWSER=${browser} npm run _test:gui
   cp results/coverage-final.json ../../.nyc_output/${browser}.json
 done
