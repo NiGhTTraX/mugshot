@@ -30,7 +30,7 @@
     "@babel/plugin-proposal-decorators": "~7.4.0",
     "@babel/preset-env": "~7.5.0",
     "@babel/preset-typescript": "~7.3.0",
-    "@babel/register": "~7.4.0",
+    "@babel/register": "~7.5.0",
     "@nighttrax/eslint-config-ts": "~2.0.0",
     "@types/chai": "~4.1.7",
     "@types/fs-extra": "~8.0.0",
