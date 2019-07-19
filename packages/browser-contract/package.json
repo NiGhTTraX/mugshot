@@ -26,13 +26,13 @@
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build"
+    "package": "cp -r fixtures ./dist",
+    "prepublishOnly": "npm run build && npm run package"
   },
   "peerDependencies": {
     "mugshot": "^2.0.1"
   },
   "dependencies": {
-    "@mugshot/selenium": "^1.0.2",
     "@types/chai": "~4.1.7",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~12.6.0",

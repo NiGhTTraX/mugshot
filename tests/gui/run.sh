@@ -2,7 +2,7 @@
 
 trap cleanup EXIT
 cleanup() {
-  ../../packages/selenium/scripts/index.sh stop
+  npx @tdd-buffet/selenium stop
 }
 
 set -e
@@ -13,7 +13,8 @@ NODES=4
 if npx is-ci ; then
   NODES=1
 fi
-../../packages/selenium/scripts/index.sh start ${NODES}
+
+npx @tdd-buffet/selenium start ${NODES} --html fixtures
 
 BROWSERS=(chrome firefox)
 

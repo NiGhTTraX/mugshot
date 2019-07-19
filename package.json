@@ -9,8 +9,8 @@
     "test": "./tests/run.sh",
     "test:node": "jest --config tests/node/jest.config.js --coverage",
     "test:gui": "./tests/gui/run.sh",
-    "test:gui:selenium": "packages/selenium/scripts/debug.sh",
-    "test:gui:selenium:stop": "packages/selenium/scripts/stop.sh",
+    "test:gui:selenium": "selenium debug --html tests/gui/fixtures",
+    "test:gui:selenium:stop": "selenium stop",
     "_test:gui": "jest --config=tests/gui/jest.config.js --coverage",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
   },
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~2.0.0",
+    "@tdd-buffet/selenium": "~0.2.1",
     "@types/chai": "~4.1.7",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~10.12.2",
