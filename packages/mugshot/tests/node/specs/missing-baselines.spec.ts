@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from '../../../../../tests/node/suite';
+import { afterEach, beforeEach, describe, expect, it } from 'tdd-buffet/suite/node';
 import { AssertionError } from 'chai';
 import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
 import PNGDiffer from '../../../src/interfaces/png-differ';

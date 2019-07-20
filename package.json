@@ -25,12 +25,10 @@
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~2.0.0",
-    "@tdd-buffet/selenium": "~0.2.1",
-    "@types/chai": "~4.1.7",
+    "@tdd-buffet/selenium": "~0.2.2",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~10.12.2",
     "@typescript-eslint/eslint-plugin": "~1.11.0",
-    "chai": "~4.2.0",
     "codecov": "~3.5.0",
     "eslint": "~5.16.0",
     "fs-extra": "~8.1.0",
