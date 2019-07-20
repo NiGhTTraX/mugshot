@@ -40,8 +40,7 @@ function createFixture(html: string) {
 
 async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: string) {
   const fixtureContent = await fs.readFile(
-    // resolve will give us the location of the src/index.js.
-    path.join(require.resolve('@mugshot/selenium'), `../../fixtures/${name}.html`),
+    path.join(__dirname, `../fixtures/${name}.html`),
     { encoding: 'utf8' }
   );
 

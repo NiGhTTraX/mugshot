@@ -1,14 +1,5 @@
-import { expect } from 'chai';
+import { expect } from 'tdd-buffet/suite/node';
 import CustomJimp from 'mugshot/src/vendor/custom-jimp';
-
-export { expect };
-
-export {
-  runnerIt as it,
-  runnerAfterEach as afterEach,
-  runnerBeforeEach as beforeEach,
-  runnerDescribe as describe
-} from '../mocha-runner';
 
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.

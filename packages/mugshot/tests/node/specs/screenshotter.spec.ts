@@ -1,10 +1,4 @@
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expectIdenticalBuffers,
-  it
-} from '../../../../../tests/node/suite';
+import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import Mock from 'strong-mock';
 import Browser from '../../../src/interfaces/browser';
 import PNGProcessor from '../../../src/interfaces/png-processor';
@@ -15,6 +9,7 @@ import {
   redPixelBuffer,
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
+import { expectIdenticalBuffers } from '../../../../../tests/node/suite';
 
 describe('Screenshotter', () => {
   const browser = new Mock<Browser>();

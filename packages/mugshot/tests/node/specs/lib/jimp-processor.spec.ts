@@ -1,10 +1,6 @@
-import {
-  createTestBuffer,
-  describe,
-  expectIdenticalBuffers,
-  it
-} from '../../../../../../tests/node/suite';
+import { describe, it } from 'tdd-buffet/suite/node';
 import JimpProcessor from '../../../../src/lib/jimp-processor';
+import { createTestBuffer, expectIdenticalBuffers } from '../../../../../../tests/node/suite';
 
 describe('JimpProcessor', () => {
   it('should crop the entire image', async () => {

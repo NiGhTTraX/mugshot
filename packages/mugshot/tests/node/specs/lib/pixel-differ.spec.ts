@@ -1,12 +1,10 @@
+import { describe, expect, it } from 'tdd-buffet/suite/node';
+import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   createTestBuffer,
-  describe,
-  expect,
   expectIdenticalBuffers,
-  it,
   lightenBuffer
 } from '../../../../../../tests/node/suite';
-import PixelDiffer from '../../../../src/lib/pixel-differ';
 
 describe('PixelDiffer', () => {
   describe('same width and height', () => {

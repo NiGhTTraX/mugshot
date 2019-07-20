@@ -2,14 +2,28 @@
 
 trap cleanup EXIT
 cleanup() {
-  ../../packages/selenium/scripts/index.sh stop
+  npx @tdd-buffet/selenium stop
 }
 
 set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-../../packages/selenium/scripts/index.sh start
+NODES=4
+if npx is-ci ; then
+  NODES=1
+fi
 
-COVERAGE=1 BROWSER=chrome npm run _test:gui
-COVERAGE=1 BROWSER=firefox npm run _test:gui
+npx @tdd-buffet/selenium start ${NODES} --html fixtures
+
+BROWSERS=(chrome firefox)
+
+for browser in "${BROWSERS[@]}"; do
+  if npx is-ci ; then
+    BROWSER=${browser} npm run _test:gui -- --runInBand
+  else
+    BROWSER=${browser} npm run _test:gui -- --maxWorkers=${NODES}
+  fi
+
+  cp results/coverage-final.json ../../.nyc_output/${browser}.json
+done
