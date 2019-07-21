@@ -1,16 +1,14 @@
 import path from 'path';
 import fs from 'fs-extra';
 import {
-  beforeEach,
   createResultsDirWithBaseline,
-  describe,
   expectIdenticalScreenshots,
-  it,
   loadFixture
 } from '../../../../../tests/gui/suite';
 import { expect } from 'tdd-buffet/suite/expect';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 
 describe('Mugshot', async () => {
   describe('diff', () => {
@@ -21,7 +19,7 @@ describe('Mugshot', async () => {
     });
 
     it('should create diff', async browser => {
-      await loadFixture('simple2');
+      await loadFixture(browser, 'simple2');
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 

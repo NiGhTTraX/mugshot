@@ -1,13 +1,8 @@
-import {
-  beforeEach,
-  createResultsDirWithBaseline,
-  describe,
-  it,
-  loadFixture
-} from '../../../../../tests/gui/suite';
+import { createResultsDirWithBaseline, loadFixture } from '../../../../../tests/gui/suite';
 import { expect } from 'tdd-buffet/suite/expect';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 
 describe('Mugshot', () => {
   let resultsPath!: string;
@@ -17,7 +12,7 @@ describe('Mugshot', () => {
   });
 
   it('should pass when identical', async browser => {
-    await loadFixture('simple');
+    await loadFixture(browser, 'simple');
 
     const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath);
 
@@ -27,7 +22,7 @@ describe('Mugshot', () => {
   });
 
   it('should fail when different', async browser => {
-    await loadFixture('simple2');
+    await loadFixture(browser, 'simple2');
 
     const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath);
 

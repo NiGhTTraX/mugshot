@@ -1,15 +1,10 @@
 import path from 'path';
 import fs from 'fs-extra';
-import {
-  beforeEach,
-  describe,
-  expectIdenticalScreenshots,
-  it,
-  loadFixture
-} from '../../../../../tests/gui/suite';
+import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
 import { expect } from 'tdd-buffet/suite/expect';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 
 describe('Mugshot', async () => {
   describe('baselines', () => {
@@ -20,7 +15,7 @@ describe('Mugshot', async () => {
     });
 
     it('should write first baseline', async browser => {
-      await loadFixture('simple');
+      await loadFixture(browser, 'simple');
 
       const baselinePath = path.join(resultsPath, 'new.png');
 
@@ -43,7 +38,7 @@ describe('Mugshot', async () => {
     });
 
     it('should create parent folders when writing baseline', async browser => {
-      await loadFixture('simple');
+      await loadFixture(browser, 'simple');
 
       const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
         createMissingBaselines: true

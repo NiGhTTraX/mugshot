@@ -1,11 +1,7 @@
-import {
-  describe,
-  expectIdenticalScreenshots,
-  it,
-  loadFixture
-} from '../../../../../tests/gui/suite';
+import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
 import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
 import browserContractTests from '@mugshot/browser-contract';
+import { describe, it } from 'tdd-buffet/suite/gui';
 
 describe('WebdriverIOAdapter', () => {
   browserContractTests.forEach(test => {
@@ -13,7 +9,7 @@ describe('WebdriverIOAdapter', () => {
   });
 
   it('should take a full page screenshot', async browser => {
-    await loadFixture('simple');
+    await loadFixture(browser, 'simple');
 
     const browserAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(await browserAdapter.takeScreenshot(), 'base64');
@@ -22,7 +18,7 @@ describe('WebdriverIOAdapter', () => {
   });
 
   it('should take a full page screenshot with absolutely positioned elements', async browser => {
-    await loadFixture('rect');
+    await loadFixture(browser, 'rect');
 
     const browserAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(await browserAdapter.takeScreenshot(), 'base64');
