@@ -37,7 +37,7 @@
     "lint-staged": "~9.2.0",
     "nyc": "~14.1.0",
     "strong-mock": "~1.0.0",
-    "tdd-buffet": "~0.3.0",
+    "tdd-buffet": "~0.3.2",
     "typescript": "~3.5.0",
     "webdriverio": "~5.11.0"
   }
