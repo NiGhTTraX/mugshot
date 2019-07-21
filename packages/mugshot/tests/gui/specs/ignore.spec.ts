@@ -2,10 +2,10 @@ import {
   beforeEach,
   createResultsDirWithBaseline,
   describe,
-  expect,
   it,
   loadFixture
 } from '../../../../../tests/gui/suite';
+import { expect } from 'tdd-buffet/suite/expect';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 

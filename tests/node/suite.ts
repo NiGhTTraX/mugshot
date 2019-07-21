@@ -1,4 +1,4 @@
-import { expect } from 'tdd-buffet/suite/node';
+import { expect } from 'tdd-buffet/suite/expect';
 import CustomJimp from 'mugshot/src/vendor/custom-jimp';
 
 /**

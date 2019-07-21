@@ -1,7 +1,7 @@
 import { remote } from 'webdriverio';
 import fs from 'fs-extra';
 import path from 'path';
-import { expect } from 'chai';
+import { expect } from 'tdd-buffet/suite/expect';
 import {
   runnerAfter,
   runnerBefore,
@@ -10,8 +10,6 @@ import {
   runnerIt
 } from '../jest-runner';
 import PixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
-
-export { expect };
 
 type Browser = ReturnType<typeof remote>;
 export type TestDefinition = (browser: Browser) => Promise<any> | void;

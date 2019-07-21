@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'tdd-buffet/suite/node';
+import { describe, it } from 'tdd-buffet/suite/node';
+import { expect } from 'tdd-buffet/suite/expect';
 import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   createTestBuffer,
