@@ -4,14 +4,14 @@ import { AssertionError } from 'chai';
 import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
 import PNGDiffer from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
-import FileSystem from '../../../src/interfaces/file-system';
+import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
 import Screenshotter from '../../../src/interfaces/screenshotter';
 import Mock from 'strong-mock';
 
 describe('Mugshot', () => {
   describe('missing baselines', () => {
-    const fs = new Mock<FileSystem>();
+    const fs = new Mock<ScreenshotStorage>();
     const browser = new Mock<Browser>();
     const pngDiffer = new Mock<PNGDiffer>();
     const screenshotter = new Mock<Screenshotter>();

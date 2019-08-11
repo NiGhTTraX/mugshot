@@ -1,14 +1,14 @@
 import path from 'path';
-import fsExtra from 'fs-extra';
 import isCI from 'is-ci';
 import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
-import FileSystem from '../interfaces/file-system';
+import ScreenshotStorage from '../interfaces/screenshot-storage';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import PixelDiffer from './pixel-differ';
 import MugshotScreenshotter from './mugshot-screenshotter';
+import FsStorage from './fs-storage';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -39,7 +39,7 @@ export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 export type MugshotSelector = string;
 
 interface MugshotOptions {
-  fs?: FileSystem;
+  fs?: ScreenshotStorage;
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
   screenshotter?: Screenshotter;
@@ -73,7 +73,7 @@ export default class Mugshot {
 
   private readonly resultsPath: string;
 
-  private readonly fs: FileSystem;
+  private readonly fs: ScreenshotStorage;
 
   private readonly pngDiffer: PNGDiffer;
 
@@ -83,7 +83,7 @@ export default class Mugshot {
 
   private readonly createMissingBaselines: boolean;
 
-  private updateBaselines: boolean;
+  private readonly updateBaselines: boolean;
 
   /**
    * @param browser
@@ -99,7 +99,7 @@ export default class Mugshot {
     browser: Browser,
     resultsPath: string,
     {
-      fs = fsExtra,
+      fs = new FsStorage(),
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),

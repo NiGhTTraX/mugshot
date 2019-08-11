@@ -4,7 +4,7 @@ import { AssertionError } from 'chai';
 import Mugshot, { MugshotResult } from '../../../src/lib/mugshot';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import Browser from '../../../src/interfaces/browser';
-import FileSystem from '../../../src/interfaces/file-system';
+import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import {
   blackPixelBuffer,
   redPixelBuffer,
@@ -15,7 +15,7 @@ import Mock from 'strong-mock';
 
 describe('Mugshot', () => {
   describe('existing baselines', () => {
-    const fs = new Mock<FileSystem>();
+    const fs = new Mock<ScreenshotStorage>();
     const browser = new Mock<Browser>();
     const pngDiffer = new Mock<PNGDiffer>();
     const screenshotter = new Mock<Screenshotter>();

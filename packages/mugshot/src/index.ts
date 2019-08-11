@@ -2,7 +2,7 @@ import Mugshot from './lib/mugshot';
 import Browser, { ElementNotFound } from './interfaces/browser';
 import PNGProcessor from './interfaces/png-processor';
 import PNGDiffer from './interfaces/png-differ';
-import FileSystem from './interfaces/file-system';
+import ScreenshotStorage from './interfaces/screenshot-storage';
 import Screenshotter from './interfaces/screenshotter';
 import PixelDiffer from './lib/pixel-differ';
 
@@ -12,7 +12,7 @@ export {
   Browser,
   PNGDiffer,
   PNGProcessor,
-  FileSystem,
+  ScreenshotStorage,
   Screenshotter,
   PixelDiffer,
   ElementNotFound
