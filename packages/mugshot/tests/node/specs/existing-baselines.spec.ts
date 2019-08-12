@@ -15,14 +15,12 @@ import Mock from 'strong-mock';
 
 describe('Mugshot', () => {
   describe('existing baselines', () => {
-    const fs = new Mock<ScreenshotStorage>();
     const storage = new Mock<ScreenshotStorage>();
     const browser = new Mock<Browser>();
     const pngDiffer = new Mock<PNGDiffer>();
     const screenshotter = new Mock<Screenshotter>();
 
     beforeEach(() => {
-      fs.reset();
       storage.reset();
       browser.reset();
       screenshotter.reset();
@@ -30,7 +28,6 @@ describe('Mugshot', () => {
     });
 
     afterEach(() => {
-      fs.verifyAll();
       storage.verifyAll();
       browser.verifyAll();
       screenshotter.verifyAll();
@@ -100,7 +97,6 @@ describe('Mugshot', () => {
       );
 
       const mugshot = new Mugshot(browser.stub, 'results', {
-        fs: fs.stub,
         storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
@@ -134,7 +130,6 @@ describe('Mugshot', () => {
       );
 
       const mugshot = new Mugshot(browser.stub, 'results', {
-        fs: fs.stub,
         storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
@@ -161,7 +156,6 @@ describe('Mugshot', () => {
       );
 
       const mugshot = new Mugshot(browser.stub, 'results', {
-        fs: fs.stub,
         storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
@@ -188,7 +182,6 @@ describe('Mugshot', () => {
         .returns(Promise.resolve(whitePixelBuffer));
 
       const mugshot = new Mugshot(browser.stub, 'results', {
-        fs: fs.stub,
         storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
@@ -215,7 +208,6 @@ describe('Mugshot', () => {
         .returns(Promise.resolve(whitePixelBuffer));
 
       const mugshot = new Mugshot(browser.stub, 'results', {
-        fs: fs.stub,
         storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
