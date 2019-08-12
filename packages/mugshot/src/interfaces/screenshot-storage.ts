@@ -1,6 +1,7 @@
 /* eslint-disable semi */
 export default interface ScreenshotStorage {
   readFile: (name: string) => Promise<Buffer>;
+
   pathExists: (path: string) => Promise<boolean>;
 
   /**

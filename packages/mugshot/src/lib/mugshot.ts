@@ -12,8 +12,8 @@ import FsStorage from './fs-storage';
 
 export type MugshotIdenticalResult = {
   matches: true;
-  // The FS path where the baseline image is stored.
-  expectedPath: string;
+  // The name of the baseline.
+  expectedName: string;
   // A PNG MIME encoded buffer of the baseline image.
   expected: Buffer;
 };
@@ -26,12 +26,12 @@ export type MugshotDiffResult = {
   actual: Buffer;
   // A PNG MIME encoded buffer of the diff image.
   diff: Buffer;
-  // The FS path of the baseline image.
-  expectedPath: string;
-  // The FS path of the actual screenshot.
-  actualPath: string;
-  // The FS path of the diff image.
-  diffPath: string;
+  // The name of the baseline.
+  expectedName: string;
+  // The name of the actual screenshot.
+  actualName: string;
+  // The name of the diff image.
+  diffName: string;
 };
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
@@ -40,6 +40,7 @@ export type MugshotSelector = string;
 
 interface MugshotOptions {
   fs?: ScreenshotStorage;
+  storage?: ScreenshotStorage;
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
   screenshotter?: Screenshotter;
@@ -75,6 +76,8 @@ export default class Mugshot {
 
   private readonly fs: ScreenshotStorage;
 
+  private readonly storage: ScreenshotStorage | undefined;
+
   private readonly pngDiffer: PNGDiffer;
 
   private readonly pngProcessor: PNGProcessor;
@@ -89,6 +92,7 @@ export default class Mugshot {
    * @param browser
    * @param resultsPath
    * @param fs
+   * @param storage
    * @param pngDiffer
    * @param pngProcessor
    * @param screenshotter
@@ -100,6 +104,7 @@ export default class Mugshot {
     resultsPath: string,
     {
       fs = new FsStorage(),
+      storage,
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),
@@ -110,6 +115,7 @@ export default class Mugshot {
     this.browser = browser;
     this.resultsPath = resultsPath;
     this.fs = fs;
+    this.storage = storage;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
     this.screenshotter = screenshotter;
@@ -157,53 +163,61 @@ export default class Mugshot {
     }
 
     const expectedPath = path.join(this.resultsPath, `${name}.png`);
-    const baselineExists = await this.fs.pathExists(expectedPath);
+    const baselineExists = this.storage
+      ? await this.storage.pathExists(name)
+      : await this.fs.pathExists(expectedPath);
 
     if (!baselineExists) {
       if (this.createMissingBaselines || this.updateBaselines) {
-        return this.writeBaseline(expectedPath, options, selector);
+        return this.writeBaseline(name, expectedPath, options, selector);
       }
 
       throw new MugshotMissingBaselineError();
     } else if (this.updateBaselines) {
-      return this.writeBaseline(expectedPath, options, selector);
+      return this.writeBaseline(name, expectedPath, options, selector);
     }
 
     const actual = await this.getScreenshot(selector, options);
 
-    const expected = await this.fs.readFile(expectedPath);
+    const expected = this.storage
+      ? await this.storage.readFile(name)
+      : await this.fs.readFile(expectedPath);
     const result = await this.pngDiffer.compare(expected, actual);
 
     if (!result.matches) {
-      return this.diff(name, expectedPath, expected, result.diff, actual);
+      return this.diff(name, expected, result.diff, actual);
     }
 
     return {
       matches: true,
       expected,
-      expectedPath
+      expectedName: name
     };
   }
 
   private async writeBaseline(
+    name: string,
     expectedPath: string,
     options: ScreenshotOptions,
     selector?: MugshotSelector
   ): Promise<MugshotIdenticalResult> {
     const expected = await this.getScreenshot(selector, options);
 
-    await this.fs.outputFile(expectedPath, expected);
+    if (this.storage) {
+      await this.storage.outputFile(name, expected);
+    } else {
+      await this.fs.outputFile(expectedPath, expected);
+    }
 
     return {
       matches: true,
       expected,
-      expectedPath
+      expectedName: name
     };
   }
 
   private async diff(
     name: string,
-    expectedPath: string,
     expected: Buffer,
     diff: Buffer,
     actual: Buffer
@@ -211,17 +225,22 @@ export default class Mugshot {
     const diffPath = path.join(this.resultsPath, `${name}.diff.png`);
     const actualPath = path.join(this.resultsPath, `${name}.actual.png`);
 
-    await this.fs.outputFile(diffPath, diff);
-    await this.fs.outputFile(actualPath, actual);
+    if (this.storage) {
+      await this.storage.outputFile(`${name}.diff`, diff);
+      await this.storage.outputFile(`${name}.actual`, actual);
+    } else {
+      await this.fs.outputFile(diffPath, diff);
+      await this.fs.outputFile(actualPath, actual);
+    }
 
     return {
       matches: false,
       expected,
       actual,
       diff,
-      expectedPath,
-      diffPath,
-      actualPath
+      expectedName: name,
+      diffName: `${name}.diff`,
+      actualName: `${name}.actual`
     };
   }
 

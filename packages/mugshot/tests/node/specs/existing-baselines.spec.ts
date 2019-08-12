@@ -16,12 +16,14 @@ import Mock from 'strong-mock';
 describe('Mugshot', () => {
   describe('existing baselines', () => {
     const fs = new Mock<ScreenshotStorage>();
+    const storage = new Mock<ScreenshotStorage>();
     const browser = new Mock<Browser>();
     const pngDiffer = new Mock<PNGDiffer>();
     const screenshotter = new Mock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
+      storage.reset();
       browser.reset();
       screenshotter.reset();
       pngDiffer.reset();
@@ -29,18 +31,21 @@ describe('Mugshot', () => {
 
     afterEach(() => {
       fs.verifyAll();
+      storage.verifyAll();
       browser.verifyAll();
       screenshotter.verifyAll();
       pngDiffer.verifyAll();
     });
 
-    function setupFsWithExistingBaseline(path: string, base: Buffer) {
-      fs
-        .when(f => f.pathExists(path))
+    function setupStorageWithExistingBaseline(name: string, base: Buffer) {
+      storage
+        .when(s => s.pathExists(name))
         .returns(Promise.resolve(true));
-      fs
-        .when(f => f.readFile(path))
+      storage
+        .when(f => f.readFile(name))
         .returns(Promise.resolve(base));
+
+      return storage;
     }
 
     function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
@@ -52,28 +57,29 @@ describe('Mugshot', () => {
     async function expectIdenticalResult(
       checkCall: Promise<MugshotResult>,
       baselinePath: string,
+      name: string,
       baseline: Buffer
     ) {
       const result = await checkCall;
 
       expect(result.matches).to.be.true;
-      expect(result.expectedPath).to.equal(baselinePath);
+      expect(result.expectedName).to.equal(name);
       expect(result.expected).to.deep.equal(baseline);
     }
 
     async function expectDiffResult(
       checkCall: Promise<MugshotResult>,
-      diffPath: string,
+      diffName: string,
       diff: Buffer,
-      actualPath: string,
+      actualName: string,
       actual: Buffer
     ) {
       const result = await checkCall;
 
       if (!result.matches) {
-        expect(result.diffPath).to.equal(diffPath);
+        expect(result.diffName).to.equal(diffName);
         expect(result.diff).to.deep.equal(diff);
-        expect(result.actualPath).to.equal(actualPath);
+        expect(result.actualName).to.equal(actualName);
         expect(result.actual).to.deep.equal(actual);
       } else {
         throw new AssertionError('Expected Mugshot to return a diff result');
@@ -81,10 +87,7 @@ describe('Mugshot', () => {
     }
 
     it('should pass when identical', async () => {
-      setupFsWithExistingBaseline(
-        'results/identical.png',
-        blackPixelBuffer
-      );
+      setupStorageWithExistingBaseline('identical', blackPixelBuffer);
 
       screenshotter
         .when(s => s.takeScreenshot({}))
@@ -98,6 +101,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -105,6 +109,7 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('identical'),
         'results/identical.png',
+        'identical',
         blackPixelBuffer
       );
     });
@@ -114,15 +119,12 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupFsWithExistingBaseline(
-        'results/unexpected.png',
-        whitePixelBuffer
-      );
-      fs
-        .when(f => f.outputFile('results/unexpected.actual.png', blackPixelBuffer))
+      setupStorageWithExistingBaseline('unexpected', whitePixelBuffer);
+      storage
+        .when(f => f.outputFile('unexpected.actual', blackPixelBuffer))
         .returns(Promise.resolve());
-      fs
-        .when(f => f.outputFile('results/unexpected.diff.png', redPixelBuffer))
+      storage
+        .when(f => f.outputFile('unexpected.diff', redPixelBuffer))
         .returns(Promise.resolve());
 
       setupDifferWithResult(
@@ -133,22 +135,20 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
 
       await expectDiffResult(
         mugshot.check('unexpected'),
-        'results/unexpected.diff.png', redPixelBuffer,
-        'results/unexpected.actual.png', blackPixelBuffer
+        'unexpected.diff', redPixelBuffer,
+        'unexpected.actual', blackPixelBuffer
       );
     });
 
     it('should ignore an element', async () => {
-      setupFsWithExistingBaseline(
-        'results/ignore.png',
-        blackPixelBuffer
-      );
+      setupStorageWithExistingBaseline('ignore', blackPixelBuffer);
 
       screenshotter
         .when(s => s.takeScreenshot({ ignore: '.ignore' }))
@@ -162,6 +162,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -169,15 +170,13 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('ignore', { ignore: '.ignore' }),
         'results/ignore.png',
+        'ignore',
         blackPixelBuffer
       );
     });
 
     it('should screenshot only an element', async () => {
-      setupFsWithExistingBaseline(
-        'results/element.png',
-        blackPixelBuffer
-      );
+      setupStorageWithExistingBaseline('element', blackPixelBuffer);
       setupDifferWithResult(
         blackPixelBuffer,
         whitePixelBuffer,
@@ -190,6 +189,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -197,16 +197,17 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('element', '.element'),
         'results/element.png',
+        'element',
         blackPixelBuffer
       );
     });
 
     it('should update when told to', async () => {
-      fs
-        .when(f => f.pathExists('results/update.png'))
+      storage
+        .when(f => f.pathExists('update'))
         .returns(Promise.resolve(true));
-      fs
-        .when(f => f.outputFile('results/update.png', whitePixelBuffer))
+      storage
+        .when(f => f.outputFile('update', whitePixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter
@@ -215,6 +216,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         updateBaselines: true
@@ -223,6 +225,7 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('update'),
         'results/update.png',
+        'update',
         whitePixelBuffer
       );
     });

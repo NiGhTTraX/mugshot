@@ -12,12 +12,14 @@ import Mock from 'strong-mock';
 describe('Mugshot', () => {
   describe('missing baselines', () => {
     const fs = new Mock<ScreenshotStorage>();
+    const storage = new Mock<ScreenshotStorage>();
     const browser = new Mock<Browser>();
     const pngDiffer = new Mock<PNGDiffer>();
     const screenshotter = new Mock<Screenshotter>();
 
     beforeEach(() => {
       fs.reset();
+      storage.reset();
       browser.reset();
       screenshotter.reset();
       pngDiffer.reset();
@@ -25,26 +27,28 @@ describe('Mugshot', () => {
 
     afterEach(() => {
       fs.verifyAll();
+      storage.verifyAll();
       browser.verifyAll();
       screenshotter.verifyAll();
       pngDiffer.verifyAll();
     });
 
-    function setupFsWithMissingBaseline(path: string) {
-      fs
-        .when(f => f.pathExists(path))
+    function setupStorageWithMissingBaseline(name: string) {
+      storage
+        .when(f => f.pathExists(name))
         .returns(Promise.resolve(false));
     }
 
     async function expectIdenticalResult(
       checkCall: Promise<MugshotResult>,
       baselinePath: string,
+      name: string,
       baseline: Buffer
     ) {
       const result = await checkCall;
 
       expect(result.matches).to.be.true;
-      expect(result.expectedPath).to.equal(baselinePath);
+      expect(result.expectedName).to.equal(name);
       expect(result.expected).to.deep.equal(baseline);
     }
 
@@ -85,12 +89,11 @@ describe('Mugshot', () => {
     }
 
     it('should fail when told to not create', async () => {
-      setupFsWithMissingBaseline(
-        'results/missing.png',
-      );
+      setupStorageWithMissingBaseline('missing',);
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: false
@@ -106,13 +109,14 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupFsWithMissingBaseline('results/missing.png',);
-      fs
-        .when(f => f.outputFile('results/missing.png', blackPixelBuffer))
+      setupStorageWithMissingBaseline('missing',);
+      storage
+        .when(f => f.outputFile('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -121,16 +125,15 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('missing'),
         'results/missing.png',
+        'missing',
         blackPixelBuffer
       );
     });
 
     it('should ignore an element when told to create', async () => {
-      setupFsWithMissingBaseline(
-        'results/ignore.png'
-      );
-      fs
-        .when(f => f.outputFile('results/ignore.png', blackPixelBuffer))
+      setupStorageWithMissingBaseline('ignore');
+      storage
+        .when(f => f.outputFile('ignore', blackPixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter
@@ -139,6 +142,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -147,16 +151,15 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('ignore', { ignore: '.ignore' }),
         'results/ignore.png',
+        'ignore',
         blackPixelBuffer
       );
     });
 
     it('should screenshot only an element when told to create', async () => {
-      setupFsWithMissingBaseline(
-        'results/element.png'
-      );
-      fs
-        .when(f => f.outputFile('results/element.png', blackPixelBuffer))
+      setupStorageWithMissingBaseline('element');
+      storage
+        .when(f => f.outputFile('element', blackPixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter
@@ -165,6 +168,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -173,6 +177,7 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('element', '.element'),
         'results/element.png',
+        'element',
         blackPixelBuffer
       );
     });
@@ -182,13 +187,14 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupFsWithMissingBaseline('results/missing.png',);
-      fs
-        .when(f => f.outputFile('results/missing.png', blackPixelBuffer))
+      setupStorageWithMissingBaseline('missing',);
+      storage
+        .when(f => f.outputFile('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
       const mugshot = new Mugshot(browser.stub, 'results', {
         fs: fs.stub,
+        storage: storage.stub,
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: false,
@@ -198,6 +204,7 @@ describe('Mugshot', () => {
       await expectIdenticalResult(
         mugshot.check('missing'),
         'results/missing.png',
+        'missing',
         blackPixelBuffer
       );
     });
