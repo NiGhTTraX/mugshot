@@ -1,8 +1,9 @@
-import { createResultsDirWithBaseline, loadFixture } from '../../../../../tests/gui/suite';
-import { expect } from 'tdd-buffet/suite/expect';
-import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { expect } from 'tdd-buffet/suite/expect';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
+import { createResultsDirWithBaseline, loadFixture } from '../../../../../tests/gui/suite';
+import FsStorage from '../../../src/lib/fs-storage';
+import Mugshot from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
   let resultsPath!: string;
@@ -14,7 +15,7 @@ describe('Mugshot', () => {
   it('should pass when identical', async browser => {
     await loadFixture(browser, 'simple');
 
-    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath);
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath));
 
     const result = await mugshot.check('simple');
 
@@ -24,7 +25,7 @@ describe('Mugshot', () => {
   it('should fail when different', async browser => {
     await loadFixture(browser, 'simple2');
 
-    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath);
+    const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath));
 
     const result = await mugshot.check('simple');
 

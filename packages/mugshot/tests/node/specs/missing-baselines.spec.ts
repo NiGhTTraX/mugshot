@@ -1,13 +1,13 @@
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { expect } from 'tdd-buffet/suite/expect';
 import { AssertionError } from 'chai';
-import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
-import PNGDiffer from '../../../src/interfaces/png-differ';
-import Browser from '../../../src/interfaces/browser';
-import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
-import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
-import Screenshotter from '../../../src/interfaces/screenshotter';
 import Mock from 'strong-mock';
+import { expect } from 'tdd-buffet/suite/expect';
+import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
+import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
+import Browser from '../../../src/interfaces/browser';
+import PNGDiffer from '../../../src/interfaces/png-differ';
+import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
+import Screenshotter from '../../../src/interfaces/screenshotter';
+import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
   describe('missing baselines', () => {
@@ -88,8 +88,7 @@ describe('Mugshot', () => {
     it('should fail when told to not create', async () => {
       setupStorageWithMissingBaseline('missing',);
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: false
@@ -110,8 +109,7 @@ describe('Mugshot', () => {
         .when(f => f.outputFile('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -135,8 +133,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({ ignore: '.ignore' }))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -160,8 +157,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot('.element', {}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: true
@@ -185,8 +181,7 @@ describe('Mugshot', () => {
         .when(f => f.outputFile('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         createMissingBaselines: false,

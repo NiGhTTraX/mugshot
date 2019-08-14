@@ -1,15 +1,17 @@
-import Mugshot from './lib/mugshot';
 import Browser, { ElementNotFound } from './interfaces/browser';
-import PNGProcessor from './interfaces/png-processor';
 import PNGDiffer from './interfaces/png-differ';
+import PNGProcessor from './interfaces/png-processor';
 import ScreenshotStorage from './interfaces/screenshot-storage';
 import Screenshotter from './interfaces/screenshotter';
+import FsStorage from './lib/fs-storage';
+import Mugshot from './lib/mugshot';
 import PixelDiffer from './lib/pixel-differ';
 
 export default Mugshot;
 
 export {
   Browser,
+  FsStorage,
   PNGDiffer,
   PNGProcessor,
   ScreenshotStorage,

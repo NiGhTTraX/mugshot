@@ -1,17 +1,17 @@
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { expect } from 'tdd-buffet/suite/expect';
 import { AssertionError } from 'chai';
-import Mugshot, { MugshotResult } from '../../../src/lib/mugshot';
-import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
-import Browser from '../../../src/interfaces/browser';
-import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
+import Mock from 'strong-mock';
+import { expect } from 'tdd-buffet/suite/expect';
+import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
   redPixelBuffer,
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
+import Browser from '../../../src/interfaces/browser';
+import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
+import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import Screenshotter from '../../../src/interfaces/screenshotter';
-import Mock from 'strong-mock';
+import Mugshot, { MugshotResult } from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
   describe('existing baselines', () => {
@@ -96,8 +96,7 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -129,8 +128,7 @@ describe('Mugshot', () => {
         { matches: false, diff: redPixelBuffer }
       );
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -155,8 +153,7 @@ describe('Mugshot', () => {
         { matches: true }
       );
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -181,8 +178,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot('.element', {}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -207,8 +203,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, 'results', {
-        storage: storage.stub,
+      const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         updateBaselines: true

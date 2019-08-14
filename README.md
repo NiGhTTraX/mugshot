@@ -42,7 +42,7 @@ Since different Webdriver libraries have different API and semantics, you will m
 Here is an example of using the [WebdriverIO](https://webdriver.io/) adapter:
 
 ```typescript
-import Mugshot from 'mugshot';
+import Mugshot, { FsStorage } from 'mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
@@ -53,8 +53,8 @@ import { remote } from 'webdriverio';
   });
   
   const mugshot = new Mugshot(
-    WebdriverIOAdapter(browser),
-    './screenshots'
+    new WebdriverIOAdapter(browser),
+    new FsStorage('./screenshots')
   );
   
   await browser.url('https://github.com/NiGhTTraX/mugshot');
@@ -70,7 +70,6 @@ import { remote } from 'webdriverio';
 - `createMissingBaselines`: If set to true `Mugshot.check` will pass if a baseline is not found and it will create the baseline from the screenshot it takes.
 - `updateBaselines`: When set to true Mugshot will overwrite any existing baselines and will create missing ones (equivalent to setting `createMissingBaselines: true`).
 - `pngDiffer`: Will be used to compare images and create diffs. By default it uses [PixelDiffer](./README.md#pixeldiffer).
-- `fs`: Will be used to read baselines and write results. By default it uses [fs-extra](https://www.npmjs.com/package/fs-extra).
 - `pngProcessor`: Will be used to process the screenshots e.g. crop them, paint over them etc. By default it uses [jimp](https://github.com/oliver-moran/jimp).
 
 

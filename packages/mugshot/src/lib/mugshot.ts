@@ -1,14 +1,12 @@
-import path from 'path';
 import isCI from 'is-ci';
-import PNGDiffer from '../interfaces/png-differ';
 import Browser from '../interfaces/browser';
-import ScreenshotStorage from '../interfaces/screenshot-storage';
+import PNGDiffer from '../interfaces/png-differ';
 import PNGProcessor from '../interfaces/png-processor';
+import ScreenshotStorage from '../interfaces/screenshot-storage';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
-import PixelDiffer from './pixel-differ';
 import MugshotScreenshotter from './mugshot-screenshotter';
-import FsStorage from './fs-storage';
+import PixelDiffer from './pixel-differ';
 
 export type MugshotIdenticalResult = {
   matches: true;
@@ -39,7 +37,6 @@ export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 export type MugshotSelector = string;
 
 interface MugshotOptions {
-  storage?: ScreenshotStorage;
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
   screenshotter?: Screenshotter;
@@ -71,8 +68,6 @@ export class MugshotMissingBaselineError extends Error {
 export default class Mugshot {
   private readonly browser: Browser;
 
-  private readonly resultsPath: string;
-
   private readonly storage: ScreenshotStorage;
 
   private readonly pngDiffer: PNGDiffer;
@@ -86,9 +81,8 @@ export default class Mugshot {
   private readonly updateBaselines: boolean;
 
   /**
-   * @param browser
-   * @param resultsPath
-   * @param storage
+   * @param browser An adapter over your WebDriver tool of choice.
+   * @param storage How to read and store screenshots.
    * @param pngDiffer
    * @param pngProcessor
    * @param screenshotter
@@ -97,9 +91,8 @@ export default class Mugshot {
    */
   constructor(
     browser: Browser,
-    resultsPath: string,
+    storage: ScreenshotStorage,
     {
-      storage = new FsStorage(),
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
       screenshotter = new MugshotScreenshotter(browser, pngProcessor),
@@ -108,7 +101,6 @@ export default class Mugshot {
     }: MugshotOptions = {}
   ) {
     this.browser = browser;
-    this.resultsPath = resultsPath;
     this.storage = storage;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
@@ -206,9 +198,6 @@ export default class Mugshot {
     diff: Buffer,
     actual: Buffer
   ): Promise<MugshotDiffResult> {
-    path.join(this.resultsPath, `${name}.diff.png`);
-    path.join(this.resultsPath, `${name}.actual.png`);
-
     await this.storage.outputFile(`${name}.diff`, diff);
     await this.storage.outputFile(`${name}.actual`, actual);
 

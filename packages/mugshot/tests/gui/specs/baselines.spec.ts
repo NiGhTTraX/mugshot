@@ -1,10 +1,11 @@
-import path from 'path';
-import fs from 'fs-extra';
-import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
-import { expect } from 'tdd-buffet/suite/expect';
-import Mugshot from '../../../src/lib/mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
+import fs from 'fs-extra';
+import path from 'path';
+import { expect } from 'tdd-buffet/suite/expect';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
+import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
+import FsStorage from '../../../src/lib/fs-storage';
+import Mugshot from '../../../src/lib/mugshot';
 
 describe('Mugshot', async () => {
   describe('baselines', () => {
@@ -19,7 +20,7 @@ describe('Mugshot', async () => {
 
       const baselinePath = path.join(resultsPath, 'new.png');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
         createMissingBaselines: true
       });
 
@@ -40,7 +41,7 @@ describe('Mugshot', async () => {
     it('should create parent folders when writing baseline', async browser => {
       await loadFixture(browser, 'simple');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
         createMissingBaselines: true
       });
 

@@ -1,14 +1,15 @@
-import path from 'path';
+import WebdriverIOAdapter from '@mugshot/webdriverio';
 import fs from 'fs-extra';
+import path from 'path';
+import { expect } from 'tdd-buffet/suite/expect';
+import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import {
   createResultsDirWithBaseline,
   expectIdenticalScreenshots,
   loadFixture
 } from '../../../../../tests/gui/suite';
-import { expect } from 'tdd-buffet/suite/expect';
+import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
-import WebdriverIOAdapter from '@mugshot/webdriverio';
-import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 
 describe('Mugshot', async () => {
   describe('diff', () => {
@@ -23,7 +24,7 @@ describe('Mugshot', async () => {
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), resultsPath, {
+      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
         createMissingBaselines: true
       });
 
