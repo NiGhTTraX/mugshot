@@ -32,7 +32,7 @@ describe('Mugshot', () => {
 
     function setupStorageWithMissingBaseline(name: string) {
       storage
-        .when(f => f.pathExists(name))
+        .when(f => f.baselineExists(name))
         .returns(Promise.resolve(false));
     }
 
@@ -106,7 +106,7 @@ describe('Mugshot', () => {
 
       setupStorageWithMissingBaseline('missing',);
       storage
-        .when(f => f.outputFile('missing', blackPixelBuffer))
+        .when(f => f.writeBaseline('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {
@@ -126,7 +126,7 @@ describe('Mugshot', () => {
     it('should ignore an element when told to create', async () => {
       setupStorageWithMissingBaseline('ignore');
       storage
-        .when(f => f.outputFile('ignore', blackPixelBuffer))
+        .when(f => f.writeBaseline('ignore', blackPixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter
@@ -150,7 +150,7 @@ describe('Mugshot', () => {
     it('should screenshot only an element when told to create', async () => {
       setupStorageWithMissingBaseline('element');
       storage
-        .when(f => f.outputFile('element', blackPixelBuffer))
+        .when(f => f.writeBaseline('element', blackPixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter
@@ -178,7 +178,7 @@ describe('Mugshot', () => {
 
       setupStorageWithMissingBaseline('missing',);
       storage
-        .when(f => f.outputFile('missing', blackPixelBuffer))
+        .when(f => f.writeBaseline('missing', blackPixelBuffer))
         .returns(Promise.resolve());
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {

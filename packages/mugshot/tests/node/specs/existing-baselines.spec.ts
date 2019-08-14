@@ -36,10 +36,10 @@ describe('Mugshot', () => {
 
     function setupStorageWithExistingBaseline(name: string, base: Buffer) {
       storage
-        .when(s => s.pathExists(name))
+        .when(s => s.baselineExists(name))
         .returns(Promise.resolve(true));
       storage
-        .when(f => f.readFile(name))
+        .when(f => f.getBaseline(name))
         .returns(Promise.resolve(base));
 
       return storage;
@@ -116,10 +116,10 @@ describe('Mugshot', () => {
 
       setupStorageWithExistingBaseline('unexpected', whitePixelBuffer);
       storage
-        .when(f => f.outputFile('unexpected.actual', blackPixelBuffer))
+        .when(f => f.writeBaseline('unexpected.actual', blackPixelBuffer))
         .returns(Promise.resolve());
       storage
-        .when(f => f.outputFile('unexpected.diff', redPixelBuffer))
+        .when(f => f.writeBaseline('unexpected.diff', redPixelBuffer))
         .returns(Promise.resolve());
 
       setupDifferWithResult(
@@ -193,10 +193,10 @@ describe('Mugshot', () => {
 
     it('should update when told to', async () => {
       storage
-        .when(f => f.pathExists('update'))
+        .when(f => f.baselineExists('update'))
         .returns(Promise.resolve(true));
       storage
-        .when(f => f.outputFile('update', whitePixelBuffer))
+        .when(f => f.writeBaseline('update', whitePixelBuffer))
         .returns(Promise.resolve());
 
       screenshotter

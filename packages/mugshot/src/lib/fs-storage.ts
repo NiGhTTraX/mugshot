@@ -5,18 +5,18 @@ import ScreenshotStorage from '../interfaces/screenshot-storage';
 export default class FsStorage implements ScreenshotStorage {
   private readonly resultsPath: string;
 
+  /**
+   * @param resultsPath The entire folder structure will be created if missing.
+   */
   constructor(resultsPath: string) {
     this.resultsPath = resultsPath;
   }
 
-  outputFile = async (
-    filePath: string,
-    screenshot: Buffer
-  ) => outputFile(this.getPath(filePath), screenshot);
+  writeBaseline = async (name: string, data: Buffer) => outputFile(this.getPath(name), data);
 
-  pathExists = async (filePath: string) => pathExists(this.getPath(filePath));
+  baselineExists = async (name: string) => pathExists(this.getPath(name));
 
-  readFile = async (filePath: string) => readFile(this.getPath(filePath));
+  getBaseline = async (name: string) => readFile(this.getPath(name));
 
   private getPath(filePath: string) {
     return path.join(this.resultsPath, `${filePath}.png`);

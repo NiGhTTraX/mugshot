@@ -17,7 +17,7 @@ describe('FileStorage', () => {
     await writeFile(filePath, blackPixelBuffer);
 
     const storage = new FsStorage(tmpPath);
-    expect(await storage.readFile('existing')).to.deep.equal(blackPixelBuffer);
+    expect(await storage.getBaseline('existing')).to.deep.equal(blackPixelBuffer);
   });
 
   it('should ask if a baseline exists', async () => {
@@ -26,8 +26,8 @@ describe('FileStorage', () => {
 
     const storage = new FsStorage(tmpPath);
 
-    expect(await storage.pathExists('existing')).to.be.true;
-    expect(await storage.pathExists('missing')).to.be.false;
+    expect(await storage.baselineExists('existing')).to.be.true;
+    expect(await storage.baselineExists('missing')).to.be.false;
   });
 
   it('should write a new baseline', async () => {
@@ -35,7 +35,7 @@ describe('FileStorage', () => {
 
     const storage = new FsStorage(tmpPath);
 
-    await storage.outputFile('new', blackPixelBuffer);
+    await storage.writeBaseline('new', blackPixelBuffer);
     expect(await readFile(filePath)).to.deep.equal(blackPixelBuffer);
   });
 
@@ -44,7 +44,7 @@ describe('FileStorage', () => {
     await writeFile(filePath, blackPixelBuffer);
 
     const storage = new FsStorage(tmpPath);
-    await storage.outputFile('update', whitePixelBuffer);
+    await storage.writeBaseline('update', whitePixelBuffer);
 
     expect(await readFile(filePath)).to.deep.equal(whitePixelBuffer);
   });

@@ -148,7 +148,7 @@ export default class Mugshot {
       options = selectorOrOptions;
     }
 
-    const baselineExists = await this.storage.pathExists(name);
+    const baselineExists = await this.storage.baselineExists(name);
 
     if (!baselineExists) {
       if (this.createMissingBaselines || this.updateBaselines) {
@@ -162,7 +162,7 @@ export default class Mugshot {
 
     const actual = await this.getScreenshot(selector, options);
 
-    const expected = await this.storage.readFile(name);
+    const expected = await this.storage.getBaseline(name);
     const result = await this.pngDiffer.compare(expected, actual);
 
     if (!result.matches) {
@@ -183,7 +183,7 @@ export default class Mugshot {
   ): Promise<MugshotIdenticalResult> {
     const expected = await this.getScreenshot(selector, options);
 
-    await this.storage.outputFile(name, expected);
+    await this.storage.writeBaseline(name, expected);
 
     return {
       matches: true,
@@ -198,8 +198,8 @@ export default class Mugshot {
     diff: Buffer,
     actual: Buffer
   ): Promise<MugshotDiffResult> {
-    await this.storage.outputFile(`${name}.diff`, diff);
-    await this.storage.outputFile(`${name}.actual`, actual);
+    await this.storage.writeBaseline(`${name}.diff`, diff);
+    await this.storage.writeBaseline(`${name}.actual`, actual);
 
     return {
       matches: false,

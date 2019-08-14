@@ -1,11 +1,22 @@
 /* eslint-disable semi */
+/**
+ * A way to read and write baselines.
+ *
+ * It's up to the implementation to decide where and how to
+ * write the baselines. All the methods receive the name of
+ * the baseline which is the same value as the name passed
+ * in `Mugshot.check()`.
+ *
+ * @see Mugshot.check
+ */
 export default interface ScreenshotStorage {
-  readFile: (name: string) => Promise<Buffer>;
+  getBaseline: (name: string) => Promise<Buffer>;
 
-  pathExists: (path: string) => Promise<boolean>;
+  baselineExists: (name: string) => Promise<boolean>;
 
   /**
-   * (Over)write a file and create its parent folder structure if missing.
+   * @param name
+   * @param data PNG encoded Buffer.
    */
-  outputFile: (path: string, data: Buffer) => Promise<void>;
+  writeBaseline: (name: string, data: Buffer) => Promise<void>;
 }
