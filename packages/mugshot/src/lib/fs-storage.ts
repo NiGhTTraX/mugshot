@@ -2,6 +2,11 @@ import { outputFile, pathExists, readFile } from 'fs-extra';
 import path from 'path';
 import ScreenshotStorage from '../interfaces/screenshot-storage';
 
+/**
+ * Write and read baselines to and from the local file system.
+ *
+ * Baselines will be saved with a `.png` extension.
+ */
 export default class FsStorage implements ScreenshotStorage {
   private readonly resultsPath: string;
 

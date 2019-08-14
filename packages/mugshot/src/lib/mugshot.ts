@@ -112,12 +112,13 @@ export default class Mugshot {
   /**
    * Check for visual regressions.
    *
-   * @param name Mugshot will look for a baseline named `${name}.png` in the
-   *   `resultsPath` folder. If one is not found and `createMissingBaselines`
+   * @param name Mugshot will ask the storage implementation for a baseline
+   *   with this name. If one is not found and `createMissingBaselines`
    *   is true then Mugshot will create a new baseline and pass the test. <br>
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `browser`. If differences are found the test will fail
-   *   and a `${name}.diff.png` will be created in `resultsPath`.
+   *   and a `${name}.diff` and a `${name}.actual` will be created in the
+   *   storage.
    *
    * @param selector If given then Mugshot will screenshot the visible
    *   region bounded by the element's rectangle. <br>

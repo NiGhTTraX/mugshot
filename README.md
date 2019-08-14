@@ -65,6 +65,7 @@ import { remote } from 'webdriverio';
 })();
 ```
 
+
 ### Config
 
 - `createMissingBaselines`: If set to true `Mugshot.check` will pass if a baseline is not found and it will create the baseline from the screenshot it takes.
@@ -75,7 +76,7 @@ import { remote } from 'webdriverio';
 
 ### `check(name, selector?, options?)`
 
-The first argument is the name of the baseline screenshot - Mugshot will look for a file named `${name}.png` located in `resultsPath` that was passed in the constructor. If this file is missing, and `createMissingBaselines` is `false`, then Mugshot will throw an error. If the file is found it will be compared against the fresh screenshot taken from the browser. If any differences are found then a `${name}.actual.png` and a `${name}.diff.png` will be created in `resultsPath` and Mugshot will return a result with `{ matches: false }`.
+The first argument is the name of the baseline screenshot. With the basic `FsStorage`, Mugshot will look for a file named `${name}.png` located in `resultsPath` that was passed in the constructor. If this file is missing, and `createMissingBaselines` is `false`, then Mugshot will throw an error. If the file is found it will be compared against the fresh screenshot taken from the browser. If any differences are found then a `${name}.actual.png` and a `${name}.diff.png` will be created in `resultsPath` and Mugshot will return a result with `{ matches: false }`.
 
 
 #### Taking a screenshot of a single element
@@ -86,6 +87,13 @@ A selector can be passed as the second argument and will tell Mugshot to only sc
 #### Ignoring elements
 
 You can ignore a single element on the page (for now, ignoring multiple elements is a planned feature) by passing a selector through the `ignore` option. The first element identified by that selector will be painted black before taking any screenshots.
+
+
+## Storage
+
+Mugshot offers flexibility in where and how the screenshots are stored. It ships with an `FsStorage` implementation which reads and saves PNGs from and to the local file system.
+
+If you want to store the screenshots somewhere else, for instance in the cloud, you can provide your own implementation of the [`ScreenshotStorage` interface](./packages/mugshot/src/interfaces/screenshot-storage.ts).
 
 
 ## PixelDiffer
