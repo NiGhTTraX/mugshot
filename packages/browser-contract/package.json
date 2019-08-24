@@ -33,7 +33,7 @@
     "mugshot": "^2.0.1"
   },
   "dependencies": {
-    "@types/chai": "~4.1.7",
+    "@types/chai": "~4.2.0",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~12.6.0",
     "chai": "~4.2.0",
