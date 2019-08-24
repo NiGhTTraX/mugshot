@@ -12,7 +12,7 @@
     "test:gui:selenium": "selenium debug --html tests/gui/fixtures",
     "test:gui:selenium:stop": "selenium stop",
     "_test:gui": "tdd-buffet test --config=tests/gui/jest.config.js --coverage",
-    "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage/coverage-final.json"
+    "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage-final.json"
   },
   "husky": {
     "hooks": {
