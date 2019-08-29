@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~3.0.0",
-    "@tdd-buffet/selenium": "~0.3.0",
+    "@tdd-buffet/selenium": "~0.4.0",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~10.12.2",
     "@typescript-eslint/eslint-plugin": "~2.0.0",
