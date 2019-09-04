@@ -1,12 +1,12 @@
+import Jimp from 'jimp';
 import { expect } from 'tdd-buffet/suite/expect';
-import CustomJimp from 'mugshot/src/vendor/custom-jimp';
 
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.
  */
 export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
-  const screenshotJimp = await CustomJimp.read(actual);
-  const baselineJimp = await CustomJimp.read(expected);
+  const screenshotJimp = await Jimp.read(actual);
+  const baselineJimp = await Jimp.read(expected);
 
   const sWidth = screenshotJimp.getWidth();
   const sHeight = screenshotJimp.getHeight();
@@ -19,10 +19,10 @@ export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
   for (let x = 0; x < sWidth; x++) {
     for (let y = 0; y < sHeight; y++) {
       expect(
-        CustomJimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
+        Jimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
         `Pixel at ${x}, ${y} has a different color`
       ).to.deep.equal(
-        CustomJimp.intToRGBA(baselineJimp.getPixelColor(x, y))
+        Jimp.intToRGBA(baselineJimp.getPixelColor(x, y))
       );
     }
   }
@@ -30,11 +30,11 @@ export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
 
 function getHexFromChar(pixel: string) {
   switch (pixel) {
-    case 'R': return CustomJimp.cssColorToHex('#ff0000');
-    case 'G': return CustomJimp.cssColorToHex('#00ff00');
-    case 'B': return CustomJimp.cssColorToHex('#0000ff');
-    case 'K': return CustomJimp.cssColorToHex('#000000');
-    default: return CustomJimp.cssColorToHex('#ffffff');
+    case 'R': return Jimp.cssColorToHex('#ff0000');
+    case 'G': return Jimp.cssColorToHex('#00ff00');
+    case 'B': return Jimp.cssColorToHex('#0000ff');
+    case 'K': return Jimp.cssColorToHex('#000000');
+    default: return Jimp.cssColorToHex('#ffffff');
   }
 }
 
@@ -44,7 +44,7 @@ function getHexFromChar(pixel: string) {
  * @param rows Supports 'R' (red), 'B' (blue), 'G' (green), 'K' (black) and ' ' (white).
  */
 export async function createTestBuffer(rows: [string, ...string[]]): Promise<Buffer> {
-  const j = new CustomJimp(rows[0].length, rows.length);
+  const j = new Jimp(rows[0].length, rows.length);
 
   let y = 0;
   // eslint-disable-next-line no-restricted-syntax
@@ -62,7 +62,7 @@ export async function createTestBuffer(rows: [string, ...string[]]): Promise<Buf
     y++;
   }
 
-  return j.getBufferAsync(CustomJimp.MIME_PNG);
+  return j.getBufferAsync(Jimp.MIME_PNG);
 }
 
 /**
@@ -73,9 +73,9 @@ export async function createTestBuffer(rows: [string, ...string[]]): Promise<Buf
  *   100 will return white, 0 will return the original image.
  */
 export async function lightenBuffer(b: Buffer, amount: number): Promise<Buffer> {
-  const j = await CustomJimp.read(b);
+  const j = await Jimp.read(b);
 
   j.color([{ apply: 'tint', params: [amount] }]);
 
-  return j.getBufferAsync(CustomJimp.MIME_PNG);
+  return j.getBufferAsync(Jimp.MIME_PNG);
 }
