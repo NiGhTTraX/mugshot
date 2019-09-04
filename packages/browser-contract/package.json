@@ -33,15 +33,15 @@
     "mugshot": "^2.0.1"
   },
   "dependencies": {
-    "@types/chai": "~4.1.7",
+    "@types/chai": "~4.2.0",
     "@types/fs-extra": "~8.0.0",
-    "@types/node": "~12.6.0",
+    "@types/node": "~12.7.0",
     "chai": "~4.2.0",
     "fs-extra": "~8.1.0",
     "jimp": "~0.6.1"
   },
   "devDependencies": {
     "mugshot": "^2.2.0",
-    "typescript": "~3.5.0"
+    "typescript": "~3.6.0"
   }
 }
