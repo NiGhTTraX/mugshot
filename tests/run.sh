@@ -11,8 +11,8 @@ rm -rf .nyc_output tests/results tests/node/results tests/gui/results
 mkdir .nyc_output
 
 # --silent so we don't get the npm err epilogue.
-npm run test:node --silent
-npm run test:gui --silent
+yarn run test:node --silent
+yarn run test:gui --silent
 
 cp tests/node/results/coverage-final.json .nyc_output/node.json
 

@@ -14,12 +14,9 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-before_script:
-- npm run bootstrap --  --no-ci
-
 script:
-- npm run lint
-- npm run test
+- yarn run lint
+- yarn run test
 
 after_script:
-- npm run report-coverage
+- yarn run report-coverage

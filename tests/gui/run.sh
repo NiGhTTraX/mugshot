@@ -20,9 +20,9 @@ BROWSERS=(chrome firefox)
 
 for browser in "${BROWSERS[@]}"; do
   if npx is-ci ; then
-    BROWSER=${browser} npm run _test:gui -- --runInBand
+    BROWSER=${browser} yarn run _test:gui --runInBand
   else
-    BROWSER=${browser} npm run _test:gui -- --maxWorkers=${NODES}
+    BROWSER=${browser} yarn run _test:gui --maxWorkers=${NODES}
   fi
 
   cp results/coverage-final.json ../../.nyc_output/${browser}.json

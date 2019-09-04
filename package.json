@@ -1,10 +1,12 @@
 {
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "pub": "npm run build && lerna publish && npm run clean",
+    "pub": "yarn run build && lerna publish && yarn run clean",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "./tests/run.sh",
     "test:node": "tdd-buffet test --config tests/node/jest.config.js --coverage",

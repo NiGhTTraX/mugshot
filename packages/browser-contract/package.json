@@ -23,11 +23,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run clean && npm run compile",
+    "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "package": "cp -r fixtures ./dist",
-    "prepublishOnly": "npm run build && npm run package"
+    "prepublishOnly": "yarn run build && yarn run package"
   },
   "peerDependencies": {
     "mugshot": "^2.0.1"
