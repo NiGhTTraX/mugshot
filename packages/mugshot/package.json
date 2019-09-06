@@ -34,7 +34,7 @@
     "@types/node": "~10.12.2",
     "fs-extra": "~8.1.0",
     "is-ci": "~2.0.0",
-    "jimp": "~0.6.8"
+    "jimp": "~0.7.0"
   },
   "devDependencies": {
     "typescript": "~3.6.0"
