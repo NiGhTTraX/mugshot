@@ -38,7 +38,7 @@
     "@types/node": "~12.7.0",
     "chai": "~4.2.0",
     "fs-extra": "~8.1.0",
-    "jimp": "~0.7.0"
+    "jimp": "~0.8.0"
   },
   "devDependencies": {
     "mugshot": "^2.2.0",
