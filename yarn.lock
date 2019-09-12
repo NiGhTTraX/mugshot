@@ -1532,6 +1532,18 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/jest-diff@*":
+  version "20.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
+  integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
+
+"@types/jest@~24.0.18":
+  version "24.0.18"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.18.tgz#9c7858d450c59e2164a8a9df0905fc5091944498"
+  integrity sha512-jcDDXdjTcrQzdN06+TSVsPPqxvsZA/5QkYfIZlq1JMw7FdP5AZylbOc+6B/cuDurctRe+MziUMtQ3xQdrbjqyQ==
+  dependencies:
+    "@types/jest-diff" "*"
+
 "@types/json-schema@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
@@ -4898,7 +4910,7 @@ jest-runner@^24.9.0:
     source-map-support "^0.5.6"
     throat "^4.0.0"
 
-jest-runtime@^24.9.0:
+jest-runtime@^24.9.0, jest-runtime@~24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-runtime/-/jest-runtime-24.9.0.tgz#9f14583af6a4f7314a6a9d9f0226e1a781c8e4ac"
   integrity sha512-8oNqgnmF3v2J6PVRM2Jfuj8oX3syKmaynlDMMKQ4iyzbQzIG6th5ub/lM2bCMTmoTKM3ykcUYI2Pw9xwNtjMnw==
@@ -5002,7 +5014,7 @@ jest-worker@^24.6.0, jest-worker@^24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-jest@^24.8.0:
+jest@~24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-24.9.0.tgz#987d290c05a08b52c56188c1002e368edb007171"
   integrity sha512-YvkBL1Zm7d2B1+h5fHEOdyjCG+sGMz4f8D86/0HiqJ6MB4MnDc8FgP5vdWsGnemOQro7lnYo8UakZ3+5A0jxGw==
@@ -7860,21 +7872,22 @@ tar@^4, tar@^4.4.10, tar@^4.4.8:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-tdd-buffet@~0.8.0:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/tdd-buffet/-/tdd-buffet-0.8.2.tgz#b6f01349c956349ecec8905fcfcd8f5545205370"
-  integrity sha512-U43v1Tb33P0hImjAwd3AYbEbNyaXBOMF3rISdjDlNt0pb9Kenb7ptrvpb/tK7M05xanFwxtLyjCggcCmnKsryg==
+tdd-buffet@~0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/tdd-buffet/-/tdd-buffet-0.10.0.tgz#7a579df39e46b0f3d408361a879db40dea3d9630"
+  integrity sha512-1MQ3a2fIEurXEkftEBpWlVUkYT84zETD2Hr6NPjSocc/tIKKUDS0PMpOAHb9IKtmLlf3SOkSzC8yDXHzvClWEg==
   dependencies:
     "@jest/types" "~24.9.0"
     "@types/chai" "~4.2.0"
     "@types/fs-extra" "~8.0.0"
     "@types/istanbul-lib-coverage" "~2.0.1"
+    "@types/jest" "~24.0.18"
     chai "~4.2.0"
     execa "~2.0.3"
     fs-extra "~8.1.0"
     istanbul-lib-coverage "~2.0.5"
-    jest "^24.8.0"
-    jest-runtime "^24.9.0"
+    jest "~24.9.0"
+    jest-runtime "~24.9.0"
     meow "~5.0.0"
     ts-jest "~24.0.2"
     webdriverio "~5.12.0"
