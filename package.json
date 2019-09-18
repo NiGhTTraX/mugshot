@@ -13,7 +13,7 @@
     "test:gui": "./tests/gui/run.sh",
     "test:gui:selenium": "selenium debug",
     "test:gui:selenium:stop": "selenium stop",
-    "_test:gui": "tdd-buffet test --config=tests/gui/jest.config.js --coverage",
+    "_test:gui": "tdd-buffet test --config tests/gui/jest.config.js --coverage",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage-final.json"
   },
   "husky": {

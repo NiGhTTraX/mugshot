@@ -16,5 +16,5 @@ yarn run test:gui --silent
 
 cp tests/node/results/coverage-final.json .nyc_output/node.json
 
-npx nyc report
-npx nyc check-coverage
+nyc report
+nyc check-coverage
