@@ -6,8 +6,21 @@ import PixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 const { BROWSER = 'chrome' } = process.env;
 
+/* istanbul ignore next because this will get stringified and sent to the browser */
+function createFixture(html: string) {
+  // This should use `document.write` instead but Firefox gives an "insecure operation" error.
+  document.body.innerHTML = html;
+}
+
 export async function loadFixture(browser: Browser, name: string) {
-  await browser.url(`file:///var/www/html/${name}.html`);
+  const fixtureContent = await fs.readFile(
+    path.join(__dirname, `./fixtures/${name}.html`),
+    { encoding: 'utf8' }
+  );
+
+  await browser.url('about:blank');
+
+  await browser.execute(createFixture, fixtureContent);
 
   await setViewportSize(1024, 768);
 }

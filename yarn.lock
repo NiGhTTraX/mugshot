@@ -1413,10 +1413,10 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tdd-buffet/selenium@~0.3.0":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@tdd-buffet/selenium/-/selenium-0.3.3.tgz#c7c490e981ae7f1b6d80a915f1942ef8819cb239"
-  integrity sha512-WqX8vFGHLTWqj5lgUeecympYMJ/a0fQ+uL3w+UN+UGcW+gx0KhvwboU6zCvBkOq58E+djVEJPrUBwWHMN+NxJA==
+"@tdd-buffet/selenium@~0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@tdd-buffet/selenium/-/selenium-0.4.1.tgz#5a8ba415e1c2b0360809563aeb750988ee9c425b"
+  integrity sha512-mTbDRTibWX4kHsfI1Zx1HCpsYgkkaLiAvGbbQbiEKcEkb83kub38Gz2RurmnVGOCthNyVuppx44UGoZwIMwKyg==
   dependencies:
     "@types/got" "~9.6.2"
     "@types/meow" "~5.0.0"

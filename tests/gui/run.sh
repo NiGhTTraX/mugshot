@@ -14,7 +14,7 @@ if npx is-ci ; then
   NODES=1
 fi
 
-npx @tdd-buffet/selenium start ${NODES} --html fixtures
+npx @tdd-buffet/selenium start ${NODES}
 
 BROWSERS=(chrome firefox)
 
