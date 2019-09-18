@@ -1,7 +1,7 @@
-import { Browser, setViewportSize } from 'tdd-buffet/suite/gui';
-import { expect } from 'tdd-buffet/suite/expect';
 import fs from 'fs-extra';
 import path from 'path';
+import { expect } from 'tdd-buffet/expect/chai';
+import { Browser, setViewportSize } from 'tdd-buffet/suite/gui';
 import PixelDiffer from '../../packages/mugshot/src/lib/pixel-differ';
 
 const { BROWSER = 'chrome' } = process.env;

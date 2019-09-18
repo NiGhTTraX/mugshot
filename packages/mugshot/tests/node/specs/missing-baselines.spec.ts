@@ -1,6 +1,6 @@
 import { AssertionError } from 'chai';
 import Mock from 'strong-mock';
-import { expect } from 'tdd-buffet/suite/expect';
+import { expect } from 'tdd-buffet/expect/chai';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { blackPixelBuffer } from '../../../../../tests/node/fixtures';
 import Browser from '../../../src/interfaces/browser';

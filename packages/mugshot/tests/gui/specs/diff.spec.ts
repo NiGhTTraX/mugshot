@@ -1,7 +1,7 @@
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import fs from 'fs-extra';
 import path from 'path';
-import { expect } from 'tdd-buffet/suite/expect';
+import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import {
   createResultsDirWithBaseline,

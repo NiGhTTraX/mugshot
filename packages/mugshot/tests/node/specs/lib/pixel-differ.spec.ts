@@ -1,11 +1,11 @@
+import { expect } from 'tdd-buffet/expect/chai';
 import { describe, it } from 'tdd-buffet/suite/node';
-import { expect } from 'tdd-buffet/suite/expect';
-import PixelDiffer from '../../../../src/lib/pixel-differ';
 import {
   createTestBuffer,
   expectIdenticalBuffers,
   lightenBuffer
 } from '../../../../../../tests/node/suite';
+import PixelDiffer from '../../../../src/lib/pixel-differ';
 
 describe('PixelDiffer', () => {
   describe('same width and height', () => {

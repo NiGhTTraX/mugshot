@@ -1,5 +1,5 @@
 import WebdriverIOAdapter from '@mugshot/webdriverio';
-import { expect } from 'tdd-buffet/suite/expect';
+import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import { createResultsDirWithBaseline, loadFixture } from '../../../../../tests/gui/suite';
 import FsStorage from '../../../src/lib/fs-storage';
