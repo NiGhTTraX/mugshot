@@ -1,7 +1,7 @@
-import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
-import WebdriverIOAdapter from '../../../src/lib/webdriverio-adapter';
 import browserContractTests from '@mugshot/browser-contract';
 import { describe, it } from 'tdd-buffet/suite/gui';
+import { expectIdenticalScreenshots, loadFixture } from '../../../tests/gui/suite';
+import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
   browserContractTests.forEach(test => {

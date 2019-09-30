@@ -33,6 +33,7 @@ export default interface Browser {
   setViewportSize: (width: number, height: number) => Promise<void>;
 }
 
+/* istanbul ignore next because the adapter packages are supposed to throw it */
 export class ElementNotFound extends Error {
   constructor(selector: string) {
     super(`Couldn't find element ${selector}`);

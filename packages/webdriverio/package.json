@@ -25,6 +25,8 @@
     "dist"
   ],
   "scripts": {
+    "test": "./tests/run.sh",
+    "_test": "tdd-buffet test --config ../../tests/jest.config.js --coverage --runInBand",
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",

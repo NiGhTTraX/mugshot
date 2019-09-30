@@ -7966,10 +7966,10 @@ tar@^4, tar@^4.4.10, tar@^4.4.8:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-tdd-buffet@~0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/tdd-buffet/-/tdd-buffet-0.12.0.tgz#94ffed77aba9ba6ef92fe291f480a8a277899673"
-  integrity sha512-gm8hGOf22Ge84TfFKVuFQdMPqQj0JlqKDa47X/giNiu69bu5F7jeRkAVjuqAim9zvNUvP55zK4vWTdt3ROOhfw==
+tdd-buffet@~0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/tdd-buffet/-/tdd-buffet-0.12.3.tgz#92f6088aa1fbc8a7bcd0acebe2828dbf7d2e5ea0"
+  integrity sha512-1prbIYiXbedxBCMB2m3BSeTa+UrXJE43LPNpE7W3EiQceOUI9lGc+RMIxY9/flsn8c4SlS3RXNyvD3B5/BOgDw==
   dependencies:
     "@jest/types" "~24.9.0"
     "@types/chai" "~4.2.0"
@@ -7985,6 +7985,7 @@ tdd-buffet@~0.12.0:
     meow "~5.0.0"
     ts-jest "~24.1.0"
     ts-loader "~6.1.2"
+    typescript "~3.6.0"
     webdriverio "~5.13.0"
 
 teeny-request@^3.11.3:

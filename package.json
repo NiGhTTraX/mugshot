@@ -8,12 +8,11 @@
     "build": "lerna run build",
     "pub": "yarn run build && lerna publish && yarn run clean",
     "lint": "eslint --ext ts,tsx,js .",
-    "test": "./tests/run.sh",
-    "test:node": "tdd-buffet test --config tests/node/jest.config.js --coverage",
-    "test:gui": "./tests/gui/run.sh",
-    "test:gui:selenium": "selenium debug",
-    "test:gui:selenium:stop": "selenium stop",
-    "_test:gui": "tdd-buffet test --config tests/gui/jest.config.js --coverage",
+    "test": "lerna run test",
+    "posttest": "./tests/coverage.sh",
+    "pretest": "yarn run selenium",
+    "selenium": "selenium start",
+    "selenium:debug": "selenium debug",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage-final.json"
   },
   "husky": {
@@ -40,7 +39,7 @@
     "lint-staged": "~9.4.0",
     "nyc": "~14.1.0",
     "strong-mock": "~3.0.0",
-    "tdd-buffet": "~0.12.0",
+    "tdd-buffet": "~0.12.3",
     "typescript": "~3.6.0",
     "webdriverio": "~5.13.1"
   }
