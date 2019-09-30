@@ -1,10 +1,17 @@
-import { Browser, ElementNotFound } from 'mugshot';
 import { expect } from 'chai';
-import Jimp from 'jimp';
 import fs from 'fs-extra';
+import Jimp from 'jimp';
+import { Browser, ElementNotFound } from 'mugshot';
 import path from 'path';
 
-export interface BrowserToBeAdapted {
+/**
+ * Methods on the browser instance that these tests need.
+ *
+ * They're different from the ones from mugshot/browser because
+ * the tests are concerned with navigating the browser to test
+ * fixtures.
+ */
+export interface TestBrowser {
   /**
    * Navigate to an URL.
    */
@@ -29,7 +36,7 @@ export type BrowserContractTest = {
    *   a test fixture and resize the window.
    * @param adapter The browser adapter.
    */
-  getTest: (browser: BrowserToBeAdapted, adapter: Browser) => () => Promise<void>;
+  getTest: (browser: TestBrowser, adapter: Browser) => () => Promise<void>;
 }
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
@@ -38,7 +45,7 @@ function createFixture(html: string) {
   document.body.innerHTML = html;
 }
 
-async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: string) {
+async function loadFixture(browser: TestBrowser, adapter: Browser, name: string) {
   const fixtureContent = await fs.readFile(
     path.join(__dirname, `../fixtures/${name}.html`),
     { encoding: 'utf8' }
@@ -53,7 +60,7 @@ async function loadFixture(browser: BrowserToBeAdapted, adapter: Browser, name: 
 
 const browserContractTests: BrowserContractTest[] = [{
   name: 'should take a viewport screenshot',
-  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+  getTest(browser: TestBrowser, adapter: Browser) {
     return async () => {
       await loadFixture(browser, adapter, 'simple');
 
@@ -65,7 +72,7 @@ const browserContractTests: BrowserContractTest[] = [{
   }
 }, {
   name: 'should take a viewport screenshot with absolutely positioned elements',
-  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+  getTest(browser: TestBrowser, adapter: Browser) {
     return async () => {
       await loadFixture(browser, adapter, 'rect');
 
@@ -77,7 +84,7 @@ const browserContractTests: BrowserContractTest[] = [{
   }
 }, {
   name: 'should get bounding rect of element',
-  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+  getTest(browser: TestBrowser, adapter: Browser) {
     return async () => {
       await loadFixture(browser, adapter, 'rect');
 
@@ -94,7 +101,7 @@ const browserContractTests: BrowserContractTest[] = [{
   }
 }, {
   name: 'should get bounding rect of off-screen element',
-  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+  getTest(browser: TestBrowser, adapter: Browser) {
     return async () => {
       await loadFixture(browser, adapter, 'rect-scroll');
 
@@ -106,7 +113,7 @@ const browserContractTests: BrowserContractTest[] = [{
   }
 }, {
   name: 'should get bounding rect of missing element',
-  getTest(browser: BrowserToBeAdapted, adapter: Browser) {
+  getTest(browser: TestBrowser, adapter: Browser) {
     return async () => {
       await loadFixture(browser, adapter, 'rect-scroll');
 
