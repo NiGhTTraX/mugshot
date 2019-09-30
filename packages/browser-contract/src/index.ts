@@ -1,8 +1,7 @@
 import { expect } from 'chai';
-import fs from 'fs-extra';
 import Jimp from 'jimp';
 import { Browser, ElementNotFound } from 'mugshot';
-import path from 'path';
+import { fixtures } from './fixtures';
 
 /**
  * Methods on the browser instance that these tests need.
@@ -45,11 +44,8 @@ function createFixture(html: string) {
   document.body.innerHTML = html;
 }
 
-async function loadFixture(browser: TestBrowser, adapter: Browser, name: string) {
-  const fixtureContent = await fs.readFile(
-    path.join(__dirname, `../fixtures/${name}.html`),
-    { encoding: 'utf8' }
-  );
+async function loadFixture(browser: TestBrowser, adapter: Browser, name: keyof typeof fixtures) {
+  const fixtureContent = fixtures[name];
 
   await browser.url('about:blank');
 
