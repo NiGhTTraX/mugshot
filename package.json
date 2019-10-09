@@ -42,6 +42,6 @@
     "strong-mock": "~3.0.0",
     "tdd-buffet": "~0.13.0",
     "typescript": "~3.6.0",
-    "webdriverio": "~5.13.1"
+    "webdriverio": "~5.14.0"
   }
 }
