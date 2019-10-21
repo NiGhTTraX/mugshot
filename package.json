@@ -30,7 +30,7 @@
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~10.12.2",
-    "@typescript-eslint/eslint-plugin": "~2.4.0",
+    "@typescript-eslint/eslint-plugin": "~2.5.0",
     "codecov": "~3.6.0",
     "eslint": "~6.5.0",
     "fs-extra": "~8.1.0",
