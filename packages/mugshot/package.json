@@ -37,6 +37,6 @@
     "jimp": "~0.8.2"
   },
   "devDependencies": {
-    "typescript": "~3.6.0"
+    "typescript": "~3.7.0"
   }
 }
