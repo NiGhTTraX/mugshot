@@ -39,7 +39,7 @@
     "lerna": "~3.18.0",
     "lint-staged": "~9.4.0",
     "nyc": "~14.1.0",
-    "strong-mock": "~3.1.0",
+    "strong-mock": "~3.2.0",
     "tdd-buffet": "~0.14.0",
     "typescript": "~3.7.0",
     "webdriverio": "~5.16.0"
