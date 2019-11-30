@@ -1,6 +1,7 @@
 import Browser from '../interfaces/browser';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
+import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
 /**
@@ -10,7 +11,7 @@ import { MugshotSelector } from './mugshot';
 export default class BrowserScreenshotter implements Screenshotter {
   constructor(
     private readonly browser: Browser,
-    private readonly pngProcessor: PNGProcessor
+    private readonly pngProcessor: PNGProcessor = new JimpProcessor()
   ) {}
 
   async takeScreenshot(

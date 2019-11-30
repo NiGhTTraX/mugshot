@@ -45,7 +45,6 @@ Here is an example of using the [WebdriverIO](https://webdriver.io/) adapter:
 import Mugshot, {
   FsStorage,
   BrowserScreenshotter,
-  JimpProcessor
 } from 'mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
@@ -58,8 +57,7 @@ import { remote } from 'webdriverio';
   
   const mugshot = new Mugshot(
     new BrowserScreenshotter(
-      new WebdriverIOAdapter(browser),
-      new JimpProcessor()
+      new WebdriverIOAdapter(browser)
     ),
     new FsStorage('./screenshots')
   );

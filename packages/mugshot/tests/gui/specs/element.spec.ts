@@ -7,7 +7,6 @@ import {
 } from '../../../../../tests/gui/suite';
 import BrowserScreenshotter from '../../../src/lib/browser-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
-import JimpProcessor from '../../../src/lib/jimp-processor';
 import Mugshot from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
@@ -22,10 +21,7 @@ describe('Mugshot', () => {
       await loadFixture(browser, 'rect');
 
       const mugshot = new Mugshot(
-        new BrowserScreenshotter(
-          new WebdriverIOAdapter(browser),
-          new JimpProcessor()
-        ),
+        new BrowserScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath)
       );
 
