@@ -1,5 +1,4 @@
 import isCI from 'is-ci';
-import Browser from '../interfaces/browser';
 import PNGDiffer from '../interfaces/png-differ';
 import PNGProcessor from '../interfaces/png-processor';
 import ScreenshotStorage from '../interfaces/screenshot-storage';
@@ -65,8 +64,6 @@ export class MugshotMissingBaselineError extends Error {
 }
 
 export default class Mugshot {
-  private readonly browser: Browser;
-
   private readonly storage: ScreenshotStorage;
 
   private readonly pngDiffer: PNGDiffer;
@@ -80,8 +77,8 @@ export default class Mugshot {
   private readonly updateBaselines: boolean;
 
   /**
-   * @param browser An adapter over your WebDriver tool of choice.
    * @param storage How to read and store screenshots.
+   * @param browser An adapter over your WebDriver tool of choice.
    * @param pngDiffer
    * @param pngProcessor
    * @param screenshotter
@@ -89,7 +86,6 @@ export default class Mugshot {
    * @param updateBaselines
    */
   constructor(
-    browser: Browser,
     storage: ScreenshotStorage,
     {
       pngDiffer = new PixelDiffer(),
@@ -99,7 +95,6 @@ export default class Mugshot {
       updateBaselines = false
     }: MugshotOptions = {}
   ) {
-    this.browser = browser;
     this.storage = storage;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;

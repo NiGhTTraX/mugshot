@@ -20,16 +20,12 @@ describe('Mugshot', () => {
   it('should pass when identical', async browser => {
     await loadFixture(browser, 'simple');
 
-    const mugshot = new Mugshot(
-      new WebdriverIOAdapter(browser),
-      new FsStorage(resultsPath),
-      {
-        screenshotter: new BrowserViewportCropScreenshotter(
-          new WebdriverIOAdapter(browser),
-          new JimpProcessor()
-        )
-      }
-    );
+    const mugshot = new Mugshot(new FsStorage(resultsPath), {
+      screenshotter: new BrowserViewportCropScreenshotter(
+        new WebdriverIOAdapter(browser),
+        new JimpProcessor()
+      )
+    });
 
     const result = await mugshot.check('simple');
 
@@ -39,16 +35,12 @@ describe('Mugshot', () => {
   it('should fail when different', async browser => {
     await loadFixture(browser, 'simple2');
 
-    const mugshot = new Mugshot(
-      new WebdriverIOAdapter(browser),
-      new FsStorage(resultsPath),
-      {
-        screenshotter: new BrowserViewportCropScreenshotter(
-          new WebdriverIOAdapter(browser),
-          new JimpProcessor()
-        )
-      }
-    );
+    const mugshot = new Mugshot(new FsStorage(resultsPath), {
+      screenshotter: new BrowserViewportCropScreenshotter(
+        new WebdriverIOAdapter(browser),
+        new JimpProcessor()
+      )
+    });
 
     const result = await mugshot.check('simple');
 

@@ -94,7 +94,7 @@ describe('Mugshot', () => {
         matches: true
       });
 
-      const mugshot = new Mugshot(browser.stub, storage.stub, {
+      const mugshot = new Mugshot(storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -125,7 +125,7 @@ describe('Mugshot', () => {
         diff: redPixelBuffer
       });
 
-      const mugshot = new Mugshot(browser.stub, storage.stub, {
+      const mugshot = new Mugshot(storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -150,7 +150,7 @@ describe('Mugshot', () => {
         matches: true
       });
 
-      const mugshot = new Mugshot(browser.stub, storage.stub, {
+      const mugshot = new Mugshot(storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -173,7 +173,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot('.element', {}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, storage.stub, {
+      const mugshot = new Mugshot(storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub
       });
@@ -198,7 +198,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(whitePixelBuffer));
 
-      const mugshot = new Mugshot(browser.stub, storage.stub, {
+      const mugshot = new Mugshot(storage.stub, {
         pngDiffer: pngDiffer.stub,
         screenshotter: screenshotter.stub,
         updateBaselines: true

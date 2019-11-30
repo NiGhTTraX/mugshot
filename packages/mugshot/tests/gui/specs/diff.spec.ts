@@ -26,17 +26,13 @@ describe('Mugshot', async () => {
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
-      const mugshot = new Mugshot(
-        new WebdriverIOAdapter(browser),
-        new FsStorage(resultsPath),
-        {
-          createMissingBaselines: true,
-          screenshotter: new BrowserViewportCropScreenshotter(
-            new WebdriverIOAdapter(browser),
-            new JimpProcessor()
-          )
-        }
-      );
+      const mugshot = new Mugshot(new FsStorage(resultsPath), {
+        createMissingBaselines: true,
+        screenshotter: new BrowserViewportCropScreenshotter(
+          new WebdriverIOAdapter(browser),
+          new JimpProcessor()
+        )
+      });
 
       await mugshot.check('simple');
 
