@@ -6,6 +6,8 @@ import Screenshotter from './interfaces/screenshotter';
 import FsStorage from './lib/fs-storage';
 import Mugshot from './lib/mugshot';
 import PixelDiffer from './lib/pixel-differ';
+import BrowserViewportCropScreenshotter from './lib/browser-viewport-crop-screenshotter';
+import JimpProcessor from './lib/jimp-processor';
 
 export default Mugshot;
 
@@ -17,5 +19,7 @@ export {
   ScreenshotStorage,
   Screenshotter,
   PixelDiffer,
-  ElementNotFound
+  ElementNotFound,
+  BrowserViewportCropScreenshotter,
+  JimpProcessor
 };

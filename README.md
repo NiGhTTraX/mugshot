@@ -42,7 +42,11 @@ Since different Webdriver libraries have different API and semantics, you will m
 Here is an example of using the [WebdriverIO](https://webdriver.io/) adapter:
 
 ```typescript
-import Mugshot, { FsStorage } from 'mugshot';
+import Mugshot, {
+  FsStorage,
+  BrowserViewportCropScreenshotter,
+  JimpProcessor
+} from 'mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
@@ -53,7 +57,10 @@ import { remote } from 'webdriverio';
   });
   
   const mugshot = new Mugshot(
-    new WebdriverIOAdapter(browser),
+    new BrowserViewportCropScreenshotter(
+      new WebdriverIOAdapter(browser),
+      new JimpProcessor()
+    ),
     new FsStorage('./screenshots')
   );
   
