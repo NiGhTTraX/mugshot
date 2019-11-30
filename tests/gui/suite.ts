@@ -43,7 +43,8 @@ export async function expectIdenticalScreenshots(
   }
 
   const differ = new PixelDiffer({ threshold: 0 });
-  expect((await differ.compare(baseline, screenshot)).matches, message).to.be.true;
+  expect((await differ.compare(baseline, screenshot)).matches, message).to.be
+    .true;
 }
 
 /**

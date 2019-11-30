@@ -35,17 +35,17 @@ describe('Mugshot', () => {
     });
 
     function setupStorageWithExistingBaseline(name: string, base: Buffer) {
-      storage
-        .when(s => s.baselineExists(name))
-        .returns(Promise.resolve(true));
-      storage
-        .when(f => f.getBaseline(name))
-        .returns(Promise.resolve(base));
+      storage.when(s => s.baselineExists(name)).returns(Promise.resolve(true));
+      storage.when(f => f.getBaseline(name)).returns(Promise.resolve(base));
 
       return storage;
     }
 
-    function setupDifferWithResult(base: Buffer, screenshot: Buffer, result: DiffResult) {
+    function setupDifferWithResult(
+      base: Buffer,
+      screenshot: Buffer,
+      result: DiffResult
+    ) {
       pngDiffer
         .when(e => e.compare(base, screenshot))
         .returns(Promise.resolve(result));
@@ -90,11 +90,9 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupDifferWithResult(
-        blackPixelBuffer,
-        blackPixelBuffer,
-        { matches: true }
-      );
+      setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
+        matches: true
+      });
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
@@ -122,11 +120,10 @@ describe('Mugshot', () => {
         .when(f => f.writeBaseline('unexpected.diff', redPixelBuffer))
         .returns(Promise.resolve());
 
-      setupDifferWithResult(
-        whitePixelBuffer,
-        blackPixelBuffer,
-        { matches: false, diff: redPixelBuffer }
-      );
+      setupDifferWithResult(whitePixelBuffer, blackPixelBuffer, {
+        matches: false,
+        diff: redPixelBuffer
+      });
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
@@ -135,8 +132,10 @@ describe('Mugshot', () => {
 
       await expectDiffResult(
         mugshot.check('unexpected'),
-        'unexpected.diff', redPixelBuffer,
-        'unexpected.actual', blackPixelBuffer
+        'unexpected.diff',
+        redPixelBuffer,
+        'unexpected.actual',
+        blackPixelBuffer
       );
     });
 
@@ -147,11 +146,9 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({ ignore: '.ignore' }))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupDifferWithResult(
-        blackPixelBuffer,
-        blackPixelBuffer,
-        { matches: true }
-      );
+      setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
+        matches: true
+      });
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
@@ -168,11 +165,9 @@ describe('Mugshot', () => {
 
     it('should screenshot only an element', async () => {
       setupStorageWithExistingBaseline('element', blackPixelBuffer);
-      setupDifferWithResult(
-        blackPixelBuffer,
-        whitePixelBuffer,
-        { matches: true }
-      );
+      setupDifferWithResult(blackPixelBuffer, whitePixelBuffer, {
+        matches: true
+      });
 
       screenshotter
         .when(s => s.takeScreenshot('.element', {}))

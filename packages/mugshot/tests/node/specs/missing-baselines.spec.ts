@@ -7,7 +7,10 @@ import Browser from '../../../src/interfaces/browser';
 import PNGDiffer from '../../../src/interfaces/png-differ';
 import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import Screenshotter from '../../../src/interfaces/screenshotter';
-import Mugshot, { MugshotMissingBaselineError, MugshotResult } from '../../../src/lib/mugshot';
+import Mugshot, {
+  MugshotMissingBaselineError,
+  MugshotResult
+} from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
   describe('missing baselines', () => {
@@ -31,9 +34,7 @@ describe('Mugshot', () => {
     });
 
     function setupStorageWithMissingBaseline(name: string) {
-      storage
-        .when(f => f.baselineExists(name))
-        .returns(Promise.resolve(false));
+      storage.when(f => f.baselineExists(name)).returns(Promise.resolve(false));
     }
 
     async function expectIdenticalResult(
@@ -69,24 +70,22 @@ describe('Mugshot', () => {
       }
 
       if (!threwExpectedError) {
-        throw new AssertionError(`Expected Mugshot to throw a ${expectedError.constructor.name} error`);
+        throw new AssertionError(
+          `Expected Mugshot to throw a ${expectedError.constructor.name} error`
+        );
       }
     }
 
     async function expectMissingBaselineError(
       checkCall: Promise<MugshotResult>
     ) {
-      return expectError(
-        checkCall,
-        MugshotMissingBaselineError,
-        error => {
-          expect(error.message).to.contain('Missing baseline');
-        }
-      );
+      return expectError(checkCall, MugshotMissingBaselineError, error => {
+        expect(error.message).to.contain('Missing baseline');
+      });
     }
 
     it('should fail when told to not create', async () => {
-      setupStorageWithMissingBaseline('missing',);
+      setupStorageWithMissingBaseline('missing');
 
       const mugshot = new Mugshot(browser.stub, storage.stub, {
         pngDiffer: pngDiffer.stub,
@@ -94,9 +93,7 @@ describe('Mugshot', () => {
         createMissingBaselines: false
       });
 
-      await expectMissingBaselineError(
-        mugshot.check('missing')
-      );
+      await expectMissingBaselineError(mugshot.check('missing'));
     });
 
     it('should write missing baseline and pass when told to create', async () => {
@@ -104,7 +101,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupStorageWithMissingBaseline('missing',);
+      setupStorageWithMissingBaseline('missing');
       storage
         .when(f => f.writeBaseline('missing', blackPixelBuffer))
         .returns(Promise.resolve());
@@ -176,7 +173,7 @@ describe('Mugshot', () => {
         .when(s => s.takeScreenshot({}))
         .returns(Promise.resolve(blackPixelBuffer));
 
-      setupStorageWithMissingBaseline('missing',);
+      setupStorageWithMissingBaseline('missing');
       storage
         .when(f => f.writeBaseline('missing', blackPixelBuffer))
         .returns(Promise.resolve());

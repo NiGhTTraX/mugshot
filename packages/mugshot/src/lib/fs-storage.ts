@@ -17,7 +17,8 @@ export default class FsStorage implements ScreenshotStorage {
     this.resultsPath = resultsPath;
   }
 
-  writeBaseline = async (name: string, data: Buffer) => outputFile(this.getPath(name), data);
+  writeBaseline = async (name: string, data: Buffer) =>
+    outputFile(this.getPath(name), data);
 
   baselineExists = async (name: string) => pathExists(this.getPath(name));
 

@@ -21,20 +21,23 @@ export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
       expect(
         Jimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
         `Pixel at ${x}, ${y} has a different color`
-      ).to.deep.equal(
-        Jimp.intToRGBA(baselineJimp.getPixelColor(x, y))
-      );
+      ).to.deep.equal(Jimp.intToRGBA(baselineJimp.getPixelColor(x, y)));
     }
   }
 }
 
 function getHexFromChar(pixel: string) {
   switch (pixel) {
-    case 'R': return Jimp.cssColorToHex('#ff0000');
-    case 'G': return Jimp.cssColorToHex('#00ff00');
-    case 'B': return Jimp.cssColorToHex('#0000ff');
-    case 'K': return Jimp.cssColorToHex('#000000');
-    default: return Jimp.cssColorToHex('#ffffff');
+    case 'R':
+      return Jimp.cssColorToHex('#ff0000');
+    case 'G':
+      return Jimp.cssColorToHex('#00ff00');
+    case 'B':
+      return Jimp.cssColorToHex('#0000ff');
+    case 'K':
+      return Jimp.cssColorToHex('#000000');
+    default:
+      return Jimp.cssColorToHex('#ffffff');
   }
 }
 
@@ -43,7 +46,9 @@ function getHexFromChar(pixel: string) {
  *
  * @param rows Supports 'R' (red), 'B' (blue), 'G' (green), 'K' (black) and ' ' (white).
  */
-export async function createTestBuffer(rows: [string, ...string[]]): Promise<Buffer> {
+export async function createTestBuffer(
+  rows: [string, ...string[]]
+): Promise<Buffer> {
   const j = new Jimp(rows[0].length, rows.length);
 
   let y = 0;
@@ -72,7 +77,10 @@ export async function createTestBuffer(rows: [string, ...string[]]): Promise<Buf
  * @param amount Lighten the image this much, from 0 to 100.
  *   100 will return white, 0 will return the original image.
  */
-export async function lightenBuffer(b: Buffer, amount: number): Promise<Buffer> {
+export async function lightenBuffer(
+  b: Buffer,
+  amount: number
+): Promise<Buffer> {
   const j = await Jimp.read(b);
 
   j.color([{ apply: 'tint', params: [amount] }]);

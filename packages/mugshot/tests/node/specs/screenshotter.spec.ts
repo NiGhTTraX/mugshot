@@ -79,7 +79,9 @@ describe('Screenshotter', () => {
       pngProcessor.stub
     );
 
-    const screenshot = await screenshotter.takeScreenshot({ ignore: '.ignore' });
+    const screenshot = await screenshotter.takeScreenshot({
+      ignore: '.ignore'
+    });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
   });
@@ -107,7 +109,9 @@ describe('Screenshotter', () => {
       pngProcessor.stub
     );
 
-    const screenshot = await screenshotter.takeScreenshot('.test', { ignore: '.ignore' });
+    const screenshot = await screenshotter.takeScreenshot('.test', {
+      ignore: '.ignore'
+    });
 
     await expectIdenticalBuffers(screenshot, redPixelBuffer);
   });

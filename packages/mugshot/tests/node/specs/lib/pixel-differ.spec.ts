@@ -11,16 +11,8 @@ describe('PixelDiffer', () => {
   describe('same width and height', () => {
     it('should compare identical buffers', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'RGB',
-          'RGB',
-          'RGB'
-        ]),
-        await createTestBuffer([
-          'RGB',
-          'RGB',
-          'RGB'
-        ])
+        await createTestBuffer(['RGB', 'RGB', 'RGB']),
+        await createTestBuffer(['RGB', 'RGB', 'RGB'])
       );
 
       expect(result.matches).to.be.true;
@@ -28,16 +20,8 @@ describe('PixelDiffer', () => {
 
     it('should not create a diff for identical buffers', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'RGB',
-          'RGB',
-          'RGB'
-        ]),
-        await createTestBuffer([
-          'RGB',
-          'RGB',
-          'RGB'
-        ])
+        await createTestBuffer(['RGB', 'RGB', 'RGB']),
+        await createTestBuffer(['RGB', 'RGB', 'RGB'])
       );
 
       // @ts-ignore
@@ -46,17 +30,8 @@ describe('PixelDiffer', () => {
 
     it('should compare different buffers', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'RRR',
-          'GGG',
-          'BBB'
-        ]),
-        await createTestBuffer([
-          'GGG',
-          'BBB',
-          'RRR'
-        ])
-
+        await createTestBuffer(['RRR', 'GGG', 'BBB']),
+        await createTestBuffer(['GGG', 'BBB', 'RRR'])
       );
 
       expect(result.matches).to.be.false;
@@ -64,39 +39,21 @@ describe('PixelDiffer', () => {
 
     it('should create a diff for different buffers', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'GGG',
-          'GGG',
-          'GGG'
-        ]),
-        await createTestBuffer([
-          'BBB',
-          'BBB',
-          'BBB'
-        ])
+        await createTestBuffer(['GGG', 'GGG', 'GGG']),
+        await createTestBuffer(['BBB', 'BBB', 'BBB'])
       );
 
       await expectIdenticalBuffers(
         // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
         result.diff,
-        await createTestBuffer([
-          'RRR',
-          'RRR',
-          'RRR'
-        ])
+        await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
     });
 
     it('should have 0 threshold by default', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'KKK',
-          'KKK'
-        ]),
-        await lightenBuffer(await createTestBuffer([
-          'KKK',
-          'KKK'
-        ]), 1)
+        await createTestBuffer(['KKK', 'KKK']),
+        await lightenBuffer(await createTestBuffer(['KKK', 'KKK']), 1)
       );
 
       expect(result.matches).to.be.false;
@@ -107,80 +64,43 @@ describe('PixelDiffer', () => {
   describe('different sizes and same content', () => {
     it('with different width and height should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'KKKK',
-          'KKKK',
-          'KKKK',
-          'KKKK'
-        ]),
-        await createTestBuffer([
-          'KK',
-          'KK'
-        ])
+        await createTestBuffer(['KKKK', 'KKKK', 'KKKK', 'KKKK']),
+        await createTestBuffer(['KK', 'KK'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          '  RR',
-          '  RR',
-          'RRRR',
-          'RRRR'
-        ])
-
+        await createTestBuffer(['  RR', '  RR', 'RRRR', 'RRRR'])
       );
     });
 
     it('with different width should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'KKK',
-          'KKK',
-          'KKK'
-        ]),
-        await createTestBuffer([
-          'KK',
-          'KK',
-          'KK'
-        ])
+        await createTestBuffer(['KKK', 'KKK', 'KKK']),
+        await createTestBuffer(['KK', 'KK', 'KK'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          '  R',
-          '  R',
-          '  R'
-        ])
+        await createTestBuffer(['  R', '  R', '  R'])
       );
     });
 
     it('with different height should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'KKK',
-          'KKK',
-          'KKK'
-        ]),
-        await createTestBuffer([
-          'KKK',
-          'KKK'
-        ])
+        await createTestBuffer(['KKK', 'KKK', 'KKK']),
+        await createTestBuffer(['KKK', 'KKK'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          '   ',
-          '   ',
-          'RRR'
-        ])
+        await createTestBuffer(['   ', '   ', 'RRR'])
       );
     });
   });
@@ -188,114 +108,67 @@ describe('PixelDiffer', () => {
   describe('different sizes and different content', () => {
     it('with different width and height should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'BB',
-          'BB'
-        ]),
-        await createTestBuffer([
-          'GGG',
-          'GGG',
-          'GGG'
-        ])
+        await createTestBuffer(['BB', 'BB']),
+        await createTestBuffer(['GGG', 'GGG', 'GGG'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          'RRR',
-          'RRR',
-          'RRR'
-        ])
+        await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
     });
 
     it('with different width should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'BBB',
-          'BBB',
-          'BBB'
-        ]),
-        await createTestBuffer([
-          'GG',
-          'GG',
-          'GG'
-        ])
+        await createTestBuffer(['BBB', 'BBB', 'BBB']),
+        await createTestBuffer(['GG', 'GG', 'GG'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          'RRR',
-          'RRR',
-          'RRR'
-        ])
+        await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
     });
 
     it('with different height should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer([
-          'BBB',
-          'BBB',
-          'BBB'
-        ]),
-        await createTestBuffer([
-          'GGG',
-          'GGG'
-        ])
+        await createTestBuffer(['BBB', 'BBB', 'BBB']),
+        await createTestBuffer(['GGG', 'GGG'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-ignore
         result.diff,
-        await createTestBuffer([
-          'RRR',
-          'RRR',
-          'RRR'
-        ])
+        await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
     });
   });
 
   describe('config', () => {
     it('should apply custom diff color', async () => {
-      const result = await new PixelDiffer({ diffColor: { r: 0, g: 0, b: 255 } }).compare(
-        await createTestBuffer([
-          'RRR',
-          'RRR'
-        ]),
-        await createTestBuffer([
-          'GGG',
-          'GGG'
-        ])
+      const result = await new PixelDiffer({
+        diffColor: { r: 0, g: 0, b: 255 }
+      }).compare(
+        await createTestBuffer(['RRR', 'RRR']),
+        await createTestBuffer(['GGG', 'GGG'])
       );
 
       await expectIdenticalBuffers(
         // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
         result.diff,
-        await createTestBuffer([
-          'BBB',
-          'BBB'
-        ])
+        await createTestBuffer(['BBB', 'BBB'])
       );
     });
 
     it('should apply custom threshold', async () => {
       const result = await new PixelDiffer({ threshold: 0.1 }).compare(
-        await createTestBuffer([
-          'KKK',
-          'KKK'
-        ]),
-        await lightenBuffer(await createTestBuffer([
-          'KKK',
-          'KKK'
-        ]), 10)
+        await createTestBuffer(['KKK', 'KKK']),
+        await lightenBuffer(await createTestBuffer(['KKK', 'KKK']), 10)
       );
 
       expect(result.matches).to.be.true;

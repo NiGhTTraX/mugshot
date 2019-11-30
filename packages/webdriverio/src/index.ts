@@ -33,10 +33,10 @@ export default class WebdriverIOAdapter implements Browser {
   takeScreenshot = async () => this.browser.takeScreenshot();
 
   getElementRect = async (selector: string) => {
-    const rect: DOMRect | null = await this.browser.execute(
+    const rect: DOMRect | null = (await this.browser.execute(
       getBoundingRect,
       selector
-    ) as DOMRect | null;
+    )) as DOMRect | null;
 
     if (!rect) {
       throw new ElementNotFound(selector);
@@ -68,7 +68,6 @@ export default class WebdriverIOAdapter implements Browser {
     try {
       await this.browser.setWindowRect(0, 0, actualWidth, actualHeight);
       // eslint-disable-next-line no-empty
-    } catch (e) {
-    }
+    } catch (e) {}
   };
 }

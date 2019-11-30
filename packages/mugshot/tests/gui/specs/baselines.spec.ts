@@ -3,7 +3,10 @@ import fs from 'fs-extra';
 import path from 'path';
 import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
-import { expectIdenticalScreenshots, loadFixture } from '../../../../../tests/gui/suite';
+import {
+  expectIdenticalScreenshots,
+  loadFixture
+} from '../../../../../tests/gui/suite';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 
@@ -20,16 +23,18 @@ describe('Mugshot', async () => {
 
       const baselinePath = path.join(resultsPath, 'new.png');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
-        createMissingBaselines: true
-      });
+      const mugshot = new Mugshot(
+        new WebdriverIOAdapter(browser),
+        new FsStorage(resultsPath),
+        {
+          createMissingBaselines: true
+        }
+      );
 
       const resultWhenMissingBaseline = await mugshot.check('new');
       expect(resultWhenMissingBaseline.matches).to.be.true;
-      expect(
-        await fs.pathExists(baselinePath),
-        'Baseline wasn\'t written'
-      ).to.be.true;
+      expect(await fs.pathExists(baselinePath), "Baseline wasn't written").to.be
+        .true;
 
       await expectIdenticalScreenshots(
         path.join(resultsPath, 'new.png'),
@@ -41,15 +46,19 @@ describe('Mugshot', async () => {
     it('should create parent folders when writing baseline', async browser => {
       await loadFixture(browser, 'simple');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
-        createMissingBaselines: true
-      });
+      const mugshot = new Mugshot(
+        new WebdriverIOAdapter(browser),
+        new FsStorage(resultsPath),
+        {
+          createMissingBaselines: true
+        }
+      );
 
       await mugshot.check('foo/bar/new');
 
       expect(
         await fs.pathExists(path.join(resultsPath, 'foo/bar')),
-        'Baseline folder structure wasn\'t created'
+        "Baseline folder structure wasn't created"
       ).to.be.true;
     });
   });

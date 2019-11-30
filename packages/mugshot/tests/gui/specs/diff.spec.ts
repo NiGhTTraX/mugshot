@@ -24,16 +24,17 @@ describe('Mugshot', async () => {
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
-      const mugshot = new Mugshot(new WebdriverIOAdapter(browser), new FsStorage(resultsPath), {
-        createMissingBaselines: true
-      });
+      const mugshot = new Mugshot(
+        new WebdriverIOAdapter(browser),
+        new FsStorage(resultsPath),
+        {
+          createMissingBaselines: true
+        }
+      );
 
       await mugshot.check('simple');
 
-      expect(
-        await fs.pathExists(diffPath),
-        'Diff wasn\'t written'
-      ).to.be.true;
+      expect(await fs.pathExists(diffPath), "Diff wasn't written").to.be.true;
 
       await expectIdenticalScreenshots(
         diffPath,

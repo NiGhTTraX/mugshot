@@ -35,13 +35,26 @@ export default class PixelDiffer implements PNGDiffer {
     const expectedJimp = await Jimp.read(expected);
     const actualJimp = await Jimp.read(actual);
 
-    const smallestWidth = Math.min(expectedJimp.getWidth(), actualJimp.getWidth());
-    const smallestHeight = Math.min(expectedJimp.getHeight(), actualJimp.getHeight());
-    const biggestWidth = Math.max(expectedJimp.getWidth(), actualJimp.getWidth());
-    const biggestHeight = Math.max(expectedJimp.getHeight(), actualJimp.getHeight());
+    const smallestWidth = Math.min(
+      expectedJimp.getWidth(),
+      actualJimp.getWidth()
+    );
+    const smallestHeight = Math.min(
+      expectedJimp.getHeight(),
+      actualJimp.getHeight()
+    );
+    const biggestWidth = Math.max(
+      expectedJimp.getWidth(),
+      actualJimp.getWidth()
+    );
+    const biggestHeight = Math.max(
+      expectedJimp.getHeight(),
+      actualJimp.getHeight()
+    );
 
-    const differentSize = expectedJimp.getWidth() !== actualJimp.getWidth()
-      || expectedJimp.getHeight() !== actualJimp.getHeight();
+    const differentSize =
+      expectedJimp.getWidth() !== actualJimp.getWidth() ||
+      expectedJimp.getHeight() !== actualJimp.getHeight();
 
     if (differentSize) {
       expectedJimp.crop(0, 0, smallestWidth, smallestHeight);
@@ -82,5 +95,5 @@ export default class PixelDiffer implements PNGDiffer {
       matches: false,
       diff: await diffJimp.getBufferAsync(Jimp.MIME_PNG)
     };
-  }
+  };
 }

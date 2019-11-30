@@ -9,7 +9,7 @@ export type ScreenshotOptions = {
    * TODO: support rects
    */
   ignore?: string;
-}
+};
 
 export default interface Screenshotter {
   /**
@@ -20,5 +20,8 @@ export default interface Screenshotter {
   /**
    * Take a screenshot of an element.
    */
-  takeScreenshot(selector?: MugshotSelector, options?: ScreenshotOptions): Promise<Buffer>;
+  takeScreenshot(
+    selector?: MugshotSelector,
+    options?: ScreenshotOptions
+  ): Promise<Buffer>;
 }

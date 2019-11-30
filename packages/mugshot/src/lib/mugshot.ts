@@ -95,7 +95,10 @@ export default class Mugshot {
     {
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
-      screenshotter = new BrowserViewportCropScreenshotter(browser, pngProcessor),
+      screenshotter = new BrowserViewportCropScreenshotter(
+        browser,
+        pngProcessor
+      ),
       createMissingBaselines = !isCI,
       updateBaselines = false
     }: MugshotOptions = {}
@@ -131,7 +134,11 @@ export default class Mugshot {
    * @param options
    */
   // eslint-disable-next-line max-len
-  check(name: string, selector: MugshotSelector, options?: ScreenshotOptions): Promise<MugshotResult>;
+  check(
+    name: string,
+    selector: MugshotSelector,
+    options?: ScreenshotOptions
+  ): Promise<MugshotResult>;
   // eslint-disable-next-line no-dupe-class-members,lines-between-class-members
   check(name: string, options?: ScreenshotOptions): Promise<MugshotResult>;
   // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
@@ -213,12 +220,15 @@ export default class Mugshot {
     };
   }
 
-  private async getScreenshot(selector: MugshotSelector | undefined, options: ScreenshotOptions) {
+  private async getScreenshot(
+    selector: MugshotSelector | undefined,
+    options: ScreenshotOptions
+  ) {
     return selector
-      // TODO: because WebStorm really wants it
-      // eslint-disable-next-line no-return-await
-      ? await this.screenshotter.takeScreenshot(selector, options)
-      // eslint-disable-next-line no-return-await
-      : await this.screenshotter.takeScreenshot(options);
+      ? // TODO: because WebStorm really wants it
+        // eslint-disable-next-line no-return-await
+        await this.screenshotter.takeScreenshot(selector, options)
+      : // eslint-disable-next-line no-return-await
+        await this.screenshotter.takeScreenshot(options);
   }
 }

@@ -1,13 +1,15 @@
 /* eslint-disable semi */
-export type DiffResult = {
-  matches: true
-} | {
-  matches: false;
-  /**
-   * A PNG MIME encoded buffer of the diff image.
-   */
-  diff: Buffer;
-};
+export type DiffResult =
+  | {
+      matches: true;
+    }
+  | {
+      matches: false;
+      /**
+       * A PNG MIME encoded buffer of the diff image.
+       */
+      diff: Buffer;
+    };
 
 export default interface PNGDiffer {
   /**

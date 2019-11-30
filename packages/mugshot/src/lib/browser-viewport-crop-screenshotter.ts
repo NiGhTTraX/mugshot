@@ -46,12 +46,25 @@ export default class BrowserViewportCropScreenshotter implements Screenshotter {
   private async crop(selector: MugshotSelector, screenshot: Buffer) {
     const rect = await this.browser.getElementRect(selector);
 
-    return this.pngProcessor.crop(screenshot, rect.x, rect.y, rect.width, rect.height);
+    return this.pngProcessor.crop(
+      screenshot,
+      rect.x,
+      rect.y,
+      rect.width,
+      rect.height
+    );
   }
 
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
     const rect = await this.browser.getElementRect(selector);
 
-    return this.pngProcessor.paint(screenshot, rect.x, rect.y, rect.width, rect.height, '#000');
+    return this.pngProcessor.paint(
+      screenshot,
+      rect.x,
+      rect.y,
+      rect.width,
+      rect.height,
+      '#000'
+    );
   }
 }
