@@ -37,7 +37,6 @@ export type MugshotSelector = string;
 interface MugshotOptions {
   pngDiffer?: PNGDiffer;
   pngProcessor?: PNGProcessor;
-  screenshotter?: Screenshotter;
 
   /**
    * If set to true `Mugshot.check` will pass if a baseline is not
@@ -70,27 +69,25 @@ export default class Mugshot {
 
   private readonly pngProcessor: PNGProcessor;
 
-  private readonly screenshotter: Screenshotter;
-
   private readonly createMissingBaselines: boolean;
 
   private readonly updateBaselines: boolean;
 
   /**
+   * @param screenshotter
    * @param storage How to read and store screenshots.
    * @param browser An adapter over your WebDriver tool of choice.
    * @param pngDiffer
    * @param pngProcessor
-   * @param screenshotter
    * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
    * @param updateBaselines
    */
   constructor(
+    private screenshotter: Screenshotter,
     storage: ScreenshotStorage,
     {
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
-      screenshotter,
       createMissingBaselines = !isCI,
       updateBaselines = false
     }: MugshotOptions = {}
@@ -98,8 +95,6 @@ export default class Mugshot {
     this.storage = storage;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
-    // @ts-ignore
-    this.screenshotter = screenshotter;
     this.createMissingBaselines = createMissingBaselines;
     this.updateBaselines = updateBaselines;
   }

@@ -21,12 +21,13 @@ describe('Mugshot', () => {
     it('should take a screenshot of an absolutely positioned element', async browser => {
       await loadFixture(browser, 'rect');
 
-      const mugshot = new Mugshot(new FsStorage(resultsPath), {
-        screenshotter: new BrowserViewportCropScreenshotter(
+      const mugshot = new Mugshot(
+        new BrowserViewportCropScreenshotter(
           new WebdriverIOAdapter(browser),
           new JimpProcessor()
-        )
-      });
+        ),
+        new FsStorage(resultsPath)
+      );
 
       const result = await mugshot.check('rect', '.test');
 

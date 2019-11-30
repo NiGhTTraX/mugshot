@@ -25,13 +25,16 @@ describe('Mugshot', async () => {
 
       const baselinePath = path.join(resultsPath, 'new.png');
 
-      const mugshot = new Mugshot(new FsStorage(resultsPath), {
-        createMissingBaselines: true,
-        screenshotter: new BrowserViewportCropScreenshotter(
+      const mugshot = new Mugshot(
+        new BrowserViewportCropScreenshotter(
           new WebdriverIOAdapter(browser),
           new JimpProcessor()
-        )
-      });
+        ),
+        new FsStorage(resultsPath),
+        {
+          createMissingBaselines: true
+        }
+      );
 
       const resultWhenMissingBaseline = await mugshot.check('new');
       expect(resultWhenMissingBaseline.matches).to.be.true;
@@ -48,13 +51,16 @@ describe('Mugshot', async () => {
     it('should create parent folders when writing baseline', async browser => {
       await loadFixture(browser, 'simple');
 
-      const mugshot = new Mugshot(new FsStorage(resultsPath), {
-        createMissingBaselines: true,
-        screenshotter: new BrowserViewportCropScreenshotter(
+      const mugshot = new Mugshot(
+        new BrowserViewportCropScreenshotter(
           new WebdriverIOAdapter(browser),
           new JimpProcessor()
-        )
-      });
+        ),
+        new FsStorage(resultsPath),
+        {
+          createMissingBaselines: true
+        }
+      );
 
       await mugshot.check('foo/bar/new');
 

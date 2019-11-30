@@ -21,12 +21,13 @@ describe('Mugshot', () => {
     it('should ignore an element', async browser => {
       await loadFixture(browser, 'simple');
 
-      const mugshot = new Mugshot(new FsStorage(resultsPath), {
-        screenshotter: new BrowserViewportCropScreenshotter(
+      const mugshot = new Mugshot(
+        new BrowserViewportCropScreenshotter(
           new WebdriverIOAdapter(browser),
           new JimpProcessor()
-        )
-      });
+        ),
+        new FsStorage(resultsPath)
+      );
 
       const result = await mugshot.check('ignore', { ignore: 'div' });
 
