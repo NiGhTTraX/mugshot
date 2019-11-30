@@ -1,8 +1,5 @@
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import Mock from 'strong-mock';
-import Browser from '../../../src/interfaces/browser';
-import PNGProcessor from '../../../src/interfaces/png-processor';
-import MugshotScreenshotter from '../../../src/lib/mugshot-screenshotter';
+import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelB64,
   blackPixelBuffer,
@@ -10,6 +7,9 @@ import {
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
 import { expectIdenticalBuffers } from '../../../../../tests/node/suite';
+import Browser from '../../../src/interfaces/browser';
+import PNGProcessor from '../../../src/interfaces/png-processor';
+import BrowserViewportCropScreenshotter from '../../../src/lib/browser-viewport-crop-screenshotter';
 
 describe('Screenshotter', () => {
   const browser = new Mock<Browser>();
@@ -30,7 +30,7 @@ describe('Screenshotter', () => {
       .when(b => b.takeScreenshot())
       .returns(Promise.resolve(blackPixelB64));
 
-    const screenshotter = new MugshotScreenshotter(
+    const screenshotter = new BrowserViewportCropScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -52,7 +52,7 @@ describe('Screenshotter', () => {
       .when(p => p.crop(blackPixelBuffer, 1, 2, 3, 4))
       .returns(Promise.resolve(whitePixelBuffer));
 
-    const screenshotter = new MugshotScreenshotter(
+    const screenshotter = new BrowserViewportCropScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -74,7 +74,7 @@ describe('Screenshotter', () => {
       .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
       .returns(Promise.resolve(whitePixelBuffer));
 
-    const screenshotter = new MugshotScreenshotter(
+    const screenshotter = new BrowserViewportCropScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -102,7 +102,7 @@ describe('Screenshotter', () => {
       .when(p => p.paint(whitePixelBuffer, 1, 1, 4, 4, '#000'))
       .returns(Promise.resolve(redPixelBuffer));
 
-    const screenshotter = new MugshotScreenshotter(
+    const screenshotter = new BrowserViewportCropScreenshotter(
       browser.stub,
       pngProcessor.stub
     );

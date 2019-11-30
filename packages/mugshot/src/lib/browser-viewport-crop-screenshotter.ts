@@ -1,9 +1,13 @@
 import Browser from '../interfaces/browser';
 import PNGProcessor from '../interfaces/png-processor';
-import { MugshotSelector } from './mugshot';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
+import { MugshotSelector } from './mugshot';
 
-export default class MugshotScreenshotter implements Screenshotter {
+/**
+ * Take screenshots of selectors by first taking a viewport screenshot and then cropping
+ * the element out.
+ */
+export default class BrowserViewportCropScreenshotter implements Screenshotter {
   private browser: Browser;
 
   private pngProcessor: PNGProcessor;

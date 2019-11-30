@@ -4,8 +4,8 @@ import PNGDiffer from '../interfaces/png-differ';
 import PNGProcessor from '../interfaces/png-processor';
 import ScreenshotStorage from '../interfaces/screenshot-storage';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
+import BrowserViewportCropScreenshotter from './browser-viewport-crop-screenshotter';
 import JimpProcessor from './jimp-processor';
-import MugshotScreenshotter from './mugshot-screenshotter';
 import PixelDiffer from './pixel-differ';
 
 export type MugshotIdenticalResult = {
@@ -95,7 +95,7 @@ export default class Mugshot {
     {
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
-      screenshotter = new MugshotScreenshotter(browser, pngProcessor),
+      screenshotter = new BrowserViewportCropScreenshotter(browser, pngProcessor),
       createMissingBaselines = !isCI,
       updateBaselines = false
     }: MugshotOptions = {}
