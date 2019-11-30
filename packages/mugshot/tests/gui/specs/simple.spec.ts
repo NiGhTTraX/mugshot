@@ -5,7 +5,9 @@ import {
   createResultsDirWithBaseline,
   loadFixture
 } from '../../../../../tests/gui/suite';
+import BrowserViewportCropScreenshotter from '../../../src/lib/browser-viewport-crop-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
+import JimpProcessor from '../../../src/lib/jimp-processor';
 import Mugshot from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
@@ -20,7 +22,13 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(
       new WebdriverIOAdapter(browser),
-      new FsStorage(resultsPath)
+      new FsStorage(resultsPath),
+      {
+        screenshotter: new BrowserViewportCropScreenshotter(
+          new WebdriverIOAdapter(browser),
+          new JimpProcessor()
+        )
+      }
     );
 
     const result = await mugshot.check('simple');
@@ -33,7 +41,13 @@ describe('Mugshot', () => {
 
     const mugshot = new Mugshot(
       new WebdriverIOAdapter(browser),
-      new FsStorage(resultsPath)
+      new FsStorage(resultsPath),
+      {
+        screenshotter: new BrowserViewportCropScreenshotter(
+          new WebdriverIOAdapter(browser),
+          new JimpProcessor()
+        )
+      }
     );
 
     const result = await mugshot.check('simple');
