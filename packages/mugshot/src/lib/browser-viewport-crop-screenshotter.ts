@@ -8,14 +8,10 @@ import { MugshotSelector } from './mugshot';
  * the element out.
  */
 export default class BrowserViewportCropScreenshotter implements Screenshotter {
-  private browser: Browser;
-
-  private pngProcessor: PNGProcessor;
-
-  constructor(browser: Browser, pngProcessor: PNGProcessor) {
-    this.browser = browser;
-    this.pngProcessor = pngProcessor;
-  }
+  constructor(
+    private readonly browser: Browser,
+    private readonly pngProcessor: PNGProcessor
+  ) {}
 
   async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,

@@ -10,6 +10,12 @@ module.exports = {
   'plugins': ['prettier'],
 
   'rules': {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
+
+    // Allow `constructor(private foo: number) {}`
+    'no-useless-constructor': 0,
+    'no-empty-function': ['error', {
+      'allow': ['constructors']
+    }]
   }
 };

@@ -63,8 +63,6 @@ export class MugshotMissingBaselineError extends Error {
 }
 
 export default class Mugshot {
-  private readonly storage: ScreenshotStorage;
-
   private readonly pngDiffer: PNGDiffer;
 
   private readonly pngProcessor: PNGProcessor;
@@ -83,8 +81,8 @@ export default class Mugshot {
    * @param updateBaselines
    */
   constructor(
-    private screenshotter: Screenshotter,
-    storage: ScreenshotStorage,
+    private readonly screenshotter: Screenshotter,
+    private readonly storage: ScreenshotStorage,
     {
       pngDiffer = new PixelDiffer(),
       pngProcessor = new JimpProcessor(),
@@ -92,7 +90,6 @@ export default class Mugshot {
       updateBaselines = false
     }: MugshotOptions = {}
   ) {
-    this.storage = storage;
     this.pngDiffer = pngDiffer;
     this.pngProcessor = pngProcessor;
     this.createMissingBaselines = createMissingBaselines;

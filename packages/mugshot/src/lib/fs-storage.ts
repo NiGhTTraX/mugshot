@@ -8,14 +8,10 @@ import ScreenshotStorage from '../interfaces/screenshot-storage';
  * Baselines will be saved with a `.png` extension.
  */
 export default class FsStorage implements ScreenshotStorage {
-  private readonly resultsPath: string;
-
   /**
    * @param resultsPath The entire folder structure will be created if missing.
    */
-  constructor(resultsPath: string) {
-    this.resultsPath = resultsPath;
-  }
+  constructor(private readonly resultsPath: string) {}
 
   writeBaseline = async (name: string, data: Buffer) =>
     outputFile(this.getPath(name), data);

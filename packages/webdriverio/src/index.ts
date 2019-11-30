@@ -24,11 +24,9 @@ function getBrowserChromeSize() {
  * API adapter for WebdriverIO to make working with it saner.
  */
 export default class WebdriverIOAdapter implements Browser {
-  private browser: WebDriver.ClientAsync & WebdriverIOAsync.Browser;
-
-  constructor(browser: WebDriver.ClientAsync & WebdriverIOAsync.Browser) {
-    this.browser = browser;
-  }
+  constructor(
+    private readonly browser: WebDriver.ClientAsync & WebdriverIOAsync.Browser
+  ) {}
 
   takeScreenshot = async () => this.browser.takeScreenshot();
 
