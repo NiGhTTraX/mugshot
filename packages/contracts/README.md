@@ -1,4 +1,4 @@
-> Contract tests for Mugshot's `Browser` interface
+> Contract tests for Mugshot's various interfaces
 
 ----
 
@@ -7,10 +7,10 @@
 ```typescript
 import { describe, it, before } from 'mocha';
 import MyAdapter from './src';
-import browserContractTests, { BrowserToBeAdapted } from '@mugshot/browser-contract';
+import { browserContractTests, TestBrowser } from '@mugshot/contracts';
 
 describe('MyAdapter', () => {
-  let browser!: BrowserToBeAdapted;
+  let browser!: TestBrowser;
 
   before(async () => {
     // Set up browser here.

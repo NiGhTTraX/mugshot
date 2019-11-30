@@ -1,4 +1,4 @@
-import browserContractTests from '@mugshot/browser-contract';
+import { browserContractTests } from '@mugshot/contracts';
 import { describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,

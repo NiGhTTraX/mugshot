@@ -58,7 +58,7 @@ async function loadFixture(
   await adapter.setViewportSize(1024, 768);
 }
 
-const browserContractTests: BrowserContractTest[] = [
+export const browserContractTests: BrowserContractTest[] = [
   {
     name: 'should take a viewport screenshot',
     getTest(browser: TestBrowser, adapter: Browser) {
@@ -141,5 +141,3 @@ const browserContractTests: BrowserContractTest[] = [
     }
   }
 ];
-
-export default browserContractTests;

@@ -1,10 +1,10 @@
 {
-  "name": "@mugshot/browser-contract",
+  "name": "@mugshot/contracts",
   "publishConfig": {
     "access": "public"
   },
   "version": "2.0.1",
-  "description": "Contract tests for Mugshot's Browser interface",
+  "description": "Contract tests for Mugshot's various interfaces",
   "keywords": [
     "visual",
     "regression",
@@ -16,7 +16,7 @@
   },
   "author": "Andrei Picus",
   "license": "MIT",
-  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/browser-contract",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/contracts",
   "main": "dist/index",
   "types": "dist/index",
   "files": [
