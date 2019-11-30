@@ -9,9 +9,9 @@ import {
 import { expectIdenticalBuffers } from '../../../../../tests/node/suite';
 import Browser from '../../../src/interfaces/browser';
 import PNGProcessor from '../../../src/interfaces/png-processor';
-import BrowserViewportCropScreenshotter from '../../../src/lib/browser-viewport-crop-screenshotter';
+import BrowserScreenshotter from '../../../src/lib/browser-screenshotter';
 
-describe('Screenshotter', () => {
+describe('BrowserScreenshotter', () => {
   const browser = new Mock<Browser>();
   const pngProcessor = new Mock<PNGProcessor>();
 
@@ -30,7 +30,7 @@ describe('Screenshotter', () => {
       .when(b => b.takeScreenshot())
       .returns(Promise.resolve(blackPixelB64));
 
-    const screenshotter = new BrowserViewportCropScreenshotter(
+    const screenshotter = new BrowserScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -52,7 +52,7 @@ describe('Screenshotter', () => {
       .when(p => p.crop(blackPixelBuffer, 1, 2, 3, 4))
       .returns(Promise.resolve(whitePixelBuffer));
 
-    const screenshotter = new BrowserViewportCropScreenshotter(
+    const screenshotter = new BrowserScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -74,7 +74,7 @@ describe('Screenshotter', () => {
       .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
       .returns(Promise.resolve(whitePixelBuffer));
 
-    const screenshotter = new BrowserViewportCropScreenshotter(
+    const screenshotter = new BrowserScreenshotter(
       browser.stub,
       pngProcessor.stub
     );
@@ -104,7 +104,7 @@ describe('Screenshotter', () => {
       .when(p => p.paint(whitePixelBuffer, 1, 1, 4, 4, '#000'))
       .returns(Promise.resolve(redPixelBuffer));
 
-    const screenshotter = new BrowserViewportCropScreenshotter(
+    const screenshotter = new BrowserScreenshotter(
       browser.stub,
       pngProcessor.stub
     );

@@ -7,7 +7,7 @@ import { MugshotSelector } from './mugshot';
  * Take screenshots of selectors by first taking a viewport screenshot and then cropping
  * the element out.
  */
-export default class BrowserViewportCropScreenshotter implements Screenshotter {
+export default class BrowserScreenshotter implements Screenshotter {
   constructor(
     private readonly browser: Browser,
     private readonly pngProcessor: PNGProcessor
