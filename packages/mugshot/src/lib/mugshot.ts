@@ -51,8 +51,8 @@ interface MugshotOptions {
 }
 
 export class MugshotMissingBaselineError extends Error {
-  constructor() {
-    super('Missing baseline');
+  constructor(name: string) {
+    super(`Missing baseline for ${name}`);
   }
 }
 
@@ -135,7 +135,7 @@ export default class Mugshot {
         return this.writeBaseline(name, options, selector);
       }
 
-      throw new MugshotMissingBaselineError();
+      throw new MugshotMissingBaselineError(name);
     } else if (this.updateBaselines) {
       return this.writeBaseline(name, options, selector);
     }
