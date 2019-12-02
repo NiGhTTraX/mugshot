@@ -1,6 +1,12 @@
 import Jimp from 'jimp';
+import pixelmatch from 'pixelmatch';
 import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
-import pixelmatch, { Color } from '../vendor/pixelmatch';
+
+export type Color = {
+  r: number;
+  g: number;
+  b: number;
+};
 
 interface PixelDifferOptions {
   /**
@@ -23,6 +29,11 @@ export default class PixelDiffer implements PNGDiffer {
 
   private readonly threshold: number;
 
+  /**
+   * @param diffColor The color used to mark pixels that are different.
+   * @param threshold How far should 2 pixels be to be considered different?
+   *  Values can be between 0 and 1 and represent 0% and 100% respectively.
+   */
   constructor({
     diffColor = { r: 255, g: 0, b: 0 },
     threshold = 0
@@ -66,12 +77,13 @@ export default class PixelDiffer implements PNGDiffer {
     const numDiffPixels = pixelmatch(
       expectedJimp.bitmap.data,
       actualJimp.bitmap.data,
-      diffJimp.bitmap.data, // this will be modified
+      diffJimp.bitmap.data, // this will be modified in place
       smallestWidth,
       smallestHeight,
       {
-        diffColor: this.diffColor,
-        threshold: this.threshold
+        diffColor: [this.diffColor.r, this.diffColor.g, this.diffColor.b],
+        threshold: this.threshold,
+        alpha: 0
       }
     );
 
