@@ -37,8 +37,5 @@ export default interface Browser {
 export class ElementNotFound extends Error {
   constructor(selector: string) {
     super(`Couldn't find element ${selector}`);
-
-    // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    Object.setPrototypeOf(this, ElementNotFound.prototype);
   }
 }
