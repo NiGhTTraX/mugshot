@@ -21,7 +21,7 @@ export default interface Browser {
    *
    * Should throw `ElementNotFound` if the element is not found.
    */
-  getElementRect: (selector: string) => Promise<ElementRect>;
+  getElementRect: (selector: string) => Promise<ElementRect | ElementRect[]>;
 
   /**
    * Set the size of the __viewport__ (meaning window minus chrome).

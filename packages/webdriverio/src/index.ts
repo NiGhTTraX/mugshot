@@ -2,14 +2,20 @@ import { Browser, ElementNotFound } from 'mugshot';
 import 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
-function getBoundingRect(selector: string): DOMRect | null {
-  const element = document.querySelector(selector);
+function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
+  const elements = document.querySelectorAll(selector);
 
-  if (!element) {
+  if (!elements.length) {
     return null;
   }
 
-  return element.getBoundingClientRect() as DOMRect;
+  if (elements.length === 1) {
+    return elements[0].getBoundingClientRect() as DOMRect;
+  }
+
+  return Array.from(elements).map(
+    element => element.getBoundingClientRect() as DOMRect
+  );
 }
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
@@ -31,20 +37,29 @@ export default class WebdriverIOAdapter implements Browser {
   takeScreenshot = async () => this.browser.takeScreenshot();
 
   getElementRect = async (selector: string) => {
-    const rect: DOMRect | null = (await this.browser.execute(
-      getBoundingRect,
-      selector
-    )) as DOMRect | null;
+    const rects = (await this.browser.execute(getBoundingRect, selector)) as
+      | DOMRect
+      | DOMRect[]
+      | null;
 
-    if (!rect) {
+    if (!rects) {
       throw new ElementNotFound(selector);
     }
 
+    if (Array.isArray(rects)) {
+      return rects.map(rect => ({
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height
+      }));
+    }
+
     return {
-      x: rect.x,
-      y: rect.y,
-      width: rect.width,
-      height: rect.height
+      x: rects.x,
+      y: rects.y,
+      width: rects.width,
+      height: rects.height
     };
   };
 

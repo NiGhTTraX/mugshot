@@ -43,6 +43,10 @@ export default class BrowserScreenshotter implements Screenshotter {
   private async crop(selector: MugshotSelector, screenshot: Buffer) {
     const rect = await this.browser.getElementRect(selector);
 
+    if (Array.isArray(rect)) {
+      throw new Error(/* TODO */);
+    }
+
     return this.pngProcessor.crop(
       screenshot,
       rect.x,
@@ -54,6 +58,10 @@ export default class BrowserScreenshotter implements Screenshotter {
 
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
     const rect = await this.browser.getElementRect(selector);
+
+    if (Array.isArray(rect)) {
+      throw new Error(/* TODO */);
+    }
 
     return this.pngProcessor.paint(
       screenshot,
