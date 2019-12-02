@@ -1,4 +1,5 @@
 import Mock from 'strong-mock';
+import { expect } from 'tdd-buffet/expect/jest';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelB64,
@@ -9,6 +10,7 @@ import {
 import { expectIdenticalBuffers } from '../../../../../tests/node/suite';
 import Browser from '../../../src/interfaces/browser';
 import PNGProcessor from '../../../src/interfaces/png-processor';
+import { TooManyElementsError } from '../../../src/interfaces/screenshotter';
 import BrowserScreenshotter from '../../../src/lib/browser-screenshotter';
 
 describe('BrowserScreenshotter', () => {
@@ -60,6 +62,29 @@ describe('BrowserScreenshotter', () => {
     const screenshot = await screenshotter.takeScreenshot('.test');
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
+  });
+
+  it('should throw if the selector returns multiple elements', async () => {
+    browser
+      .when(b => b.takeScreenshot())
+      .returns(Promise.resolve(blackPixelB64));
+    browser
+      .when(b => b.getElementRect('.test'))
+      .returns(
+        Promise.resolve([
+          { x: 1, y: 2, width: 3, height: 4 },
+          { x: 5, y: 6, width: 7, height: 8 }
+        ])
+      );
+
+    const screenshotter = new BrowserScreenshotter(
+      browser.stub,
+      pngProcessor.stub
+    );
+
+    expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
+      TooManyElementsError
+    );
   });
 
   it('should take a screenshot of the viewport and ignore an element', async () => {

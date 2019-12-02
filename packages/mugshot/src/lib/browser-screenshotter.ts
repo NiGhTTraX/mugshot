@@ -1,6 +1,9 @@
 import Browser from '../interfaces/browser';
 import PNGProcessor from '../interfaces/png-processor';
-import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
+import Screenshotter, {
+  ScreenshotOptions,
+  TooManyElementsError
+} from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
@@ -44,7 +47,7 @@ export default class BrowserScreenshotter implements Screenshotter {
     const rect = await this.browser.getElementRect(selector);
 
     if (Array.isArray(rect)) {
-      throw new Error(/* TODO */);
+      throw new TooManyElementsError(selector);
     }
 
     return this.pngProcessor.crop(

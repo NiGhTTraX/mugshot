@@ -10,6 +10,14 @@ export type ScreenshotOptions = {
   ignore?: string;
 };
 
+export class TooManyElementsError extends Error {
+  constructor(selector: MugshotSelector) {
+    super(`More than 1 elements matches ${selector}.
+
+You can only take a screenshot of one element. Please narrow down your selector.`);
+  }
+}
+
 export default interface Screenshotter {
   /**
    * Take a viewport screenshot.
@@ -18,9 +26,11 @@ export default interface Screenshotter {
 
   /**
    * Take a screenshot of an element.
+   *
+   * Will throw if `selector` matches more than one element.
    */
   takeScreenshot(
-    selector?: MugshotSelector,
+    selector: MugshotSelector,
     options?: ScreenshotOptions
   ): Promise<Buffer>;
 }
