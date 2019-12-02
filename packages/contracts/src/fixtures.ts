@@ -1,6 +1,7 @@
 export const fixtures = {
-  rect: `<html>
+  rect: `<html lang="en">
     <head>
+        <title>Rect</title>
         <style>
             .test {
                 position: absolute;
@@ -19,8 +20,9 @@ export const fixtures = {
     <div class="test"></div>
     </body>
     </html>`,
-  'rect-scroll': `<html>
+  'rect-scroll': `<html lang="en">
     <head>
+        <title>Rect with scroll</title>
         <style>
             .test {
                 position: absolute;
@@ -36,8 +38,9 @@ export const fixtures = {
     <div class="test"></div>
     </body>
     </html>`,
-  'rect-multiple': `<html>
+  'rect-multiple': `<html lang="en">
     <head>
+        <title>Multiple rects</title>
         <style>
             .multiple {
                 position: absolute;
@@ -54,7 +57,7 @@ export const fixtures = {
     <div class="multiple" style="left: 100px; top: 100px;"></div>
     </body>
     </html>`,
-  simple: `<html>
+  simple: `<html lang="en">
     <body>
     This is some simple HTML
     <div style="width: 100px; height: 100px; border: 1px solid blue; background: coral"></div>
