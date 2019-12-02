@@ -3,9 +3,8 @@ import { MugshotSelector } from '../lib/mugshot';
 
 export type ScreenshotOptions = {
   /**
-   * The first element identified by this selector will be painted black
+   * All elements identified by this selector will be painted black
    * before taking the screenshot.
-   * TODO: ignore all elements
    * TODO: support rects
    */
   ignore?: string;

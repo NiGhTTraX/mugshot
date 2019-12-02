@@ -57,18 +57,33 @@ export default class BrowserScreenshotter implements Screenshotter {
   }
 
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
-    const rect = await this.browser.getElementRect(selector);
+    const rects = await this.browser.getElementRect(selector);
 
-    if (Array.isArray(rect)) {
-      throw new Error(/* TODO */);
+    if (Array.isArray(rects)) {
+      let result: Buffer = screenshot;
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const rect of rects) {
+        // eslint-disable-next-line no-await-in-loop
+        result = await this.pngProcessor.paint(
+          result,
+          rect.x,
+          rect.y,
+          rect.width,
+          rect.height,
+          '#000'
+        );
+      }
+
+      return result;
     }
 
     return this.pngProcessor.paint(
       screenshot,
-      rect.x,
-      rect.y,
-      rect.width,
-      rect.height,
+      rects.x,
+      rects.y,
+      rects.width,
+      rects.height,
       '#000'
     );
   }
