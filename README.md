@@ -1,4 +1,4 @@
-![logo](logo.png)
+![logo](media/logo.png)
 
 > Framework independent visual testing library
 
@@ -23,7 +23,7 @@ Mugshot aims to automate that process. It offers a simple API that lets you comp
 
 Expected | Actual | Diff
 ---------|--------|-----
-![expected](./expected.png) | ![actual](./actual.png) | ![diff](./diff.png)
+![expected](media/expected.png) | ![actual](media/actual.png) | ![diff](media/diff.png)
 
 If you have an existing testing suite then it will be straightforward to add Mugshot to it. If you're starting from scratch with browser testing then you can choose your favorite tools, Mugshot doesn't impose anything on you. You will have full control over how you spin up browsers and how you control them. 
 
