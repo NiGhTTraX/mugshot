@@ -11,9 +11,13 @@ export type DiffResult =
       diff: Buffer;
     };
 
+/**
+ * Compare two screenshots and produce a diff image if necessary.
+ */
 export default interface PNGDiffer {
   /**
-   * Compare two PNG MIME encoded buffers.
+   * @param expected PNG encoded buffer.
+   * @param actual PNG encoded buffer.
    */
-  compare: (base: Buffer, screenshot: Buffer) => Promise<DiffResult>;
+  compare: (expected: Buffer, actual: Buffer) => Promise<DiffResult>;
 }

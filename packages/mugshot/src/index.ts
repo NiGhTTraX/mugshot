@@ -1,4 +1,4 @@
-import Browser, { ElementNotFound } from './interfaces/browser';
+import Browser, { ElementNotFoundError } from './interfaces/browser';
 import PNGDiffer from './interfaces/png-differ';
 import PNGProcessor from './interfaces/png-processor';
 import ScreenshotStorage from './interfaces/screenshot-storage';
@@ -19,7 +19,7 @@ export {
   ScreenshotStorage,
   Screenshotter,
   PixelDiffer,
-  ElementNotFound,
+  ElementNotFoundError,
   BrowserScreenshotter,
   JimpProcessor
 };

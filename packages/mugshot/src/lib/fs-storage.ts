@@ -5,7 +5,7 @@ import ScreenshotStorage from '../interfaces/screenshot-storage';
 /**
  * Write and read baselines to and from the local file system.
  *
- * Baselines will be saved with a `.png` extension.
+ * Screenshots will be saved with a `.png` extension.
  */
 export default class FsStorage implements ScreenshotStorage {
   /**
@@ -13,12 +13,12 @@ export default class FsStorage implements ScreenshotStorage {
    */
   constructor(private readonly resultsPath: string) {}
 
-  writeBaseline = async (name: string, data: Buffer) =>
+  write = async (name: string, data: Buffer) =>
     outputFile(this.getPath(name), data);
 
-  baselineExists = async (name: string) => pathExists(this.getPath(name));
+  exists = async (name: string) => pathExists(this.getPath(name));
 
-  getBaseline = async (name: string) => readFile(this.getPath(name));
+  read = async (name: string) => readFile(this.getPath(name));
 
   private getPath(filePath: string) {
     return path.join(this.resultsPath, `${filePath}.png`);

@@ -1,4 +1,4 @@
-import { Browser, ElementNotFound } from 'mugshot';
+import { Browser, ElementNotFoundError } from 'mugshot';
 import 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
@@ -43,7 +43,7 @@ export default class WebdriverIOAdapter implements Browser {
       | null;
 
     if (!rects) {
-      throw new ElementNotFound(selector);
+      throw new ElementNotFoundError(selector);
     }
 
     if (Array.isArray(rects)) {

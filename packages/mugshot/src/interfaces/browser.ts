@@ -6,6 +6,9 @@ export type ElementRect = {
   height: number;
 };
 
+/**
+ * Webdriver compatible browser.
+ */
 export default interface Browser {
   /**
    * Take a viewport screenshot and return a base64 string.
@@ -19,7 +22,9 @@ export default interface Browser {
    *
    * @see https://w3c.github.io/webdriver/#get-element-rect
    *
-   * Should throw `ElementNotFound` if the element is not found.
+   * Should throw [[ElementNotFoundError]] if the element is not found.
+   *
+   * @see [[ElementNotFoundError]]
    */
   getElementRect: (selector: string) => Promise<ElementRect | ElementRect[]>;
 
@@ -33,8 +38,12 @@ export default interface Browser {
   setViewportSize: (width: number, height: number) => Promise<void>;
 }
 
+/**
+ * Thrown when no element matching the selector passed to [[Mugshot.check]]
+ * is found.
+ */
 /* istanbul ignore next because the adapter packages are supposed to throw it */
-export class ElementNotFound extends Error {
+export class ElementNotFoundError extends Error {
   constructor(selector: string) {
     super(`Couldn't find element ${selector}`);
   }

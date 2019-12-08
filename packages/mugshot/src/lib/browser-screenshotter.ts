@@ -8,8 +8,7 @@ import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
 /**
- * Take screenshots of selectors by first taking a viewport screenshot and then cropping
- * the element out.
+ * Take screenshots from a Webdriver compatible browser.
  */
 export default class BrowserScreenshotter implements Screenshotter {
   constructor(
@@ -17,6 +16,10 @@ export default class BrowserScreenshotter implements Screenshotter {
     private readonly pngProcessor: PNGProcessor = new JimpProcessor()
   ) {}
 
+  /**
+   * Take screenshots of selectors by first taking a viewport screenshot and
+   * then cropping the element out.
+   */
   async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
     options: ScreenshotOptions = {}

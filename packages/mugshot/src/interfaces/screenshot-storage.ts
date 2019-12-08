@@ -1,22 +1,34 @@
 /* eslint-disable semi */
 /**
- * A way to read and write baselines.
+ * A way to read and write screenshots.
  *
  * It's up to the implementation to decide where and how to
- * write the baselines. All the methods receive the name of
- * the baseline which is the same value as the name passed
- * in `Mugshot.check()`.
+ * write the screenshots. All the methods receive the name of
+ * the screenshot which is the same value as the name passed
+ * in [[Mugshot.check]].
  *
- * @see Mugshot.check
+ * @see [[Mugshot.check]]
  */
 export default interface ScreenshotStorage {
-  getBaseline: (name: string) => Promise<Buffer>;
-
-  baselineExists: (name: string) => Promise<boolean>;
+  /**
+   * Return the screenshot for `name` as a PNG encoded buffer.
+   *
+   * @param name The value passed to [[Mugshot.check]].
+   */
+  read: (name: string) => Promise<Buffer>;
 
   /**
-   * @param name
+   * Check whether a screenshot exists for `namme`.
+   *
+   * @param name The value passed to [[Mugshot.check]].
+   */
+  exists: (name: string) => Promise<boolean>;
+
+  /**
+   * Write a screenshot for `name`.
+   *
+   * @param name The value passed to [[Mugshot.check]].
    * @param data PNG encoded Buffer.
    */
-  writeBaseline: (name: string, data: Buffer) => Promise<void>;
+  write: (name: string, data: Buffer) => Promise<void>;
 }

@@ -6,10 +6,15 @@ export type ScreenshotOptions = {
    * All elements identified by this selector will be painted black
    * before taking the screenshot.
    * TODO: support rects
+   * TODO: configure the color
    */
   ignore?: string;
 };
 
+/**
+ * Thrown when the selector passed to [[Mugshot.check]] matches more than one
+ * element.
+ */
 export class TooManyElementsError extends Error {
   constructor(selector: MugshotSelector) {
     super(`More than 1 elements matches ${selector}.
@@ -27,7 +32,9 @@ export default interface Screenshotter {
   /**
    * Take a screenshot of an element.
    *
-   * Will throw if `selector` matches more than one element.
+   * Will throw [[TooManyElementsError]] if `selector` matches more than one element.
+   *
+   * @see [[TooManyElementsError]]
    */
   takeScreenshot(
     selector: MugshotSelector,

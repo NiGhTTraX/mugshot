@@ -24,6 +24,10 @@ interface PixelDifferOptions {
   threshold?: number;
 }
 
+/**
+ * Compare screenshots pixel by pixel using
+ * [pixelmatch](https://github.com/mapbox/pixelmatch).
+ */
 export default class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
 

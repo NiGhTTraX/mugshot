@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Jimp from 'jimp';
-import { Browser, ElementNotFound } from 'mugshot';
+import { Browser, ElementNotFoundError } from 'mugshot';
 import { fixtures } from './fixtures';
 
 /**
@@ -132,7 +132,7 @@ export const browserContractTests: BrowserContractTest[] = [
       return async () => {
         await loadFixture(browser, adapter, 'rect-scroll');
 
-        let caughtError!: ElementNotFound;
+        let caughtError!: ElementNotFoundError;
 
         try {
           await adapter.getElementRect('.missing');
@@ -140,7 +140,7 @@ export const browserContractTests: BrowserContractTest[] = [
           caughtError = e;
         }
 
-        expect(caughtError).to.be.instanceOf(ElementNotFound);
+        expect(caughtError).to.be.instanceOf(ElementNotFoundError);
         expect(caughtError.message).to.contain('.missing');
       };
     }

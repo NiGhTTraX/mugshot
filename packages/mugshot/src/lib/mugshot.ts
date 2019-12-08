@@ -91,9 +91,9 @@ export default class Mugshot {
    *   with this name. If one is not found and `createMissingBaselines`
    *   is true then Mugshot will create a new baseline and pass the test. <br>
    *   If a baseline is found then it will be compared with the screenshot
-   *   taken from `browser`. If differences are found the test will fail
-   *   and a `${name}.diff` and a `${name}.actual` will be created in the
-   *   storage.
+   *   taken from `screenshotter`. If differences are found this will return a
+   *   failing result and a `${name}.diff` and a `${name}.actual` will be
+   *   created using `storage`.
    *
    * @param selector If given then Mugshot will screenshot the visible
    *   region bounded by the element's rectangle. <br>
@@ -111,6 +111,20 @@ export default class Mugshot {
     selector: MugshotSelector,
     options?: ScreenshotOptions
   ): Promise<MugshotResult>;
+  /**
+   * Check for visual regressions.
+   *
+   * @param name Mugshot will ask the storage implementation for a baseline
+   *   with this name. If one is not found and `createMissingBaselines`
+   *   is true then Mugshot will create a new baseline and pass the test. <br>
+   *   If a baseline is found then it will be compared with the screenshot
+   *   taken from `screenshotter`. If differences are found this will return a
+   *   failing result and a `${name}.diff` and a `${name}.actual` will be
+   *   created using `storage`.
+   *
+   * @param options
+   */
+
   // eslint-disable-next-line no-dupe-class-members,lines-between-class-members
   check(name: string, options?: ScreenshotOptions): Promise<MugshotResult>;
   // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
@@ -128,7 +142,7 @@ export default class Mugshot {
       options = selectorOrOptions;
     }
 
-    const baselineExists = await this.storage.baselineExists(name);
+    const baselineExists = await this.storage.exists(name);
 
     if (!baselineExists) {
       if (this.createMissingBaselines || this.updateBaselines) {
@@ -142,7 +156,7 @@ export default class Mugshot {
 
     const actual = await this.getScreenshot(selector, options);
 
-    const expected = await this.storage.getBaseline(name);
+    const expected = await this.storage.read(name);
     const result = await this.pngDiffer.compare(expected, actual);
 
     if (!result.matches) {
@@ -163,7 +177,7 @@ export default class Mugshot {
   ): Promise<MugshotIdenticalResult> {
     const expected = await this.getScreenshot(selector, options);
 
-    await this.storage.writeBaseline(name, expected);
+    await this.storage.write(name, expected);
 
     return {
       matches: true,
@@ -178,8 +192,8 @@ export default class Mugshot {
     diff: Buffer,
     actual: Buffer
   ): Promise<MugshotDiffResult> {
-    await this.storage.writeBaseline(`${name}.diff`, diff);
-    await this.storage.writeBaseline(`${name}.actual`, actual);
+    await this.storage.write(`${name}.diff`, diff);
+    await this.storage.write(`${name}.actual`, actual);
 
     return {
       matches: false,
