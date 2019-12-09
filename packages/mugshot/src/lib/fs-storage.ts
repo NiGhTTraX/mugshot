@@ -1,4 +1,4 @@
-import { outputFile, pathExists, readFile } from 'fs-extra';
+import { outputFile, pathExists, readFile, remove } from 'fs-extra';
 import path from 'path';
 import ScreenshotStorage from '../interfaces/screenshot-storage';
 
@@ -19,6 +19,8 @@ export default class FsStorage implements ScreenshotStorage {
   exists = async (name: string) => pathExists(this.getPath(name));
 
   read = async (name: string) => readFile(this.getPath(name));
+
+  delete = async (name: string) => remove(this.getPath(name));
 
   private getPath(filePath: string) {
     return path.join(this.resultsPath, `${filePath}.png`);

@@ -31,4 +31,13 @@ export default interface ScreenshotStorage {
    * @param data PNG encoded Buffer.
    */
   write: (name: string, data: Buffer) => Promise<void>;
+
+  /**
+   * Delete the screenshot for `name`.
+   *
+   * If the screenshot doesn't exist, this should be a no-op.
+   *
+   * @param name The value passed to [[Mugshot.check]].
+   */
+  delete: (name: string) => Promise<void>;
 }

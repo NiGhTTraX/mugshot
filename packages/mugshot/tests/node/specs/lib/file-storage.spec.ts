@@ -1,4 +1,4 @@
-import { mkdtemp, readFile, writeFile } from 'fs-extra';
+import { mkdtemp, readFile, writeFile, pathExists } from 'fs-extra';
 import path from 'path';
 import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
@@ -50,5 +50,24 @@ describe('FileStorage', () => {
     await storage.write('update', whitePixelBuffer);
 
     expect(await readFile(filePath)).to.deep.equal(whitePixelBuffer);
+  });
+
+  it('should delete an existing screenshot', async () => {
+    const filePath = path.join(tmpPath, 'delete.png');
+    await writeFile(filePath, blackPixelBuffer);
+
+    const storage = new FsStorage(tmpPath);
+    await storage.delete('delete');
+
+    expect(await pathExists(filePath)).to.be.false;
+  });
+
+  it('should delete an non existing screenshot', async () => {
+    const filePath = path.join(tmpPath, 'missing.png');
+
+    const storage = new FsStorage(tmpPath);
+    await storage.delete('missing');
+
+    expect(await pathExists(filePath)).to.be.false;
   });
 });
