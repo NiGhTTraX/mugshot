@@ -89,11 +89,15 @@ export default class Mugshot {
    *
    * @param name Mugshot will ask the storage implementation for a baseline
    *   with this name. If one is not found and `createMissingBaselines`
-   *   is true then Mugshot will create a new baseline and pass the test. <br>
+   *   is true then Mugshot will create a new baseline and return a passing
+   *   result. Any leftover diffs from last time will be cleaned up.<br>
+   *
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `screenshotter`. If differences are found this will return a
    *   failing result and a `${name}.diff` and a `${name}.actual` will be
-   *   created using `storage`.
+   *   created using `storage`. If no differences are found then a passing
+   *   result will be returned and any leftover diffs from last time will be
+   *   cleaned up.
    *
    * @param selector If given then Mugshot will screenshot the visible
    *   region bounded by the element's rectangle. <br>
@@ -105,29 +109,33 @@ export default class Mugshot {
    *
    * @param options
    */
-  // eslint-disable-next-line max-len
   check(
     name: string,
     selector: MugshotSelector,
     options?: ScreenshotOptions
   ): Promise<MugshotResult>;
+
   /**
    * Check for visual regressions.
    *
    * @param name Mugshot will ask the storage implementation for a baseline
    *   with this name. If one is not found and `createMissingBaselines`
-   *   is true then Mugshot will create a new baseline and pass the test. <br>
+   *   is true then Mugshot will create a new baseline and return a passing
+   *   result. Any leftover diffs from last time will be cleaned up.<br>
+   *
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `screenshotter`. If differences are found this will return a
    *   failing result and a `${name}.diff` and a `${name}.actual` will be
-   *   created using `storage`.
+   *   created using `storage`. If no differences are found then a passing
+   *   result will be returned and any leftover diffs from last time will be
+   *   cleaned up.
    *
    * @param options
    */
-
-  // eslint-disable-next-line no-dupe-class-members,lines-between-class-members
+  // eslint-disable-next-line no-dupe-class-members
   check(name: string, options?: ScreenshotOptions): Promise<MugshotResult>;
-  // eslint-disable-next-line lines-between-class-members,no-dupe-class-members
+
+  // eslint-disable-next-line no-dupe-class-members
   async check(
     name: string,
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
@@ -163,6 +171,8 @@ export default class Mugshot {
       return this.diff(name, expected, result.diff, actual);
     }
 
+    await this.cleanup(name);
+
     return {
       matches: true,
       expected,
@@ -178,6 +188,7 @@ export default class Mugshot {
     const expected = await this.getScreenshot(selector, options);
 
     await this.storage.write(name, expected);
+    await this.cleanup(name);
 
     return {
       matches: true,
@@ -217,4 +228,9 @@ export default class Mugshot {
       : // eslint-disable-next-line no-return-await
         await this.screenshotter.takeScreenshot(options);
   }
+
+  private cleanup = async (name: string) => {
+    await this.storage.delete(`${name}.diff`);
+    await this.storage.delete(`${name}.actual`);
+  };
 }
