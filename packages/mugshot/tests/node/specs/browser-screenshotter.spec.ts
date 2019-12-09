@@ -28,9 +28,7 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
@@ -43,16 +41,14 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of an element', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.test'))
-      .returns(Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }));
+      .resolves({ x: 1, y: 2, width: 3, height: 4 });
 
     pngProcessor
       .when(p => p.crop(blackPixelBuffer, 1, 2, 3, 4))
-      .returns(Promise.resolve(whitePixelBuffer));
+      .resolves(whitePixelBuffer);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
@@ -65,9 +61,7 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should throw if the selector returns multiple elements', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.test'))
       .returns(
@@ -88,16 +82,14 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore an element', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.ignore'))
-      .returns(Promise.resolve({ x: 1, y: 2, width: 3, height: 4 }));
+      .resolves({ x: 1, y: 2, width: 3, height: 4 });
 
     pngProcessor
       .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
-      .returns(Promise.resolve(whitePixelBuffer));
+      .resolves(whitePixelBuffer);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
@@ -112,9 +104,7 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore all matching elements', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.ignore'))
       .returns(
@@ -126,10 +116,10 @@ describe('BrowserScreenshotter', () => {
 
     pngProcessor
       .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
-      .returns(Promise.resolve(whitePixelBuffer));
+      .resolves(whitePixelBuffer);
     pngProcessor
       .when(p => p.paint(whitePixelBuffer, 10, 20, 30, 40, '#000'))
-      .returns(Promise.resolve(blackPixelBuffer));
+      .resolves(blackPixelBuffer);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
@@ -144,22 +134,20 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore an element', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.test'))
-      .returns(Promise.resolve({ x: 0, y: 0, width: 10, height: 10 }));
+      .resolves({ x: 0, y: 0, width: 10, height: 10 });
     browser
       .when(b => b.getElementRect('.ignore'))
-      .returns(Promise.resolve({ x: 1, y: 1, width: 4, height: 4 }));
+      .resolves({ x: 1, y: 1, width: 4, height: 4 });
 
     pngProcessor
       .when(p => p.crop(blackPixelBuffer, 0, 0, 10, 10))
-      .returns(Promise.resolve(whitePixelBuffer));
+      .resolves(whitePixelBuffer);
     pngProcessor
       .when(p => p.paint(whitePixelBuffer, 1, 1, 4, 4, '#000'))
-      .returns(Promise.resolve(redPixelBuffer));
+      .resolves(redPixelBuffer);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
@@ -174,12 +162,10 @@ describe('BrowserScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore all matching elements', async () => {
-    browser
-      .when(b => b.takeScreenshot())
-      .returns(Promise.resolve(blackPixelB64));
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
       .when(b => b.getElementRect('.test'))
-      .returns(Promise.resolve({ x: 0, y: 0, width: 10, height: 10 }));
+      .resolves({ x: 0, y: 0, width: 10, height: 10 });
     browser
       .when(b => b.getElementRect('.ignore'))
       .returns(
@@ -191,13 +177,13 @@ describe('BrowserScreenshotter', () => {
 
     pngProcessor
       .when(p => p.crop(blackPixelBuffer, 0, 0, 10, 10))
-      .returns(Promise.resolve(whitePixelBuffer));
+      .resolves(whitePixelBuffer);
     pngProcessor
       .when(p => p.paint(whitePixelBuffer, 1, 2, 3, 4, '#000'))
-      .returns(Promise.resolve(redPixelBuffer));
+      .resolves(redPixelBuffer);
     pngProcessor
       .when(p => p.paint(redPixelBuffer, 5, 6, 7, 8, '#000'))
-      .returns(Promise.resolve(blackPixelBuffer));
+      .resolves(blackPixelBuffer);
 
     const screenshotter = new BrowserScreenshotter(
       browser.stub,
