@@ -70,7 +70,7 @@
 				<hr>
 				<p>Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. Moreover, Mugshot doesn&#39;t impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.</p>
 				<div align="center">
-					<a href="./docs/index.html">View docs</a>
+					<a href="http://nighttrax.github.io/mugshot/index.html">View docs</a>
 				</div>
 				<hr>
 				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -105,7 +105,7 @@
 				<pre><code class="language-shell">npm install --save-dev mugshot</code></pre>
 				<p>Or alternatively with yarn</p>
 				<pre><code class="language-shell">yarn add -D mugshot</code></pre>
-				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="./docs/interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="./docs/classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
+				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
 				<table>
 					<thead>
 						<tr>
@@ -118,7 +118,7 @@
 							<td><img src="https://img.shields.io/npm/v/@mugshot/webdriverio.svg" alt="npm"></td>
 						</tr>
 				</tbody></table>
-				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="./docs/interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
+				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="http://nighttrax.github.io/mugshot/interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
 				<a href="#intro" id="intro" style="color: inherit; text-decoration: none;">
 					<h2>Intro</h2>
 				</a>
@@ -146,7 +146,7 @@
 					<li>Interact with the UI (scroll, click a button, input some text in a form etc.).</li>
 					<li>Run the Mugshot assertion.</li>
 				</ol>
-				<p>The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call <a href="./docs/classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
+				<p>The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call <a href="http://nighttrax.github.io/mugshot/classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
 				<a href="#basic-example" id="basic-example" style="color: inherit; text-decoration: none;">
 					<h2>Basic example</h2>
 				</a>
@@ -180,11 +180,11 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 				<a href="#taking-screenshots" id="taking-screenshots" style="color: inherit; text-decoration: none;">
 					<h2>Taking screenshots</h2>
 				</a>
-				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="./docs/interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
+				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
 				<a href="#taking-a-screenshot-of-a-single-element" id="taking-a-screenshot-of-a-single-element" style="color: inherit; text-decoration: none;">
 					<h3>Taking a screenshot of a single element</h3>
 				</a>
-				<p>A selector can be passed as the second argument to <a href="./docs/classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./docs/interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./docs/classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
+				<p>A selector can be passed as the second argument to <a href="http://nighttrax.github.io/mugshot/classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
 				<a href="#ignoring-elements" id="ignoring-elements" style="color: inherit; text-decoration: none;">
 					<h3>Ignoring elements</h3>
 				</a>
@@ -192,7 +192,7 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 				<a href="#storing-screenshots" id="storing-screenshots" style="color: inherit; text-decoration: none;">
 					<h3>Storing screenshots</h3>
 				</a>
-				<p>Screenshots are taken in <strong>PNG</strong> format and how they&#39;re stored is controlled by the <a href="./docs/interfaces/screenshotstorage.html"><code>ScreenshotStorage</code></a> interface. Mugshot ships with a <a href="./docs/classes/fsstorage.html">local file system implementation</a>, but you could easily plug in e.g. a cloud storage implementation.</p>
+				<p>Screenshots are taken in <strong>PNG</strong> format and how they&#39;re stored is controlled by the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotstorage.html"><code>ScreenshotStorage</code></a> interface. Mugshot ships with a <a href="http://nighttrax.github.io/mugshot/classes/fsstorage.html">local file system implementation</a>, but you could easily plug in e.g. a cloud storage implementation.</p>
 				<a href="#reducing-flakiness" id="reducing-flakiness" style="color: inherit; text-decoration: none;">
 					<h3>Reducing flakiness</h3>
 				</a>
