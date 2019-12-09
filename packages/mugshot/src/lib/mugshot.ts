@@ -31,6 +31,19 @@ export type MugshotDiffResult = {
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
 // TODO: support rects
+/**
+ * A CSS selector.
+ *
+ * @example
+ * ```
+ * #root
+ * ```
+ *
+ * @example
+ * ```
+ * ul.results li:first-child > .name
+ * ```
+ */
 export type MugshotSelector = string;
 
 interface MugshotOptions {
