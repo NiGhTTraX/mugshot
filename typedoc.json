@@ -1,0 +1,13 @@
+{
+  "out": "./docs",
+  "src": ["./packages"],
+  "mode": "file",
+  "name": "Mugshot",
+  "readme": "./README.md",
+  "gitRevision": "master",
+  "excludeNotExported": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "exclude": ["**/tests/**/*"],
+  "media": "./media"
+}
