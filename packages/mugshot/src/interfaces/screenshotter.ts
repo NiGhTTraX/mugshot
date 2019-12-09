@@ -30,7 +30,7 @@ export default interface Screenshotter {
   takeScreenshot(options?: ScreenshotOptions): Promise<Buffer>;
 
   /**
-   * Take a screenshot of an element.
+   * Take a screenshot of a single element.
    *
    * Will throw [[TooManyElementsError]] if `selector` matches more than one element.
    *

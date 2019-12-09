@@ -30,6 +30,7 @@ export type MugshotDiffResult = {
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
+// TODO: support rects
 export type MugshotSelector = string;
 
 interface MugshotOptions {
@@ -99,13 +100,7 @@ export default class Mugshot {
    *   result will be returned and any leftover diffs from last time will be
    *   cleaned up.
    *
-   * @param selector If given then Mugshot will screenshot the visible
-   *   region bounded by the element's rectangle. <br>
-   *   If the element is not in the viewport then, depending on the
-   *   browser WebDriver implementation, a screenshot might fail.
-   *   It is up to you to appropriately scroll the viewport
-   *   before calling Mugshot. <br>
-   *   If the element is not found an error will be thrown.
+   * @param selector See [[Screenshotter.takeScreenshot]] for more details.
    *
    * @param options
    */

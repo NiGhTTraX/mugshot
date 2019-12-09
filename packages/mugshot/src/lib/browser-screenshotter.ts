@@ -19,6 +19,9 @@ export default class BrowserScreenshotter implements Screenshotter {
   /**
    * Take screenshots of selectors by first taking a viewport screenshot and
    * then cropping the element out.
+   *
+   * The element's bounding rectangle will be used to crop it out of the
+   * viewport screenshot. If the element is not fully visible in the viewport
    */
   async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
