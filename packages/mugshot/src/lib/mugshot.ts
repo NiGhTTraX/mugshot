@@ -222,11 +222,8 @@ export default class Mugshot {
     options: ScreenshotOptions
   ) {
     return selector
-      ? // TODO: because WebStorm really wants it
-        // eslint-disable-next-line no-return-await
-        await this.screenshotter.takeScreenshot(selector, options)
-      : // eslint-disable-next-line no-return-await
-        await this.screenshotter.takeScreenshot(options);
+      ? this.screenshotter.takeScreenshot(selector, options)
+      : this.screenshotter.takeScreenshot(options);
   }
 
   private cleanup = async (name: string) => {
