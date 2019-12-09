@@ -1,7 +1,6 @@
-/* eslint-disable semi */
 import { MugshotSelector } from '../lib/mugshot';
 
-export type ScreenshotOptions = {
+export interface ScreenshotOptions {
   /**
    * All elements identified by this selector will be painted black
    * before taking the screenshot.
@@ -9,7 +8,7 @@ export type ScreenshotOptions = {
    * TODO: configure the color
    */
   ignore?: string;
-};
+}
 
 /**
  * Thrown when the selector passed to [[Mugshot.check]] matches more than one

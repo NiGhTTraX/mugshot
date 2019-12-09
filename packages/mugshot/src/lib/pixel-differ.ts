@@ -2,11 +2,11 @@ import Jimp from 'jimp';
 import pixelmatch from 'pixelmatch';
 import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
 
-export type Color = {
+export interface Color {
   r: number;
   g: number;
   b: number;
-};
+}
 
 interface PixelDifferOptions {
   /**

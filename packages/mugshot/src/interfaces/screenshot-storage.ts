@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 /**
  * A way to read and write screenshots.
  *

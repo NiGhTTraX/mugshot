@@ -1,15 +1,16 @@
-/* eslint-disable semi */
-export type DiffResult =
-  | {
-      matches: true;
-    }
-  | {
-      matches: false;
-      /**
-       * A PNG MIME encoded buffer of the diff image.
-       */
-      diff: Buffer;
-    };
+export interface DiffPassingResult {
+  matches: true;
+}
+
+export interface DiffFailingResult {
+  matches: false;
+  /**
+   * A PNG MIME encoded buffer of the diff image.
+   */
+  diff: Buffer;
+}
+
+export type DiffResult = DiffPassingResult | DiffFailingResult;
 
 /**
  * Compare two screenshots and produce a diff image if necessary.

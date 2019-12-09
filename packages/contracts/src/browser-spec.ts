@@ -25,7 +25,7 @@ export interface TestBrowser {
   execute: (func: (...args: any[]) => any, ...args: any[]) => Promise<any>;
 }
 
-export type BrowserContractTest = {
+export interface BrowserContractTest {
   name: string;
 
   /**
@@ -36,7 +36,7 @@ export type BrowserContractTest = {
    * @param adapter The browser adapter.
    */
   getTest: (browser: TestBrowser, adapter: Browser) => () => Promise<void>;
-};
+}
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function createFixture(html: string) {

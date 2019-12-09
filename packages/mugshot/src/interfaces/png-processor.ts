@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 export default interface PNGProcessor {
   /**
    * Crop a screenshot to the specified dimensions.

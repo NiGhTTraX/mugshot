@@ -1,10 +1,9 @@
-/* eslint-disable semi */
-export type ElementRect = {
+export interface ElementRect {
   x: number;
   y: number;
   width: number;
   height: number;
-};
+}
 
 /**
  * Webdriver compatible browser.

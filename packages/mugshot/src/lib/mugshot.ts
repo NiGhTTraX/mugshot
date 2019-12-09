@@ -4,29 +4,45 @@ import ScreenshotStorage from '../interfaces/screenshot-storage';
 import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
 import PixelDiffer from './pixel-differ';
 
-export type MugshotIdenticalResult = {
+export interface MugshotIdenticalResult {
   matches: true;
-  // The name of the baseline.
+  /**
+   * The name of the baseline.
+   */
   expectedName: string;
-  // A PNG MIME encoded buffer of the baseline image.
+  /**
+   * A PNG MIME encoded buffer of the baseline image.
+   */
   expected: Buffer;
-};
+}
 
-export type MugshotDiffResult = {
+export interface MugshotDiffResult {
   matches: false;
-  // A PNG MIME encoded buffer of the baseline image.
+  /**
+   * A PNG MIME encoded buffer of the baseline image.
+   */
   expected: Buffer;
-  // A PNG MIME encoded buffer of the actual screenshot.
+  /**
+   * A PNG MIME encoded buffer of the actual screenshot.
+   */
   actual: Buffer;
-  // A PNG MIME encoded buffer of the diff image.
+  /**
+   * A PNG MIME encoded buffer of the diff image.
+   */
   diff: Buffer;
-  // The name of the baseline.
+  /**
+   * The name of the baseline.
+   */
   expectedName: string;
-  // The name of the actual screenshot.
+  /**
+   * The name of the actual screenshot.
+   */
   actualName: string;
-  // The name of the diff image.
+  /**
+   * The name of the diff image.
+   */
   diffName: string;
-};
+}
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
