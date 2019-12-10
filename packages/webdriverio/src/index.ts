@@ -1,5 +1,6 @@
 import { Browser, ElementNotFoundError } from 'mugshot';
 import 'webdriverio';
+import { ElementNotVisibleError } from 'mugshot/src/interfaces/browser';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
@@ -27,7 +28,10 @@ function getBrowserChromeSize() {
 }
 
 /**
- * @see [WebdriverIO](https://webdriver.io/).
+ * Adapter over [WebdriverIO](https://webdriver.io/) to be used with
+ * [[BrowserScreenshotter].
+ *
+ * @see https://webdriver.io/docs/api.html
  */
 export default class WebdriverIOAdapter implements Browser {
   constructor(
@@ -47,12 +51,32 @@ export default class WebdriverIOAdapter implements Browser {
     }
 
     if (Array.isArray(rects)) {
-      return rects.map(rect => ({
-        x: rect.x,
-        y: rect.y,
-        width: rect.width,
-        height: rect.height
-      }));
+      return rects.map(rect => {
+        if (
+          rect.x === 0 &&
+          rect.y === 0 &&
+          rect.width === 0 &&
+          rect.height === 0
+        ) {
+          throw new ElementNotVisibleError(selector);
+        }
+
+        return {
+          x: rect.x,
+          y: rect.y,
+          width: rect.width,
+          height: rect.height
+        };
+      });
+    }
+
+    if (
+      rects.x === 0 &&
+      rects.y === 0 &&
+      rects.width === 0 &&
+      rects.height === 0
+    ) {
+      throw new ElementNotVisibleError(selector);
     }
 
     return {

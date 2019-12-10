@@ -23,9 +23,7 @@ export default interface Browser {
    *
    * Should throw [[ElementNotFoundError]] if the element is not found.
    *
-   * If the element is not visible it should return [0, 0, 0, 0]. TODO: it should throw instead.
-   *
-   * @see [[ElementNotFoundError]]
+   * Should throw [[ElementNotVisibleError] if the element is not visible.
    */
   getElementRect: (selector: string) => Promise<ElementRect | ElementRect[]>;
 
@@ -47,5 +45,15 @@ export default interface Browser {
 export class ElementNotFoundError extends Error {
   constructor(selector: string) {
     super(`Couldn't find element ${selector}`);
+  }
+}
+
+/**
+ * Thrown when the element matching the selector passed to [[Mugshot.check]]
+ * is not visible.
+ */
+export class ElementNotVisibleError extends Error {
+  constructor(selector: string) {
+    super(`Element ${selector} is not visible`);
   }
 }

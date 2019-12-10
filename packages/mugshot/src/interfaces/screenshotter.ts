@@ -32,8 +32,6 @@ export default interface Screenshotter {
    * Take a screenshot of a single element.
    *
    * Will throw [[TooManyElementsError]] if `selector` matches more than one element.
-   *
-   * @see [[TooManyElementsError]]
    */
   takeScreenshot(
     selector: MugshotSelector,

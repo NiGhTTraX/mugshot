@@ -1,8 +1,12 @@
 import { Browser, ElementNotFoundError } from 'mugshot';
+import { ElementNotVisibleError } from 'mugshot/src/interfaces/browser';
 import { Page } from 'puppeteer';
 
 /**
- * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer).
+ * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
+ * to be used with [[BrowserScreenshotter].
+ *
+ * @see https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md
  */
 export default class PuppeteerAdapter implements Browser {
   constructor(private readonly page: Page) {}
@@ -15,15 +19,15 @@ export default class PuppeteerAdapter implements Browser {
     }
 
     const rects = await Promise.all(
-      elements.map(
-        async element =>
-          (await element.boundingBox()) || {
-            x: 0,
-            y: 0,
-            width: 0,
-            height: 0
-          }
-      )
+      elements.map(async element => {
+        const rect = await element.boundingBox();
+
+        if (!rect) {
+          throw new ElementNotVisibleError(selector);
+        }
+
+        return rect;
+      })
     );
 
     return rects.length === 1 ? rects[0] : rects;

@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import Jimp from 'jimp';
 import { Browser, ElementNotFoundError } from 'mugshot';
+import { ElementNotVisibleError } from 'mugshot/src/interfaces/browser';
 import { fixtures } from './fixtures';
 
 /**
@@ -135,7 +137,7 @@ export const browserContractTests: BrowserContractTest[] = [
     }
   },
   {
-    name: 'should get bounding rect of missing element',
+    name: 'should throw if element is missing',
     getTest(browser: TestBrowser, adapter: Browser) {
       return async () => {
         await loadFixture(browser, adapter, 'rect-scroll');
@@ -143,7 +145,7 @@ export const browserContractTests: BrowserContractTest[] = [
         let caughtError!: ElementNotFoundError;
 
         try {
-          await adapter.getElementRect('.missing');
+          expect(await adapter.getElementRect('.missing')).to.be.undefined;
         } catch (e) {
           caughtError = e;
         }
@@ -169,17 +171,21 @@ export const browserContractTests: BrowserContractTest[] = [
     }
   },
   {
-    name: 'should get bounding rect of invisible elements',
+    name: 'should throw if element is not visible',
     getTest(browser, adapter) {
       return async () => {
         await loadFixture(browser, adapter, 'rect-invisible');
 
-        expect(await adapter.getElementRect('.invisible')).to.deep.equal({
-          x: 0,
-          y: 0,
-          width: 0,
-          height: 0
-        });
+        let caughtError!: ElementNotFoundError;
+
+        try {
+          expect(await adapter.getElementRect('.invisible')).to.be.undefined;
+        } catch (e) {
+          caughtError = e;
+        }
+
+        expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
+        expect(caughtError.message).to.contain('.invisible');
       };
     }
   }

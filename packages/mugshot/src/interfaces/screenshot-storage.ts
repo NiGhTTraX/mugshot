@@ -5,8 +5,6 @@
  * write the screenshots. All the methods receive the name of
  * the screenshot which is the same value as the name passed
  * in [[Mugshot.check]].
- *
- * @see [[Mugshot.check]]
  */
 export default interface ScreenshotStorage {
   /**
