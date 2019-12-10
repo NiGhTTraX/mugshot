@@ -57,6 +57,19 @@ export const fixtures = {
     <div class="multiple" style="left: 100px; top: 100px;"></div>
     </body>
     </html>`,
+  'rect-invisible': `<html lang="en">
+    <head>
+        <title>Invisible rect</title>
+        <style>
+            .invisible {
+                display: none;
+            }
+        </style>
+      </head>
+    <body>
+    <div class="invisible"></div>
+    </body>
+    </html>`,
   simple: `<html lang="en">
     <body>
     This is some simple HTML

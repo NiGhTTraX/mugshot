@@ -159,5 +159,20 @@ export const browserContractTests: BrowserContractTest[] = [
         ]);
       };
     }
+  },
+  {
+    name: 'should get bounding rect of invisible elements',
+    getTest(browser, adapter) {
+      return async () => {
+        await loadFixture(browser, adapter, 'rect-invisible');
+
+        expect(await adapter.getElementRect('.invisible')).to.deep.equal({
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0
+        });
+      };
+    }
   }
 ];

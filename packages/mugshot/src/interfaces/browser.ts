@@ -23,6 +23,8 @@ export default interface Browser {
    *
    * Should throw [[ElementNotFoundError]] if the element is not found.
    *
+   * If the element is not visible it should return [0, 0, 0, 0]. TODO: it should throw instead.
+   *
    * @see [[ElementNotFoundError]]
    */
   getElementRect: (selector: string) => Promise<ElementRect | ElementRect[]>;
