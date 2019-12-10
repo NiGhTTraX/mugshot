@@ -11,7 +11,7 @@
 Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. Moreover, Mugshot doesn't impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.
 
 <div align="center">
-<a href="./docs/index.html">View docs</a>
+<a href="http://nighttrax.github.io/mugshot">View API docs</a>
 </div>
 
 ----
@@ -52,13 +52,13 @@ Or alternatively with yarn
 yarn add -D mugshot
 ```
 
-Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`BrowserScreenshotter`](./docs/classes/browserscreenshotter.html) that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
+Depending on how you want to take screenshots, you'll need a [`Screenshotter`](http://nighttrax.github.io/mugshot/interfaces/screenshotter.html) implementation. Mugshot bundles a [`BrowserScreenshotter`](http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html) that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
 Package | Version
 --------|--------
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
 
-If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](./docs/interfaces/browser.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
+If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](http://nighttrax.github.io/mugshot/interfaces/browser.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 
 
 ## Intro
@@ -80,7 +80,7 @@ You can think of Mugshot as providing an assertion - "expect this part of the UI
 3. Interact with the UI (scroll, click a button, input some text in a form etc.).
 4. Run the Mugshot assertion.
 
-The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call [`Mugshot.check`](./docs/classes/mugshot.html#check) and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.
+The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call [`Mugshot.check`](http://nighttrax.github.io/mugshot/classes/mugshot.html#check) and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.
 
 
 ## Basic example
@@ -119,12 +119,12 @@ it('GitHub project page should look the same', async () => {
 
 ## Taking screenshots
 
-Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the [Screenshotter](./docs/interfaces/screenshotter.html) interface for more details.
+Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the [Screenshotter](http://nighttrax.github.io/mugshot/interfaces/screenshotter.html) interface for more details.
 
 
 ### Taking a screenshot of a single element
 
-A selector can be passed as the second argument to [`Mugshot.check`](./docs/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](./docs/interfaces/screenshotter.html) implementation. For example, using the [BrowserScreenshotter](./docs/classes/browserscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
+A selector can be passed as the second argument to [`Mugshot.check`](http://nighttrax.github.io/mugshot/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](http://nighttrax.github.io/mugshot/interfaces/screenshotter.html) implementation. For example, using the [BrowserScreenshotter](http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
 
 
 ### Ignoring elements
@@ -134,7 +134,7 @@ You can ignore elements on the page by passing a selector through the `ignore` o
 
 ### Storing screenshots
 
-Screenshots are taken in **PNG** format and how they're stored is controlled by the [`ScreenshotStorage`](./docs/interfaces/screenshotstorage.html) interface. Mugshot ships with a [local file system implementation](./docs/classes/fsstorage.html), but you could easily plug in e.g. a cloud storage implementation.
+Screenshots are taken in **PNG** format and how they're stored is controlled by the [`ScreenshotStorage`](http://nighttrax.github.io/mugshot/interfaces/screenshotstorage.html) interface. Mugshot ships with a [local file system implementation](http://nighttrax.github.io/mugshot/classes/fsstorage.html), but you could easily plug in e.g. a cloud storage implementation.
 
 
 ### Reducing flakiness
