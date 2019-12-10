@@ -27,7 +27,7 @@ function getBrowserChromeSize() {
 }
 
 /**
- * API adapter for WebdriverIO to make working with it saner.
+ * @see [WebdriverIO](https://webdriver.io/).
  */
 export default class WebdriverIOAdapter implements Browser {
   constructor(

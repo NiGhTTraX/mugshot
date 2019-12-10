@@ -57,6 +57,7 @@ Depending on how you want to take screenshots, you'll need a [`Screenshotter`](h
 Package | Version
 --------|--------
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
+[@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
 
 If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](http://nighttrax.github.io/mugshot/interfaces/browser.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 

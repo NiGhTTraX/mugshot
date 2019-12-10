@@ -1,0 +1,44 @@
+{
+  "name": "@mugshot/puppeteer",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "description": "A Puppeteer adapter for Mugshot",
+  "keywords": [
+    "mugshot",
+    "puppeteer",
+    "visual",
+    "regression",
+    "testing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiGhTTraX/mugshot.git"
+  },
+  "author": "Andrei Picus",
+  "license": "MIT",
+  "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/puppeteer",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "tdd-buffet test --config ../../tests/jest.config.js --coverage --runInBand",
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build"
+  },
+  "peerDependencies": {
+    "mugshot": "^2.0.0",
+    "puppeteer": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^2.0.0",
+    "mugshot": "^2.2.0",
+    "puppeteer": "^2.0.0",
+    "typescript": "~3.7.0"
+  }
+}
