@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MugshotDiffResult | Mugshot</title>
+	<title>ElementNotVisibleError | Mugshot</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,21 +54,34 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="mugshotdiffresult.html">MugshotDiffResult</a>
+					<a href="elementnotvisibleerror.html">ElementNotVisibleError</a>
 				</li>
 			</ul>
-			<h1>Interface MugshotDiffResult</h1>
+			<h1>Class ElementNotVisibleError</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Thrown when the element matching the selector passed to <a href="mugshot.html#check">Mugshot.check</a>
+						is not visible.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MugshotDiffResult</span>
+						<span class="tsd-signature-type">Error</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ElementNotVisibleError</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -77,119 +90,92 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="elementnotvisibleerror.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#actual" class="tsd-kind-icon">actual</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#actualname" class="tsd-kind-icon">actual<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#diff" class="tsd-kind-icon">diff</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#diffname" class="tsd-kind-icon">diff<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#expected" class="tsd-kind-icon">expected</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#expectedname" class="tsd-kind-icon">expected<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mugshotdiffresult.html#matches" class="tsd-kind-icon">matches</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elementnotvisibleerror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elementnotvisibleerror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="elementnotvisibleerror.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="elementnotvisibleerror.html#error" class="tsd-kind-icon">Error</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Element<wbr>Not<wbr>Visible<wbr>Error<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elementnotvisibleerror.html" class="tsd-signature-type">ElementNotVisibleError</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/browser.ts#L55">packages/mugshot/src/interfaces/browser.ts:55</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="elementnotvisibleerror.html" class="tsd-signature-type">ElementNotVisibleError</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="actual" class="tsd-anchor"></a>
-					<h3>actual</h3>
-					<div class="tsd-signature tsd-kind-icon">actual<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.message</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L28">packages/mugshot/src/lib/mugshot.ts:28</a></li>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:974</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A PNG MIME encoded buffer of the actual screenshot.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="actualname" class="tsd-anchor"></a>
-					<h3>actual<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">actual<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.name</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L40">packages/mugshot/src/lib/mugshot.ts:40</a></li>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:973</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the actual screenshot.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="diff" class="tsd-anchor"></a>
-					<h3>diff</h3>
-					<div class="tsd-signature tsd-kind-icon">diff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.stack</p>
+						<p>Overrides Error.stack</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L32">packages/mugshot/src/lib/mugshot.ts:32</a></li>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:975</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A PNG MIME encoded buffer of the diff image.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="diffname" class="tsd-anchor"></a>
-					<h3>diff<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">diff<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="error" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> Error</h3>
+					<div class="tsd-signature tsd-kind-icon">Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ErrorConstructor</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L44">packages/mugshot/src/lib/mugshot.ts:44</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the diff image.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expected" class="tsd-anchor"></a>
-					<h3>expected</h3>
-					<div class="tsd-signature tsd-kind-icon">expected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L24">packages/mugshot/src/lib/mugshot.ts:24</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A PNG MIME encoded buffer of the baseline image.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="expectedname" class="tsd-anchor"></a>
-					<h3>expected<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">expected<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L36">packages/mugshot/src/lib/mugshot.ts:36</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the baseline.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="matches" class="tsd-anchor"></a>
-					<h3>matches</h3>
-					<div class="tsd-signature tsd-kind-icon">matches<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L20">packages/mugshot/src/lib/mugshot.ts:20</a></li>
+							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:984</li>
 						</ul>
 					</aside>
 				</section>
@@ -206,106 +192,100 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="../classes/browserscreenshotter.html" class="tsd-kind-icon">Browser<wbr>Screenshotter</a>
+						<a href="browserscreenshotter.html" class="tsd-kind-icon">Browser<wbr>Screenshotter</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/elementnotvisibleerror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Visible<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/fsstorage.html" class="tsd-kind-icon">Fs<wbr>Storage</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/jimpprocessor.html" class="tsd-kind-icon">Jimp<wbr>Processor</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/mugshot.html" class="tsd-kind-icon">Mugshot</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/toomanyelementserror.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Elements<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="../classes/webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="browser.html" class="tsd-kind-icon">Browser</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="color.html" class="tsd-kind-icon">Color</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="difffailingresult.html" class="tsd-kind-icon">Diff<wbr>Failing<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="diffpassingresult.html" class="tsd-kind-icon">Diff<wbr>Passing<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="elementrect.html" class="tsd-kind-icon">Element<wbr>Rect</a>
+						<a href="elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="mugshotdiffresult.html" class="tsd-kind-icon">Mugshot<wbr>Diff<wbr>Result</a>
+					<li class="current tsd-kind-class">
+						<a href="elementnotvisibleerror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Visible<wbr>Error</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#actual" class="tsd-kind-icon">actual</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="elementnotvisibleerror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#actualname" class="tsd-kind-icon">actual<wbr>Name</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="elementnotvisibleerror.html#message" class="tsd-kind-icon">message</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#diff" class="tsd-kind-icon">diff</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="elementnotvisibleerror.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#diffname" class="tsd-kind-icon">diff<wbr>Name</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="elementnotvisibleerror.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#expected" class="tsd-kind-icon">expected</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#expectedname" class="tsd-kind-icon">expected<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="mugshotdiffresult.html#matches" class="tsd-kind-icon">matches</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="elementnotvisibleerror.html#error" class="tsd-kind-icon">Error</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="mugshotidenticalresult.html" class="tsd-kind-icon">Mugshot<wbr>Identical<wbr>Result</a>
+					<li class=" tsd-kind-class">
+						<a href="fsstorage.html" class="tsd-kind-icon">Fs<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="jimpprocessor.html" class="tsd-kind-icon">Jimp<wbr>Processor</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="mugshot.html" class="tsd-kind-icon">Mugshot</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="toomanyelementserror.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Elements<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="pngdiffer.html" class="tsd-kind-icon">PNGDiffer</a>
+						<a href="../interfaces/browser.html" class="tsd-kind-icon">Browser</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="pngprocessor.html" class="tsd-kind-icon">PNGProcessor</a>
+						<a href="../interfaces/browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a>
+						<a href="../interfaces/color.html" class="tsd-kind-icon">Color</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="screenshotstorage.html" class="tsd-kind-icon">Screenshot<wbr>Storage</a>
+						<a href="../interfaces/difffailingresult.html" class="tsd-kind-icon">Diff<wbr>Failing<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="screenshotter.html" class="tsd-kind-icon">Screenshotter</a>
+						<a href="../interfaces/diffpassingresult.html" class="tsd-kind-icon">Diff<wbr>Passing<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
+						<a href="../interfaces/elementrect.html" class="tsd-kind-icon">Element<wbr>Rect</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/mugshotdiffresult.html" class="tsd-kind-icon">Mugshot<wbr>Diff<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/mugshotidenticalresult.html" class="tsd-kind-icon">Mugshot<wbr>Identical<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/pngdiffer.html" class="tsd-kind-icon">PNGDiffer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/pngprocessor.html" class="tsd-kind-icon">PNGProcessor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/screenshotstorage.html" class="tsd-kind-icon">Screenshot<wbr>Storage</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/screenshotter.html" class="tsd-kind-icon">Screenshotter</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
