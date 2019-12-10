@@ -58,6 +58,14 @@ async function loadFixture(
   await adapter.setViewportSize(1024, 768);
 }
 
+/**
+ * Contract tests for the [[Browser]] interface.
+ *
+ * These exercise the [[Browser.takeScreenshot]] method, but they don't check
+ * the actual screenshot content, only some basic properties. This is because
+ * the tests can't assume any details about the environment in which they're
+ * ran e.g. OS, actual browser instance, user profile etc.
+ */
 export const browserContractTests: BrowserContractTest[] = [
   {
     name: 'should take a viewport screenshot',
