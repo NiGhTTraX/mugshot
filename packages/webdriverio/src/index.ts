@@ -1,6 +1,5 @@
-import { Browser, ElementNotFoundError } from 'mugshot';
+import { Browser, ElementNotFoundError, ElementNotVisibleError } from 'mugshot';
 import 'webdriverio';
-import { ElementNotVisibleError } from 'mugshot/src/interfaces/browser';
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
 function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {

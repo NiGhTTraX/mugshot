@@ -1,5 +1,4 @@
-import { Browser, ElementNotFoundError } from 'mugshot';
-import { ElementNotVisibleError } from 'mugshot/src/interfaces/browser';
+import { Browser, ElementNotFoundError, ElementNotVisibleError } from 'mugshot';
 import { Page } from 'puppeteer';
 
 /**
