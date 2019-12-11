@@ -142,15 +142,4 @@ Screenshots are taken in **PNG** format and how they're stored is controlled by 
 
 A frequent source of flakiness in visual tests is dynamic data e.g. the current time and date or live API data. You can ignore elements that contain such data by painting over them with a solid color square. See the [ignore option](#ignoring-elements) for more details.
 
-Other common sources are animations and the blinking cursor in input fields. You can turn those off by including the following stylesheet on your page:
-
-```css
-input {
-  caret-color: transparent;
-}
-
-*, *::before, *::after {
-  transition: none !important;
-  animation: none !important;
-}
-```
+Other common sources are animations and the blinking cursor in input fields. If you're using the [`BrowserScreenshotter`](./docs/classes/browserscreenshotter.html) you can turn them off by passing the [`disableAnimations` flag](http://nighttrax.github.io/mugshot/interfaces/browserscreenshotteroptions.html#disableanimations).

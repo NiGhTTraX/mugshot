@@ -7,14 +7,42 @@ import Screenshotter, {
 import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
+export interface BrowserScreenshotterOptions {
+  /**
+   * Disable any CSS animations that might cause test flakiness.
+   */
+  disableAnimations?: boolean;
+}
+
+/* istanbul ignore next because this will be stringified and executed in the browser */
+function injectAnimationDisablingStylesheet() {
+  const style = document.createElement('style');
+  style.textContent = `
+input {
+  caret-color: transparent;
+}
+
+*, *::before, *::after {
+  transition: none !important;
+  animation: none !important;
+}
+        `;
+  document.head.appendChild(style);
+}
+
 /**
  * Take screenshots from a Webdriver compatible browser.
  */
 export default class BrowserScreenshotter implements Screenshotter {
+  private readonly disableAnimations: boolean;
+
   constructor(
     private readonly browser: Browser,
-    private readonly pngProcessor: PNGProcessor = new JimpProcessor()
-  ) {}
+    private readonly pngProcessor: PNGProcessor = new JimpProcessor(),
+    { disableAnimations = false }: BrowserScreenshotterOptions = {}
+  ) {
+    this.disableAnimations = disableAnimations;
+  }
 
   /**
    * Take screenshots of selectors by first taking a viewport screenshot and
@@ -34,6 +62,10 @@ export default class BrowserScreenshotter implements Screenshotter {
     } else if (typeof selectorOrOptions === 'object') {
       // eslint-disable-next-line no-param-reassign
       options = selectorOrOptions;
+    }
+
+    if (this.disableAnimations) {
+      await this.browser.execute(injectAnimationDisablingStylesheet);
     }
 
     let screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');

@@ -1,4 +1,4 @@
-import Mock from 'strong-mock';
+import Mock, { It } from 'strong-mock';
 import { expect } from 'tdd-buffet/expect/jest';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
@@ -193,6 +193,21 @@ describe('BrowserScreenshotter', () => {
     const screenshot = await screenshotter.takeScreenshot('.test', {
       ignore: '.ignore'
     });
+
+    await expectIdenticalBuffers(screenshot, blackPixelBuffer);
+  });
+
+  it('should disable animations', async () => {
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
+    browser.when(b => b.execute(It.isAny)).resolves(undefined);
+
+    const screenshotter = new BrowserScreenshotter(
+      browser.stub,
+      pngProcessor.stub,
+      { disableAnimations: true }
+    );
+
+    const screenshot = await screenshotter.takeScreenshot();
 
     await expectIdenticalBuffers(screenshot, blackPixelBuffer);
   });
