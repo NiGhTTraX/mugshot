@@ -5,19 +5,17 @@
 ## Usage
 
 ```typescript
-import { describe, it, before } from 'mocha';
+import { browserContractTests } from '@mugshot/contracts';
 import MyAdapter from './src';
-import { browserContractTests, TestBrowser } from '@mugshot/contracts';
 
 describe('MyAdapter', () => {
-  let browser!: TestBrowser;
-
-  before(async () => {
-    // Set up browser here.
-  });
-
   browserContractTests.forEach(test => {
-    it(test.name, test.getTest(browser, new MyAdapter(browser)));
+    it(test.name, async () => {
+      // Set up your framework/library here.
+      const browser = setUpBrowserInstance();
+
+      await test.runTest(browser, new MyAdapter(browser))
+    });
   });
 });
 ```

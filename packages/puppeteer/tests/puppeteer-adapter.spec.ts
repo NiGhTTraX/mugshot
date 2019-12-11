@@ -16,14 +16,14 @@ describe('PuppeteerAdapter', () => {
   });
 
   browserContractTests.forEach(test => {
-    it(test.name, async () => {
-      return test.getTest(
+    it(test.name, () =>
+      test.run(
         {
           url: path => page.goto(path),
           execute: (func, ...args) => page.evaluate(func, ...args)
         },
         new PuppeteerAdapter(page)
-      )();
-    });
+      )
+    );
   });
 });

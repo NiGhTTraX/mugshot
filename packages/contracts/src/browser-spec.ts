@@ -8,7 +8,7 @@ import { fixtures } from './fixtures';
 /**
  * Methods on the browser instance that these tests need.
  *
- * They're different from the ones from mugshot/browser because
+ * They're different from the ones from [[Browser]] because
  * the tests are concerned with navigating the browser to test
  * fixtures.
  */
@@ -31,13 +31,13 @@ export interface BrowserContractTest {
   name: string;
 
   /**
-   * Get the test implementation that will throw an `AssertionError` on failure.
+   * Run the test which will throw an `AssertionError` on failure.
    *
    * @param browser The browser you're adapting. It will be used to navigate to
    *   a test fixture and resize the window.
    * @param adapter The browser adapter.
    */
-  getTest: (browser: TestBrowser, adapter: Browser) => () => Promise<void>;
+  run: (browser: TestBrowser, adapter: Browser) => Promise<void>;
 }
 
 /* istanbul ignore next because this will get stringified and sent to the browser */
@@ -71,122 +71,108 @@ async function loadFixture(
 export const browserContractTests: BrowserContractTest[] = [
   {
     name: 'should take a viewport screenshot',
-    getTest(browser: TestBrowser, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, adapter, 'simple');
+    run: async (browser: TestBrowser, adapter: Browser) => {
+      await loadFixture(browser, adapter, 'simple');
 
-        const screenshot = await Jimp.read(
-          Buffer.from(await adapter.takeScreenshot(), 'base64')
-        );
+      const screenshot = await Jimp.read(
+        Buffer.from(await adapter.takeScreenshot(), 'base64')
+      );
 
-        expect(screenshot.getWidth()).to.equal(1024);
-        expect(screenshot.getHeight()).to.equal(768);
-      };
+      expect(screenshot.getWidth()).to.equal(1024);
+      expect(screenshot.getHeight()).to.equal(768);
     }
   },
   {
     name:
       'should take a viewport screenshot with absolutely positioned elements',
-    getTest(browser: TestBrowser, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect');
+    run: async (browser: TestBrowser, adapter: Browser) => {
+      await loadFixture(browser, adapter, 'rect');
 
-        const screenshot = await Jimp.read(
-          Buffer.from(await adapter.takeScreenshot(), 'base64')
-        );
+      const screenshot = await Jimp.read(
+        Buffer.from(await adapter.takeScreenshot(), 'base64')
+      );
 
-        expect(screenshot.getWidth()).to.equal(1024);
-        expect(screenshot.getHeight()).to.equal(768);
-      };
+      expect(screenshot.getWidth()).to.equal(1024);
+      expect(screenshot.getHeight()).to.equal(768);
     }
   },
   {
     name: 'should get bounding rect of element',
-    getTest(browser: TestBrowser, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect');
+    run: async (browser: TestBrowser, adapter: Browser) => {
+      await loadFixture(browser, adapter, 'rect');
 
-        const rect = await adapter.getElementRect('.test');
+      const rect = await adapter.getElementRect('.test');
 
-        expect(rect).to.deep.equal({
-          // Include margin.
-          x: 8 + 3,
-          y: 10 + 3,
-          // Include border and padding.
-          width: 100 + 2 * 2 + 4 * 2,
-          height: 100 + 2 * 2 + 4 * 2
-        });
-      };
+      expect(rect).to.deep.equal({
+        // Include margin.
+        x: 8 + 3,
+        y: 10 + 3,
+        // Include border and padding.
+        width: 100 + 2 * 2 + 4 * 2,
+        height: 100 + 2 * 2 + 4 * 2
+      });
     }
   },
   {
     name: 'should get bounding rect of off-screen element',
-    getTest(browser: TestBrowser, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect-scroll');
+    run: async (browser: TestBrowser, adapter: Browser) => {
+      await loadFixture(browser, adapter, 'rect-scroll');
 
-        const rect = await adapter.getElementRect('.test');
+      const rect = await adapter.getElementRect('.test');
 
-        expect(rect).to.deep.equal({
-          x: 2000,
-          y: 2000,
-          width: 100,
-          height: 100
-        });
-      };
+      expect(rect).to.deep.equal({
+        x: 2000,
+        y: 2000,
+        width: 100,
+        height: 100
+      });
     }
   },
   {
     name: 'should throw if element is missing',
-    getTest(browser: TestBrowser, adapter: Browser) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect-scroll');
+    run: async (browser: TestBrowser, adapter: Browser) => {
+      await loadFixture(browser, adapter, 'rect-scroll');
 
-        let caughtError!: ElementNotFoundError;
+      let caughtError!: ElementNotFoundError;
 
-        try {
-          expect(await adapter.getElementRect('.missing')).to.be.undefined;
-        } catch (e) {
-          caughtError = e;
-        }
+      try {
+        expect(await adapter.getElementRect('.missing')).to.be.undefined;
+      } catch (e) {
+        caughtError = e;
+      }
 
-        expect(caughtError).to.be.instanceOf(ElementNotFoundError);
-        expect(caughtError.message).to.contain('.missing');
-      };
+      expect(caughtError).to.be.instanceOf(ElementNotFoundError);
+      expect(caughtError.message).to.contain('.missing');
     }
   },
   {
     name: 'should get bounding rect of all matching elements',
-    getTest(browser, adapter) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect-multiple');
+    run: async (browser, adapter) => {
+      await loadFixture(browser, adapter, 'rect-multiple');
 
-        expect(await adapter.getElementRect('.multiple')).to.deep.equal([
-          { x: 0, y: 0, width: 100, height: 100 },
-          { x: 100, y: 0, width: 100, height: 100 },
-          { x: 0, y: 100, width: 100, height: 100 },
-          { x: 100, y: 100, width: 100, height: 100 }
-        ]);
-      };
+      expect(await adapter.getElementRect('.multiple')).to.deep.equal([
+        { x: 0, y: 0, width: 100, height: 100 },
+        { x: 100, y: 0, width: 100, height: 100 },
+        { x: 0, y: 100, width: 100, height: 100 },
+        { x: 100, y: 100, width: 100, height: 100 }
+      ]);
     }
   },
   {
     name: 'should throw if element is not visible',
-    getTest(browser, adapter) {
-      return async () => {
-        await loadFixture(browser, adapter, 'rect-invisible');
+    run: async (browser, adapter) => {
+      await loadFixture(browser, adapter, 'rect-invisible');
 
-        let caughtError!: ElementNotFoundError;
+      let caughtError!: ElementNotFoundError;
 
-        try {
-          expect(await adapter.getElementRect('.invisible')).to.be.undefined;
-        } catch (e) {
-          caughtError = e;
-        }
+      try {
+        expect(await adapter.getElementRect('.invisible')).to.be.undefined;
+      } catch (e) {
+        caughtError = e;
+      }
 
-        expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
-        expect(caughtError.message).to.contain('.invisible');
-      };
+      expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
+      expect(caughtError.message).to.contain('.invisible');
     }
   }
 ];

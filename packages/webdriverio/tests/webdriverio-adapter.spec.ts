@@ -8,8 +8,8 @@ import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
   browserContractTests.forEach(test => {
-    it(test.name, async browser =>
-      test.getTest(browser, new WebdriverIOAdapter(browser))()
+    it(test.name, browser =>
+      test.run(browser, new WebdriverIOAdapter(browser))
     );
   });
 
