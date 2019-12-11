@@ -201,15 +201,7 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 					<h3>Reducing flakiness</h3>
 				</a>
 				<p>A frequent source of flakiness in visual tests is dynamic data e.g. the current time and date or live API data. You can ignore elements that contain such data by painting over them with a solid color square. See the <a href="#ignoring-elements">ignore option</a> for more details.</p>
-				<p>Other common sources are animations and the blinking cursor in input fields. You can turn those off by including the following stylesheet on your page:</p>
-				<pre><code class="language-css"><span class="hljs-selector-tag">input</span> {
-  <span class="hljs-attribute">caret-color</span>: transparent;
-}
-
-*, *<span class="hljs-selector-pseudo">::before</span>, *<span class="hljs-selector-pseudo">::after</span> {
-  <span class="hljs-attribute">transition</span>: none <span class="hljs-meta">!important</span>;
-  <span class="hljs-attribute">animation</span>: none <span class="hljs-meta">!important</span>;
-}</code></pre>
+				<p>Other common sources are animations and the blinking cursor in input fields. If you&#39;re using the <a href="./docs/classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> you can turn them off by passing the <a href="http://nighttrax.github.io/mugshot/interfaces/browserscreenshotteroptions.html#disableanimations"><code>disableAnimations</code> flag</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -260,6 +252,9 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/browserscreenshotteroptions.html" class="tsd-kind-icon">Browser<wbr>Screenshotter<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/color.html" class="tsd-kind-icon">Color</a>
