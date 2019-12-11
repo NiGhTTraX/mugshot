@@ -157,13 +157,30 @@ export const browserContractTests: BrowserContractTest[] = [
       let caughtError!: ElementNotFoundError;
 
       try {
-        expect(await adapter.getElementRect('.invisible')).to.be.undefined;
+        expect(await adapter.getElementRect('#invisible')).to.be.undefined;
       } catch (e) {
         caughtError = e;
       }
 
       expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
-      expect(caughtError.message).to.contain('.invisible');
+      expect(caughtError.message).to.contain('#invisible');
+    }
+  },
+  {
+    name: 'should throw if matching element is not visible',
+    run: async (browser, adapter) => {
+      await loadFixture(browser, adapter, 'rect-invisible');
+
+      let caughtError!: ElementNotFoundError;
+
+      try {
+        expect(await adapter.getElementRect('div')).to.be.undefined;
+      } catch (e) {
+        caughtError = e;
+      }
+
+      expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
+      expect(caughtError.message).to.contain('div');
     }
   },
   {
@@ -171,7 +188,10 @@ export const browserContractTests: BrowserContractTest[] = [
     run: async (browser, adapter) => {
       await loadFixture(browser, adapter, 'simple');
 
-      expect(await adapter.execute(() => 23)).to.equal(23);
+      /* istanbul ignore next because this will get stringified and sent to the browser */
+      const func = () => 23;
+
+      expect(await adapter.execute(func)).to.equal(23);
     }
   },
   {
@@ -179,7 +199,10 @@ export const browserContractTests: BrowserContractTest[] = [
     run: async (browser, adapter) => {
       await loadFixture(browser, adapter, 'simple');
 
-      expect(await adapter.execute(x => x, 42)).to.equal(42);
+      /* istanbul ignore next because this will get stringified and sent to the browser */
+      const func = (x: number) => x;
+
+      expect(await adapter.execute(func, 42)).to.equal(42);
     }
   }
 ];

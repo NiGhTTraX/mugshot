@@ -67,7 +67,8 @@ export const fixtures = {
         </style>
       </head>
     <body>
-    <div class="invisible"></div>
+    <div id="visible">visible</div>
+    <div id="invisible" class="invisible">invisible</div>
     </body>
     </html>`,
   simple: `<html lang="en">

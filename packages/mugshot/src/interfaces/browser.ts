@@ -60,6 +60,7 @@ export class ElementNotFoundError extends Error {
  * Thrown when the element matching the selector passed to [[Mugshot.check]]
  * is not visible.
  */
+/* istanbul ignore next because the adapter packages are supposed to throw it */
 export class ElementNotVisibleError extends Error {
   constructor(selector: string) {
     super(`Element ${selector} is not visible`);
