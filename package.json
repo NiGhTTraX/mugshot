@@ -14,6 +14,7 @@
     "pretest": "yarn run selenium",
     "selenium": "selenium start",
     "selenium:debug": "selenium debug",
+    "selenium:stop": "selenium stop",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage-final.json"
   },
   "husky": {
