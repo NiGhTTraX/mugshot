@@ -17,14 +17,6 @@ export interface TestBrowser {
    * Navigate to an URL.
    */
   url: (path: string) => Promise<any>;
-
-  /**
-   * Execute JS in the active page.
-   *
-   * @param func Should be stringified and sent to the browser.
-   * @param args Should be stringified and passed to func.
-   */
-  execute: (func: (...args: any[]) => any, ...args: any[]) => Promise<any>;
 }
 
 export interface BrowserContractTest {
@@ -55,7 +47,7 @@ async function loadFixture(
 
   await browser.url('about:blank');
 
-  await browser.execute(createFixture, fixtureContent);
+  await adapter.execute(createFixture, fixtureContent);
 
   await adapter.setViewportSize(1024, 768);
 }
@@ -173,6 +165,22 @@ export const browserContractTests: BrowserContractTest[] = [
 
       expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
       expect(caughtError.message).to.contain('.invisible');
+    }
+  },
+  {
+    name: 'should execute a simple function',
+    run: async (browser, adapter) => {
+      await loadFixture(browser, adapter, 'simple');
+
+      expect(await adapter.execute(() => 23)).to.equal(23);
+    }
+  },
+  {
+    name: 'should execute a simple function with args',
+    run: async (browser, adapter) => {
+      await loadFixture(browser, adapter, 'simple');
+
+      expect(await adapter.execute(x => x, 42)).to.equal(42);
     }
   }
 ];

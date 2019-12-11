@@ -35,6 +35,14 @@ export default interface Browser {
    * @see https://w3c.github.io/webdriver/#set-window-rect
    */
   setViewportSize: (width: number, height: number) => Promise<void>;
+
+  /**
+   * Execute a function in the current page context.
+   *
+   * @param func A synchronous function. Needs to be serializable.
+   * @param args Will be passed to the function. Needs to be serializable.
+   */
+  execute: <R>(func: (...args: any[]) => R, ...args: any[]) => Promise<R>;
 }
 
 /**

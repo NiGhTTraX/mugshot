@@ -19,8 +19,7 @@ describe('PuppeteerAdapter', () => {
     it(test.name, () =>
       test.run(
         {
-          url: path => page.goto(path),
-          execute: (func, ...args) => page.evaluate(func, ...args)
+          url: path => page.goto(path)
         },
         new PuppeteerAdapter(page)
       )

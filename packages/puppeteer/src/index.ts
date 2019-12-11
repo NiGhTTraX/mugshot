@@ -40,4 +40,7 @@ export default class PuppeteerAdapter implements Browser {
     });
 
   takeScreenshot = () => this.page.screenshot();
+
+  execute = <R>(func: (...args: any[]) => R, ...args: any[]) =>
+    this.page.evaluate(func, ...args);
 }

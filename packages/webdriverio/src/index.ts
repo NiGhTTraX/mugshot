@@ -107,4 +107,7 @@ export default class WebdriverIOAdapter implements Browser {
       // eslint-disable-next-line no-empty
     } catch (e) {}
   };
+
+  execute = <R>(func: (...args: any[]) => R, ...args: any[]) =>
+    this.browser.execute<R>(func, ...args);
 }
