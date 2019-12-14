@@ -1,5 +1,4 @@
 import WebdriverIOAdapter from '@mugshot/webdriverio';
-import { writeFile } from 'fs-extra';
 import { describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,
@@ -18,8 +17,9 @@ describe('BrowserScreenshotter', () => {
       }
     );
 
-    const xxx = await screenshotter.takeScreenshot('.animated');
-    await writeFile('/tmp/mata.png', xxx);
-    await expectIdenticalScreenshots(xxx, 'animations');
+    await expectIdenticalScreenshots(
+      await screenshotter.takeScreenshot('.animated'),
+      'animations'
+    );
   });
 });
