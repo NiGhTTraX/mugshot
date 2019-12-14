@@ -8,6 +8,8 @@ import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
 export interface BrowserScreenshotterOptions {
+  pngProcessor?: PNGProcessor;
+
   /**
    * Disable any CSS animations that might cause test flakiness.
    */
@@ -36,12 +38,17 @@ input {
 export default class BrowserScreenshotter implements Screenshotter {
   private readonly disableAnimations: boolean;
 
+  private readonly pngProcessor: PNGProcessor;
+
   constructor(
     private readonly browser: Browser,
-    private readonly pngProcessor: PNGProcessor = new JimpProcessor(),
-    { disableAnimations = false }: BrowserScreenshotterOptions = {}
+    {
+      disableAnimations = false,
+      pngProcessor = new JimpProcessor()
+    }: BrowserScreenshotterOptions = {}
   ) {
     this.disableAnimations = disableAnimations;
+    this.pngProcessor = pngProcessor;
   }
 
   /**

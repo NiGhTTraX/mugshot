@@ -30,10 +30,7 @@ describe('BrowserScreenshotter', () => {
   it('should take a screenshot of the viewport', async () => {
     browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub);
 
     const screenshot = await screenshotter.takeScreenshot();
 
@@ -50,10 +47,9 @@ describe('BrowserScreenshotter', () => {
       .when(p => p.crop(blackPixelBuffer, 1, 2, 3, 4))
       .resolves(whitePixelBuffer);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     const screenshot = await screenshotter.takeScreenshot('.test');
 
@@ -71,10 +67,9 @@ describe('BrowserScreenshotter', () => {
         ])
       );
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
       TooManyElementsError
@@ -91,10 +86,9 @@ describe('BrowserScreenshotter', () => {
       .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
       .resolves(whitePixelBuffer);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     const screenshot = await screenshotter.takeScreenshot({
       ignore: '.ignore'
@@ -121,10 +115,9 @@ describe('BrowserScreenshotter', () => {
       .when(p => p.paint(whitePixelBuffer, 10, 20, 30, 40, '#000'))
       .resolves(blackPixelBuffer);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     const screenshot = await screenshotter.takeScreenshot({
       ignore: '.ignore'
@@ -149,10 +142,9 @@ describe('BrowserScreenshotter', () => {
       .when(p => p.paint(whitePixelBuffer, 1, 1, 4, 4, '#000'))
       .resolves(redPixelBuffer);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
       ignore: '.ignore'
@@ -185,10 +177,9 @@ describe('BrowserScreenshotter', () => {
       .when(p => p.paint(redPixelBuffer, 5, 6, 7, 8, '#000'))
       .resolves(blackPixelBuffer);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
       ignore: '.ignore'
@@ -201,11 +192,10 @@ describe('BrowserScreenshotter', () => {
     browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser.when(b => b.execute(It.isAny)).resolves(undefined);
 
-    const screenshotter = new BrowserScreenshotter(
-      browser.stub,
-      pngProcessor.stub,
-      { disableAnimations: true }
-    );
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub,
+      disableAnimations: true
+    });
 
     const screenshot = await screenshotter.takeScreenshot();
 
