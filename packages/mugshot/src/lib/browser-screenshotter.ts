@@ -36,19 +36,19 @@ input {
  * Take screenshots from a Webdriver compatible browser.
  */
 export default class BrowserScreenshotter implements Screenshotter {
-  private readonly disableAnimations: boolean;
-
   private readonly pngProcessor: PNGProcessor;
+
+  private readonly disableAnimations: boolean;
 
   constructor(
     private readonly browser: Browser,
     {
-      disableAnimations = false,
-      pngProcessor = new JimpProcessor()
+      pngProcessor = new JimpProcessor(),
+      disableAnimations = false
     }: BrowserScreenshotterOptions = {}
   ) {
-    this.disableAnimations = disableAnimations;
     this.pngProcessor = pngProcessor;
+    this.disableAnimations = disableAnimations;
   }
 
   /**
