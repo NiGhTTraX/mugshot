@@ -28,7 +28,7 @@ input {
   transition: none !important;
   animation: none !important;
 }
-        `;
+`;
   document.head.appendChild(style);
 }
 
