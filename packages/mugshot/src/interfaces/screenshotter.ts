@@ -4,6 +4,7 @@ export interface ScreenshotOptions {
   /**
    * All elements identified by this selector will be painted black
    * before taking the screenshot.
+   * TODO: support multiple selectors
    * TODO: configure the color
    */
   ignore?: MugshotSelector;
