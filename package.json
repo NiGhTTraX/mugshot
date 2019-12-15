@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "docs": "doctoc --title '**Table of content**' README.md && typedoc",
+    "docs": "./docs.sh",
     "pub": "yarn run build && lerna publish && yarn run clean",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "lerna run test",

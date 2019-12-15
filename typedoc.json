@@ -3,7 +3,7 @@
   "src": ["./packages"],
   "mode": "file",
   "name": "Mugshot",
-  "readme": "./README.md",
+  "readme": "./DOCS.md",
   "gitRevision": "master",
   "excludeNotExported": true,
   "excludePrivate": true,

@@ -69,17 +69,12 @@
 				</div>
 				<hr>
 				<p>Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. Moreover, Mugshot doesn&#39;t impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.</p>
-				<div align="center">
-					<a href="http://nighttrax.github.io/mugshot">View API docs</a>
-				</div>
 				<hr>
 				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
 				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 				<p><strong>Table of content</strong></p>
 				<ul>
-					<li><a href="#features">Features</a></li>
 					<li><a href="#installation">Installation</a></li>
-					<li><a href="#intro">Intro</a></li>
 					<li><a href="#basic-example">Basic example</a></li>
 					<li><a href="#taking-screenshots">Taking screenshots</a><ul>
 							<li><a href="#taking-a-screenshot-of-a-single-element">Taking a screenshot of a single element</a></li>
@@ -90,22 +85,13 @@
 					</li>
 				</ul>
 				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
-					<h2>Features</h2>
-				</a>
-				<ul>
-					<li>Framework independent so you can choose your favorite tools or plug it into your existing testing suite.</li>
-					<li>Produces diff images if a test fails.</li>
-					<li>Throws on missing baselines (can be toggled through options).</li>
-					<li>Everything is pluggable (screenshotter, differ, storage etc.).</li>
-				</ul>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
 				<pre><code class="language-shell">npm install --save-dev mugshot</code></pre>
 				<p>Or alternatively with yarn</p>
 				<pre><code class="language-shell">yarn add -D mugshot</code></pre>
-				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
+				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="./interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="./classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
 				<table>
 					<thead>
 						<tr>
@@ -122,26 +108,10 @@
 							<td><img src="https://img.shields.io/npm/v/@mugshot/puppeteer.svg" alt="npm"></td>
 						</tr>
 				</tbody></table>
-				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="http://nighttrax.github.io/mugshot/interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
-				<a href="#intro" id="intro" style="color: inherit; text-decoration: none;">
-					<h2>Intro</h2>
+				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="./interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
+				<a href="#basic-example" id="basic-example" style="color: inherit; text-decoration: none;">
+					<h2>Basic example</h2>
 				</a>
-				<p>Manually checking one component for unexpected visual changes is hard. Doing it across your entire UI is harder. Doing it in multiple browsers/devices is even harder. Making sure that everyone on your team does it is the hardest.</p>
-				<p>Mugshot aims to automate that process. It offers a simple API that lets you compare an existing baseline screenshot with a fresh screenshot and make sure they&#39;re identical. If they&#39;re not you&#39;ll get a diff image highlighting the differences. You can then commit it as the new baseline if the changes are expected, or fix the code and rerun the tests.</p>
-				<table>
-					<thead>
-						<tr>
-							<th>Expected</th>
-							<th>Actual</th>
-							<th>Diff</th>
-						</tr>
-					</thead>
-					<tbody><tr>
-							<td><img src="media/expected.png" alt="expected"></td>
-							<td><img src="media/actual.png" alt="actual"></td>
-							<td><img src="media/diff.png" alt="diff"></td>
-						</tr>
-				</tbody></table>
 				<p>If you have an existing testing suite then it will be straightforward to add Mugshot to it. If you&#39;re starting from scratch then you can choose your favorite tools, Mugshot doesn&#39;t impose anything on you like a test runner or a particular way to write the tests.</p>
 				<p>You can think of Mugshot as providing an assertion - &quot;expect this part of the UI to look the same as last time&quot;. A visual test would typically look like:</p>
 				<ol>
@@ -150,10 +120,7 @@
 					<li>Interact with the UI (scroll, click a button, input some text in a form etc.).</li>
 					<li>Run the Mugshot assertion.</li>
 				</ol>
-				<p>The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call <a href="http://nighttrax.github.io/mugshot/classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
-				<a href="#basic-example" id="basic-example" style="color: inherit; text-decoration: none;">
-					<h2>Basic example</h2>
-				</a>
+				<p>The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
 				<p>Here is an example of a test that makes sure a website doesn&#39;t have any visual changes using <a href="https://webdriver.io/">WebdriverIO</a>:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Mugshot, {
   FsStorage,
@@ -184,11 +151,11 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 				<a href="#taking-screenshots" id="taking-screenshots" style="color: inherit; text-decoration: none;">
 					<h2>Taking screenshots</h2>
 				</a>
-				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
+				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="./interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
 				<a href="#taking-a-screenshot-of-a-single-element" id="taking-a-screenshot-of-a-single-element" style="color: inherit; text-decoration: none;">
 					<h3>Taking a screenshot of a single element</h3>
 				</a>
-				<p>A selector can be passed as the second argument to <a href="http://nighttrax.github.io/mugshot/classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="http://nighttrax.github.io/mugshot/classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
+				<p>A selector can be passed as the second argument to <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
 				<a href="#ignoring-elements" id="ignoring-elements" style="color: inherit; text-decoration: none;">
 					<h3>Ignoring elements</h3>
 				</a>
@@ -196,12 +163,12 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 				<a href="#storing-screenshots" id="storing-screenshots" style="color: inherit; text-decoration: none;">
 					<h3>Storing screenshots</h3>
 				</a>
-				<p>Screenshots are taken in <strong>PNG</strong> format and how they&#39;re stored is controlled by the <a href="http://nighttrax.github.io/mugshot/interfaces/screenshotstorage.html"><code>ScreenshotStorage</code></a> interface. Mugshot ships with a <a href="http://nighttrax.github.io/mugshot/classes/fsstorage.html">local file system implementation</a>, but you could easily plug in e.g. a cloud storage implementation.</p>
+				<p>Screenshots are taken in <strong>PNG</strong> format and how they&#39;re stored is controlled by the <a href="./interfaces/screenshotstorage.html"><code>ScreenshotStorage</code></a> interface. Mugshot ships with a <a href="./classes/fsstorage.html">local file system implementation</a>, but you could easily plug in e.g. a cloud storage implementation.</p>
 				<a href="#reducing-flakiness" id="reducing-flakiness" style="color: inherit; text-decoration: none;">
 					<h3>Reducing flakiness</h3>
 				</a>
 				<p>A frequent source of flakiness in visual tests is dynamic data e.g. the current time and date or live API data. You can ignore elements that contain such data by painting over them with a solid color square. See the <a href="#ignoring-elements">ignore option</a> for more details.</p>
-				<p>Other common sources are animations and the blinking cursor in input fields. If you&#39;re using the <a href="./docs/classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> you can turn them off by passing the <a href="http://nighttrax.github.io/mugshot/interfaces/browserscreenshotteroptions.html#disableanimations"><code>disableAnimations</code> flag</a>.</p>
+				<p>Other common sources are animations and the blinking cursor in input fields. If you&#39;re using the <a href="./classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> you can turn them off by passing the <a href="./interfaces/browserscreenshotteroptions.html#disableanimations"><code>disableAnimations</code> flag</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
