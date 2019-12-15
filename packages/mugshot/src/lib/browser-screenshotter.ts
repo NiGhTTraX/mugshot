@@ -64,7 +64,10 @@ export default class BrowserScreenshotter implements Screenshotter {
   ): Promise<Buffer> {
     let selector: MugshotSelector | undefined;
 
-    if (typeof selectorOrOptions === 'string') {
+    if (
+      typeof selectorOrOptions === 'string' ||
+      (typeof selectorOrOptions !== 'undefined' && 'x' in selectorOrOptions)
+    ) {
       selector = selectorOrOptions;
     } else if (typeof selectorOrOptions === 'object') {
       // eslint-disable-next-line no-param-reassign
@@ -89,7 +92,10 @@ export default class BrowserScreenshotter implements Screenshotter {
   }
 
   private async crop(selector: MugshotSelector, screenshot: Buffer) {
-    const rect = await this.browser.getElementRect(selector);
+    const rect =
+      typeof selector === 'string'
+        ? await this.browser.getElementRect(selector)
+        : selector;
 
     if (Array.isArray(rect)) {
       throw new TooManyElementsError(selector);
@@ -105,7 +111,10 @@ export default class BrowserScreenshotter implements Screenshotter {
   }
 
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
-    const rects = await this.browser.getElementRect(selector);
+    const rects =
+      typeof selector === 'string'
+        ? await this.browser.getElementRect(selector)
+        : selector;
 
     if (Array.isArray(rects)) {
       let result: Buffer = screenshot;

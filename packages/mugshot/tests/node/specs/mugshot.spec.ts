@@ -208,6 +208,30 @@ describe('Mugshot', () => {
       );
     });
 
+    it('should screenshot only an area', async () => {
+      setupStorageWithExistingBaseline('element', blackPixelBuffer);
+      ignoreCleanup();
+
+      setupDifferWithResult(blackPixelBuffer, whitePixelBuffer, {
+        matches: true
+      });
+
+      screenshotter
+        .when(s => s.takeScreenshot({ x: 0, y: 1, width: 2, height: 3 }, {}))
+        .resolves(whitePixelBuffer);
+
+      const mugshot = new Mugshot(screenshotter.stub, storage.stub, {
+        pngDiffer: pngDiffer.stub
+      });
+
+      await expectIdenticalResult(
+        mugshot.check('element', { x: 0, y: 1, width: 2, height: 3 }),
+        'results/element.png',
+        'element',
+        blackPixelBuffer
+      );
+    });
+
     it('should update when told to', async () => {
       storage.when(f => f.exists('update')).resolves(true);
       storage

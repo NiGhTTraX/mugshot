@@ -1,9 +1,4 @@
-export interface ElementRect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
+import { CSSSelector, ElementRect } from '../lib/mugshot';
 
 /**
  * Webdriver compatible browser.
@@ -25,7 +20,9 @@ export default interface Browser {
    *
    * Should throw [[ElementNotVisibleError] if the element is not visible.
    */
-  getElementRect: (selector: string) => Promise<ElementRect | ElementRect[]>;
+  getElementRect: (
+    selector: CSSSelector
+  ) => Promise<ElementRect | ElementRect[]>;
 
   /**
    * Set the size of the __viewport__ (meaning window minus chrome).

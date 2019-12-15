@@ -56,6 +56,27 @@ describe('BrowserScreenshotter', () => {
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
   });
 
+  it('should take a screenshot of an area', async () => {
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
+
+    pngProcessor
+      .when(p => p.crop(blackPixelBuffer, 1, 2, 3, 4))
+      .resolves(whitePixelBuffer);
+
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
+
+    const screenshot = await screenshotter.takeScreenshot({
+      x: 1,
+      y: 2,
+      width: 3,
+      height: 4
+    });
+
+    await expectIdenticalBuffers(screenshot, whitePixelBuffer);
+  });
+
   it('should throw if the selector returns multiple elements', async () => {
     browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
     browser
@@ -92,6 +113,24 @@ describe('BrowserScreenshotter', () => {
 
     const screenshot = await screenshotter.takeScreenshot({
       ignore: '.ignore'
+    });
+
+    await expectIdenticalBuffers(screenshot, whitePixelBuffer);
+  });
+
+  it('should take a screenshot of the viewport and ignore an area', async () => {
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
+
+    pngProcessor
+      .when(p => p.paint(blackPixelBuffer, 1, 2, 3, 4, '#000'))
+      .resolves(whitePixelBuffer);
+
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
+
+    const screenshot = await screenshotter.takeScreenshot({
+      ignore: { x: 1, y: 2, width: 3, height: 4 }
     });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
@@ -148,6 +187,30 @@ describe('BrowserScreenshotter', () => {
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
       ignore: '.ignore'
+    });
+
+    await expectIdenticalBuffers(screenshot, redPixelBuffer);
+  });
+
+  it('should take a screenshot of an element and ignore an area', async () => {
+    browser.when(b => b.takeScreenshot()).resolves(blackPixelB64);
+    browser
+      .when(b => b.getElementRect('.test'))
+      .resolves({ x: 0, y: 0, width: 10, height: 10 });
+
+    pngProcessor
+      .when(p => p.crop(blackPixelBuffer, 0, 0, 10, 10))
+      .resolves(whitePixelBuffer);
+    pngProcessor
+      .when(p => p.paint(whitePixelBuffer, 1, 2, 3, 4, '#000'))
+      .resolves(redPixelBuffer);
+
+    const screenshotter = new BrowserScreenshotter(browser.stub, {
+      pngProcessor: pngProcessor.stub
+    });
+
+    const screenshot = await screenshotter.takeScreenshot('.test', {
+      ignore: { x: 1, y: 2, width: 3, height: 4 }
     });
 
     await expectIdenticalBuffers(screenshot, redPixelBuffer);

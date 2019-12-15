@@ -46,21 +46,22 @@ export interface MugshotDiffResult {
 
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
-// TODO: support rects
 /**
- * A CSS selector.
- *
  * @example
  * ```
  * #root
  * ```
- *
- * @example
- * ```
- * ul.results li:first-child > .name
- * ```
  */
-export type MugshotSelector = string;
+export type CSSSelector = string;
+
+export interface ElementRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export type MugshotSelector = CSSSelector | ElementRect;
 
 interface MugshotOptions {
   pngDiffer?: PNGDiffer;
@@ -167,7 +168,10 @@ export default class Mugshot {
   ): Promise<MugshotResult> {
     let selector: MugshotSelector | undefined;
 
-    if (typeof selectorOrOptions === 'string') {
+    if (
+      typeof selectorOrOptions === 'string' ||
+      (typeof selectorOrOptions !== 'undefined' && 'x' in selectorOrOptions)
+    ) {
       selector = selectorOrOptions;
     } else if (typeof selectorOrOptions === 'object') {
       // eslint-disable-next-line no-param-reassign
