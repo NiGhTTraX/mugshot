@@ -75,6 +75,7 @@
 								<li class="tsd-kind-class"><a href="classes/jimpprocessor.html" class="tsd-kind-icon">Jimp<wbr>Processor</a></li>
 								<li class="tsd-kind-class"><a href="classes/mugshot.html" class="tsd-kind-icon">Mugshot</a></li>
 								<li class="tsd-kind-class"><a href="classes/mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a></li>
+								<li class="tsd-kind-class"><a href="classes/outofboundserror.html" class="tsd-kind-icon">Out<wbr>OfBounds<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a></li>
 								<li class="tsd-kind-class"><a href="classes/puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a></li>
 								<li class="tsd-kind-class"><a href="classes/toomanyelementserror.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Elements<wbr>Error</a></li>
@@ -104,6 +105,7 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias"><a href="globals.html#cssselector" class="tsd-kind-icon">CSSSelector</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mugshotresult" class="tsd-kind-icon">Mugshot<wbr>Result</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mugshotselector" class="tsd-kind-icon">Mugshot<wbr>Selector</a></li>
@@ -127,6 +129,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="cssselector" class="tsd-anchor"></a>
+					<h3>CSSSelector</h3>
+					<div class="tsd-signature tsd-kind-icon">CSSSelector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L55">packages/mugshot/src/lib/mugshot.ts:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><pre><code><span class="hljs-meta">#root</span></code></pre></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="diffresult" class="tsd-anchor"></a>
 					<h3>Diff<wbr>Result</h3>
 					<div class="tsd-signature tsd-kind-icon">Diff<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="interfaces/diffpassingresult.html" class="tsd-signature-type">DiffPassingResult</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/difffailingresult.html" class="tsd-signature-type">DiffFailingResult</a></div>
@@ -149,23 +167,12 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="mugshotselector" class="tsd-anchor"></a>
 					<h3>Mugshot<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#cssselector" class="tsd-signature-type">CSSSelector</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/elementrect.html" class="tsd-signature-type">ElementRect</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L63">packages/mugshot/src/lib/mugshot.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L64">packages/mugshot/src/lib/mugshot.ts:64</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A CSS selector.</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>example</dt>
-							<dd><pre><code><span class="hljs-meta">#root</span></code></pre></dd>
-							<dt>example</dt>
-							<dd><pre><code><span class="hljs-selector-tag">ul</span><span class="hljs-selector-class">.results</span> <span class="hljs-selector-tag">li</span>:first-child &gt; .name</code></pre></dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -173,7 +180,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="browsercontracttests" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> browser<wbr>Contract<wbr>Tests</h3>
-					<div class="tsd-signature tsd-kind-icon">browser<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/browsercontracttest.html" class="tsd-signature-type">BrowserContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;should take a viewport screenshot&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name: &#x27;should get bounding rect of element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2});}},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100});}},{name: &#x27;should throw if element is missing&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);}},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 }]);}},{name: &#x27;should throw if element is not visible&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;.invisible&#x27;);}},{name: &#x27;should execute a simple function&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);expect(await adapter.execute(() &#x3D;&gt; 23)).to.equal(23);}},{name: &#x27;should execute a simple function with args&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);expect(await adapter.execute(x &#x3D;&gt; x, 42)).to.equal(42);}}]</span></div>
+					<div class="tsd-signature tsd-kind-icon">browser<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/browsercontracttest.html" class="tsd-signature-type">BrowserContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;should take a viewport screenshot&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name: &#x27;should get bounding rect of element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2});}},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100});}},{name: &#x27;should throw if element is missing&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);}},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 }]);}},{name: &#x27;should throw if element is not visible&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);}},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);}},{name: &#x27;should execute a simple function&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the browser */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);}},{name: &#x27;should execute a simple function with args&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the browser */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);}}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L62">packages/contracts/src/browser-spec.ts:62</a></li>
@@ -214,7 +221,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.rect_invisible" class="tsd-anchor"></a>
 						<h3>rect-<wbr>invisible</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Invisible rect&lt;/title&gt;&lt;style&gt;.invisible {display: none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;invisible&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">rect-<wbr>invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Invisible rect&lt;/title&gt;&lt;style&gt;.invisible {display: none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div id&#x3D;&quot;visible&quot;&gt;visible&lt;/div&gt;&lt;div id&#x3D;&quot;invisible&quot; class&#x3D;&quot;invisible&quot;&gt;invisible&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L60">packages/contracts/src/fixtures.ts:60</a></li>
@@ -247,7 +254,7 @@
 						<div class="tsd-signature tsd-kind-icon">simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;body&gt;This is some simple HTML&lt;div style&#x3D;&quot;width: 100px; height: 100px; border: 1px solid blue; background: coral&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L73">packages/contracts/src/fixtures.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L74">packages/contracts/src/fixtures.ts:74</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -284,6 +291,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/outofboundserror.html" class="tsd-kind-icon">Out<wbr>OfBounds<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a>
@@ -341,6 +351,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#cssselector" class="tsd-kind-icon">CSSSelector</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>

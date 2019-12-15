@@ -100,13 +100,14 @@
 					<div class="tsd-signature tsd-kind-icon">crop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-processor.ts#L11">packages/mugshot/src/interfaces/png-processor.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-processor.ts#L13">packages/mugshot/src/interfaces/png-processor.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Crop a screenshot to the specified dimensions.</p>
 						</div>
+						<p>Will throw <a href="../classes/outofboundserror.html">OutOfBoundsError</a> if trying to crop outside of the image.</p>
 						<dl class="tsd-comment-tags">
 							<dt>param</dt>
 							<dd><p>PNG encoded buffer.</p>
@@ -165,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">paint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-processor.ts#L29">packages/mugshot/src/interfaces/png-processor.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-processor.ts#L31">packages/mugshot/src/interfaces/png-processor.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -264,6 +265,9 @@
 						<a href="../classes/mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="../classes/outofboundserror.html" class="tsd-kind-icon">Out<wbr>OfBounds<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="../classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -331,6 +335,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#cssselector" class="tsd-kind-icon">CSSSelector</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
