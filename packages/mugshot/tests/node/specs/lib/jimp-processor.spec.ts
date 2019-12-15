@@ -1,8 +1,11 @@
+/* eslint-disable no-restricted-syntax */
+import { expect } from 'tdd-buffet/expect/jest';
 import { describe, it } from 'tdd-buffet/suite/node';
 import {
   createTestBuffer,
   expectIdenticalBuffers
 } from '../../../../../../tests/node/suite';
+import { OutOfBoundsError } from '../../../../src/interfaces/png-processor';
 import JimpProcessor from '../../../../src/lib/jimp-processor';
 
 describe('JimpProcessor', () => {
@@ -126,4 +129,44 @@ describe('JimpProcessor', () => {
       await createTestBuffer(['  G', '  G', '  G'])
     );
   });
+
+  const outOfBoundsCoordinates = [
+    ['right', 0, 0, 1, 4],
+    ['bottom', 0, 0, 4, 1],
+    ['left', -1, 0, 1, 1],
+    ['top', 0, -1, 1, 1]
+  ] as const;
+
+  for (const [edge, x, y, w, h] of outOfBoundsCoordinates) {
+    it(`should throw when trying to crop past the ${edge} edge`, async () => {
+      const processor = new JimpProcessor();
+
+      await expect(
+        processor.crop(
+          await createTestBuffer(['GGG', 'GGG', 'GGG']),
+          x,
+          y,
+          w,
+          h
+        )
+      ).rejects.toThrow(OutOfBoundsError);
+    });
+  }
+
+  for (const [edge, x, y, w, h] of outOfBoundsCoordinates) {
+    it(`should throw when trying to paint past the ${edge} edge`, async () => {
+      const processor = new JimpProcessor();
+
+      await expect(
+        processor.paint(
+          await createTestBuffer(['GGG', 'GGG', 'GGG']),
+          x,
+          y,
+          w,
+          h,
+          '#000'
+        )
+      ).rejects.toThrow(OutOfBoundsError);
+    });
+  }
 });

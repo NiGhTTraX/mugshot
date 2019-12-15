@@ -2,6 +2,8 @@ export default interface PNGProcessor {
   /**
    * Crop a screenshot to the specified dimensions.
    *
+   * Will throw [[OutOfBoundsError]] if trying to crop outside of the image.
+   *
    * @param img PNG encoded buffer.
    * @param x Top left coordinate in pixels.
    * @param y Top left coordinate in pixels.
@@ -34,4 +36,19 @@ export default interface PNGProcessor {
     h: number,
     c: string
   ) => Promise<Buffer>;
+}
+
+export class OutOfBoundsError extends Error {
+  constructor(
+    x1: number,
+    y1: number,
+    w1: number,
+    h1: number,
+    w2: number,
+    h2: number
+  ) {
+    super(
+      `Tried to crop (${x1},${y1},${w1},${h1}) outside of the image (${w2},${h2})`
+    );
+  }
 }
