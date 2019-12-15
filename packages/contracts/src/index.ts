@@ -1,1 +1,1 @@
-export { browserContractTests } from './browser-spec';
+export * from './browser-spec';
