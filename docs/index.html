@@ -155,11 +155,11 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 				<a href="#taking-a-screenshot-of-a-single-element" id="taking-a-screenshot-of-a-single-element" style="color: inherit; text-decoration: none;">
 					<h3>Taking a screenshot of a single element</h3>
 				</a>
-				<p>A selector can be passed as the second argument to <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
+				<p>A <a href="./globals.html#mugshotselector">selector</a> can be passed as the second argument to <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
 				<a href="#ignoring-elements" id="ignoring-elements" style="color: inherit; text-decoration: none;">
 					<h3>Ignoring elements</h3>
 				</a>
-				<p>You can ignore elements on the page by passing a selector through the <code>ignore</code> option. The elements identified by that selector will be painted black before taking any screenshots.</p>
+				<p>You can ignore elements on the page by passing a <a href="./globals.html#mugshotselector">selector</a> through the <code>ignore</code> option. The elements identified by that selector will be painted black before taking any screenshots.</p>
 				<a href="#storing-screenshots" id="storing-screenshots" style="color: inherit; text-decoration: none;">
 					<h3>Storing screenshots</h3>
 				</a>

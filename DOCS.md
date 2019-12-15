@@ -101,12 +101,12 @@ Mugshot doesn't care where the screenshots are coming from, as long as they're i
 
 ### Taking a screenshot of a single element
 
-A selector can be passed as the second argument to [`Mugshot.check`](./docs/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](./docs/interfaces/screenshotter.html) implementation. For example, using the [BrowserScreenshotter](./docs/classes/browserscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
+A [selector](./docs/globals.html#mugshotselector) can be passed as the second argument to [`Mugshot.check`](./docs/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](./docs/interfaces/screenshotter.html) implementation. For example, using the [BrowserScreenshotter](./docs/classes/browserscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
 
 
 ### Ignoring elements
 
-You can ignore elements on the page by passing a selector through the `ignore` option. The elements identified by that selector will be painted black before taking any screenshots.
+You can ignore elements on the page by passing a [selector](./docs/globals.html#mugshotselector) through the `ignore` option. The elements identified by that selector will be painted black before taking any screenshots.
 
 
 ### Storing screenshots
