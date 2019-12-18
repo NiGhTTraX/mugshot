@@ -48,6 +48,6 @@
     "tdd-buffet": "~0.15.0",
     "typedoc": "~0.15.3",
     "typescript": "~3.7.0",
-    "webdriverio": "~5.16.0"
+    "webdriverio": "~5.17.0"
   }
 }

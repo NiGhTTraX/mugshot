@@ -2011,6 +2011,15 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
+"@wdio/config@5.17.0":
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/@wdio/config/-/config-5.17.0.tgz#43c4a051a3b626310851778dd9ef6dd0518dc414"
+  integrity sha512-rdFcAR/5YlRfBXWh9463b+kU0JmwyfgFnAFy2GMhbJ9CSJSooflppPgGiC7+3hFOsqWqUMDWcLpQgYN9Fyv/gg==
+  dependencies:
+    "@wdio/logger" "5.16.10"
+    deepmerge "^4.0.0"
+    glob "^7.1.2"
+
 "@wdio/logger@5.16.10":
   version "5.16.10"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.10.tgz#45d0ea485d52c8a7c526954ccc980d54c3e29e56"
@@ -2033,10 +2042,25 @@
   dependencies:
     "@wdio/utils" "5.16.10"
 
+"@wdio/repl@5.16.15":
+  version "5.16.15"
+  resolved "https://registry.yarnpkg.com/@wdio/repl/-/repl-5.16.15.tgz#b419e4ee4079386bd1baebbbf2359f636ff901ac"
+  integrity sha512-AklEbnjL7uxr5+7IgD1RZEE1c7QKQpmNKx8DrOPVjNJIBjUmcatOFG+9R+sysyRI957DA5tlnU513dtF5rlGZg==
+  dependencies:
+    "@wdio/utils" "5.16.15"
+
 "@wdio/utils@5.16.10":
   version "5.16.10"
   resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-5.16.10.tgz#886206b89f3388d7cc72ceaf35feda1d6e82cfb5"
   integrity sha512-aDx+/28QWtLk/zrnWZvlyjTTSkziX5Vka5sw+9Elxj67ii5bh7NtBd3euJK2NhphJXlF1vUZY2JT9KYs9jWSAA==
+  dependencies:
+    "@wdio/logger" "5.16.10"
+    deepmerge "^4.0.0"
+
+"@wdio/utils@5.16.15":
+  version "5.16.15"
+  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-5.16.15.tgz#c2228dcb196079a2e6c8758506de05d5ba3196e2"
+  integrity sha512-xeZSAeDtzm1+zVRjTuhsEKpcXokOZU1NrnXBacNNwyKIfRMwPUmyOX3WvKtHL+2OuLXjKP9dlRMHbPgX/nsz4w==
   dependencies:
     "@wdio/logger" "5.16.10"
     deepmerge "^4.0.0"
@@ -9454,6 +9478,18 @@ webdriver@5.16.10:
     lodash.merge "^4.6.1"
     request "^2.83.0"
 
+webdriver@5.17.0:
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-5.17.0.tgz#451ac2df970210b1fe99fe197a9be378e2acde11"
+  integrity sha512-Jg3Z/O+EuKQA91wZNHHRFiSa4TqT8UyvH+Lgvdl6CeZEUstbtP0CpxmyMP8ZRJjMqvuM7/NMIpKjpWCRaCXYGA==
+  dependencies:
+    "@wdio/config" "5.17.0"
+    "@wdio/logger" "5.16.10"
+    "@wdio/protocols" "5.16.7"
+    "@wdio/utils" "5.16.15"
+    lodash.merge "^4.6.1"
+    request "^2.83.0"
+
 webdriverio@~5.16.0:
   version "5.16.10"
   resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.16.10.tgz#9a5cd3085b81ae7e9198b1e217f0952656d13a04"
@@ -9474,6 +9510,27 @@ webdriverio@~5.16.0:
     rgb2hex "^0.1.0"
     serialize-error "^5.0.0"
     webdriver "5.16.10"
+
+webdriverio@~5.17.0:
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.17.0.tgz#ad4a43279f07168f6c43590b034469583a4ef792"
+  integrity sha512-hAYwnJGLBsgeGG7TT7kbiSaJPvoFfa4akGt+Hn+9c/KoUvwQafQ5vJ/tz98TFjOkwcs0FGxCXcu6Ra8iEzLvqQ==
+  dependencies:
+    "@wdio/config" "5.17.0"
+    "@wdio/logger" "5.16.10"
+    "@wdio/repl" "5.16.15"
+    "@wdio/utils" "5.16.15"
+    archiver "^3.0.0"
+    css-value "^0.0.1"
+    grapheme-splitter "^1.0.2"
+    lodash.clonedeep "^4.5.0"
+    lodash.isobject "^3.0.2"
+    lodash.isplainobject "^4.0.6"
+    lodash.zip "^4.2.0"
+    resq "^1.6.0"
+    rgb2hex "^0.1.0"
+    serialize-error "^5.0.0"
+    webdriver "5.17.0"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
