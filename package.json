@@ -31,7 +31,7 @@
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/fs-extra": "~8.0.0",
     "@types/node": "~10.12.2",
-    "@typescript-eslint/eslint-plugin": "~2.13.0",
+    "@typescript-eslint/eslint-plugin": "~2.14.0",
     "codecov": "~3.6.0",
     "doctoc": "^1.4.0",
     "eslint": "~6.8.0",
