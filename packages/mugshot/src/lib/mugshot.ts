@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import isCI from 'is-ci';
 import PNGDiffer from '../interfaces/png-differ';
 import ScreenshotStorage from '../interfaces/screenshot-storage';

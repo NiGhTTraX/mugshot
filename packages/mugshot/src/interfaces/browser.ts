@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { CSSSelector, ElementRect } from '../lib/mugshot';
 
 /**
