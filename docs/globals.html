@@ -105,8 +105,8 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias"><a href="globals.html#cssselector" class="tsd-kind-icon">CSSSelector</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#elementselector" class="tsd-kind-icon">Element<wbr>Selector</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mugshotresult" class="tsd-kind-icon">Mugshot<wbr>Result</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mugshotselector" class="tsd-kind-icon">Mugshot<wbr>Selector</a></li>
 							</ul>
@@ -129,22 +129,6 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="cssselector" class="tsd-anchor"></a>
-					<h3>CSSSelector</h3>
-					<div class="tsd-signature tsd-kind-icon">CSSSelector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L55">packages/mugshot/src/lib/mugshot.ts:55</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>example</dt>
-							<dd><pre><code><span class="hljs-meta">#root</span></code></pre></dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="diffresult" class="tsd-anchor"></a>
 					<h3>Diff<wbr>Result</h3>
 					<div class="tsd-signature tsd-kind-icon">Diff<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="interfaces/diffpassingresult.html" class="tsd-signature-type">DiffPassingResult</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/difffailingresult.html" class="tsd-signature-type">DiffFailingResult</a></div>
@@ -155,22 +139,45 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="elementselector" class="tsd-anchor"></a>
+					<h3>Element<wbr>Selector</h3>
+					<div class="tsd-signature tsd-kind-icon">Element<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L62">packages/mugshot/src/lib/mugshot.ts:62</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Uniquely identify an element on the screen according to the <a href="interfaces/screenshotter.html">Screenshotter</a>
+							implementation.</p>
+						</div>
+						<p>TODO: this abstraction is leaky - <a href="classes/mugshot.html#check">Mugshot.check</a> doesn&#39;t do anything with
+							this type other than pass it to <a href="interfaces/screenshotter.html#takescreenshot">Screenshotter.takeScreenshot</a>. It also
+							produces a LISP violation: <a href="classes/mugshot.html#check">Mugshot.check</a> accepts a very generic <code>string</code>
+							type, but a <a href="interfaces/screenshotter.html#takescreenshot">Screenshotter.takeScreenshot</a> implementation could only want
+							to accept a subset e.g. CSS selectors. Ideally, the dependency would be
+							inverted - you would pass a <a href="classes/mugshot.html">Mugshot</a> instance to a [[Screenshotter]
+						instance, but I don&#39;t like that since it takes away the focus from Mugshot.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="mugshotresult" class="tsd-anchor"></a>
 					<h3>Mugshot<wbr>Result</h3>
 					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="interfaces/mugshotidenticalresult.html" class="tsd-signature-type">MugshotIdenticalResult</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/mugshotdiffresult.html" class="tsd-signature-type">MugshotDiffResult</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L47">packages/mugshot/src/lib/mugshot.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L48">packages/mugshot/src/lib/mugshot.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="mugshotselector" class="tsd-anchor"></a>
 					<h3>Mugshot<wbr>Selector</h3>
-					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#cssselector" class="tsd-signature-type">CSSSelector</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/elementrect.html" class="tsd-signature-type">ElementRect</a></div>
+					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#elementselector" class="tsd-signature-type">ElementSelector</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/elementrect.html" class="tsd-signature-type">ElementRect</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L64">packages/mugshot/src/lib/mugshot.ts:64</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L78">packages/mugshot/src/lib/mugshot.ts:78</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -353,10 +360,10 @@
 						<a href="interfaces/testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#cssselector" class="tsd-kind-icon">CSSSelector</a>
+						<a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
+						<a href="globals.html#elementselector" class="tsd-kind-icon">Element<wbr>Selector</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#mugshotresult" class="tsd-kind-icon">Mugshot<wbr>Result</a>

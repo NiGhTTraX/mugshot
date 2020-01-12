@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { CSSSelector, ElementRect } from '../lib/mugshot';
+import { ElementSelector, ElementRect } from '../lib/mugshot';
 
 /**
  * Webdriver compatible browser.
@@ -22,7 +22,7 @@ export default interface Browser {
    * Should throw [[ElementNotVisibleError] if the element is not visible.
    */
   getElementRect: (
-    selector: CSSSelector
+    selector: ElementSelector
   ) => Promise<ElementRect | ElementRect[]>;
 
   /**
