@@ -48,7 +48,7 @@
     "prettier": "~1.19.1",
     "strong-mock": "~3.2.0",
     "tdd-buffet": "~0.15.0",
-    "typedoc": "~0.15.3",
+    "typedoc": "~0.16.0",
     "typescript": "~3.7.0",
     "webdriverio": "~5.18.0"
   }
