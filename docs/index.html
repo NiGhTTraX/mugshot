@@ -75,11 +75,15 @@
 				<p><strong>Table of content</strong></p>
 				<ul>
 					<li><a href="#installation">Installation</a></li>
-					<li><a href="#basic-example">Basic example</a></li>
+					<li><a href="#how-to-read-these-docs">How to read these docs</a></li>
+					<li><a href="#getting-started">Getting started</a></li>
 					<li><a href="#taking-screenshots">Taking screenshots</a><ul>
 							<li><a href="#taking-a-screenshot-of-a-single-element">Taking a screenshot of a single element</a></li>
 							<li><a href="#ignoring-elements">Ignoring elements</a></li>
 							<li><a href="#storing-screenshots">Storing screenshots</a></li>
+						</ul>
+					</li>
+					<li><a href="#diffing-screenshots">Diffing screenshots</a><ul>
 							<li><a href="#reducing-flakiness">Reducing flakiness</a></li>
 						</ul>
 					</li>
@@ -109,19 +113,22 @@
 						</tr>
 				</tbody></table>
 				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="./interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
-				<a href="#basic-example" id="basic-example" style="color: inherit; text-decoration: none;">
-					<h2>Basic example</h2>
+				<a href="#how-to-read-these-docs" id="how-to-read-these-docs" style="color: inherit; text-decoration: none;">
+					<h2>How to read these docs</h2>
+				</a>
+				<p>Docs are generated from the commented codebase using <a href="https://typedoc.org/">typedoc</a>. A good place to start navigating them is the main <a href="./classes/mugshot.html"><code>Mughsot</code> class docs</a>. You can also use the search function in the top bar.</p>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting started</h2>
 				</a>
 				<p>If you have an existing testing suite then it will be straightforward to add Mugshot to it. If you&#39;re starting from scratch then you can choose your favorite tools, Mugshot doesn&#39;t impose anything on you like a test runner or a particular way to write the tests.</p>
-				<p>You can think of Mugshot as providing an assertion - &quot;expect this part of the UI to look the same as last time&quot;. A visual test would typically look like:</p>
+				<p>Mugshot expects you to setup the testing environment. For instance, if you&#39;re planning to take screenshots of a website then you need to</p>
 				<ol>
-					<li>Open the app.</li>
-					<li>Navigate to the screen you wish to check.</li>
+					<li>Open the browser.</li>
+					<li>Navigate to the website you want to test.</li>
 					<li>Interact with the UI (scroll, click a button, input some text in a form etc.).</li>
-					<li>Run the Mugshot assertion.</li>
 				</ol>
-				<p>The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
-				<p>Here is an example of a test that makes sure a website doesn&#39;t have any visual changes using <a href="https://webdriver.io/">WebdriverIO</a>:</p>
+				<p>Once everything is set you just call <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.</p>
+				<p>The following example illustrates the basics. It uses <a href="https://webdriver.io/">WebdriverIO</a> to control a browser and <a href="https://jestjs.io/">Jest</a> to run the test:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Mugshot, {
   FsStorage,
   BrowserScreenshotter,
@@ -129,12 +136,17 @@
 <span class="hljs-keyword">import</span> WebdriverIOAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">'@mugshot/webdriverio'</span>;
 <span class="hljs-keyword">import</span> { remote } <span class="hljs-keyword">from</span> <span class="hljs-string">'webdriverio'</span>;
 
-it(<span class="hljs-string">'GitHub project page should look the same'</span>, <span class="hljs-keyword">async</span> () =&gt; {
+test(<span class="hljs-string">'GitHub project page should look the same'</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-comment">// 1. Open the browser.</span>
   <span class="hljs-keyword">const</span> browser = <span class="hljs-keyword">await</span> remote({
     hostname: <span class="hljs-string">'localhost'</span>,
     capabilities: { browserName: <span class="hljs-string">'chrome'</span> }
   });
 
+  <span class="hljs-comment">// 2. Navigate to the page you want to test.</span>
+  <span class="hljs-keyword">await</span> browser.url(<span class="hljs-string">'https://github.com/NiGhTTraX/mugshot'</span>);
+
+  <span class="hljs-comment">// 3. Call mugshot.</span>
   <span class="hljs-keyword">const</span> mugshot = <span class="hljs-keyword">new</span> Mugshot(
     <span class="hljs-keyword">new</span> BrowserScreenshotter(
       <span class="hljs-keyword">new</span> WebdriverIOAdapter(browser)
@@ -142,16 +154,15 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
     <span class="hljs-keyword">new</span> FsStorage(<span class="hljs-string">'./screenshots'</span>)
   );
 
-  <span class="hljs-keyword">await</span> browser.url(<span class="hljs-string">'https://github.com/NiGhTTraX/mugshot'</span>);
-
   <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> mugshot.check(<span class="hljs-string">'project page'</span>);
 
+  <span class="hljs-comment">// 4. Check the result.</span>
   expect(result.matches).toBeTruthy();
 });</code></pre>
 				<a href="#taking-screenshots" id="taking-screenshots" style="color: inherit; text-decoration: none;">
 					<h2>Taking screenshots</h2>
 				</a>
-				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="./interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
+				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a <a href="./classes/browserscreenshotter.html">browser screenshotter</a>, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="./interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
 				<a href="#taking-a-screenshot-of-a-single-element" id="taking-a-screenshot-of-a-single-element" style="color: inherit; text-decoration: none;">
 					<h3>Taking a screenshot of a single element</h3>
 				</a>
@@ -164,6 +175,16 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 					<h3>Storing screenshots</h3>
 				</a>
 				<p>Screenshots are taken in <strong>PNG</strong> format and how they&#39;re stored is controlled by the <a href="./interfaces/screenshotstorage.html"><code>ScreenshotStorage</code></a> interface. Mugshot ships with a <a href="./classes/fsstorage.html">local file system implementation</a>, but you could easily plug in e.g. a cloud storage implementation.</p>
+				<p>Regardless of how they&#39;re stored, Mugshot will produce up to 3 screenshots:</p>
+				<ol>
+					<li>A baseline screenshot. Think of it as a snapshot - how you expect your page/element to look.</li>
+					<li>The current screenshot. Mugshot will always take a new screenshot each time it&#39;s called and compare it to the baseline. If they match, the new screenshot is discarded, otherwise it&#39;s saved to the storage.</li>
+					<li>A diff. If the baseline and current screenshot are different then a diff highlighting the differences will be created and saved to the storage.</li>
+				</ol>
+				<a href="#diffing-screenshots" id="diffing-screenshots" style="color: inherit; text-decoration: none;">
+					<h2>Diffing screenshots</h2>
+				</a>
+				<p>You can customize how diffs are produced by passing in a <a href="./interfaces/pngdiffer.html"><code>PNGDiffer</code></a> instance when instantiating <a href="./classes/mugshot.html"><code>Mugshot</code></a>. Mugshot ships with <a href="./classes/pixeldiffer.html"><code>PixelDiffer</code></a> that compares screenshots pixels by pixels and marks the differing ones with a color.</p>
 				<a href="#reducing-flakiness" id="reducing-flakiness" style="color: inherit; text-decoration: none;">
 					<h3>Reducing flakiness</h3>
 				</a>
@@ -245,10 +266,16 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 						<a href="interfaces/mugshotidenticalresult.html" class="tsd-kind-icon">Mugshot<wbr>Identical<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/mugshotoptions.html" class="tsd-kind-icon">Mugshot<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/pngdiffer.html" class="tsd-kind-icon">PNGDiffer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/pngprocessor.html" class="tsd-kind-icon">PNGProcessor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pixeldifferoptions.html" class="tsd-kind-icon">Pixel<wbr>Differ<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a>
@@ -276,6 +303,21 @@ it(<span class="hljs-string">'GitHub project page should look the same'</span>, 
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#loadfixture" class="tsd-kind-icon">load<wbr>Fixture</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#fixtures" class="tsd-kind-icon">fixtures</a>

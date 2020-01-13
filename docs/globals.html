@@ -94,8 +94,10 @@
 								<li class="tsd-kind-interface"><a href="interfaces/elementrect.html" class="tsd-kind-icon">Element<wbr>Rect</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/mugshotdiffresult.html" class="tsd-kind-icon">Mugshot<wbr>Diff<wbr>Result</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/mugshotidenticalresult.html" class="tsd-kind-icon">Mugshot<wbr>Identical<wbr>Result</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/mugshotoptions.html" class="tsd-kind-icon">Mugshot<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/pngdiffer.html" class="tsd-kind-icon">PNGDiffer</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/pngprocessor.html" class="tsd-kind-icon">PNGProcessor</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/pixeldifferoptions.html" class="tsd-kind-icon">Pixel<wbr>Differ<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotstorage.html" class="tsd-kind-icon">Screenshot<wbr>Storage</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotter.html" class="tsd-kind-icon">Screenshotter</a></li>
@@ -115,6 +117,16 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable"><a href="globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function"><a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#loadfixture" class="tsd-kind-icon">load<wbr>Fixture</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -202,6 +214,131 @@
 							the tests can&#39;t assume any details about the environment in which they&#39;re
 						ran e.g. OS, actual browser instance, user profile etc.</p>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="createfixture" class="tsd-anchor"></a>
+					<h3>create<wbr>Fixture</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Fixture<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L35">packages/contracts/src/browser-spec.ts:35</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>html: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="getboundingrect" class="tsd-anchor"></a>
+					<h3>get<wbr>Bounding<wbr>Rect</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Bounding<wbr>Rect<span class="tsd-signature-symbol">(</span>selector<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L5">packages/webdriverio/src/index.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>selector: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DOMRect</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol">[]</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="getbrowserchromesize" class="tsd-anchor"></a>
+					<h3>get<wbr>Browser<wbr>Chrome<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L22">packages/webdriverio/src/index.ts:22</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="injectanimationdisablingstylesheet" class="tsd-anchor"></a>
+					<h3>inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/browser-screenshotter.ts#L20">packages/mugshot/src/lib/browser-screenshotter.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="loadfixture" class="tsd-anchor"></a>
+					<h3>load<wbr>Fixture</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><a href="interfaces/testbrowser.html" class="tsd-signature-type">TestBrowser</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/browser.html" class="tsd-signature-type">Browser</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L40">packages/contracts/src/browser-spec.ts:40</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>browser: <a href="interfaces/testbrowser.html" class="tsd-signature-type">TestBrowser</a></h5>
+								</li>
+								<li>
+									<h5>adapter: <a href="interfaces/browser.html" class="tsd-signature-type">Browser</a></h5>
+								</li>
+								<li>
+									<h5>name: <span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -342,10 +479,16 @@
 						<a href="interfaces/mugshotidenticalresult.html" class="tsd-kind-icon">Mugshot<wbr>Identical<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/mugshotoptions.html" class="tsd-kind-icon">Mugshot<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/pngdiffer.html" class="tsd-kind-icon">PNGDiffer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/pngprocessor.html" class="tsd-kind-icon">PNGProcessor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pixeldifferoptions.html" class="tsd-kind-icon">Pixel<wbr>Differ<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a>
@@ -373,6 +516,21 @@
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#loadfixture" class="tsd-kind-icon">load<wbr>Fixture</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#fixtures" class="tsd-kind-icon">fixtures</a>

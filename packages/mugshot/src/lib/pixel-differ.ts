@@ -8,7 +8,7 @@ export interface Color {
   b: number;
 }
 
-interface PixelDifferOptions {
+export interface PixelDifferOptions {
   /**
    * The color used to mark different pixels.
    */
@@ -33,6 +33,9 @@ export default class PixelDiffer implements PNGDiffer {
 
   private readonly threshold: number;
 
+  /**
+   * @param __namedParameters [[PixelDifferOptions]]
+   */
   constructor({
     diffColor = { r: 255, g: 0, b: 0 },
     threshold = 0

@@ -81,15 +81,15 @@ interface MugshotOptions {
   pngDiffer?: PNGDiffer;
 
   /**
-   * If set to true `Mugshot.check` will pass if a baseline is not
+   * If set to `true` then `Mugshot.check` will pass if a baseline is not
    * found and it will create the baseline from the screenshot it
    * takes.
    */
   createMissingBaselines?: boolean;
 
   /**
-   * When set to true Mugshot will overwrite any existing baselines
-   * and will create missing ones (equivalent to setting
+   * When set to `true` then `Mugshot.check` will overwrite any existing baselines
+   * and will create missing ones (implies setting
    * `createMissingBaselines: true`).
    */
   updateBaselines?: boolean;
@@ -111,9 +111,8 @@ export default class Mugshot {
   /**
    * @param screenshotter
    * @param storage How to read and store screenshots.
-   * @param pngDiffer
    * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
-   * @param updateBaselines
+   * @param __namedParameters [[MugshotOptions]]
    */
   constructor(
     private readonly screenshotter: Screenshotter,

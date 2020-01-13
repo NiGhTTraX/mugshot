@@ -17,11 +17,13 @@ Mugshot is a node library for doing visual regression testing. The way screensho
 **Table of content**
 
 - [Installation](#installation)
-- [Basic example](#basic-example)
+- [How to read these docs](#how-to-read-these-docs)
+- [Getting started](#getting-started)
 - [Taking screenshots](#taking-screenshots)
   - [Taking a screenshot of a single element](#taking-a-screenshot-of-a-single-element)
   - [Ignoring elements](#ignoring-elements)
   - [Storing screenshots](#storing-screenshots)
+- [Diffing screenshots](#diffing-screenshots)
   - [Reducing flakiness](#reducing-flakiness)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -49,20 +51,24 @@ Package | Version
 If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](./docs/interfaces/browser.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 
 
-## Basic example
+## How to read these docs
+
+Docs are generated from the commented codebase using [typedoc](https://typedoc.org/). A good place to start navigating them is the main [`Mughsot` class docs](./docs/classes/mugshot.html). You can also use the search function in the top bar.
+
+
+## Getting started
 
 If you have an existing testing suite then it will be straightforward to add Mugshot to it. If you're starting from scratch then you can choose your favorite tools, Mugshot doesn't impose anything on you like a test runner or a particular way to write the tests.
 
-You can think of Mugshot as providing an assertion - "expect this part of the UI to look the same as last time". A visual test would typically look like:
+Mugshot expects you to setup the testing environment. For instance, if you're planning to take screenshots of a website then you need to
 
-1. Open the app.
-2. Navigate to the screen you wish to check.
-3. Interact with the UI (scroll, click a button, input some text in a form etc.).
-4. Run the Mugshot assertion.
+1. Open the browser.
+1. Navigate to the website you want to test.
+1. Interact with the UI (scroll, click a button, input some text in a form etc.).
 
-The first 3 steps are fully in your control - you are responsible for setting the test up. Once everything is set you just call [`Mugshot.check`](./docs/classes/mugshot.html#check) and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.
+Once everything is set you just call [`Mugshot.check`](./docs/classes/mugshot.html#check) and Mugshot will take care of taking a new screenshot, comparing it to the baseline, producing diffs and returning a passing or a failing result.
 
-Here is an example of a test that makes sure a website doesn't have any visual changes using [WebdriverIO](https://webdriver.io/):
+The following example illustrates the basics. It uses [WebdriverIO](https://webdriver.io/) to control a browser and [Jest](https://jestjs.io/) to run the test:
 
 ```typescript
 import Mugshot, {
@@ -72,23 +78,27 @@ import Mugshot, {
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
-it('GitHub project page should look the same', async () => {
+test('GitHub project page should look the same', async () => {
+  // 1. Open the browser.
   const browser = await remote({
     hostname: 'localhost',
     capabilities: { browserName: 'chrome' }
   });
   
+  // 2. Navigate to the page you want to test.
+  await browser.url('https://github.com/NiGhTTraX/mugshot');
+  
+  // 3. Call mugshot.
   const mugshot = new Mugshot(
     new BrowserScreenshotter(
       new WebdriverIOAdapter(browser)
     ),
     new FsStorage('./screenshots')
   );
-  
-  await browser.url('https://github.com/NiGhTTraX/mugshot');
-  
+
   const result = await mugshot.check('project page');
   
+  // 4. Check the result.
   expect(result.matches).toBeTruthy();
 });
 ```
@@ -96,7 +106,7 @@ it('GitHub project page should look the same', async () => {
 
 ## Taking screenshots
 
-Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a browser screenshotter, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the [Screenshotter](./docs/interfaces/screenshotter.html) interface for more details.
+Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a [browser screenshotter](./docs/classes/browserscreenshotter.html), but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the [Screenshotter](./docs/interfaces/screenshotter.html) interface for more details.
 
 
 ### Taking a screenshot of a single element
@@ -112,6 +122,17 @@ You can ignore elements on the page by passing a [selector](./docs/globals.html#
 ### Storing screenshots
 
 Screenshots are taken in **PNG** format and how they're stored is controlled by the [`ScreenshotStorage`](./docs/interfaces/screenshotstorage.html) interface. Mugshot ships with a [local file system implementation](./docs/classes/fsstorage.html), but you could easily plug in e.g. a cloud storage implementation.
+
+Regardless of how they're stored, Mugshot will produce up to 3 screenshots:
+
+1. A baseline screenshot. Think of it as a snapshot - how you expect your page/element to look.
+2. The current screenshot. Mugshot will always take a new screenshot each time it's called and compare it to the baseline. If they match, the new screenshot is discarded, otherwise it's saved to the storage.
+3. A diff. If the baseline and current screenshot are different then a diff highlighting the differences will be created and saved to the storage.
+
+
+## Diffing screenshots
+
+You can customize how diffs are produced by passing in a [`PNGDiffer`](./docs/interfaces/pngdiffer.html) instance when instantiating [`Mugshot`](./docs/classes/mugshot.html). Mugshot ships with [`PixelDiffer`](./docs/classes/pixeldiffer.html) that compares screenshots pixels by pixels and marks the differing ones with a color.
 
 
 ### Reducing flakiness
