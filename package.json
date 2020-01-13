@@ -8,6 +8,7 @@
     "build": "lerna run build",
     "docs": "./docs.sh",
     "pub": "yarn run build && lerna publish && yarn run clean",
+    "pub:recover": "lerna publish from-package",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "lerna run test",
     "posttest": "./tests/coverage.sh",
