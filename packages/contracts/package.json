@@ -26,8 +26,7 @@
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "package": "cp -r fixtures ./dist",
-    "prepublishOnly": "yarn run build && yarn run package"
+    "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
     "mugshot": "^2.0.1"
