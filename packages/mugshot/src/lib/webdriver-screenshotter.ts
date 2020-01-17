@@ -40,6 +40,10 @@ export default class WebdriverScreenshotter implements Screenshotter {
 
   private readonly disableAnimations: boolean;
 
+  /**
+   * @param client
+   * @param __namedParameters [[WebdriverScreenshotterOptions]]
+   */
   constructor(
     private readonly client: Webdriver,
     {

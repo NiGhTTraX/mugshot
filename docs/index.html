@@ -95,7 +95,7 @@
 				<pre><code class="language-shell">npm install --save-dev mugshot</code></pre>
 				<p>Or alternatively with yarn</p>
 				<pre><code class="language-shell">yarn add -D mugshot</code></pre>
-				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="./interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="./classes/webdriverscreenshotter.html"><code>WebdriverScreenshotter</code></a> that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
+				<p>Depending on how you want to take screenshots, you&#39;ll need a <a href="./interfaces/screenshotter.html"><code>Screenshotter</code></a> implementation. Mugshot bundles a <a href="./classes/webdriverscreenshotter.html"><code>WebdriverScreenshotter</code></a> that you can use with Webdriver compatible clients e.g. <a href="https://selenium.dev/">Selenium</a> or <a href="http://appium.io/">Appium</a>. Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:</p>
 				<table>
 					<thead>
 						<tr>
@@ -112,7 +112,7 @@
 							<td><img src="https://img.shields.io/npm/v/@mugshot/puppeteer.svg" alt="npm"></td>
 						</tr>
 				</tbody></table>
-				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="./interfaces/browser.html"><code>Browser</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
+				<p>If none of the provided adapters suit you, you can just roll your own by implementing the <a href="./interfaces/webdriver.html"><code>Webdriver</code> interface</a>. To validate your implementation you can use the <a href="./packages/contracts">contract tests package</a>.</p>
 				<a href="#how-to-read-these-docs" id="how-to-read-these-docs" style="color: inherit; text-decoration: none;">
 					<h2>How to read these docs</h2>
 				</a>
@@ -131,7 +131,7 @@
 				<p>The following example illustrates the basics. It uses <a href="https://webdriver.io/">WebdriverIO</a> to control a browser and <a href="https://jestjs.io/">Jest</a> to run the test:</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Mugshot, {
   FsStorage,
-  BrowserScreenshotter,
+  WebdriverScreenshotter,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'mugshot'</span>;
 <span class="hljs-keyword">import</span> WebdriverIOAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">'@mugshot/webdriverio'</span>;
 <span class="hljs-keyword">import</span> { remote } <span class="hljs-keyword">from</span> <span class="hljs-string">'webdriverio'</span>;
@@ -148,7 +148,7 @@ test(<span class="hljs-string">'GitHub project page should look the same'</span>
 
   <span class="hljs-comment">// 3. Call mugshot.</span>
   <span class="hljs-keyword">const</span> mugshot = <span class="hljs-keyword">new</span> Mugshot(
-    <span class="hljs-keyword">new</span> BrowserScreenshotter(
+    <span class="hljs-keyword">new</span> WebdriverScreenshotter(
       <span class="hljs-keyword">new</span> WebdriverIOAdapter(browser)
     ),
     <span class="hljs-keyword">new</span> FsStorage(<span class="hljs-string">'./screenshots'</span>)
@@ -162,11 +162,11 @@ test(<span class="hljs-string">'GitHub project page should look the same'</span>
 				<a href="#taking-screenshots" id="taking-screenshots" style="color: inherit; text-decoration: none;">
 					<h2>Taking screenshots</h2>
 				</a>
-				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a <a href="./classes/browserscreenshotter.html">browser screenshotter</a>, but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the <a href="./interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
+				<p>Mugshot doesn&#39;t care where the screenshots are coming from, as long as they&#39;re in <strong>PNG</strong> format. By default it ships with a <a href="./classes/webdriverscreenshotter.html">webdriver screenshotter</a>, but you can pass in your own implementation. See the <a href="./interfaces/screenshotter.html">Screenshotter</a> interface for more details.</p>
 				<a href="#taking-a-screenshot-of-a-single-element" id="taking-a-screenshot-of-a-single-element" style="color: inherit; text-decoration: none;">
 					<h3>Taking a screenshot of a single element</h3>
 				</a>
-				<p>A <a href="./globals.html#mugshotselector">selector</a> can be passed as the second argument to <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./classes/browserscreenshotter.html">BrowserScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
+				<p>A <a href="./globals.html#mugshotselector">selector</a> can be passed as the second argument to <a href="./classes/mugshot.html#check"><code>Mugshot.check</code></a> and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the <a href="./interfaces/screenshotter.html">Screenshotter</a> implementation. For example, using the <a href="./classes/webdriverscreenshotter.html">WebdriverScreenshotter</a>, the element will be cropped out of the viewport according to its bounding rectangle.</p>
 				<a href="#ignoring-elements" id="ignoring-elements" style="color: inherit; text-decoration: none;">
 					<h3>Ignoring elements</h3>
 				</a>
@@ -189,7 +189,7 @@ test(<span class="hljs-string">'GitHub project page should look the same'</span>
 					<h3>Reducing flakiness</h3>
 				</a>
 				<p>A frequent source of flakiness in visual tests is dynamic data e.g. the current time and date or live API data. You can ignore elements that contain such data by painting over them with a solid color square. See the <a href="#ignoring-elements">ignore option</a> for more details.</p>
-				<p>Other common sources are animations and the blinking cursor in input fields. If you&#39;re using the <a href="./classes/browserscreenshotter.html"><code>BrowserScreenshotter</code></a> you can turn them off by passing the <a href="./interfaces/browserscreenshotteroptions.html#disableanimations"><code>disableAnimations</code> flag</a>.</p>
+				<p>Other common sources are animations and the blinking cursor in input fields. If you&#39;re using the <a href="./classes/webdriverscreenshotter.html"><code>WebdriverScreenshotter</code></a> you can turn them off by passing the <a href="./interfaces/webdriverscreenshotteroptions.html#disableanimations"><code>disableAnimations</code> flag</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
