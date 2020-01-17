@@ -7,7 +7,6 @@ import {
   redPixelBuffer,
   whitePixelBuffer
 } from '../../../../../tests/node/fixtures';
-import Browser from '../../../src/interfaces/browser';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import Screenshotter from '../../../src/interfaces/screenshotter';
@@ -18,7 +17,6 @@ import Mugshot, {
 
 describe('Mugshot', () => {
   const storage = new Mock<ScreenshotStorage>();
-  const browser = new Mock<Browser>();
   const pngDiffer = new Mock<PNGDiffer>();
   const screenshotter = new Mock<Screenshotter>();
 
@@ -44,14 +42,12 @@ describe('Mugshot', () => {
 
   beforeEach(() => {
     storage.reset();
-    browser.reset();
     screenshotter.reset();
     pngDiffer.reset();
   });
 
   afterEach(() => {
     storage.verifyAll();
-    browser.verifyAll();
     screenshotter.verifyAll();
     pngDiffer.verifyAll();
   });
