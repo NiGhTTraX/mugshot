@@ -1,4 +1,4 @@
-<!-- DUPLICATED in DOCS.md. Please keep in sync. -->
+<!-- DUPLICATED in README.md. Please keep in sync. -->
 ![logo](media/logo.png)
 
 <div align="center">
@@ -11,7 +11,7 @@
 
 Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. You can use it to write visual regression tests for websites, mobile apps, native apps etc. Moreover, Mugshot doesn't impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.
 
-<!-- END OF COMMON DESCRIPTION -->
+<!-- END OF COMMON CONENT -->
 
 ----
 
@@ -34,6 +34,8 @@ Mugshot is a node library for doing visual regression testing. The way screensho
 
 ## Installation
 
+<!-- DUPLICATED in README.md. Please keep in sync. -->
+
 ```shell script
 npm install --save-dev mugshot
 ```
@@ -50,6 +52,8 @@ Package | Version
 --------|--------
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
 [@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
+
+<!-- END OF COMMON CONTENT -->
 
 If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 
