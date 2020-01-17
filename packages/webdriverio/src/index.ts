@@ -1,7 +1,11 @@
-import { Browser, ElementNotFoundError, ElementNotVisibleError } from 'mugshot';
+import {
+  Webdriver,
+  ElementNotFoundError,
+  ElementNotVisibleError
+} from 'mugshot';
 import 'webdriverio';
 
-/* istanbul ignore next because this will get stringified and sent to the browser */
+/* istanbul ignore next because this will get stringified and sent to the client */
 function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
   const elements = document.querySelectorAll(selector);
 
@@ -18,8 +22,8 @@ function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
   );
 }
 
-/* istanbul ignore next because this will get stringified and sent to the browser */
-function getBrowserChromeSize() {
+/* istanbul ignore next because this will get stringified and sent to the client */
+function getClientChromeSize() {
   return {
     width: window.outerWidth - window.innerWidth,
     height: window.outerHeight - window.innerHeight
@@ -28,19 +32,19 @@ function getBrowserChromeSize() {
 
 /**
  * Adapter over [WebdriverIO](https://webdriver.io/) to be used with
- * [[BrowserScreenshotter]].
+ * [[WebdriverScreenshotter]].
  *
  * @see https://webdriver.io/docs/api.html
  */
-export default class WebdriverIOAdapter implements Browser {
+export default class WebdriverIOAdapter implements Webdriver {
   constructor(
-    private readonly browser: WebDriver.ClientAsync & WebdriverIOAsync.Browser
+    private readonly client: WebDriver.ClientAsync & WebdriverIOAsync.Browser
   ) {}
 
-  takeScreenshot = async () => this.browser.takeScreenshot();
+  takeScreenshot = async () => this.client.takeScreenshot();
 
   getElementRect = async (selector: string) => {
-    const rects = (await this.browser.execute(getBoundingRect, selector)) as
+    const rects = (await this.client.execute(getBoundingRect, selector)) as
       | DOMRect
       | DOMRect[]
       | null;
@@ -92,21 +96,21 @@ export default class WebdriverIOAdapter implements Browser {
       width: chromeWidth,
       // @ts-ignore
       height: chromeHeight
-    } = await this.browser.execute(getBrowserChromeSize);
+    } = await this.client.execute(getClientChromeSize);
 
     const actualWidth = width + chromeWidth;
     const actualHeight = height + chromeHeight;
 
     // Chrome...
-    await this.browser.setWindowSize(actualWidth, actualHeight);
+    await this.client.setWindowSize(actualWidth, actualHeight);
 
     // Firefox...
     try {
-      await this.browser.setWindowRect(0, 0, actualWidth, actualHeight);
+      await this.client.setWindowRect(0, 0, actualWidth, actualHeight);
       // eslint-disable-next-line no-empty
     } catch (e) {}
   };
 
   execute = <R>(func: (...args: any[]) => R, ...args: any[]) =>
-    this.browser.execute<R>(func, ...args);
+    this.client.execute<R>(func, ...args);
 }

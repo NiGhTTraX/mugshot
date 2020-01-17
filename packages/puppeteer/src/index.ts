@@ -1,13 +1,17 @@
-import { Browser, ElementNotFoundError, ElementNotVisibleError } from 'mugshot';
+import {
+  Webdriver,
+  ElementNotFoundError,
+  ElementNotVisibleError
+} from 'mugshot';
 import { Page } from 'puppeteer';
 
 /**
  * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
- * to be used with [[BrowserScreenshotter].
+ * to be used with [[WebdriverScreenshotter].
  *
  * @see https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md
  */
-export default class PuppeteerAdapter implements Browser {
+export default class PuppeteerAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
 
   getElementRect = async (selector: string) => {

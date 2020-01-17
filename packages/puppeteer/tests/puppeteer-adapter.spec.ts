@@ -1,4 +1,4 @@
-import { browserContractTests } from '@mugshot/contracts';
+import { webdriverContractTests } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
@@ -15,7 +15,7 @@ describe('PuppeteerAdapter', () => {
     await browser.close();
   });
 
-  browserContractTests.forEach(test => {
+  webdriverContractTests.forEach(test => {
     it(test.name, () =>
       test.run(
         {

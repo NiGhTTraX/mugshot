@@ -1,7 +1,7 @@
-import Browser, {
+import Webdriver, {
   ElementNotFoundError,
   ElementNotVisibleError
-} from './interfaces/browser';
+} from './interfaces/webdriver';
 import PNGDiffer from './interfaces/png-differ';
 import PNGProcessor from './interfaces/png-processor';
 import ScreenshotStorage from './interfaces/screenshot-storage';
@@ -9,13 +9,13 @@ import Screenshotter from './interfaces/screenshotter';
 import FsStorage from './lib/fs-storage';
 import Mugshot from './lib/mugshot';
 import PixelDiffer from './lib/pixel-differ';
-import BrowserScreenshotter from './lib/browser-screenshotter';
+import WebdriverScreenshotter from './lib/webdriver-screenshotter';
 import JimpProcessor from './lib/jimp-processor';
 
 export default Mugshot;
 
 export {
-  Browser,
+  Webdriver,
   FsStorage,
   PNGDiffer,
   PNGProcessor,
@@ -24,6 +24,6 @@ export {
   PixelDiffer,
   ElementNotFoundError,
   ElementNotVisibleError,
-  BrowserScreenshotter,
+  WebdriverScreenshotter,
   JimpProcessor
 };

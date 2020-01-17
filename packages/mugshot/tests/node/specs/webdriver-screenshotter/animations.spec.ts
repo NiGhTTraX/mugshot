@@ -3,14 +3,14 @@ import { describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,
   loadFixture
-} from '../../../../../tests/gui/suite';
-import BrowserScreenshotter from '../../../src/lib/browser-screenshotter';
+} from '../../../../../../tests/gui/suite';
+import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
 
-describe('BrowserScreenshotter', () => {
+describe('WebdriverScreenshotter', () => {
   it('should disable animations', async browser => {
     await loadFixture(browser, 'animations');
 
-    const screenshotter = new BrowserScreenshotter(
+    const screenshotter = new WebdriverScreenshotter(
       new WebdriverIOAdapter(browser),
       {
         disableAnimations: true

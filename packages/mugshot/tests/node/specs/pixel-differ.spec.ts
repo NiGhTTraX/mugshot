@@ -4,8 +4,8 @@ import {
   createTestBuffer,
   expectIdenticalBuffers,
   lightenBuffer
-} from '../../../../../../tests/node/suite';
-import PixelDiffer from '../../../../src/lib/pixel-differ';
+} from '../../../../../tests/node/suite';
+import PixelDiffer from '../../../src/lib/pixel-differ';
 
 describe('PixelDiffer', () => {
   describe('same width and height', () => {

@@ -1,50 +1,54 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import Jimp from 'jimp';
-import { Browser, ElementNotFoundError, ElementNotVisibleError } from 'mugshot';
+import {
+  Webdriver,
+  ElementNotFoundError,
+  ElementNotVisibleError
+} from 'mugshot';
 import { fixtures } from './fixtures';
 
 /**
- * Methods on the browser instance that these tests need.
+ * Methods on the client that these tests need.
  *
- * They're different from the ones from [[Browser]] because
- * the tests are concerned with navigating the browser to test
+ * They're different from the ones from [[WebdriverClient]] because
+ * the tests are concerned with navigating the client to test
  * fixtures.
  */
-export interface TestBrowser {
+export interface TestClient {
   /**
    * Navigate to an URL.
    */
   url: (path: string) => Promise<any>;
 }
 
-export interface BrowserContractTest {
+export interface WebdriverContractTest {
   name: string;
 
   /**
    * Run the test which will throw an `AssertionError` on failure.
    *
-   * @param browser The browser you're adapting. It will be used to navigate to
+   * @param client The client you're adapting. It will be used to navigate to
    *   a test fixture and resize the window.
-   * @param adapter The browser adapter.
+   * @param adapter The client adapter.
    */
-  run: (browser: TestBrowser, adapter: Browser) => Promise<void>;
+  run: (client: TestClient, adapter: Webdriver) => Promise<void>;
 }
 
-/* istanbul ignore next because this will get stringified and sent to the browser */
+/* istanbul ignore next because this will get stringified and sent to the client */
 function createFixture(html: string) {
   // This should use `document.write` instead but Firefox gives an "insecure operation" error.
   document.body.innerHTML = html;
 }
 
 async function loadFixture(
-  browser: TestBrowser,
-  adapter: Browser,
+  client: TestClient,
+  adapter: Webdriver,
   name: keyof typeof fixtures
 ) {
   const fixtureContent = fixtures[name];
 
-  await browser.url('about:blank');
+  await client.url('about:blank');
 
   await adapter.execute(createFixture, fixtureContent);
 
@@ -52,18 +56,18 @@ async function loadFixture(
 }
 
 /**
- * Contract tests for the [[Browser]] interface.
+ * Contract tests for the [[Webdriver]] interface.
  *
- * These exercise the [[Browser.takeScreenshot]] method, but they don't check
+ * These exercise the [[Webdriver.takeScreenshot]] method, but they don't check
  * the actual screenshot content, only some basic properties. This is because
  * the tests can't assume any details about the environment in which they're
- * ran e.g. OS, actual browser instance, user profile etc.
+ * ran e.g. OS, actual client instance, user profile etc.
  */
-export const browserContractTests: BrowserContractTest[] = [
+export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a viewport screenshot',
-    run: async (browser: TestBrowser, adapter: Browser) => {
-      await loadFixture(browser, adapter, 'simple');
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, 'simple');
 
       const screenshot = await Jimp.read(
         Buffer.from(await adapter.takeScreenshot(), 'base64')
@@ -76,8 +80,8 @@ export const browserContractTests: BrowserContractTest[] = [
   {
     name:
       'should take a viewport screenshot with absolutely positioned elements',
-    run: async (browser: TestBrowser, adapter: Browser) => {
-      await loadFixture(browser, adapter, 'rect');
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, 'rect');
 
       const screenshot = await Jimp.read(
         Buffer.from(await adapter.takeScreenshot(), 'base64')
@@ -89,8 +93,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should get bounding rect of element',
-    run: async (browser: TestBrowser, adapter: Browser) => {
-      await loadFixture(browser, adapter, 'rect');
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, 'rect');
 
       const rect = await adapter.getElementRect('.test');
 
@@ -106,8 +110,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should get bounding rect of off-screen element',
-    run: async (browser: TestBrowser, adapter: Browser) => {
-      await loadFixture(browser, adapter, 'rect-scroll');
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, 'rect-scroll');
 
       const rect = await adapter.getElementRect('.test');
 
@@ -121,8 +125,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should throw if element is missing',
-    run: async (browser: TestBrowser, adapter: Browser) => {
-      await loadFixture(browser, adapter, 'rect-scroll');
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, 'rect-scroll');
 
       let caughtError!: ElementNotFoundError;
 
@@ -138,8 +142,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should get bounding rect of all matching elements',
-    run: async (browser, adapter) => {
-      await loadFixture(browser, adapter, 'rect-multiple');
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, 'rect-multiple');
 
       expect(await adapter.getElementRect('.multiple')).to.deep.equal([
         { x: 0, y: 0, width: 100, height: 100 },
@@ -151,8 +155,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should throw if element is not visible',
-    run: async (browser, adapter) => {
-      await loadFixture(browser, adapter, 'rect-invisible');
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, 'rect-invisible');
 
       let caughtError!: ElementNotFoundError;
 
@@ -168,8 +172,8 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should throw if matching element is not visible',
-    run: async (browser, adapter) => {
-      await loadFixture(browser, adapter, 'rect-invisible');
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, 'rect-invisible');
 
       let caughtError!: ElementNotFoundError;
 
@@ -185,10 +189,10 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should execute a simple function',
-    run: async (browser, adapter) => {
-      await loadFixture(browser, adapter, 'simple');
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, 'simple');
 
-      /* istanbul ignore next because this will get stringified and sent to the browser */
+      /* istanbul ignore next because this will get stringified and sent to the client */
       const func = () => 23;
 
       expect(await adapter.execute(func)).to.equal(23);
@@ -196,10 +200,10 @@ export const browserContractTests: BrowserContractTest[] = [
   },
   {
     name: 'should execute a simple function with args',
-    run: async (browser, adapter) => {
-      await loadFixture(browser, adapter, 'simple');
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, 'simple');
 
-      /* istanbul ignore next because this will get stringified and sent to the browser */
+      /* istanbul ignore next because this will get stringified and sent to the client */
       const func = (x: number) => x;
 
       expect(await adapter.execute(func, 42)).to.equal(42);

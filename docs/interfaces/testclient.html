@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BrowserContractTest | Mugshot</title>
+	<title>TestClient | Mugshot</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,21 +54,31 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="browsercontracttest.html">BrowserContractTest</a>
+					<a href="testclient.html">TestClient</a>
 				</li>
 			</ul>
-			<h1>Interface BrowserContractTest</h1>
+			<h1>Interface TestClient</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Methods on the client that these tests need.</p>
+					</div>
+					<p>They&#39;re different from the ones from [[WebdriverClient]] because
+						the tests are concerned with navigating the client to test
+					fixtures.</p>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BrowserContractTest</span>
+						<span class="target">TestClient</span>
 					</li>
 				</ul>
 			</section>
@@ -79,8 +89,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="browsercontracttest.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="browsercontracttest.html#run" class="tsd-kind-icon">run</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="testclient.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,57 +98,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L22">packages/contracts/src/browser-spec.ts:22</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="run" class="tsd-anchor"></a>
-					<h3>run</h3>
-					<div class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L31">packages/contracts/src/browser-spec.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L22">packages/contracts/src/webdriver-spec.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Run the test which will throw an <code>AssertionError</code> on failure.</p>
+							<p>Navigate to an URL.</p>
 						</div>
-						<dl class="tsd-comment-tags">
-							<dt>param</dt>
-							<dd><p>The browser you&#39;re adapting. It will be used to navigate to
-								a test fixture and resize the window.</p>
-							</dd>
-							<dt>param</dt>
-							<dd><p>The browser adapter.</p>
-							</dd>
-						</dl>
 					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><a href="testbrowser.html" class="tsd-signature-type">TestBrowser</a>, adapter<span class="tsd-signature-symbol">: </span><a href="browser.html" class="tsd-signature-type">Browser</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>browser: <a href="testbrowser.html" class="tsd-signature-type">TestBrowser</a></h5>
-											</li>
-											<li>
-												<h5>adapter: <a href="browser.html" class="tsd-signature-type">Browser</a></h5>
+												<h5>path: <span class="tsd-signature-type">string</span></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 									</li>
 								</ul>
 							</li>
@@ -158,9 +145,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="../classes/browserscreenshotter.html" class="tsd-kind-icon">Browser<wbr>Screenshotter</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a>
 					</li>
@@ -194,26 +178,8 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="browser.html" class="tsd-kind-icon">Browser</a>
-					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="browsercontracttest.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="browsercontracttest.html#run" class="tsd-kind-icon">run</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="browserscreenshotteroptions.html" class="tsd-kind-icon">Browser<wbr>Screenshotter<wbr>Options</a>
+					<li class=" tsd-kind-class">
+						<a href="../classes/webdriverscreenshotter.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="color.html" class="tsd-kind-icon">Color</a>
@@ -254,8 +220,26 @@
 					<li class=" tsd-kind-interface">
 						<a href="screenshotter.html" class="tsd-kind-icon">Screenshotter</a>
 					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="testclient.html" class="tsd-kind-icon">Test<wbr>Client</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="testclient.html#url" class="tsd-kind-icon">url</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
-						<a href="testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
+						<a href="webdriver.html" class="tsd-kind-icon">Webdriver</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="webdrivercontracttest.html" class="tsd-kind-icon">Webdriver<wbr>Contract<wbr>Test</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="webdriverscreenshotteroptions.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="../globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
@@ -270,7 +254,7 @@
 						<a href="../globals.html#mugshotselector" class="tsd-kind-icon">Mugshot<wbr>Selector</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="../globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a>
+						<a href="../globals.html#webdrivercontracttests" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
@@ -279,7 +263,7 @@
 						<a href="../globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="../globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a>
+						<a href="../globals.html#getclientchromesize" class="tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a>

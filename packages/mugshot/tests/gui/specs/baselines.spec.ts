@@ -7,7 +7,7 @@ import {
   expectIdenticalScreenshots,
   loadFixture
 } from '../../../../../tests/gui/suite';
-import BrowserScreenshotter from '../../../src/lib/browser-screenshotter';
+import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 
@@ -25,7 +25,7 @@ describe('Mugshot', async () => {
       const baselinePath = path.join(resultsPath, 'new.png');
 
       const mugshot = new Mugshot(
-        new BrowserScreenshotter(new WebdriverIOAdapter(browser)),
+        new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true
@@ -48,7 +48,7 @@ describe('Mugshot', async () => {
       await loadFixture(browser, 'simple');
 
       const mugshot = new Mugshot(
-        new BrowserScreenshotter(new WebdriverIOAdapter(browser)),
+        new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true

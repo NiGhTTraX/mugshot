@@ -5,11 +5,11 @@
 ## Usage
 
 ```typescript
-import { browserContractTests } from '@mugshot/contracts';
+import { webdriverContractTests } from '@mugshot/contracts';
 import MyAdapter from './src';
 
 describe('MyAdapter', () => {
-  browserContractTests.forEach(test => {
+  webdriverContractTests.forEach(test => {
     it(test.name, async () => {
       // Set up your framework/library here.
       const browser = setUpBrowserInstance();

@@ -41,14 +41,14 @@ Or alternatively with yarn
 yarn add -D mugshot
 ```
 
-Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`BrowserScreenshotter`](./docs/classes/browserscreenshotter.html) that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
+Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`WebdriverScreenshotter`](./docs/classes/webdriverscreenshotter.html) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
 Package | Version
 --------|--------
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
 [@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
 
-If none of the provided adapters suit you, you can just roll your own by implementing the [`Browser` interface](./docs/interfaces/browser.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
+If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 
 
 ## How to read these docs
@@ -73,7 +73,7 @@ The following example illustrates the basics. It uses [WebdriverIO](https://webd
 ```typescript
 import Mugshot, {
   FsStorage,
-  BrowserScreenshotter,
+  WebdriverScreenshotter,
 } from 'mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
@@ -90,7 +90,7 @@ test('GitHub project page should look the same', async () => {
   
   // 3. Call mugshot.
   const mugshot = new Mugshot(
-    new BrowserScreenshotter(
+    new WebdriverScreenshotter(
       new WebdriverIOAdapter(browser)
     ),
     new FsStorage('./screenshots')
@@ -106,12 +106,12 @@ test('GitHub project page should look the same', async () => {
 
 ## Taking screenshots
 
-Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a [browser screenshotter](./docs/classes/browserscreenshotter.html), but you can plug your own implementation that either does things differently, or interacts with something other than a browser e.g. a mobile device. See the [Screenshotter](./docs/interfaces/screenshotter.html) interface for more details.
+Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a [webdriver screenshotter](./docs/classes/webdriverscreenshotter.html), but you can pass in your own implementation. See the [Screenshotter](./docs/interfaces/screenshotter.html) interface for more details.
 
 
 ### Taking a screenshot of a single element
 
-A [selector](./docs/globals.html#mugshotselector) can be passed as the second argument to [`Mugshot.check`](./docs/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](./docs/interfaces/screenshotter.html) implementation. For example, using the [BrowserScreenshotter](./docs/classes/browserscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
+A [selector](./docs/globals.html#mugshotselector) can be passed as the second argument to [`Mugshot.check`](./docs/classes/mugshot.html#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](./docs/interfaces/screenshotter.html) implementation. For example, using the [WebdriverScreenshotter](./docs/classes/webdriverscreenshotter.html), the element will be cropped out of the viewport according to its bounding rectangle.
 
 
 ### Ignoring elements
@@ -139,4 +139,4 @@ You can customize how diffs are produced by passing in a [`PNGDiffer`](./docs/in
 
 A frequent source of flakiness in visual tests is dynamic data e.g. the current time and date or live API data. You can ignore elements that contain such data by painting over them with a solid color square. See the [ignore option](#ignoring-elements) for more details.
 
-Other common sources are animations and the blinking cursor in input fields. If you're using the [`BrowserScreenshotter`](./docs/classes/browserscreenshotter.html) you can turn them off by passing the [`disableAnimations` flag](./docs/interfaces/browserscreenshotteroptions.html#disableanimations).
+Other common sources are animations and the blinking cursor in input fields. If you're using the [`WebdriverScreenshotter`](./docs/classes/webdriverscreenshotter.html) you can turn them off by passing the [`disableAnimations` flag](./docs/interfaces/webdriverscreenshotteroptions.html#disableanimations).

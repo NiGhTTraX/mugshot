@@ -68,7 +68,6 @@
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class"><a href="classes/browserscreenshotter.html" class="tsd-kind-icon">Browser<wbr>Screenshotter</a></li>
 								<li class="tsd-kind-class"><a href="classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/elementnotvisibleerror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Visible<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/fsstorage.html" class="tsd-kind-icon">Fs<wbr>Storage</a></li>
@@ -80,14 +79,12 @@
 								<li class="tsd-kind-class"><a href="classes/puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a></li>
 								<li class="tsd-kind-class"><a href="classes/toomanyelementserror.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Elements<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a></li>
+								<li class="tsd-kind-class"><a href="classes/webdriverscreenshotter.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface"><a href="interfaces/browser.html" class="tsd-kind-icon">Browser</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/browserscreenshotteroptions.html" class="tsd-kind-icon">Browser<wbr>Screenshotter<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/color.html" class="tsd-kind-icon">Color</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/difffailingresult.html" class="tsd-kind-icon">Diff<wbr>Failing<wbr>Result</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/diffpassingresult.html" class="tsd-kind-icon">Diff<wbr>Passing<wbr>Result</a></li>
@@ -101,7 +98,10 @@
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotoptions.html" class="tsd-kind-icon">Screenshot<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotstorage.html" class="tsd-kind-icon">Screenshot<wbr>Storage</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/screenshotter.html" class="tsd-kind-icon">Screenshotter</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/testclient.html" class="tsd-kind-icon">Test<wbr>Client</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/webdriver.html" class="tsd-kind-icon">Webdriver</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/webdrivercontracttest.html" class="tsd-kind-icon">Webdriver<wbr>Contract<wbr>Test</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/webdriverscreenshotteroptions.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -116,7 +116,7 @@
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable"><a href="globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a></li>
+								<li class="tsd-kind-variable"><a href="globals.html#webdrivercontracttests" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -124,7 +124,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function"><a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a></li>
-								<li class="tsd-kind-function"><a href="globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getclientchromesize" class="tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#loadfixture" class="tsd-kind-icon">load<wbr>Fixture</a></li>
 							</ul>
@@ -197,22 +197,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable">
-					<a name="browsercontracttests" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> browser<wbr>Contract<wbr>Tests</h3>
-					<div class="tsd-signature tsd-kind-icon">browser<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/browsercontracttest.html" class="tsd-signature-type">BrowserContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;should take a viewport screenshot&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name: &#x27;should get bounding rect of element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2});}},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100});}},{name: &#x27;should throw if element is missing&#x27;,run: async (browser: TestBrowser, adapter: Browser) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);}},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 }]);}},{name: &#x27;should throw if element is not visible&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);}},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);}},{name: &#x27;should execute a simple function&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the browser */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);}},{name: &#x27;should execute a simple function with args&#x27;,run: async (browser, adapter) &#x3D;&gt; {await loadFixture(browser, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the browser */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);}}]</span></div>
+					<a name="webdrivercontracttests" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Contract<wbr>Tests</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;should take a viewport screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name: &#x27;should get bounding rect of element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2});}},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100});}},{name: &#x27;should throw if element is missing&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);}},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 }]);}},{name: &#x27;should throw if element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);}},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);}},{name: &#x27;should execute a simple function&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);}},{name: &#x27;should execute a simple function with args&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);}}]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L62">packages/contracts/src/browser-spec.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L66">packages/contracts/src/webdriver-spec.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Contract tests for the <a href="interfaces/browser.html">Browser</a> interface.</p>
+							<p>Contract tests for the <a href="interfaces/webdriver.html">Webdriver</a> interface.</p>
 						</div>
-						<p>These exercise the <a href="interfaces/browser.html#takescreenshot">Browser.takeScreenshot</a> method, but they don&#39;t check
+						<p>These exercise the <a href="interfaces/webdriver.html#takescreenshot">Webdriver.takeScreenshot</a> method, but they don&#39;t check
 							the actual screenshot content, only some basic properties. This is because
 							the tests can&#39;t assume any details about the environment in which they&#39;re
-						ran e.g. OS, actual browser instance, user profile etc.</p>
+						ran e.g. OS, actual client instance, user profile etc.</p>
 					</div>
 				</section>
 			</section>
@@ -228,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L35">packages/contracts/src/browser-spec.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L39">packages/contracts/src/webdriver-spec.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -251,7 +251,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L5">packages/webdriverio/src/index.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L9">packages/webdriverio/src/index.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -270,16 +270,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="getbrowserchromesize" class="tsd-anchor"></a>
-					<h3>get<wbr>Browser<wbr>Chrome<wbr>Size</h3>
+					<a name="getclientchromesize" class="tsd-anchor"></a>
+					<h3>get<wbr>Client<wbr>Chrome<wbr>Size</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L22">packages/webdriverio/src/index.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L26">packages/webdriverio/src/index.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
@@ -304,7 +304,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/browser-screenshotter.ts#L20">packages/mugshot/src/lib/browser-screenshotter.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/webdriver-screenshotter.ts#L20">packages/mugshot/src/lib/webdriver-screenshotter.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -315,22 +315,22 @@
 					<a name="loadfixture" class="tsd-anchor"></a>
 					<h3>load<wbr>Fixture</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>browser<span class="tsd-signature-symbol">: </span><a href="interfaces/testbrowser.html" class="tsd-signature-type">TestBrowser</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/browser.html" class="tsd-signature-type">Browser</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/browser-spec.ts#L40">packages/contracts/src/browser-spec.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L44">packages/contracts/src/webdriver-spec.ts:44</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>browser: <a href="interfaces/testbrowser.html" class="tsd-signature-type">TestBrowser</a></h5>
+									<h5>client: <a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a></h5>
 								</li>
 								<li>
-									<h5>adapter: <a href="interfaces/browser.html" class="tsd-signature-type">Browser</a></h5>
+									<h5>adapter: <a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a></h5>
 								</li>
 								<li>
 									<h5>name: <span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span></h5>
@@ -416,9 +416,6 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/browserscreenshotter.html" class="tsd-kind-icon">Browser<wbr>Screenshotter</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -451,14 +448,8 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/browser.html" class="tsd-kind-icon">Browser</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/browsercontracttest.html" class="tsd-kind-icon">Browser<wbr>Contract<wbr>Test</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/browserscreenshotteroptions.html" class="tsd-kind-icon">Browser<wbr>Screenshotter<wbr>Options</a>
+					<li class=" tsd-kind-class">
+						<a href="classes/webdriverscreenshotter.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/color.html" class="tsd-kind-icon">Color</a>
@@ -500,7 +491,16 @@
 						<a href="interfaces/screenshotter.html" class="tsd-kind-icon">Screenshotter</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/testbrowser.html" class="tsd-kind-icon">Test<wbr>Browser</a>
+						<a href="interfaces/testclient.html" class="tsd-kind-icon">Test<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/webdriver.html" class="tsd-kind-icon">Webdriver</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/webdrivercontracttest.html" class="tsd-kind-icon">Webdriver<wbr>Contract<wbr>Test</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/webdriverscreenshotteroptions.html" class="tsd-kind-icon">Webdriver<wbr>Screenshotter<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#diffresult" class="tsd-kind-icon">Diff<wbr>Result</a>
@@ -515,7 +515,7 @@
 						<a href="globals.html#mugshotselector" class="tsd-kind-icon">Mugshot<wbr>Selector</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#browsercontracttests" class="tsd-kind-icon">browser<wbr>Contract<wbr>Tests</a>
+						<a href="globals.html#webdrivercontracttests" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
@@ -524,7 +524,7 @@
 						<a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getbrowserchromesize" class="tsd-kind-icon">get<wbr>Browser<wbr>Chrome<wbr>Size</a>
+						<a href="globals.html#getclientchromesize" class="tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a>

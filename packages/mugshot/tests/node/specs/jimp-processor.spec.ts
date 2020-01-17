@@ -4,9 +4,9 @@ import { describe, it } from 'tdd-buffet/suite/node';
 import {
   createTestBuffer,
   expectIdenticalBuffers
-} from '../../../../../../tests/node/suite';
-import { OutOfBoundsError } from '../../../../src/interfaces/png-processor';
-import JimpProcessor from '../../../../src/lib/jimp-processor';
+} from '../../../../../tests/node/suite';
+import { OutOfBoundsError } from '../../../src/interfaces/png-processor';
+import JimpProcessor from '../../../src/lib/jimp-processor';
 
 describe('JimpProcessor', () => {
   it('should crop the entire image', async () => {

@@ -1,4 +1,4 @@
-import { browserContractTests } from '@mugshot/contracts';
+import { webdriverContractTests } from '@mugshot/contracts';
 import { describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,
@@ -7,7 +7,7 @@ import {
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
-  browserContractTests.forEach(test => {
+  webdriverContractTests.forEach(test => {
     it(test.name, browser =>
       test.run(browser, new WebdriverIOAdapter(browser))
     );
@@ -16,9 +16,9 @@ describe('WebdriverIOAdapter', () => {
   it('should take a full page screenshot', async browser => {
     await loadFixture(browser, 'simple');
 
-    const browserAdapter = new WebdriverIOAdapter(browser);
+    const clientAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(
-      await browserAdapter.takeScreenshot(),
+      await clientAdapter.takeScreenshot(),
       'base64'
     );
 
@@ -28,9 +28,9 @@ describe('WebdriverIOAdapter', () => {
   it('should take a full page screenshot with absolutely positioned elements', async browser => {
     await loadFixture(browser, 'rect');
 
-    const browserAdapter = new WebdriverIOAdapter(browser);
+    const clientAdapter = new WebdriverIOAdapter(browser);
     const screenshot = Buffer.from(
-      await browserAdapter.takeScreenshot(),
+      await clientAdapter.takeScreenshot(),
       'base64'
     );
 

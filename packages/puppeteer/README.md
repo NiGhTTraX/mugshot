@@ -9,7 +9,7 @@
 ```typescript
 import Mugshot, {
   FsStorage,
-  BrowserScreenshotter,
+  WebdriverScreenshotter,
 } from 'mugshot';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
@@ -19,7 +19,7 @@ it('GitHub project page should look the same', async () => {
   const page = await browser.newPage();
 
   const mugshot = new Mugshot(
-    new BrowserScreenshotter(
+    new WebdriverScreenshotter(
       new PuppeteerAdapter(page)
     ),
     new FsStorage('./screenshots')

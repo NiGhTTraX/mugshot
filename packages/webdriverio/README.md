@@ -9,7 +9,7 @@
 ```typescript
 import Mugshot, {
   FsStorage,
-  BrowserScreenshotter,
+  WebdriverScreenshotter,
 } from 'mugshot';
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
@@ -21,7 +21,7 @@ it('GitHub project page should look the same', async () => {
   });
   
   const mugshot = new Mugshot(
-    new BrowserScreenshotter(
+    new WebdriverScreenshotter(
       new WebdriverIOAdapter(browser)
     ),
     new FsStorage('./screenshots')

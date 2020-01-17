@@ -5,8 +5,8 @@ import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
   whitePixelBuffer
-} from '../../../../../../tests/node/fixtures';
-import FsStorage from '../../../../src/lib/fs-storage';
+} from '../../../../../tests/node/fixtures';
+import FsStorage from '../../../src/lib/fs-storage';
 
 describe('FileStorage', () => {
   let tmpPath!: string;

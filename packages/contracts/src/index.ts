@@ -1,1 +1,1 @@
-export * from './browser-spec';
+export * from './webdriver-spec';

@@ -1,4 +1,4 @@
-import Browser from '../interfaces/browser';
+import Webdriver from '../interfaces/webdriver';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, {
   ScreenshotOptions,
@@ -7,7 +7,7 @@ import Screenshotter, {
 import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
 
-export interface BrowserScreenshotterOptions {
+export interface WebdriverScreenshotterOptions {
   pngProcessor?: PNGProcessor;
 
   /**
@@ -16,7 +16,7 @@ export interface BrowserScreenshotterOptions {
   disableAnimations?: boolean;
 }
 
-/* istanbul ignore next because this will be stringified and executed in the browser */
+/* istanbul ignore next because this will be stringified and executed in the client */
 function injectAnimationDisablingStylesheet() {
   const style = document.createElement('style');
   style.textContent = `
@@ -33,19 +33,19 @@ input {
 }
 
 /**
- * Take screenshots from a Webdriver compatible browser.
+ * Take screenshots from a Webdriver compatible client.
  */
-export default class BrowserScreenshotter implements Screenshotter {
+export default class WebdriverScreenshotter implements Screenshotter {
   private readonly pngProcessor: PNGProcessor;
 
   private readonly disableAnimations: boolean;
 
   constructor(
-    private readonly browser: Browser,
+    private readonly client: Webdriver,
     {
       pngProcessor = new JimpProcessor(),
       disableAnimations = false
-    }: BrowserScreenshotterOptions = {}
+    }: WebdriverScreenshotterOptions = {}
   ) {
     this.pngProcessor = pngProcessor;
     this.disableAnimations = disableAnimations;
@@ -75,10 +75,10 @@ export default class BrowserScreenshotter implements Screenshotter {
     }
 
     if (this.disableAnimations) {
-      await this.browser.execute(injectAnimationDisablingStylesheet);
+      await this.client.execute(injectAnimationDisablingStylesheet);
     }
 
-    let screenshot = Buffer.from(await this.browser.takeScreenshot(), 'base64');
+    let screenshot = Buffer.from(await this.client.takeScreenshot(), 'base64');
 
     if (selector) {
       screenshot = await this.crop(selector, screenshot);
@@ -94,7 +94,7 @@ export default class BrowserScreenshotter implements Screenshotter {
   private async crop(selector: MugshotSelector, screenshot: Buffer) {
     const rect =
       typeof selector === 'string'
-        ? await this.browser.getElementRect(selector)
+        ? await this.client.getElementRect(selector)
         : selector;
 
     if (Array.isArray(rect)) {
@@ -113,7 +113,7 @@ export default class BrowserScreenshotter implements Screenshotter {
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
     const rects =
       typeof selector === 'string'
-        ? await this.browser.getElementRect(selector)
+        ? await this.client.getElementRect(selector)
         : selector;
 
     if (Array.isArray(rects)) {

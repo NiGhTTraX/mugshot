@@ -2,9 +2,9 @@
 import { ElementSelector, ElementRect } from '../lib/mugshot';
 
 /**
- * Webdriver compatible browser.
+ * Webdriver compatible client.
  */
-export default interface Browser {
+export default interface Webdriver {
   /**
    * Take a viewport screenshot and return a base64 string.
    *
