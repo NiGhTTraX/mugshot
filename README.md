@@ -52,7 +52,7 @@ Or alternatively with yarn
 yarn add -D mugshot
 ```
 
-Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`BrowserScreenshotter`](./docs/classes/browserscreenshotter.html) that you can use with Webdriver compatible browsers. Each browser might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
+Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`WebdriverScreenshotter`](./docs/classes/webdriverscreenshotter.html) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
 Package | Version
 --------|--------
