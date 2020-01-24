@@ -15,11 +15,18 @@ export interface PixelDifferOptions {
   diffColor?: Color;
 
   /**
-   * A number between 0 and 1 representing the max difference in %
-   * between 2 pixels to be considered identical. 0 means the pixel
-   * need to be identical, 1 means two completely different images
-   * will be identical. 0.1 means black (#000) and 90% gray (0a0a0a)
-   * will be identical.
+   * A number between `0` and `1` representing the max difference in %
+   * between 2 pixels to be considered identical.
+   *
+   * @example
+   * `0` means the pixel need to be identical.
+   *
+   * @example
+   * `1` means two completely different images will be identical. If the
+   * images have different dimension then the comparison will fail.
+   *
+   * @example
+   * `0.1` means black (`#000`) and 90% gray (`#0a0a0a`) will be identical.
    */
   threshold?: number;
 }
@@ -27,6 +34,9 @@ export interface PixelDifferOptions {
 /**
  * Compare screenshots pixel by pixel using
  * [pixelmatch](https://github.com/mapbox/pixelmatch).
+ *
+ * Images with different dimensions will always fail comparison and a diff
+ * indicating the extra region will be returned.
  */
 export default class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
