@@ -39,6 +39,6 @@
     "@types/puppeteer": "^2.0.0",
     "mugshot": "^3.0.0-alpha.0",
     "puppeteer": "^2.0.0",
-    "typescript": "~3.7.0"
+    "typescript": "~3.8.0"
   }
 }
