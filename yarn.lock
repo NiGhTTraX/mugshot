@@ -2028,11 +2028,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.30.tgz#4c2b4f0015f214f8158a347350481322b3b29b2f"
   integrity sha512-nsqTN6zUcm9xtdJiM9OvOJ5EF0kOI8f1Zuug27O/rgtxCRJHGqncSWfCMZUP852dCKPsDsYXGvBhxfRjDBkF5Q==
 
-"@types/node@~12.12.0":
-  version "12.12.14"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.14.tgz#1c1d6e3c75dba466e0326948d56e8bd72a1903d2"
-  integrity sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==
-
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -9245,12 +9240,11 @@ strong-log-transformer@^2.0.0:
     minimist "^1.2.0"
     through "^2.3.4"
 
-strong-mock@~4.0.0-alpha.2:
-  version "4.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-4.0.0-alpha.2.tgz#3a18cdeb31802eca3f5168edc336616376d055a4"
-  integrity sha512-AK5CFlFDkiI+QyGHNjO81ZAiYyP4Mnz7neRcAN2mr80fELc+TlvJd+teSYTeUMkxEZ27VzauupkP7i/KPYL/Dg==
+strong-mock@~4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-4.1.1.tgz#ea3fbe61a1c97923dd52af6387d117b6e484198a"
+  integrity sha512-HSLIukpA4cC8g+3VlBIoud0Hm+Pmvtk9K8N3ZvT/+QbcsMx/h841DTaEdxDtS4JmQK8w6+NOLXM7834PJWBtBA==
   dependencies:
-    "@types/node" "~12.12.0"
     jest-matcher-utils "~25.1.0"
     lodash "~4.17.15"
 
