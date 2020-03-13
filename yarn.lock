@@ -8459,13 +8459,6 @@ serialize-error@^5.0.0:
   dependencies:
     type-fest "^0.8.0"
 
-serialize-error@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/serialize-error/-/serialize-error-6.0.0.tgz#ccfb887a1dd1c48d6d52d7863b92544331fd752b"
-  integrity sha512-3vmBkMZLQO+BR4RPHcyRGdE09XCF6cvxzk2N2qn8Er3F91cy8Qt7VvEbZBOpaL53qsBbe2cFOefU6tRY6WDelA==
-  dependencies:
-    type-fest "^0.12.0"
-
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
@@ -9407,11 +9400,6 @@ type-detect@^4.0.0, type-detect@^4.0.5:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
-type-fest@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.12.0.tgz#f57a27ab81c68d136a51fd71467eff94157fa1ee"
-  integrity sha512-53RyidyjvkGpnWPMF9bQgFtWp+Sl8O2Rp13VavmJgfAP9WWG6q6TkrKU8iyJdnwnfgHI6k2hTlgqH4aSdjoTbg==
-
 type-fest@^0.3.0:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.3.1.tgz#63d00d204e059474fe5e1b7c011112bbd1dc29e1"
@@ -9754,10 +9742,10 @@ webdriver@5.16.10:
     lodash.merge "^4.6.1"
     request "^2.83.0"
 
-webdriver@5.19.0:
-  version "5.19.0"
-  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-5.19.0.tgz#ddeb7b48f652ba761ac6c6510a1d0fff17e81588"
-  integrity sha512-lPHhLqySiwEQr61R+/UD4KjImCxPEQTgipU5nIFUJFJxo97dIBolTHpXVcGazsrQc3nSPjiHY9CrKjuxl2MjCQ==
+webdriver@5.21.0:
+  version "5.21.0"
+  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-5.21.0.tgz#e5a50ec1332095ab118d464ef83fd5e527d1b4b3"
+  integrity sha512-BROcUUNao26ipJA1x7KDcgs+3RYokdIDlnwgM2oAYFN7dCtg1x+o2yC6ayXOCN9P/JXXX/ft/dUP53kxS7za8w==
   dependencies:
     "@wdio/config" "5.18.4"
     "@wdio/logger" "5.16.10"
@@ -9787,10 +9775,10 @@ webdriverio@~5.16.0:
     serialize-error "^5.0.0"
     webdriver "5.16.10"
 
-webdriverio@~5.20.0:
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.20.1.tgz#99bf3c3e8e12d55f2addabc1e89933a990f3e702"
-  integrity sha512-uXfksyM4vN3FbHIU6krNhE0dqynZ8vUGOAOcW9u+xejPlIE2g6MyAo0J5JJeR0jkXjT2+4R2ti9jcFV6asY9Ow==
+webdriverio@~5.21.0:
+  version "5.21.0"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-5.21.0.tgz#a25973123eb48dda54777a5c15829245ff35a0cd"
+  integrity sha512-T9QQQ71NJRDUETj/yvJdiKOuIeLGmNrQaZTgOy5alcgTCPYBMZ2uKMA/NHZICZ2RgxivYDIbWnnkxDgxuvZBhg==
   dependencies:
     "@wdio/config" "5.18.4"
     "@wdio/logger" "5.16.10"
@@ -9805,8 +9793,8 @@ webdriverio@~5.20.0:
     lodash.zip "^4.2.0"
     resq "^1.6.0"
     rgb2hex "^0.1.0"
-    serialize-error "^6.0.0"
-    webdriver "5.19.0"
+    serialize-error "^5.0.0"
+    webdriver "5.21.0"
 
 webidl-conversions@^4.0.2:
   version "4.0.2"
