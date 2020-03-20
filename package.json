@@ -48,7 +48,7 @@
     "nyc": "~15.0.0",
     "prettier": "~1.19.1",
     "strong-mock": "~4.1.1",
-    "tdd-buffet": "~0.15.0",
+    "tdd-buffet": "~0.16.0",
     "typedoc": "~0.17.0",
     "typescript": "~3.8.0",
     "webdriverio": "~5.22.0"
