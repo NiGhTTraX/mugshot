@@ -15,11 +15,11 @@ describe('PuppeteerAdapter', () => {
     await browser.close();
   });
 
-  webdriverContractTests.forEach(test => {
+  webdriverContractTests.forEach((test) => {
     it(test.name, () =>
       test.run(
         {
-          url: path => page.goto(path)
+          url: (path) => page.goto(path),
         },
         new PuppeteerAdapter(page)
       )

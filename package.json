@@ -28,7 +28,7 @@
     "*.js": "eslint"
   },
   "devDependencies": {
-    "@nighttrax/eslint-config-ts": "~4.1.0-alpha.0",
+    "@nighttrax/eslint-config-ts": "~5.0.0-beta.1",
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/fs-extra": "~8.1.0",
     "@types/node": "~10.12.2",
@@ -46,7 +46,7 @@
     "lerna": "~3.20.0",
     "lint-staged": "~10.1.0",
     "nyc": "~15.0.0",
-    "prettier": "~1.19.1",
+    "prettier": "~2.0.1",
     "strong-mock": "~4.1.1",
     "tdd-buffet": "~0.16.0",
     "typedoc": "~0.17.0",

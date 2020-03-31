@@ -4,7 +4,7 @@ import Jimp from 'jimp';
 import {
   Webdriver,
   ElementNotFoundError,
-  ElementNotVisibleError
+  ElementNotVisibleError,
 } from 'mugshot';
 import { fixtures } from './fixtures';
 
@@ -75,7 +75,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
 
       expect(screenshot.getWidth()).to.equal(1024);
       expect(screenshot.getHeight()).to.equal(768);
-    }
+    },
   },
   {
     name:
@@ -89,7 +89,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
 
       expect(screenshot.getWidth()).to.equal(1024);
       expect(screenshot.getHeight()).to.equal(768);
-    }
+    },
   },
   {
     name: 'should get bounding rect of element',
@@ -104,9 +104,9 @@ export const webdriverContractTests: WebdriverContractTest[] = [
         y: 10 + 3,
         // Include border and padding.
         width: 100 + 2 * 2 + 4 * 2,
-        height: 100 + 2 * 2 + 4 * 2
+        height: 100 + 2 * 2 + 4 * 2,
       });
-    }
+    },
   },
   {
     name: 'should get bounding rect of off-screen element',
@@ -119,9 +119,9 @@ export const webdriverContractTests: WebdriverContractTest[] = [
         x: 2000,
         y: 2000,
         width: 100,
-        height: 100
+        height: 100,
       });
-    }
+    },
   },
   {
     name: 'should throw if element is missing',
@@ -138,7 +138,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
 
       expect(caughtError).to.be.instanceOf(ElementNotFoundError);
       expect(caughtError.message).to.contain('.missing');
-    }
+    },
   },
   {
     name: 'should get bounding rect of all matching elements',
@@ -149,9 +149,9 @@ export const webdriverContractTests: WebdriverContractTest[] = [
         { x: 0, y: 0, width: 100, height: 100 },
         { x: 100, y: 0, width: 100, height: 100 },
         { x: 0, y: 100, width: 100, height: 100 },
-        { x: 100, y: 100, width: 100, height: 100 }
+        { x: 100, y: 100, width: 100, height: 100 },
       ]);
-    }
+    },
   },
   {
     name: 'should throw if element is not visible',
@@ -168,7 +168,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
 
       expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
       expect(caughtError.message).to.contain('#invisible');
-    }
+    },
   },
   {
     name: 'should throw if matching element is not visible',
@@ -185,7 +185,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
 
       expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
       expect(caughtError.message).to.contain('div');
-    }
+    },
   },
   {
     name: 'should execute a simple function',
@@ -196,7 +196,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
       const func = () => 23;
 
       expect(await adapter.execute(func)).to.equal(23);
-    }
+    },
   },
   {
     name: 'should execute a simple function with args',
@@ -207,6 +207,6 @@ export const webdriverContractTests: WebdriverContractTest[] = [
       const func = (x: number) => x;
 
       expect(await adapter.execute(func, 42)).to.equal(42);
-    }
-  }
+    },
+  },
 ];

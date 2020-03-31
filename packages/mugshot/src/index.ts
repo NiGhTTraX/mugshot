@@ -1,6 +1,6 @@
 import Webdriver, {
   ElementNotFoundError,
-  ElementNotVisibleError
+  ElementNotVisibleError,
 } from './interfaces/webdriver';
 import PNGDiffer from './interfaces/png-differ';
 import PNGProcessor from './interfaces/png-processor';
@@ -25,5 +25,5 @@ export {
   ElementNotFoundError,
   ElementNotVisibleError,
   WebdriverScreenshotter,
-  JimpProcessor
+  JimpProcessor,
 };

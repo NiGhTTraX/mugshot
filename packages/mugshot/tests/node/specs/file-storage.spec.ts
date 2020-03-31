@@ -4,7 +4,7 @@ import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
-  whitePixelBuffer
+  whitePixelBuffer,
 } from '../../../../../tests/node/fixtures';
 import FsStorage from '../../../src/lib/fs-storage';
 

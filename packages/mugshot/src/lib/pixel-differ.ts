@@ -48,7 +48,7 @@ export default class PixelDiffer implements PNGDiffer {
    */
   constructor({
     diffColor = { r: 255, g: 0, b: 0 },
-    threshold = 0
+    threshold = 0,
   }: PixelDifferOptions = {}) {
     this.diffColor = diffColor;
     this.threshold = threshold;
@@ -95,7 +95,7 @@ export default class PixelDiffer implements PNGDiffer {
       {
         diffColor: [this.diffColor.r, this.diffColor.g, this.diffColor.b],
         threshold: this.threshold,
-        alpha: 0
+        alpha: 0,
       }
     );
 
@@ -107,7 +107,7 @@ export default class PixelDiffer implements PNGDiffer {
 
       return {
         matches: false,
-        diff: await wholeDiffJimp.getBufferAsync(Jimp.MIME_PNG)
+        diff: await wholeDiffJimp.getBufferAsync(Jimp.MIME_PNG),
       };
     }
 
@@ -117,7 +117,7 @@ export default class PixelDiffer implements PNGDiffer {
 
     return {
       matches: false,
-      diff: await diffJimp.getBufferAsync(Jimp.MIME_PNG)
+      diff: await diffJimp.getBufferAsync(Jimp.MIME_PNG),
     };
   };
 }

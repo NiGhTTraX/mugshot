@@ -5,14 +5,14 @@ import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
   redPixelBuffer,
-  whitePixelBuffer
+  whitePixelBuffer,
 } from '../../../../../tests/node/fixtures';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import Screenshotter from '../../../src/interfaces/screenshotter';
 import Mugshot, {
   MugshotMissingBaselineError,
-  MugshotResult
+  MugshotResult,
 } from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
@@ -34,9 +34,7 @@ describe('Mugshot', () => {
   }
 
   function ignoreCleanup() {
-    when(storage.delete(It.isAny()))
-      .thenResolve(undefined)
-      .atLeast(0);
+    when(storage.delete(It.isAny())).thenResolve(undefined).atLeast(0);
   }
 
   beforeEach(() => {
@@ -93,11 +91,11 @@ describe('Mugshot', () => {
       when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
-        matches: true
+        matches: true,
       });
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await expectIdenticalResult(
@@ -116,11 +114,11 @@ describe('Mugshot', () => {
       when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
-        matches: true
+        matches: true,
       });
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await mugshot.check('identical');
@@ -139,11 +137,11 @@ describe('Mugshot', () => {
 
       setupDifferWithResult(whitePixelBuffer, blackPixelBuffer, {
         matches: false,
-        diff: redPixelBuffer
+        diff: redPixelBuffer,
       });
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await expectDiffResult(
@@ -164,11 +162,11 @@ describe('Mugshot', () => {
       );
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
-        matches: true
+        matches: true,
       });
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await expectIdenticalResult(
@@ -184,7 +182,7 @@ describe('Mugshot', () => {
       ignoreCleanup();
 
       setupDifferWithResult(blackPixelBuffer, whitePixelBuffer, {
-        matches: true
+        matches: true,
       });
 
       when(screenshotter.takeScreenshot('.element', {})).thenResolve(
@@ -192,7 +190,7 @@ describe('Mugshot', () => {
       );
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await expectIdenticalResult(
@@ -208,7 +206,7 @@ describe('Mugshot', () => {
       ignoreCleanup();
 
       setupDifferWithResult(blackPixelBuffer, whitePixelBuffer, {
-        matches: true
+        matches: true,
       });
 
       when(
@@ -216,7 +214,7 @@ describe('Mugshot', () => {
       ).thenResolve(whitePixelBuffer);
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer)
+        pngDiffer: instance(pngDiffer),
       });
 
       await expectIdenticalResult(
@@ -236,7 +234,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        updateBaselines: true
+        updateBaselines: true,
       });
 
       await expectIdenticalResult(
@@ -282,7 +280,7 @@ describe('Mugshot', () => {
     async function expectMissingBaselineError(
       checkCall: Promise<MugshotResult>
     ) {
-      return expectError(checkCall, MugshotMissingBaselineError, error => {
+      return expectError(checkCall, MugshotMissingBaselineError, (error) => {
         expect(error.message).to.contain('Missing baseline');
       });
     }
@@ -292,7 +290,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        createMissingBaselines: false
+        createMissingBaselines: false,
       });
 
       await expectMissingBaselineError(mugshot.check('missing'));
@@ -307,7 +305,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        createMissingBaselines: true
+        createMissingBaselines: true,
       });
 
       await expectIdenticalResult(
@@ -328,7 +326,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        createMissingBaselines: true
+        createMissingBaselines: true,
       });
 
       await mugshot.check('missing');
@@ -345,7 +343,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        createMissingBaselines: true
+        createMissingBaselines: true,
       });
 
       await expectIdenticalResult(
@@ -367,7 +365,7 @@ describe('Mugshot', () => {
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
-        createMissingBaselines: true
+        createMissingBaselines: true,
       });
 
       await expectIdenticalResult(
@@ -388,7 +386,7 @@ describe('Mugshot', () => {
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
         pngDiffer: instance(pngDiffer),
         createMissingBaselines: false,
-        updateBaselines: true
+        updateBaselines: true,
       });
 
       await expectIdenticalResult(

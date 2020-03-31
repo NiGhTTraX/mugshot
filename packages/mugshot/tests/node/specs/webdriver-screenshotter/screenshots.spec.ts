@@ -5,7 +5,7 @@ import {
   blackPixelB64,
   blackPixelBuffer,
   redPixelBuffer,
-  whitePixelBuffer
+  whitePixelBuffer,
 } from '../../../../../../tests/node/fixtures';
 import { expectIdenticalBuffers } from '../../../../../../tests/node/suite';
 import PNGProcessor from '../../../../src/interfaces/png-processor';
@@ -43,7 +43,7 @@ describe('WebdriverScreenshotter', () => {
       x: 1,
       y: 2,
       width: 3,
-      height: 4
+      height: 4,
     });
 
     when(pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
@@ -51,7 +51,7 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test');
@@ -67,14 +67,14 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot({
       x: 1,
       y: 2,
       width: 3,
-      height: 4
+      height: 4,
     });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
@@ -84,11 +84,11 @@ describe('WebdriverScreenshotter', () => {
     when(client.takeScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
-      { x: 5, y: 6, width: 7, height: 8 }
+      { x: 5, y: 6, width: 7, height: 8 },
     ]);
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
@@ -102,7 +102,7 @@ describe('WebdriverScreenshotter', () => {
       x: 1,
       y: 2,
       width: 3,
-      height: 4
+      height: 4,
     });
 
     when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
@@ -110,11 +110,11 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot({
-      ignore: '.ignore'
+      ignore: '.ignore',
     });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
@@ -128,11 +128,11 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot({
-      ignore: { x: 1, y: 2, width: 3, height: 4 }
+      ignore: { x: 1, y: 2, width: 3, height: 4 },
     });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
@@ -142,7 +142,7 @@ describe('WebdriverScreenshotter', () => {
     when(client.takeScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
-      { x: 10, y: 20, width: 30, height: 40 }
+      { x: 10, y: 20, width: 30, height: 40 },
     ]);
 
     when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
@@ -153,11 +153,11 @@ describe('WebdriverScreenshotter', () => {
     ).thenResolve(blackPixelBuffer);
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot({
-      ignore: '.ignore'
+      ignore: '.ignore',
     });
 
     await expectIdenticalBuffers(screenshot, blackPixelBuffer);
@@ -169,13 +169,13 @@ describe('WebdriverScreenshotter', () => {
       x: 0,
       y: 0,
       width: 10,
-      height: 10
+      height: 10,
     });
     when(client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 1,
       width: 4,
-      height: 4
+      height: 4,
     });
 
     when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
@@ -186,11 +186,11 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
-      ignore: '.ignore'
+      ignore: '.ignore',
     });
 
     await expectIdenticalBuffers(screenshot, redPixelBuffer);
@@ -202,7 +202,7 @@ describe('WebdriverScreenshotter', () => {
       x: 0,
       y: 0,
       width: 10,
-      height: 10
+      height: 10,
     });
 
     when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
@@ -213,11 +213,11 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
-      ignore: { x: 1, y: 2, width: 3, height: 4 }
+      ignore: { x: 1, y: 2, width: 3, height: 4 },
     });
 
     await expectIdenticalBuffers(screenshot, redPixelBuffer);
@@ -229,11 +229,11 @@ describe('WebdriverScreenshotter', () => {
       x: 0,
       y: 0,
       width: 10,
-      height: 10
+      height: 10,
     });
     when(client.getElementRect('.ignore')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
-      { x: 5, y: 6, width: 7, height: 8 }
+      { x: 5, y: 6, width: 7, height: 8 },
     ]);
 
     when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
@@ -247,11 +247,11 @@ describe('WebdriverScreenshotter', () => {
     );
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor)
+      pngProcessor: instance(pngProcessor),
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
-      ignore: '.ignore'
+      ignore: '.ignore',
     });
 
     await expectIdenticalBuffers(screenshot, blackPixelBuffer);
@@ -263,7 +263,7 @@ describe('WebdriverScreenshotter', () => {
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
       pngProcessor: instance(pngProcessor),
-      disableAnimations: true
+      disableAnimations: true,
     });
 
     const screenshot = await screenshotter.takeScreenshot();
