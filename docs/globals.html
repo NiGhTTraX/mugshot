@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> Mugshot</h1>
+			<h1>Mugshot</h1>
 		</div>
 	</div>
 </header>
@@ -156,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">Element<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L62">packages/mugshot/src/lib/mugshot.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L63">packages/mugshot/src/lib/mugshot.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -164,13 +164,6 @@
 							<p>Uniquely identify an element on the screen according to the <a href="interfaces/screenshotter.html">Screenshotter</a>
 							implementation.</p>
 						</div>
-						<p>TODO: this abstraction is leaky - <a href="classes/mugshot.html#check">Mugshot.check</a> doesn&#39;t do anything with
-							this type other than pass it to <a href="interfaces/screenshotter.html#takescreenshot">Screenshotter.takeScreenshot</a>. It also
-							produces a LISP violation: <a href="classes/mugshot.html#check">Mugshot.check</a> accepts a very generic <code>string</code>
-							type, but a <a href="interfaces/screenshotter.html#takescreenshot">Screenshotter.takeScreenshot</a> implementation could only want
-							to accept a subset e.g. CSS selectors. Ideally, the dependency would be
-							inverted - you would pass a <a href="classes/mugshot.html">Mugshot</a> instance to a [[Screenshotter]
-						instance, but I don&#39;t like that since it takes away the focus from Mugshot.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
@@ -189,7 +182,7 @@
 					<div class="tsd-signature tsd-kind-icon">Mugshot<wbr>Selector<span class="tsd-signature-symbol">:</span> <a href="globals.html#elementselector" class="tsd-signature-type">ElementSelector</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/elementrect.html" class="tsd-signature-type">ElementRect</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L78">packages/mugshot/src/lib/mugshot.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/mugshot.ts#L79">packages/mugshot/src/lib/mugshot.ts:79</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +192,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="webdrivercontracttests" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Contract<wbr>Tests</h3>
-					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;should take a viewport screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);}},{name: &#x27;should get bounding rect of element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2});}},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100});}},{name: &#x27;should throw if element is missing&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);}},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 }]);}},{name: &#x27;should throw if element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);}},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);}},{name: &#x27;should execute a simple function&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);}},{name: &#x27;should execute a simple function with args&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);}}]</span></div>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should take a viewport screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},{name: &#x27;should get bounding rect of element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2,});},},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100,});},},{name: &#x27;should throw if element is missing&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);},},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 },]);},},{name: &#x27;should throw if element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);},},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);},},{name: &#x27;should execute a simple function&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);},},{name: &#x27;should execute a simple function with args&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);},},]</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L66">packages/contracts/src/webdriver-spec.ts:66</a></li>
@@ -260,12 +253,7 @@
 									<h5>selector: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DOMRect</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol">[]</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">null</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DOMRect</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -273,7 +261,7 @@
 					<a name="getclientchromesize" class="tsd-anchor"></a>
 					<h3>get<wbr>Client<wbr>Chrome<wbr>Size</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -282,7 +270,7 @@
 									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L26">packages/webdriverio/src/index.ts:26</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
 									<h5>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
@@ -315,7 +303,7 @@
 					<a name="loadfixture" class="tsd-anchor"></a>
 					<h3>load<wbr>Fixture</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">fixtures</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -333,7 +321,7 @@
 									<h5>adapter: <a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a></h5>
 								</li>
 								<li>
-									<h5>name: <span class="tsd-signature-type">keyof <span class="tsd-signature-type">object</span></span></h5>
+									<h5>name: <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">fixtures</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -355,7 +343,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.rect" class="tsd-anchor"></a>
 						<h3>rect</h3>
-						<div class="tsd-signature tsd-kind-icon">rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 8px;top: 10px;width: 100px;height: 100px;border: 2px solid blue;margin: 3px;padding: 4px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 8px;top: 10px;width: 100px;height: 100px;border: 2px solid blue;margin: 3px;padding: 4px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L2">packages/contracts/src/fixtures.ts:2</a></li>
@@ -365,7 +353,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.rect_invisible" class="tsd-anchor"></a>
 						<h3>rect-<wbr>invisible</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Invisible rect&lt;/title&gt;&lt;style&gt;.invisible {display: none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div id&#x3D;&quot;visible&quot;&gt;visible&lt;/div&gt;&lt;div id&#x3D;&quot;invisible&quot; class&#x3D;&quot;invisible&quot;&gt;invisible&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">rect-<wbr>invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Invisible rect&lt;/title&gt;&lt;style&gt;.invisible {display: none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div id&#x3D;&quot;visible&quot;&gt;visible&lt;/div&gt;&lt;div id&#x3D;&quot;invisible&quot; class&#x3D;&quot;invisible&quot;&gt;invisible&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L60">packages/contracts/src/fixtures.ts:60</a></li>
@@ -375,7 +363,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.rect_multiple" class="tsd-anchor"></a>
 						<h3>rect-<wbr>multiple</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>multiple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Multiple rects&lt;/title&gt;&lt;style&gt;.multiple {position: absolute;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 100px;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 100px;&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">rect-<wbr>multiple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Multiple rects&lt;/title&gt;&lt;style&gt;.multiple {position: absolute;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 100px;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 100px;&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L41">packages/contracts/src/fixtures.ts:41</a></li>
@@ -385,7 +373,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.rect_scroll" class="tsd-anchor"></a>
 						<h3>rect-<wbr>scroll</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>scroll<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect with scroll&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 2000px;top: 2000px;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">rect-<wbr>scroll<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect with scroll&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 2000px;top: 2000px;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L23">packages/contracts/src/fixtures.ts:23</a></li>
@@ -395,7 +383,7 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="fixtures.simple" class="tsd-anchor"></a>
 						<h3>simple</h3>
-						<div class="tsd-signature tsd-kind-icon">simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;body&gt;This is some simple HTML&lt;div style&#x3D;&quot;width: 100px; height: 100px; border: 1px solid blue; background: coral&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<div class="tsd-signature tsd-kind-icon">simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;body&gt;This is some simple HTML&lt;div style&#x3D;&quot;width: 100px; height: 100px; border: 1px solid blue; background: coral&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
 						<aside class="tsd-sources">
 							<ul>
 								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L74">packages/contracts/src/fixtures.ts:74</a></li>
@@ -545,57 +533,18 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
