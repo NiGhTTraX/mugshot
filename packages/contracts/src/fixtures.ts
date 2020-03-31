@@ -76,5 +76,5 @@ export const fixtures = {
     This is some simple HTML
     <div style="width: 100px; height: 100px; border: 1px solid blue; background: coral"></div>
     </body>
-    </html>`
+    </html>`,
 };

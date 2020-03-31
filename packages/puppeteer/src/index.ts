@@ -1,7 +1,7 @@
 import {
   Webdriver,
   ElementNotFoundError,
-  ElementNotVisibleError
+  ElementNotVisibleError,
 } from 'mugshot';
 import { Page } from 'puppeteer';
 
@@ -22,7 +22,7 @@ export default class PuppeteerAdapter implements Webdriver {
     }
 
     const rects = await Promise.all(
-      elements.map(async element => {
+      elements.map(async (element) => {
         const rect = await element.boundingBox();
 
         if (!rect) {
@@ -39,7 +39,7 @@ export default class PuppeteerAdapter implements Webdriver {
   setViewportSize = (width: number, height: number) =>
     this.page.setViewport({
       width,
-      height
+      height,
     });
 
   takeScreenshot = () => this.page.screenshot();

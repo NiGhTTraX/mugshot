@@ -1,7 +1,7 @@
 import {
   Webdriver,
   ElementNotFoundError,
-  ElementNotVisibleError
+  ElementNotVisibleError,
 } from 'mugshot';
 import 'webdriverio';
 
@@ -18,7 +18,7 @@ function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
   }
 
   return Array.from(elements).map(
-    element => element.getBoundingClientRect() as DOMRect
+    (element) => element.getBoundingClientRect() as DOMRect
   );
 }
 
@@ -26,7 +26,7 @@ function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
 function getClientChromeSize() {
   return {
     width: window.outerWidth - window.innerWidth,
-    height: window.outerHeight - window.innerHeight
+    height: window.outerHeight - window.innerHeight,
   };
 }
 
@@ -54,7 +54,7 @@ export default class WebdriverIOAdapter implements Webdriver {
     }
 
     if (Array.isArray(rects)) {
-      return rects.map(rect => {
+      return rects.map((rect) => {
         if (
           rect.x === 0 &&
           rect.y === 0 &&
@@ -68,7 +68,7 @@ export default class WebdriverIOAdapter implements Webdriver {
           x: rect.x,
           y: rect.y,
           width: rect.width,
-          height: rect.height
+          height: rect.height,
         };
       });
     }
@@ -86,7 +86,7 @@ export default class WebdriverIOAdapter implements Webdriver {
       x: rects.x,
       y: rects.y,
       width: rects.width,
-      height: rects.height
+      height: rects.height,
     };
   };
 
@@ -95,7 +95,7 @@ export default class WebdriverIOAdapter implements Webdriver {
       // @ts-ignore because the return type is not properly inferred
       width: chromeWidth,
       // @ts-ignore
-      height: chromeHeight
+      height: chromeHeight,
     } = await this.client.execute(getClientChromeSize);
 
     const actualWidth = width + chromeWidth;

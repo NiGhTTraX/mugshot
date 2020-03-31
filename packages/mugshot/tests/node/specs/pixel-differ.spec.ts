@@ -3,7 +3,7 @@ import { describe, it } from 'tdd-buffet/suite/node';
 import {
   createTestBuffer,
   expectIdenticalBuffers,
-  lightenBuffer
+  lightenBuffer,
 } from '../../../../../tests/node/suite';
 import PixelDiffer from '../../../src/lib/pixel-differ';
 
@@ -152,7 +152,7 @@ describe('PixelDiffer', () => {
   describe('config', () => {
     it('should apply custom diff color', async () => {
       const result = await new PixelDiffer({
-        diffColor: { r: 0, g: 0, b: 255 }
+        diffColor: { r: 0, g: 0, b: 255 },
       }).compare(
         await createTestBuffer(['RRR', 'RRR']),
         await createTestBuffer(['GGG', 'GGG'])

@@ -6,7 +6,7 @@ import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import {
   createResultsDirWithBaseline,
   expectIdenticalScreenshots,
-  loadFixture
+  loadFixture,
 } from '../../../../../tests/gui/suite';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
@@ -20,7 +20,7 @@ describe('Mugshot', async () => {
       resultsPath = await createResultsDirWithBaseline('simple');
     });
 
-    it('should create diff', async browser => {
+    it('should create diff', async (browser) => {
       await loadFixture(browser, 'simple2');
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
@@ -29,7 +29,7 @@ describe('Mugshot', async () => {
         new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath),
         {
-          createMissingBaselines: true
+          createMissingBaselines: true,
         }
       );
 

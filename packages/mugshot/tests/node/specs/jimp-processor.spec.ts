@@ -3,7 +3,7 @@ import { expect } from 'tdd-buffet/expect/jest';
 import { describe, it } from 'tdd-buffet/suite/node';
 import {
   createTestBuffer,
-  expectIdenticalBuffers
+  expectIdenticalBuffers,
 } from '../../../../../tests/node/suite';
 import { OutOfBoundsError } from '../../../src/interfaces/png-processor';
 import JimpProcessor from '../../../src/lib/jimp-processor';
@@ -134,7 +134,7 @@ describe('JimpProcessor', () => {
     ['right', 0, 0, 1, 4],
     ['bottom', 0, 0, 4, 1],
     ['left', -1, 0, 1, 1],
-    ['top', 0, -1, 1, 1]
+    ['top', 0, -1, 1, 1],
   ] as const;
 
   for (const [edge, x, y, w, h] of outOfBoundsCoordinates) {

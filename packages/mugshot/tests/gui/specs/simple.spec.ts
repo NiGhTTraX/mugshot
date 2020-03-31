@@ -3,7 +3,7 @@ import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import {
   createResultsDirWithBaseline,
-  loadFixture
+  loadFixture,
 } from '../../../../../tests/gui/suite';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
@@ -16,7 +16,7 @@ describe('Mugshot', () => {
     resultsPath = await createResultsDirWithBaseline('simple');
   });
 
-  it('should pass when identical', async browser => {
+  it('should pass when identical', async (browser) => {
     await loadFixture(browser, 'simple');
 
     const mugshot = new Mugshot(
@@ -29,7 +29,7 @@ describe('Mugshot', () => {
     expect(result.matches).to.be.true;
   });
 
-  it('should fail when different', async browser => {
+  it('should fail when different', async (browser) => {
     await loadFixture(browser, 'simple2');
 
     const mugshot = new Mugshot(

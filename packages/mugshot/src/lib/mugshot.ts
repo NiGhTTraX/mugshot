@@ -120,7 +120,7 @@ export default class Mugshot {
     {
       pngDiffer = new PixelDiffer(),
       createMissingBaselines = !isCI,
-      updateBaselines = false
+      updateBaselines = false,
     }: MugshotOptions = {}
   ) {
     this.pngDiffer = pngDiffer;
@@ -217,7 +217,7 @@ export default class Mugshot {
     return {
       matches: true,
       expected,
-      expectedName: name
+      expectedName: name,
     };
   }
 
@@ -234,7 +234,7 @@ export default class Mugshot {
     return {
       matches: true,
       expected,
-      expectedName: name
+      expectedName: name,
     };
   }
 
@@ -254,7 +254,7 @@ export default class Mugshot {
       diff,
       expectedName: name,
       diffName: `${name}.diff`,
-      actualName: `${name}.actual`
+      actualName: `${name}.actual`,
     };
   }
 

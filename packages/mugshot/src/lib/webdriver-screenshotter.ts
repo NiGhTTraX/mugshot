@@ -2,7 +2,7 @@ import Webdriver from '../interfaces/webdriver';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, {
   ScreenshotOptions,
-  TooManyElementsError
+  TooManyElementsError,
 } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
 import { MugshotSelector } from './mugshot';
@@ -48,7 +48,7 @@ export default class WebdriverScreenshotter implements Screenshotter {
     private readonly client: Webdriver,
     {
       pngProcessor = new JimpProcessor(),
-      disableAnimations = false
+      disableAnimations = false,
     }: WebdriverScreenshotterOptions = {}
   ) {
     this.pngProcessor = pngProcessor;

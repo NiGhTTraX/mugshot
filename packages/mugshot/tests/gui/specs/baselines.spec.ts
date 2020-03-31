@@ -5,7 +5,7 @@ import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,
-  loadFixture
+  loadFixture,
 } from '../../../../../tests/gui/suite';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
@@ -19,7 +19,7 @@ describe('Mugshot', async () => {
       resultsPath = await fs.mkdtemp(`/tmp/mugshot-${process.env.BROWSER}`);
     });
 
-    it('should write first baseline', async browser => {
+    it('should write first baseline', async (browser) => {
       await loadFixture(browser, 'simple');
 
       const baselinePath = path.join(resultsPath, 'new.png');
@@ -28,7 +28,7 @@ describe('Mugshot', async () => {
         new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath),
         {
-          createMissingBaselines: true
+          createMissingBaselines: true,
         }
       );
 
@@ -44,14 +44,14 @@ describe('Mugshot', async () => {
       );
     });
 
-    it('should create parent folders when writing baseline', async browser => {
+    it('should create parent folders when writing baseline', async (browser) => {
       await loadFixture(browser, 'simple');
 
       const mugshot = new Mugshot(
         new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
         new FsStorage(resultsPath),
         {
-          createMissingBaselines: true
+          createMissingBaselines: true,
         }
       );
 
