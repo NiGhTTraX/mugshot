@@ -32,4 +32,5 @@ it('GitHub project page should look the same', async () => {
   const result = await mugshot.check('project page');
   
   expect(result.matches).toBeTruthy();
+});
 ```
