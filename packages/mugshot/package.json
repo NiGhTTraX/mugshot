@@ -38,7 +38,7 @@
     "fs-extra": "~9.0.0",
     "is-ci": "~2.0.0",
     "jimp": "~0.10.0",
-    "pixelmatch": "~5.1.0"
+    "pixelmatch": "~5.2.0"
   },
   "devDependencies": {
     "@types/pixelmatch": "~5.1.0",
