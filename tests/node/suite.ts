@@ -16,11 +16,11 @@ export async function expectIdenticalBuffers(actual: Buffer, expected: Buffer) {
   expect(sWidth, 'Images have different widths').to.equal(bWidth);
   expect(bHeight, 'Images have different heights').to.equal(bHeight);
 
-  for (let x = 0; x < sWidth; x++) {
-    for (let y = 0; y < sHeight; y++) {
+  for (let y = 0; y < sHeight; y++) {
+    for (let x = 0; x < sWidth; x++) {
       expect(
         Jimp.intToRGBA(screenshotJimp.getPixelColor(x, y)),
-        `Pixel at ${x}, ${y} has a different color`
+        `Pixel at row#${y}, col#${x} has a different color`
       ).to.deep.equal(Jimp.intToRGBA(baselineJimp.getPixelColor(x, y)));
     }
   }
