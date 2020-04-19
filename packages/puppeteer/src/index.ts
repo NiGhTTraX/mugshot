@@ -7,7 +7,7 @@ import { Page } from 'puppeteer';
 
 /**
  * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
- * to be used with [[WebdriverScreenshotter].
+ * to be used with [[WebdriverScreenshotter]].
  *
  * @see https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md
  */
