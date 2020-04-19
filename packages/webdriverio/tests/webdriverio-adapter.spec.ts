@@ -3,7 +3,7 @@ import { describe, it } from 'tdd-buffet/suite/gui';
 import {
   expectIdenticalScreenshots,
   loadFixture,
-} from '../../../tests/gui/suite';
+} from '../../../tests/gui/helpers';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {

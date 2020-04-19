@@ -4,7 +4,7 @@ import {
   createTestBuffer,
   expectIdenticalBuffers,
   lightenBuffer,
-} from '../../../../../tests/node/suite';
+} from '../../../../../tests/node/helpers';
 import PixelDiffer from '../../../src/lib/pixel-differ';
 
 describe('PixelDiffer', () => {

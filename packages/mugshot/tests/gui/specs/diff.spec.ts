@@ -7,7 +7,7 @@ import {
   createResultsDirWithBaseline,
   expectIdenticalScreenshots,
   loadFixture,
-} from '../../../../../tests/gui/suite';
+} from '../../../../../tests/gui/helpers';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';

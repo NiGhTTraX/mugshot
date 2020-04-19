@@ -7,7 +7,7 @@ import {
   redPixelBuffer,
   whitePixelBuffer,
 } from '../../../../../../tests/node/fixtures';
-import { expectIdenticalBuffers } from '../../../../../../tests/node/suite';
+import { expectIdenticalBuffers } from '../../../../../../tests/node/helpers';
 import PNGProcessor from '../../../../src/interfaces/png-processor';
 import { TooManyElementsError } from '../../../../src/interfaces/screenshotter';
 import Webdriver from '../../../../src/interfaces/webdriver';
