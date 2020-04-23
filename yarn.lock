@@ -1845,10 +1845,10 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/pixelmatch@~5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@types/pixelmatch/-/pixelmatch-5.1.0.tgz#580b356fde4499fb2a9293da886edf5d627a1a4b"
-  integrity sha512-9duySxw+imsKMBnsTwve8gbWhwO0OyF3BqTwia2EyCOSAOvFYm8IB9cLanSHggfVu8pgvqvsO4+FG+TwVVK08w==
+"@types/pixelmatch@~5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@types/pixelmatch/-/pixelmatch-5.2.0.tgz#dd98096e53bae9f2d71ed270d6250b674a43f465"
+  integrity sha512-+wPemBFN+Yp/GbhWtoVH9mmqu4s/xRNUSXvuoAECQYS0Lb0/qZduTX9o1msBFjimQwNh0jKvao89DRiF+6SLhg==
   dependencies:
     "@types/node" "*"
 
