@@ -47,7 +47,7 @@
     "lint-staged": "~10.2.0",
     "nyc": "~15.0.0",
     "prettier": "~2.0.1",
-    "strong-mock": "~4.1.1",
+    "strong-mock": "~5.0.0",
     "tdd-buffet": "~0.16.0",
     "typedoc": "~0.17.0",
     "typescript": "~3.8.3",
