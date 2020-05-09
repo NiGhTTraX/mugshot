@@ -1,7 +1,5 @@
 module.exports = {
-  'root': true,
+  root: true,
 
-  'extends': [
-    '@nighttrax/eslint-config-ts',
-  ],
+  extends: ['@nighttrax/eslint-config-ts'],
 };
