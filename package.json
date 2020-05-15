@@ -30,7 +30,7 @@
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~6.1.0-beta.0",
     "@tdd-buffet/selenium": "~0.4.1",
-    "@types/fs-extra": "~8.1.0",
+    "@types/fs-extra": "~9.0.0",
     "@types/node": "~10.12.2",
     "codecov": "~3.6.0",
     "doctoc": "^1.4.0",
