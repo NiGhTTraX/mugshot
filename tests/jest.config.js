@@ -1,4 +1,4 @@
-const baseConfig = require('tdd-buffet/config/jest.config');
+const baseConfig = require('@tdd-buffet/jest-config');
 
 module.exports = {
   ...baseConfig,
