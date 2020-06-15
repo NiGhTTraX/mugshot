@@ -33,12 +33,12 @@
   },
   "peerDependencies": {
     "mugshot": "^2.0.0",
-    "puppeteer": "^3.0.0"
+    "puppeteer": "^4.0.0"
   },
   "devDependencies": {
     "@types/puppeteer": "^2.0.0",
     "mugshot": "^3.0.0-alpha.0",
-    "puppeteer": "^3.0.0",
+    "puppeteer": "^4.0.0",
     "typescript": "~3.9.0"
   }
 }
