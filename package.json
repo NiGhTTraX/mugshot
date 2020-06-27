@@ -43,7 +43,7 @@
     "lerna": "~3.22.0",
     "lint-staged": "~10.2.0",
     "nyc": "~15.1.0",
-    "strong-mock": "~5.0.0",
+    "strong-mock": "~6.0.0",
     "tdd-buffet": "~2.0.0",
     "typedoc": "~0.17.0",
     "typescript": "~3.9.0",
