@@ -37,7 +37,7 @@
     "@types/node": "~10.12.2",
     "fs-extra": "~9.0.0",
     "is-ci": "~2.0.0",
-    "jimp": "~0.14.0",
+    "jimp": "~0.15.0",
     "pixelmatch": "~5.2.0"
   },
   "devDependencies": {
