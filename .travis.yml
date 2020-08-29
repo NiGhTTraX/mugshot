@@ -4,6 +4,7 @@ node_js:
 sudo: required
 services:
 - docker
+dist: focal
 
 env:
   - DOCKER_COMPOSE_VERSION=1.18.0
