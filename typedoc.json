@@ -1,6 +1,6 @@
 {
   "out": "./docs",
-  "src": ["./packages"],
+  "inputFiles": ["./packages"],
   "mode": "file",
   "name": "Mugshot",
   "readme": "./DOCS.md",
