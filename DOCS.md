@@ -52,6 +52,7 @@ Package | Version
 --------|--------
 [@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
 [@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
+[@mugshot/playwright](./packages/playwright) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
 
 <!-- END OF COMMON CONTENT -->
 
