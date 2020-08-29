@@ -1,6 +1,7 @@
 <!-- DUPLICATED in DOCS.md. Please keep in sync. -->
 ![logo](media/logo.png)
 
+<!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
 <h2>Framework independent visual testing library</h2>
 
@@ -13,6 +14,7 @@ Mugshot is a node library for doing visual regression testing. The way screensho
 
 <!-- END OF COMMON CONTENT -->
 
+<!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
 <a href="http://nighttrax.github.io/mugshot">View API docs</a>
 </div>

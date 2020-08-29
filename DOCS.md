@@ -1,6 +1,7 @@
 <!-- DUPLICATED in README.md. Please keep in sync. -->
 ![logo](media/logo.png)
 
+<!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
 <h2>Framework independent visual testing library</h2>
 
