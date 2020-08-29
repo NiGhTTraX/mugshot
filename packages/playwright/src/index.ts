@@ -5,6 +5,12 @@ import {
 } from 'mugshot';
 import { ElementHandle, Page } from 'playwright';
 
+/**
+ * Adapter over [Playwright](https://github.com/microsoft/playwright) to be
+ * used with [[WebdriverScreenshotter]].
+ *
+ * @see https://playwright.dev/
+ */
 export default class PlaywrightAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
 
