@@ -3,7 +3,7 @@ import {
   ElementNotVisibleError,
   Webdriver,
 } from 'mugshot';
-import { Page } from 'playwright';
+import { ElementHandle, Page } from 'playwright';
 
 export default class PlaywrightAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
@@ -29,36 +29,30 @@ export default class PlaywrightAdapter implements Webdriver {
     }
 
     if (elements.length === 1) {
-      // TODO: extract a function for this
-      const rect = await elements[0].boundingBox();
-      if (!rect) {
-        throw new ElementNotVisibleError(selector);
-      }
-      return {
-        x: rect.x,
-        y: rect.y,
-        width: rect.width,
-        height: rect.height,
-      };
+      return this.getBoundingBox(selector)(elements[0]);
     }
 
-    return Promise.all(
-      elements.map(async (element) => {
-        const rect = await element.boundingBox();
-        if (!rect) {
-          throw new ElementNotVisibleError(selector);
-        }
-        return {
-          x: rect.x,
-          y: rect.y,
-          width: rect.width,
-          height: rect.height,
-        };
-      })
-    );
+    return Promise.all(elements.map(this.getBoundingBox(selector)));
   };
 
   setViewportSize(width: number, height: number) {
     return this.page.setViewportSize({ width, height });
   }
+
+  private getBoundingBox = (selector: string) => async (
+    element: ElementHandle
+  ) => {
+    const rect = await element.boundingBox();
+
+    if (!rect) {
+      throw new ElementNotVisibleError(selector);
+    }
+
+    return {
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height,
+    };
+  };
 }
