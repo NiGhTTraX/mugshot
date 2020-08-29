@@ -49,13 +49,15 @@ yarn add -D mugshot
 
 Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`WebdriverScreenshotter`](./docs/classes/webdriverscreenshotter.html) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
+<!-- END OF COMMON CONTENT -->
+
+<!-- Table also present in README.md; the links here point to ./docs -->
 Package | Version
 --------|--------
-[@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
-[@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
-[@mugshot/playwright](./packages/playwright) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
+[@mugshot/webdriverio](./docs/classes/webdriverioadapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
+[@mugshot/puppeteer](./docs/classes/puppeteeradapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
+[@mugshot/playwright](./docs/classes/playwrightadapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
 
-<!-- END OF COMMON CONTENT -->
 
 If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
 
