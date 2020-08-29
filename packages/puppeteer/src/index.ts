@@ -44,6 +44,10 @@ export default class PuppeteerAdapter implements Webdriver {
 
   takeScreenshot = () => this.page.screenshot();
 
-  execute = <R>(func: (...args: any[]) => R, ...args: any[]) =>
-    this.page.evaluate(func, ...args);
+  execute = <R, A extends any[]>(func: (...args: A) => R, ...args: A) =>
+    this.page.evaluate(
+      // @ts-expect-error the puppeteer type expects at least 1 argument
+      func,
+      ...args
+    );
 }

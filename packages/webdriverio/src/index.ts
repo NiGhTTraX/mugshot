@@ -111,6 +111,7 @@ export default class WebdriverIOAdapter implements Webdriver {
     } catch (e) {}
   };
 
-  execute = <R>(func: (...args: any[]) => R, ...args: any[]) =>
+  execute = <R, A extends any[]>(func: (...args: A) => R, ...args: A) =>
+    // @ts-expect-error because webdriver doesn't use a generic for args
     this.client.execute<R>(func, ...args);
 }

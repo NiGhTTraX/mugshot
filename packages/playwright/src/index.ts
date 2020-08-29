@@ -11,9 +11,15 @@ export default class PlaywrightAdapter implements Webdriver {
   takeScreenshot = async () =>
     (await this.page.screenshot()).toString('base64');
 
-  execute<R>(func: (...args: any[]) => R, args: any): Promise<R> {
-    return this.page.evaluate(func, args);
-  }
+  execute = <R, A extends any[]>(
+    func: (...args: A) => R,
+    ...args: A
+  ): Promise<R> =>
+    this.page.evaluate(
+      // @ts-expect-error because playwright has a weird conditional type for args
+      func,
+      ...args
+    );
 
   getElementRect = async (selector: string) => {
     const elements = await this.page.$$(selector);

@@ -37,10 +37,15 @@ export default interface Webdriver {
   /**
    * Execute a function in the current page context.
    *
-   * @param func A synchronous function. Needs to be serializable.
-   * @param args Will be passed to the function. Needs to be serializable.
+   * @param func An asynchronous function returning a promise.
+   *   Needs to be serializable.
+   * @param args Will be passed to the function.
+   *   Needs to be serializable.
    */
-  execute: <R>(func: (...args: any[]) => R, ...args: any[]) => Promise<R>;
+  execute: <R, A extends any[]>(
+    func: (...args: A) => R,
+    ...args: A
+  ) => Promise<R>;
 }
 
 /**

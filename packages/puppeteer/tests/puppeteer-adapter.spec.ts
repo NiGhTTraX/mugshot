@@ -25,4 +25,6 @@ describe('PuppeteerAdapter', () => {
       )
     );
   });
+
+  // TODO: add screenshots tests
 });
