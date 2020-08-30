@@ -24,7 +24,7 @@ import Mugshot, {
 import WebdriverIOAdapter from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
-it('GitHub project page should look the same', async () => {
+test('GitHub project page should look the same', async () => {
   const browser = await remote({
     hostname: 'localhost',
     capabilities: { browserName: 'chrome' }

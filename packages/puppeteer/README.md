@@ -24,7 +24,7 @@ import Mugshot, {
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
 
-it('GitHub project page should look the same', async () => {
+test('GitHub project page should look the same', async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 

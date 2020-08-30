@@ -24,7 +24,7 @@ import Mugshot, {
 import PlaywrightAdapter from '@mugshot/playwright';
 import playwright from 'playwright';
 
-it('GitHub project page should look the same', async () => {
+test('GitHub project page should look the same', async () => {
   const browser = await playwright.chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
