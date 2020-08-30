@@ -41,9 +41,11 @@ export default class PlaywrightAdapter implements Webdriver {
     return Promise.all(elements.map(this.getBoundingBox(selector)));
   };
 
-  setViewportSize(width: number, height: number) {
-    return this.page.setViewportSize({ width, height });
-  }
+  setViewportSize = (width: number, height: number) =>
+    this.page.setViewportSize({
+      width,
+      height,
+    });
 
   private getBoundingBox = (selector: string) => async (
     element: ElementHandle
