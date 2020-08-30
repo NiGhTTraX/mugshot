@@ -4,5 +4,12 @@
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "createRelease": "github",
+      "commitHooks": false
+    }
+  }
 }
