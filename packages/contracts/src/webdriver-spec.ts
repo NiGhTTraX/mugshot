@@ -41,7 +41,7 @@ function createFixture(html: string) {
   document.body.innerHTML = html;
 }
 
-async function loadFixture(
+export async function loadFixture(
   client: TestClient,
   adapter: Webdriver,
   name: keyof typeof fixtures
