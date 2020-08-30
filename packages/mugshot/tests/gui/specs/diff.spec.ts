@@ -1,18 +1,30 @@
-import WebdriverIOAdapter from '@mugshot/webdriverio';
+import PuppeteerAdapter from '@mugshot/puppeteer';
 import fs from 'fs-extra';
 import path from 'path';
+import puppeteer from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
-import { beforeEach, describe, it } from 'tdd-buffet/suite/gui';
+import { beforeEach, describe, it, afterEach } from 'tdd-buffet/suite/node';
+import FsStorage from '../../../src/lib/fs-storage';
+import Mugshot from '../../../src/lib/mugshot';
+import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import {
   createResultsDirWithBaseline,
   expectIdenticalScreenshots,
   loadFixture,
-} from '../../../../../tests/gui/helpers';
-import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import FsStorage from '../../../src/lib/fs-storage';
-import Mugshot from '../../../src/lib/mugshot';
+} from '../helpers';
 
-describe('Mugshot', async () => {
+describe('Mugshot', () => {
+  let browser!: puppeteer.Browser, page!: puppeteer.Page;
+
+  beforeEach(async () => {
+    browser = await puppeteer.launch();
+    page = await browser.newPage();
+  });
+
+  afterEach(async () => {
+    await browser.close();
+  });
+
   describe('diff', () => {
     let resultsPath!: string;
 
@@ -20,13 +32,13 @@ describe('Mugshot', async () => {
       resultsPath = await createResultsDirWithBaseline('simple');
     });
 
-    it('should create diff', async (browser) => {
-      await loadFixture(browser, 'simple2');
+    it('should create diff', async () => {
+      await loadFixture(page, 'simple2');
 
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
       const mugshot = new Mugshot(
-        new WebdriverScreenshotter(new WebdriverIOAdapter(browser)),
+        new WebdriverScreenshotter(new PuppeteerAdapter(page)),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true,
