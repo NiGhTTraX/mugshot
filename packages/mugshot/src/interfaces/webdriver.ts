@@ -41,6 +41,8 @@ export default interface Webdriver {
    *   Needs to be serializable.
    * @param args Will be passed to the function.
    *   Needs to be serializable.
+   *
+   * @see https://w3c.github.io/webdriver/#execute-async-script
    */
   execute: <R, A extends any[]>(
     func: (...args: A) => R,
