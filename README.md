@@ -50,7 +50,7 @@ Mugshot is a node library for doing visual regression testing. The way screensho
 npm install --save-dev mugshot
 ```
 
-Or alternatively with yarn
+Or with yarn
 
 ```shell script
 yarn add -D mugshot
@@ -70,7 +70,7 @@ Package | Version
 
 ## Motivation
 
-Manually checking one component for unexpected visual changes is hard. Doing it across your entire UI is harder. Doing it in multiple browsers/devices is even harder. Making sure that everyone on your team does it is the hardest.
+Manually checking one component for unexpected visual changes is hard. Doing it across your entire UI is harder. Doing it in multiple browsers/devices is even harder. Making sure everyone on your team does it is the hardest.
 
 Mugshot aims to automate that process. It offers a simple API that lets you compare an existing baseline screenshot with a fresh screenshot and make sure they're identical. If they're not you'll get a diff image highlighting the differences. You can then commit it as the new baseline if the changes are expected, or fix the code and rerun the tests.
 
