@@ -6,7 +6,7 @@ import {
   blackPixelBuffer,
   redPixelBuffer,
   whitePixelBuffer,
-} from '../../../../../tests/node/fixtures';
+} from '../fixtures';
 import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
 import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
 import Screenshotter from '../../../src/interfaces/screenshotter';

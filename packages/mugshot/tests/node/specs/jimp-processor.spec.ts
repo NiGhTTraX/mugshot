@@ -1,10 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { expect } from 'tdd-buffet/expect/jest';
 import { describe, it } from 'tdd-buffet/suite/node';
-import {
-  createTestBuffer,
-  expectIdenticalBuffers,
-} from '../../../../../tests/node/helpers';
+import { createTestBuffer, expectIdenticalBuffers } from '../helpers';
 import { OutOfBoundsError } from '../../../src/interfaces/png-processor';
 import JimpProcessor from '../../../src/lib/jimp-processor';
 
