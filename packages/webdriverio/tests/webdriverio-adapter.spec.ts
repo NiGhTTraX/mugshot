@@ -1,10 +1,14 @@
-import { loadFixture, webdriverContractTests } from '@mugshot/contracts';
+import {
+  Fixture,
+  loadFixture,
+  webdriverContractTests,
+} from '@mugshot/contracts';
 import fs from 'fs-extra';
 import { PixelDiffer } from 'mugshot';
 import path from 'path';
 import { expect } from 'tdd-buffet/expect/chai';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { remote, BrowserObject } from 'webdriverio';
+import { BrowserObject, remote } from 'webdriverio';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
@@ -52,7 +56,7 @@ describe('WebdriverIOAdapter', () => {
       it('should take a full page screenshot', async () => {
         const clientAdapter = new WebdriverIOAdapter(browser);
 
-        await loadFixture(browser, clientAdapter, 'simple');
+        await loadFixture(browser, clientAdapter, Fixture.simple);
         const screenshot = Buffer.from(
           await clientAdapter.takeScreenshot(),
           'base64'
@@ -64,7 +68,7 @@ describe('WebdriverIOAdapter', () => {
       it('should take a full page screenshot with absolutely positioned elements', async () => {
         const clientAdapter = new WebdriverIOAdapter(browser);
 
-        await loadFixture(browser, clientAdapter, 'rect');
+        await loadFixture(browser, clientAdapter, Fixture.rect);
         const screenshot = Buffer.from(
           await clientAdapter.takeScreenshot(),
           'base64'

@@ -1,3 +1,4 @@
+import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
@@ -6,7 +7,7 @@ import { afterEach } from 'tdd-buffet/suite/node';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import { createResultsDirWithBaseline, loadFixture } from '../helpers';
+import { createResultsDirWithBaseline } from '../helpers';
 
 describe('Mugshot', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -28,11 +29,16 @@ describe('Mugshot', () => {
     });
 
     it('should take a screenshot of an absolutely positioned element', async () => {
-      await loadFixture(page, 'rect');
-
+      const adapter = new PuppeteerAdapter(page);
       const mugshot = new Mugshot(
-        new WebdriverScreenshotter(new PuppeteerAdapter(page)),
+        new WebdriverScreenshotter(adapter),
         new FsStorage(resultsPath)
+      );
+
+      await loadFixture(
+        { url: (url) => page.goto(url) },
+        adapter,
+        Fixture.rect
       );
 
       const result = await mugshot.check('rect', '.test');

@@ -1,8 +1,9 @@
+import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
-import { describe, it, afterEach, beforeEach } from 'tdd-buffet/suite/node';
+import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import { expectIdenticalScreenshots, loadFixture } from '../helpers';
+import { expectIdenticalScreenshots } from '../helpers';
 
 describe('WebdriverScreenshotter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -17,13 +18,15 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should disable animations', async () => {
-    await loadFixture(page, 'animations');
+    const adapter = new PuppeteerAdapter(page);
+    const screenshotter = new WebdriverScreenshotter(adapter, {
+      disableAnimations: true,
+    });
 
-    const screenshotter = new WebdriverScreenshotter(
-      new PuppeteerAdapter(page),
-      {
-        disableAnimations: true,
-      }
+    await loadFixture(
+      { url: (path) => page.goto(path) },
+      adapter,
+      Fixture.animations
     );
 
     await expectIdenticalScreenshots(

@@ -1,3 +1,4 @@
+import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import fs from 'fs-extra';
 import path from 'path';
@@ -10,7 +11,6 @@ import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
 import {
   createResultsDirWithBaseline,
   expectIdenticalScreenshots,
-  loadFixture,
 } from '../helpers';
 
 describe('Mugshot', () => {
@@ -33,16 +33,21 @@ describe('Mugshot', () => {
     });
 
     it('should create diff', async () => {
-      await loadFixture(page, 'simple2');
-
       const diffPath = path.join(resultsPath, 'simple.diff.png');
 
+      const adapter = new PuppeteerAdapter(page);
       const mugshot = new Mugshot(
-        new WebdriverScreenshotter(new PuppeteerAdapter(page)),
+        new WebdriverScreenshotter(adapter),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true,
         }
+      );
+
+      await loadFixture(
+        { url: (url) => page.goto(url) },
+        adapter,
+        Fixture.simple2
       );
 
       await mugshot.check('simple');

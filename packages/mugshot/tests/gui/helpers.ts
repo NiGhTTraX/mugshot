@@ -1,22 +1,8 @@
 /* istanbul ignore next because this will get stringified and sent to the browser */
 import fs from 'fs-extra';
 import path from 'path';
-import { Page } from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
-import { getFixture } from '../../../../tests/gui/helpers';
 import PixelDiffer from '../../src/lib/pixel-differ';
-
-function createFixture(html: string) {
-  // This should use `document.write` instead but Firefox gives an "insecure operation" error.
-  document.body.innerHTML = html;
-}
-
-export async function loadFixture(page: Page, name: string) {
-  const fixtureContent = await getFixture(name);
-  await page.goto('about:blank');
-  await page.evaluate(createFixture, fixtureContent);
-  await page.setViewport({ width: 1024, height: 768 });
-}
 
 /**
  * Use PixelDiffer to compare two screenshots. Assume that PixelDiffer passes all of its tests.

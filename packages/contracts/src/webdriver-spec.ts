@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
+import { readFileSync } from 'fs';
 import Jimp from 'jimp';
 import {
-  Webdriver,
   ElementNotFoundError,
   ElementNotVisibleError,
+  Webdriver,
 } from 'mugshot';
-import { fixtures } from './fixtures';
+import { join } from 'path';
 
 /**
  * Methods on the client that these tests need.
@@ -41,12 +42,26 @@ function createFixture(html: string) {
   document.body.innerHTML = html;
 }
 
+export enum Fixture {
+  animations = 'animations',
+  rect = 'rect',
+  rectInvisible = 'rect-invisible',
+  rectMultiple = 'rect-multiple',
+  rectScroll = 'rect-scroll',
+  rgby = 'rgby',
+  simple = 'simple',
+  simple2 = 'simple2',
+}
+
 export async function loadFixture(
   client: TestClient,
   adapter: Webdriver,
-  name: keyof typeof fixtures
+  name: Fixture
 ) {
-  const fixtureContent = fixtures[name];
+  const fixtureContent = readFileSync(
+    join(__dirname, `fixtures/${name}.html`),
+    { encoding: 'utf8' }
+  );
 
   await client.url('about:blank');
 
@@ -67,7 +82,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a viewport screenshot',
     run: async (client: TestClient, adapter: Webdriver) => {
-      await loadFixture(client, adapter, 'simple');
+      await loadFixture(client, adapter, Fixture.simple);
 
       const screenshot = await Jimp.read(
         Buffer.from(await adapter.takeScreenshot(), 'base64')
@@ -81,7 +96,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
     name:
       'should take a viewport screenshot with absolutely positioned elements',
     run: async (client: TestClient, adapter: Webdriver) => {
-      await loadFixture(client, adapter, 'rect');
+      await loadFixture(client, adapter, Fixture.rect);
 
       const screenshot = await Jimp.read(
         Buffer.from(await adapter.takeScreenshot(), 'base64')
@@ -94,7 +109,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of element',
     run: async (client: TestClient, adapter: Webdriver) => {
-      await loadFixture(client, adapter, 'rect');
+      await loadFixture(client, adapter, Fixture.rect);
 
       const rect = await adapter.getElementRect('.test');
 
@@ -111,7 +126,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of off-screen element',
     run: async (client: TestClient, adapter: Webdriver) => {
-      await loadFixture(client, adapter, 'rect-scroll');
+      await loadFixture(client, adapter, Fixture.rectScroll);
 
       const rect = await adapter.getElementRect('.test');
 
@@ -126,7 +141,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should throw if element is missing',
     run: async (client: TestClient, adapter: Webdriver) => {
-      await loadFixture(client, adapter, 'rect-scroll');
+      await loadFixture(client, adapter, Fixture.rectScroll);
 
       let caughtError!: ElementNotFoundError;
 
@@ -143,7 +158,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of all matching elements',
     run: async (client, adapter) => {
-      await loadFixture(client, adapter, 'rect-multiple');
+      await loadFixture(client, adapter, Fixture.rectMultiple);
 
       expect(await adapter.getElementRect('.multiple')).to.deep.equal([
         { x: 0, y: 0, width: 100, height: 100 },
@@ -156,7 +171,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should throw if element is not visible',
     run: async (client, adapter) => {
-      await loadFixture(client, adapter, 'rect-invisible');
+      await loadFixture(client, adapter, Fixture.rectInvisible);
 
       let caughtError!: ElementNotFoundError;
 
@@ -173,7 +188,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should throw if matching element is not visible',
     run: async (client, adapter) => {
-      await loadFixture(client, adapter, 'rect-invisible');
+      await loadFixture(client, adapter, Fixture.rectInvisible);
 
       let caughtError!: ElementNotFoundError;
 
@@ -190,7 +205,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should execute a simple function',
     run: async (client, adapter) => {
-      await loadFixture(client, adapter, 'simple');
+      await loadFixture(client, adapter, Fixture.simple);
 
       /* istanbul ignore next because this will get stringified and sent to the client */
       const func = () => 23;
@@ -201,7 +216,7 @@ export const webdriverContractTests: WebdriverContractTest[] = [
   {
     name: 'should execute a simple function with args',
     run: async (client, adapter) => {
-      await loadFixture(client, adapter, 'simple');
+      await loadFixture(client, adapter, Fixture.simple);
 
       /* istanbul ignore next because this will get stringified and sent to the client */
       const func = (x: number) => x;

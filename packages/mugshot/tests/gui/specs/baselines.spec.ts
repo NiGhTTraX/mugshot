@@ -1,3 +1,4 @@
+import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import fs from 'fs-extra';
 import path from 'path';
@@ -7,7 +8,7 @@ import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import { expectIdenticalScreenshots, loadFixture } from '../helpers';
+import { expectIdenticalScreenshots } from '../helpers';
 
 describe('Mugshot', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -29,16 +30,21 @@ describe('Mugshot', () => {
     });
 
     it('should write first baseline', async () => {
-      await loadFixture(page, 'simple');
-
       const baselinePath = path.join(resultsPath, 'new.png');
 
+      const adapter = new PuppeteerAdapter(page);
       const mugshot = new Mugshot(
-        new WebdriverScreenshotter(new PuppeteerAdapter(page)),
+        new WebdriverScreenshotter(adapter),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true,
         }
+      );
+
+      await loadFixture(
+        { url: (url) => page.goto(url) },
+        adapter,
+        Fixture.simple
       );
 
       const resultWhenMissingBaseline = await mugshot.check('new');
@@ -54,14 +60,19 @@ describe('Mugshot', () => {
     });
 
     it('should create parent folders when writing baseline', async () => {
-      await loadFixture(page, 'simple');
-
+      const adapter = new PuppeteerAdapter(page);
       const mugshot = new Mugshot(
-        new WebdriverScreenshotter(new PuppeteerAdapter(page)),
+        new WebdriverScreenshotter(adapter),
         new FsStorage(resultsPath),
         {
           createMissingBaselines: true,
         }
+      );
+
+      await loadFixture(
+        { url: (url) => page.goto(url) },
+        adapter,
+        Fixture.simple
       );
 
       await mugshot.check('foo/bar/new');
