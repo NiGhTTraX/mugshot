@@ -4,6 +4,16 @@
 
 ----
 
+## Install
+
+```
+npm install @mugshot/playwright
+```
+or
+```
+yarn add @mugshot/playwright
+```
+
 ## Usage
 
 ```typescript

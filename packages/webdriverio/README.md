@@ -4,6 +4,16 @@
 
 ----
 
+## Install
+
+```
+npm install @mugshot/webdriverio
+```
+or
+```
+yarn add @mugshot/webdriverio
+```
+
 ## Usage
 
 ```typescript

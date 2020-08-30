@@ -2,6 +2,16 @@
 
 ----
 
+## Install
+
+```
+npm install @mugshot/contracts
+```
+or
+```
+yarn add @mugshot/contracts
+```
+
 ## Usage
 
 ```typescript

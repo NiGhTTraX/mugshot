@@ -4,6 +4,16 @@
 
 ----
 
+## Install
+
+```
+npm install @mugshot/puppeteer
+```
+or
+```
+yarn add @mugshot/puppeteer
+```
+
 ## Usage
 
 ```typescript
