@@ -23,9 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "./tests/run.sh",
-    "test:node": "tdd-buffet test --config ../../tests/jest.config.js --coverage node",
-    "test:gui": "tdd-buffet test --config ../../tests/jest.config.js --coverage --runInBand gui",
+    "test": "tdd-buffet test --config ../../tests/jest.config.js --coverage",
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
