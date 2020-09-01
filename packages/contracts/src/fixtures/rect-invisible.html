@@ -2,13 +2,27 @@
 <head>
     <title>Invisible rect</title>
     <style>
-        .invisible {
+        div {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .visible {
+            width: 100px;
+            height: 100px;
+        }
+        .none {
             display: none;
+        }
+        .zero {
+            width: 0;
+            height: 0;
         }
     </style>
 </head>
 <body>
-<div id="visible">visible</div>
-<div id="invisible" class="invisible">invisible</div>
+<div id="visible" class="visible">visible</div>
+<div id="invisible1" class="invisible none">invisible</div>
+<div id="invisible2" class="invisible zero">invisible</div>
 </body>
 </html>

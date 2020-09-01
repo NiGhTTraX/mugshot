@@ -2,11 +2,7 @@
 import { expect } from 'chai';
 import { readFileSync } from 'fs';
 import Jimp from 'jimp';
-import {
-  ElementNotFoundError,
-  ElementNotVisibleError,
-  Webdriver,
-} from 'mugshot';
+import { Webdriver } from 'mugshot';
 import { join } from 'path';
 
 /**
@@ -139,20 +135,11 @@ export const webdriverContractTests: WebdriverContractTest[] = [
     },
   },
   {
-    name: 'should throw if element is missing',
+    name: 'should return null if element is missing',
     run: async (client: TestClient, adapter: Webdriver) => {
       await loadFixture(client, adapter, Fixture.rectScroll);
 
-      let caughtError!: ElementNotFoundError;
-
-      try {
-        expect(await adapter.getElementRect('.missing')).to.be.undefined;
-      } catch (e) {
-        caughtError = e;
-      }
-
-      expect(caughtError).to.be.instanceOf(ElementNotFoundError);
-      expect(caughtError.message).to.contain('.missing');
+      expect(await adapter.getElementRect('.missing')).to.be.null;
     },
   },
   {
@@ -169,37 +156,64 @@ export const webdriverContractTests: WebdriverContractTest[] = [
     },
   },
   {
-    name: 'should throw if element is not visible',
+    name: 'should return 0,0,0,0 if the element is not visible',
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rectInvisible);
 
-      let caughtError!: ElementNotFoundError;
-
-      try {
-        expect(await adapter.getElementRect('#invisible')).to.be.undefined;
-      } catch (e) {
-        caughtError = e;
-      }
-
-      expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
-      expect(caughtError.message).to.contain('#invisible');
+      expect(await adapter.getElementRect('#invisible1')).to.deep.equal({
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      });
     },
   },
   {
-    name: 'should throw if matching element is not visible',
+    name: 'should return 0,0,0,0 for every invisible element',
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rectInvisible);
 
-      let caughtError!: ElementNotFoundError;
+      expect(await adapter.getElementRect('.invisible')).to.deep.equal([
+        {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+        },
+        {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+        },
+      ]);
+    },
+  },
+  {
+    name: 'should return visible and invisible elements',
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, Fixture.rectInvisible);
 
-      try {
-        expect(await adapter.getElementRect('div')).to.be.undefined;
-      } catch (e) {
-        caughtError = e;
-      }
-
-      expect(caughtError).to.be.instanceOf(ElementNotVisibleError);
-      expect(caughtError.message).to.contain('div');
+      expect(await adapter.getElementRect('div')).to.deep.equal([
+        {
+          x: 0,
+          y: 0,
+          width: 100,
+          height: 100,
+        },
+        {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+        },
+        {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+        },
+      ]);
     },
   },
   {
