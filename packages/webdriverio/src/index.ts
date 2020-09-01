@@ -1,8 +1,4 @@
-import {
-  Webdriver,
-  ElementNotFoundError,
-  ElementNotVisibleError,
-} from 'mugshot';
+import { Webdriver } from 'mugshot';
 import 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the client */
@@ -50,36 +46,16 @@ export default class WebdriverIOAdapter implements Webdriver {
       | null;
 
     if (!rects) {
-      throw new ElementNotFoundError(selector);
+      return null;
     }
 
     if (Array.isArray(rects)) {
-      return rects.map((rect) => {
-        if (
-          rect.x === 0 &&
-          rect.y === 0 &&
-          rect.width === 0 &&
-          rect.height === 0
-        ) {
-          throw new ElementNotVisibleError(selector);
-        }
-
-        return {
-          x: rect.x,
-          y: rect.y,
-          width: rect.width,
-          height: rect.height,
-        };
-      });
-    }
-
-    if (
-      rects.x === 0 &&
-      rects.y === 0 &&
-      rects.width === 0 &&
-      rects.height === 0
-    ) {
-      throw new ElementNotVisibleError(selector);
+      return rects.map((rect) => ({
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height,
+      }));
     }
 
     return {
