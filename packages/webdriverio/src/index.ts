@@ -68,9 +68,7 @@ export default class WebdriverIOAdapter implements Webdriver {
 
   setViewportSize = async (width: number, height: number) => {
     const {
-      // @ts-ignore because the return type is not properly inferred
       width: chromeWidth,
-      // @ts-ignore
       height: chromeHeight,
     } = await this.client.execute(getClientChromeSize);
 
