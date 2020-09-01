@@ -17,14 +17,17 @@ export default interface Webdriver {
    *
    * @see https://w3c.github.io/webdriver/#get-element-rect
    *
-   * Should throw [[ElementNotFoundError]] if the element is not found.
+   * If the selector matches more than 1 element then an array
+   * of [[ElementRect]] should be returned, otherwise a single [[ElementRect]]
+   * should be returned.
    *
-   * Should throw [[ElementNotVisibleError] if the element is not visible.
+   * Should return `null` if the selector doesn't match any element.
+   *
+   * Should return `0,0,0,0` for every element that is not visible.
    */
-  // TODO: throw here instead of making the implementations throw
   getElementRect: (
     selector: ElementSelector
-  ) => Promise<ElementRect | ElementRect[]>;
+  ) => Promise<ElementRect | ElementRect[] | null>;
 
   /**
    * Set the size of the __viewport__ (meaning window minus chrome).
@@ -52,10 +55,8 @@ export default interface Webdriver {
 }
 
 /**
- * Thrown when no element matching the selector passed to [[Mugshot.check]]
- * is found.
+ * Thrown when the given selector doesn't match anything.
  */
-/* istanbul ignore next because the adapter packages are supposed to throw it */
 export class ElementNotFoundError extends Error {
   constructor(selector: string) {
     super(`Couldn't find element ${selector}`);
@@ -63,10 +64,8 @@ export class ElementNotFoundError extends Error {
 }
 
 /**
- * Thrown when the element matching the selector passed to [[Mugshot.check]]
- * is not visible.
+ * Thrown when the given selector matches an element that is not visible.
  */
-/* istanbul ignore next because the adapter packages are supposed to throw it */
 export class ElementNotVisibleError extends Error {
   constructor(selector: string) {
     super(`Element ${selector} is not visible`);

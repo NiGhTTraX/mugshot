@@ -10,7 +10,10 @@ import {
 import { expectIdenticalBuffers } from '../../helpers';
 import PNGProcessor from '../../../../src/interfaces/png-processor';
 import { TooManyElementsError } from '../../../../src/interfaces/screenshotter';
-import Webdriver from '../../../../src/interfaces/webdriver';
+import Webdriver, {
+  ElementNotFoundError,
+  ElementNotVisibleError,
+} from '../../../../src/interfaces/webdriver';
 import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
@@ -91,8 +94,57 @@ describe('WebdriverScreenshotter', () => {
       pngProcessor: instance(pngProcessor),
     });
 
-    expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
+    await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
       TooManyElementsError
+    );
+  });
+
+  it('should throw if the element is not found', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.test')).thenResolve(null);
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
+      ElementNotFoundError
+    );
+  });
+
+  it('should throw if the element has 0 width', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.test')).thenResolve({
+      width: 0,
+      height: 100,
+      x: 0,
+      y: 0,
+    });
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
+      ElementNotVisibleError
+    );
+  });
+
+  it('should throw if the element has 0 height', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.test')).thenResolve({
+      height: 0,
+      width: 100,
+      x: 0,
+      y: 0,
+    });
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
+      ElementNotVisibleError
     );
   });
 
@@ -118,6 +170,89 @@ describe('WebdriverScreenshotter', () => {
     });
 
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
+  });
+
+  it('should throw if the ignore selector does not return anything', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.ignore')).thenResolve(null);
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(
+      screenshotter.takeScreenshot({
+        ignore: '.ignore',
+      })
+    ).rejects.toBeInstanceOf(ElementNotFoundError);
+  });
+
+  it('should throw if the ignore selector returns 0 width', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.ignore')).thenResolve({
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 100,
+    });
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(
+      screenshotter.takeScreenshot({
+        ignore: '.ignore',
+      })
+    ).rejects.toBeInstanceOf(ElementNotVisibleError);
+  });
+
+  it('should throw if the ignore selector returns 0 height', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.ignore')).thenResolve({
+      x: 0,
+      y: 0,
+      width: 100,
+      height: 0,
+    });
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(
+      screenshotter.takeScreenshot({
+        ignore: '.ignore',
+      })
+    ).rejects.toBeInstanceOf(ElementNotVisibleError);
+  });
+
+  it('should throw if the ignore selector returns multiple elements with one 0 height', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.ignore')).thenResolve([
+      {
+        x: 0,
+        y: 0,
+        width: 100,
+        height: 100,
+      },
+      {
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 0,
+      },
+    ]);
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    await expect(
+      screenshotter.takeScreenshot({
+        ignore: '.ignore',
+      })
+    ).rejects.toBeInstanceOf(ElementNotVisibleError);
   });
 
   it('should take a screenshot of the viewport and ignore an area', async () => {

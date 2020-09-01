@@ -1,11 +1,14 @@
-import Webdriver from '../interfaces/webdriver';
+import Webdriver, {
+  ElementNotFoundError,
+  ElementNotVisibleError,
+} from '../interfaces/webdriver';
 import PNGProcessor from '../interfaces/png-processor';
 import Screenshotter, {
   ScreenshotOptions,
   TooManyElementsError,
 } from '../interfaces/screenshotter';
 import JimpProcessor from './jimp-processor';
-import { MugshotSelector } from './mugshot';
+import { ElementRect, MugshotSelector } from './mugshot';
 
 export interface WebdriverScreenshotterOptions {
   pngProcessor?: PNGProcessor;
@@ -60,7 +63,7 @@ export default class WebdriverScreenshotter implements Screenshotter {
    * then cropping the element out.
    *
    * The element's bounding rectangle will be used to crop it out of the
-   * viewport screenshot. If the element is not fully visible in the viewport
+   * viewport screenshot.
    */
   async takeScreenshot(
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
@@ -96,13 +99,24 @@ export default class WebdriverScreenshotter implements Screenshotter {
   }
 
   private async crop(selector: MugshotSelector, screenshot: Buffer) {
-    const rect =
-      typeof selector === 'string'
-        ? await this.client.getElementRect(selector)
-        : selector;
+    let rect: ElementRect | ElementRect[] | null;
 
-    if (Array.isArray(rect)) {
-      throw new TooManyElementsError(selector);
+    if (typeof selector !== 'string') {
+      rect = selector;
+    } else {
+      rect = await this.client.getElementRect(selector);
+
+      if (!rect) {
+        throw new ElementNotFoundError(selector);
+      }
+
+      if (Array.isArray(rect)) {
+        throw new TooManyElementsError(selector);
+      }
+
+      if (rect.width === 0 || rect.height === 0) {
+        throw new ElementNotVisibleError(selector);
+      }
     }
 
     return this.pngProcessor.crop(
@@ -115,10 +129,27 @@ export default class WebdriverScreenshotter implements Screenshotter {
   }
 
   private async ignore(selector: MugshotSelector, screenshot: Buffer) {
-    const rects =
-      typeof selector === 'string'
-        ? await this.client.getElementRect(selector)
-        : selector;
+    let rects: ElementRect | ElementRect[] | null;
+
+    if (typeof selector === 'string') {
+      rects = await this.client.getElementRect(selector);
+
+      if (!rects) {
+        throw new ElementNotFoundError(selector);
+      }
+
+      if (Array.isArray(rects)) {
+        rects.forEach((rect) => {
+          if (rect.width === 0 || rect.height === 0) {
+            throw new ElementNotVisibleError(selector);
+          }
+        });
+      } else if (rects.width === 0 || rects.height === 0) {
+        throw new ElementNotVisibleError(selector);
+      }
+    } else {
+      rects = selector;
+    }
 
     if (Array.isArray(rects)) {
       let result: Buffer = screenshot;
