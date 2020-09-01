@@ -36,6 +36,7 @@ describe('WebdriverIOAdapter', () => {
         const clientAdapter = new WebdriverIOAdapter(browser);
 
         await loadFixture(browser, clientAdapter, Fixture.simple);
+
         const screenshot = Buffer.from(
           await clientAdapter.takeScreenshot(),
           'base64'
@@ -51,6 +52,7 @@ describe('WebdriverIOAdapter', () => {
         const clientAdapter = new WebdriverIOAdapter(browser);
 
         await loadFixture(browser, clientAdapter, Fixture.rect);
+
         const screenshot = Buffer.from(
           await clientAdapter.takeScreenshot(),
           'base64'

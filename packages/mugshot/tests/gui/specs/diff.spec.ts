@@ -54,8 +54,7 @@ describe('Mugshot', () => {
 
       await expectIdenticalScreenshots(
         diffPath,
-        path.join(__dirname, '../screenshots/simple.diff.png'),
-        `The written diff ${diffPath} doesn't match expected one`
+        path.join(__dirname, '../screenshots/simple.diff.png')
       );
     });
   });

@@ -54,8 +54,7 @@ describe('Mugshot', () => {
 
       await expectIdenticalScreenshots(
         path.join(resultsPath, 'new.png'),
-        path.join(__dirname, '../screenshots/simple.png'),
-        `The written baseline ${baselinePath} doesn't match expected one`
+        path.join(__dirname, '../screenshots/simple.png')
       );
     });
 
