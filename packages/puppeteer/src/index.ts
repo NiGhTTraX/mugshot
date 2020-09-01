@@ -1,8 +1,4 @@
-import {
-  Webdriver,
-  ElementNotFoundError,
-  ElementNotVisibleError,
-} from 'mugshot';
+import { Webdriver } from 'mugshot';
 import { Page } from 'puppeteer';
 
 /**
@@ -18,7 +14,7 @@ export default class PuppeteerAdapter implements Webdriver {
     const elements = await this.page.$$(selector);
 
     if (!elements.length) {
-      throw new ElementNotFoundError(selector);
+      return null;
     }
 
     const rects = await Promise.all(
@@ -26,7 +22,7 @@ export default class PuppeteerAdapter implements Webdriver {
         const rect = await element.boundingBox();
 
         if (!rect) {
-          throw new ElementNotVisibleError(selector);
+          return { x: 0, y: 0, width: 0, height: 0 };
         }
 
         return rect;
