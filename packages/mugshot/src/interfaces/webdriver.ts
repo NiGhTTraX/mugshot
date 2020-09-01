@@ -21,6 +21,7 @@ export default interface Webdriver {
    *
    * Should throw [[ElementNotVisibleError] if the element is not visible.
    */
+  // TODO: throw here instead of making the implementations throw
   getElementRect: (
     selector: ElementSelector
   ) => Promise<ElementRect | ElementRect[]>;
