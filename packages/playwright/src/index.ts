@@ -1,8 +1,4 @@
-import {
-  ElementNotFoundError,
-  ElementNotVisibleError,
-  Webdriver,
-} from 'mugshot';
+import { Webdriver } from 'mugshot';
 import { ElementHandle, Page } from 'playwright';
 
 /**
@@ -31,14 +27,14 @@ export default class PlaywrightAdapter implements Webdriver {
     const elements = await this.page.$$(selector);
 
     if (!elements.length) {
-      throw new ElementNotFoundError(selector);
+      return null;
     }
 
     if (elements.length === 1) {
-      return this.getBoundingBox(selector)(elements[0]);
+      return this.getBoundingBox()(elements[0]);
     }
 
-    return Promise.all(elements.map(this.getBoundingBox(selector)));
+    return Promise.all(elements.map(this.getBoundingBox()));
   };
 
   setViewportSize = (width: number, height: number) =>
@@ -47,13 +43,11 @@ export default class PlaywrightAdapter implements Webdriver {
       height,
     });
 
-  private getBoundingBox = (selector: string) => async (
-    element: ElementHandle
-  ) => {
+  private getBoundingBox = () => async (element: ElementHandle) => {
     const rect = await element.boundingBox();
 
     if (!rect) {
-      throw new ElementNotVisibleError(selector);
+      return { x: 0, y: 0, width: 0, height: 0 };
     }
 
     return {
