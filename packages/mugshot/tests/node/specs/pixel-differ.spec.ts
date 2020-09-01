@@ -24,7 +24,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['RGB', 'RGB', 'RGB'])
       );
 
-      // @ts-ignore
+      // @ts-expect-error because we don't discriminate the result
       expect(result.diff).to.be.undefined;
     });
 
@@ -44,7 +44,7 @@ describe('PixelDiffer', () => {
       );
 
       await expectIdenticalBuffers(
-        // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
@@ -70,7 +70,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['  RR', '  RR', 'RRRR', 'RRRR'])
       );
@@ -84,7 +84,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['  R', '  R', '  R'])
       );
@@ -98,7 +98,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['   ', '   ', 'RRR'])
       );
@@ -114,7 +114,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
@@ -128,7 +128,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
@@ -142,7 +142,7 @@ describe('PixelDiffer', () => {
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
-        // @ts-ignore
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
@@ -159,7 +159,7 @@ describe('PixelDiffer', () => {
       );
 
       await expectIdenticalBuffers(
-        // @ts-ignore because `.diff` is only present if we narrow by `.matches === false`
+        // @ts-expect-error because we don't discriminate the result
         result.diff,
         await createTestBuffer(['BBB', 'BBB'])
       );
