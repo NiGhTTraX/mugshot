@@ -5,13 +5,11 @@ import path from 'path';
 import puppeteer from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it, afterEach } from 'tdd-buffet/suite/node';
+import { expectIdenticalScreenshots } from '../../../../../tests/helpers';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import {
-  createResultsDirWithBaseline,
-  expectIdenticalScreenshots,
-} from '../helpers';
+import { createResultsDirWithBaseline } from '../helpers';
 
 describe('Mugshot', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -56,7 +54,7 @@ describe('Mugshot', () => {
 
       await expectIdenticalScreenshots(
         diffPath,
-        'simple.diff',
+        path.join(__dirname, '../screenshots/simple.diff.png'),
         `The written diff ${diffPath} doesn't match expected one`
       );
     });

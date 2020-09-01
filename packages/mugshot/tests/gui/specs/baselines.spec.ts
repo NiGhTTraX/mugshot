@@ -5,10 +5,10 @@ import path from 'path';
 import puppeteer from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
+import { expectIdenticalScreenshots } from '../../../../../tests/helpers';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import { expectIdenticalScreenshots } from '../helpers';
 
 describe('Mugshot', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -54,7 +54,7 @@ describe('Mugshot', () => {
 
       await expectIdenticalScreenshots(
         path.join(resultsPath, 'new.png'),
-        'simple',
+        path.join(__dirname, '../screenshots/simple.png'),
         `The written baseline ${baselinePath} doesn't match expected one`
       );
     });

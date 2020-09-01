@@ -1,9 +1,10 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
+import { join } from 'path';
 import puppeteer from 'puppeteer';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
+import { expectIdenticalScreenshots } from '../../../../../tests/helpers';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
-import { expectIdenticalScreenshots } from '../helpers';
 
 describe('WebdriverScreenshotter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -31,7 +32,7 @@ describe('WebdriverScreenshotter', () => {
 
     await expectIdenticalScreenshots(
       await screenshotter.takeScreenshot('.animated'),
-      'animations'
+      join(__dirname, '../screenshots/animations.png')
     );
   });
 });

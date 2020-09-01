@@ -3,12 +3,10 @@ import {
   loadFixture,
   webdriverContractTests,
 } from '@mugshot/contracts';
-import fs from 'fs-extra';
-import { PixelDiffer } from 'mugshot';
-import path from 'path';
-import { expect } from 'tdd-buffet/expect/chai';
+import { join } from 'path';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { BrowserObject, remote } from 'webdriverio';
+import { expectIdenticalScreenshots } from '../../../tests/helpers';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
@@ -34,25 +32,6 @@ describe('WebdriverIOAdapter', () => {
         it(test.name, () => test.run(browser, new WebdriverIOAdapter(browser)));
       });
 
-      async function expectIdenticalScreenshots(
-        screenshot: Buffer | string,
-        baselineName: string,
-        message?: string
-      ) {
-        const baseline = await fs.readFile(
-          path.join(__dirname, `screenshots/${browserName}/${baselineName}.png`)
-        );
-
-        if (typeof screenshot === 'string') {
-          // eslint-disable-next-line no-param-reassign
-          screenshot = await fs.readFile(screenshot);
-        }
-
-        const differ = new PixelDiffer({ threshold: 0 });
-        expect((await differ.compare(baseline, screenshot)).matches, message).to
-          .be.true;
-      }
-
       it('should take a full page screenshot', async () => {
         const clientAdapter = new WebdriverIOAdapter(browser);
 
@@ -62,7 +41,10 @@ describe('WebdriverIOAdapter', () => {
           'base64'
         );
 
-        await expectIdenticalScreenshots(screenshot, 'simple');
+        await expectIdenticalScreenshots(
+          screenshot,
+          join(__dirname, `screenshots/${browserName}/simple.png`)
+        );
       });
 
       it('should take a full page screenshot with absolutely positioned elements', async () => {
@@ -74,7 +56,10 @@ describe('WebdriverIOAdapter', () => {
           'base64'
         );
 
-        await expectIdenticalScreenshots(screenshot, 'full-absolute');
+        await expectIdenticalScreenshots(
+          screenshot,
+          join(__dirname, `screenshots/${browserName}/full-absolute.png`)
+        );
       });
     });
   }
