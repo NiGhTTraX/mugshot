@@ -10,6 +10,11 @@ export interface DiffFailingResult {
   diff: Buffer;
 }
 
+/**
+ * A discriminated union of a passing result and a failing result.
+ *
+ * Check the `matches` property before attempting to access the `diff`.
+ */
 export type DiffResult = DiffPassingResult | DiffFailingResult;
 
 /**
