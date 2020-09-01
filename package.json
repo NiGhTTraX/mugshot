@@ -15,10 +15,6 @@
     "lint": "eslint --ext ts,tsx,js .",
     "test": "lerna run test",
     "posttest": "./tests/coverage.sh",
-    "pretest": "yarn run selenium",
-    "selenium": "selenium start",
-    "selenium:debug": "selenium debug",
-    "selenium:stop": "selenium stop",
     "report-coverage": "nyc report --reporter=json && codecov -f tests/results/coverage-final.json"
   },
   "husky": {
@@ -34,7 +30,6 @@
     "@nighttrax/eslint-config-ts": "~6.3.0",
     "@tdd-buffet/jest-config": "~2.0.0",
     "@tdd-buffet/tsconfig": "~1.0.0",
-    "@tdd-buffet/selenium": "~0.4.1",
     "@types/fs-extra": "~9.0.0",
     "@types/node": "~10.12.2",
     "codecov": "~3.7.0",
