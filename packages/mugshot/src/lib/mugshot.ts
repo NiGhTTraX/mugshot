@@ -48,17 +48,17 @@ export interface MugshotDiffResult {
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
 /**
- * TODO: this abstraction is leaky - Mugshot.check doesn't do anything with
- * this type other than pass it to Screenshotter.takeScreenshot. It also
- * produces a LISP violation: Mugshot.check accepts a very generic `string`
- * type, but a Screenshotter.takeScreenshot implementation could only want
- * to accept a subset e.g. CSS selectors. Ideally, the dependency would be
- * inverted - you would pass a Mugshot instance to a Screenshotter
- * instance, but I don't like that since it takes away the focus from Mugshot.
- */
-/**
- * Uniquely identify an element on the screen according to the [[Screenshotter]]
- * implementation.
+ * Identify an element on the screen. Depending on the [[Screenshotter]]
+ * implementation this could be a CSS selector, an iOS selector, an Android
+ * selector etc.
+ *
+ * NOTE: This abstraction produces a LISP violation: some [[Screenshotter]]
+ * implementations only work with a subset of selectors e.g. CSS selectors
+ * or iOS selectors. Fixing this would require inverting the dependency
+ * between [[Mugshot]] and [[Screenshotter]], which I'm not fond of since it
+ * moves `Mugshot` one level down. WebdriverIO, for instance, has the same
+ * problem; it can talk to Appium which can talk to mobile devices, so using
+ * `'div'` as a selector doesn't make sense in that case.
  */
 export type ElementSelector = string;
 
