@@ -25,7 +25,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "tdd-buffet test --config ../../tests/jest.config.js --coverage --runInBand",
+    "test": "SELENIUM_HOST=0.0.0.0 SELENIUM_PORT=4444 tdd-buffet test --config ../../tests/jest.config.js --coverage --runInBand",
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
