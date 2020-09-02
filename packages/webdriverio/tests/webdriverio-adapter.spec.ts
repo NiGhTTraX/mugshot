@@ -1,6 +1,6 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { BrowserObject, remote } from 'webdriverio';
+import { BrowserObject, remote, RemoteOptions } from 'webdriverio';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
@@ -10,9 +10,10 @@ describe('WebdriverIOAdapter', () => {
       let browser!: BrowserObject;
 
       beforeEach(async () => {
-        const options: WebDriver.Options = {
+        const options: RemoteOptions = {
           hostname: process.env.SELENIUM_HOST!,
           port: parseInt(process.env.SELENIUM_PORT!, 10),
+          path: '/wd/hub',
           capabilities: { browserName },
           logLevel: 'error',
         };
