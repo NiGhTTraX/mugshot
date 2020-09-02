@@ -1,12 +1,6 @@
-import {
-  Fixture,
-  loadFixture,
-  webdriverContractTests,
-} from '@mugshot/contracts';
-import { join } from 'path';
+import { webdriverContractSuites } from '@mugshot/contracts';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { BrowserObject, remote } from 'webdriverio';
-import { expectIdenticalScreenshots } from '../../../tests/helpers';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
@@ -28,40 +22,14 @@ describe('WebdriverIOAdapter', () => {
 
       afterEach(() => browser.deleteSession());
 
-      webdriverContractTests.forEach((test) => {
-        it(test.name, () => test.run(browser, new WebdriverIOAdapter(browser)));
-      });
-
-      it('should take a full page screenshot', async () => {
-        const clientAdapter = new WebdriverIOAdapter(browser);
-
-        await loadFixture(browser, clientAdapter, Fixture.simple);
-
-        const screenshot = Buffer.from(
-          await clientAdapter.takeScreenshot(),
-          'base64'
-        );
-
-        await expectIdenticalScreenshots(
-          screenshot,
-          join(__dirname, `screenshots/${browserName}/simple.png`)
-        );
-      });
-
-      it('should take a full page screenshot with absolutely positioned elements', async () => {
-        const clientAdapter = new WebdriverIOAdapter(browser);
-
-        await loadFixture(browser, clientAdapter, Fixture.rect);
-
-        const screenshot = Buffer.from(
-          await clientAdapter.takeScreenshot(),
-          'base64'
-        );
-
-        await expectIdenticalScreenshots(
-          screenshot,
-          join(__dirname, `screenshots/${browserName}/full-absolute.png`)
-        );
+      Object.keys(webdriverContractSuites).forEach((suite) => {
+        describe(suite, () => {
+          webdriverContractSuites[suite].forEach((test) => {
+            it(test.name, () =>
+              test.run(browser, new WebdriverIOAdapter(browser))
+            );
+          });
+        });
       });
     });
   }

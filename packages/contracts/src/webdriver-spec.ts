@@ -4,6 +4,7 @@ import { readFileSync } from 'fs';
 import Jimp from 'jimp';
 import { Webdriver } from 'mugshot';
 import { join } from 'path';
+import { expectIdenticalScreenshots } from '../../../tests/helpers';
 
 /**
  * Methods on the client that these tests need.
@@ -26,7 +27,7 @@ export interface WebdriverContractTest {
    * Run the test which will throw an `AssertionError` on failure.
    *
    * @param client The client you're adapting. It will be used to navigate to
-   *   a test fixture and resize the window.
+   *   a test fixture.
    * @param adapter The client adapter.
    */
   run: (client: TestClient, adapter: Webdriver) => Promise<void>;
@@ -66,15 +67,32 @@ export async function loadFixture(
   await adapter.setViewportSize(1024, 768);
 }
 
-/**
- * Contract tests for the [[Webdriver]] interface.
- *
- * These exercise the [[Webdriver.takeScreenshot]] method, but they don't check
- * the actual screenshot content, only some basic properties. This is because
- * the tests can't assume any details about the environment in which they're
- * ran e.g. OS, actual client instance, user profile etc.
- */
-export const webdriverContractTests: WebdriverContractTest[] = [
+const webdriverExecuteContractTests: WebdriverContractTest[] = [
+  {
+    name: 'should execute a simple function',
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, Fixture.simple);
+
+      /* istanbul ignore next because this will get stringified and sent to the client */
+      const func = () => 23;
+
+      expect(await adapter.execute(func)).to.equal(23);
+    },
+  },
+  {
+    name: 'should execute a simple function with args',
+    run: async (client, adapter) => {
+      await loadFixture(client, adapter, Fixture.simple);
+
+      /* istanbul ignore next because this will get stringified and sent to the client */
+      const func = (x: number) => x;
+
+      expect(await adapter.execute(func, 42)).to.equal(42);
+    },
+  },
+];
+
+const webdriverViewportContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a viewport screenshot',
     run: async (client: TestClient, adapter: Webdriver) => {
@@ -102,6 +120,9 @@ export const webdriverContractTests: WebdriverContractTest[] = [
       expect(screenshot.getHeight()).to.equal(768);
     },
   },
+];
+
+const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of element',
     run: async (client: TestClient, adapter: Webdriver) => {
@@ -216,26 +237,75 @@ export const webdriverContractTests: WebdriverContractTest[] = [
       ]);
     },
   },
+];
+
+const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
   {
-    name: 'should execute a simple function',
-    run: async (client, adapter) => {
+    name: 'should take a full page screenshot',
+    run: async (client: TestClient, adapter: Webdriver) => {
       await loadFixture(client, adapter, Fixture.simple);
 
-      /* istanbul ignore next because this will get stringified and sent to the client */
-      const func = () => 23;
+      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
 
-      expect(await adapter.execute(func)).to.equal(23);
+      await expectIdenticalScreenshots(
+        screenshot,
+        join(__dirname, `screenshots/simple.png`)
+      );
     },
   },
   {
-    name: 'should execute a simple function with args',
-    run: async (client, adapter) => {
-      await loadFixture(client, adapter, Fixture.simple);
+    name:
+      'should take a full page screenshot with absolutely positioned elements',
+    run: async (client: TestClient, adapter: Webdriver) => {
+      await loadFixture(client, adapter, Fixture.rect);
 
-      /* istanbul ignore next because this will get stringified and sent to the client */
-      const func = (x: number) => x;
+      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
 
-      expect(await adapter.execute(func, 42)).to.equal(42);
+      await expectIdenticalScreenshots(
+        screenshot,
+        join(__dirname, `screenshots/full-absolute.png`)
+      );
     },
   },
 ];
+
+/**
+ * Contract tests for the [[Webdriver]] interface.
+ *
+ * Each key represents a suite of tests. Check the docs for each to understand
+ * their scope.
+ */
+export const webdriverContractSuites: Record<
+  string,
+  WebdriverContractTest[]
+> = {
+  /**
+   * This suite checks the [[Webdriver.getElementRect]] method
+   * and is __mandatory__ for implementations to pass.
+   */
+
+  getElementRect: webdriverGetElementRectContractTests,
+  /**
+   * This suite checks the [[Webdriver.execute]] method and is
+   * __mandatory__ for implementations to pass.
+   */
+  execute: webdriverExecuteContractTests,
+
+  /**
+   * This suite checks that [[Webdriver.takeScreenshot]] and
+   * [[Webdriver.setViewportSize]] works as expected when setting and getting the
+   * viewport size and is __mandatory__ for implementations to pass
+   */
+  setViewportSize: webdriverViewportContractTests,
+
+  /**
+   * This suite check the [[Webdriver.takeScreenshot]] method and is _optional_
+   * for implementations to pass, but strongly recommended.
+   *
+   * These tests will compare actual screenshots. The fixtures have been designed
+   * to (hopefully) not contain any UI elements that might render differently in
+   * different browsers e.g. fonts. They have been checked to generate the same
+   * results in Chrome, Chromium and Firefox.
+   */
+  takeScreenshot: webdriverTakeScreenshotContractTests,
+};

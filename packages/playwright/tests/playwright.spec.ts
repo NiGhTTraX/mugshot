@@ -1,12 +1,6 @@
-import {
-  Fixture,
-  loadFixture,
-  webdriverContractTests,
-} from '@mugshot/contracts';
-import { join } from 'path';
+import { webdriverContractSuites } from '@mugshot/contracts';
 import playwright, { Browser, Page } from 'playwright';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { expectIdenticalScreenshots } from '../../../tests/helpers';
 import PlaywrightAdapter from '../src';
 
 describe(`PlaywrightAdapter`, () => {
@@ -26,55 +20,16 @@ describe(`PlaywrightAdapter`, () => {
         await browser.close();
       });
 
-      webdriverContractTests.forEach((test) => {
-        it(test.name, async () =>
-          test.run(
-            {
-              url: (path) => page.goto(path),
-            },
-            new PlaywrightAdapter(page)
-          )
-        );
-      });
+      const client = {
+        url: (path: string) => page.goto(path),
+      };
 
-      it('should take a full page screenshot', async () => {
-        const clientAdapter = new PlaywrightAdapter(page);
-
-        await loadFixture(
-          { url: (path) => page.goto(path) },
-          clientAdapter,
-          Fixture.simple
-        );
-
-        const screenshot = Buffer.from(
-          await clientAdapter.takeScreenshot(),
-          'base64'
-        );
-
-        await expectIdenticalScreenshots(
-          screenshot,
-          join(__dirname, `screenshots/${browserName}/simple.png`)
-        );
-      });
-
-      it('should take a full page screenshot with absolutely positioned elements', async () => {
-        const clientAdapter = new PlaywrightAdapter(page);
-
-        await loadFixture(
-          { url: (path) => page.goto(path) },
-          clientAdapter,
-          Fixture.rect
-        );
-
-        const screenshot = Buffer.from(
-          await clientAdapter.takeScreenshot(),
-          'base64'
-        );
-
-        await expectIdenticalScreenshots(
-          screenshot,
-          join(__dirname, `screenshots/${browserName}/full-absolute.png`)
-        );
+      Object.keys(webdriverContractSuites).forEach((suite) => {
+        describe(suite, () => {
+          webdriverContractSuites[suite].forEach((test) => {
+            it(test.name, () => test.run(client, new PlaywrightAdapter(page)));
+          });
+        });
       });
     });
   }
