@@ -31,11 +31,15 @@ export async function expectIdenticalScreenshots(
   if (!result.matches) {
     const tmpPath = await fs.mkdtemp(`/tmp/`);
     const diffPath = join(tmpPath, 'diff.png');
+    const actualPath = join(tmpPath, 'actual.png');
 
     await fs.writeFile(diffPath, result.diff);
+    await fs.writeFile(actualPath, screenshot);
 
     throw new Error(
-      `Screenshot didn't match ${baselinePath}. Diff was written at ${diffPath}`
+      `Screenshot didn't match ${baselinePath}.
+
+Diff was written at ${diffPath}, actual was written at ${actualPath}`
     );
   }
 }
