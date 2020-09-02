@@ -24,8 +24,10 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['RGB', 'RGB', 'RGB'])
       );
 
-      // @ts-expect-error because we don't discriminate the result
-      expect(result.diff).to.be.undefined;
+      expect(
+        // @ts-expect-error because we don't discriminate the result
+        result.diff
+      ).to.be.undefined;
     });
 
     it('should compare different buffers', async () => {
