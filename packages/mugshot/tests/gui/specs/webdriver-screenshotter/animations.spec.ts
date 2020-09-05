@@ -3,8 +3,8 @@ import PuppeteerAdapter from '@mugshot/puppeteer';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { expectIdenticalScreenshots } from '../../../../../tests/helpers';
-import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
+import { expectIdenticalScreenshots } from '../../../../../../tests/helpers';
+import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
@@ -31,8 +31,8 @@ describe('WebdriverScreenshotter', () => {
     );
 
     await expectIdenticalScreenshots(
-      await screenshotter.takeScreenshot('.animated'),
-      join(__dirname, '../screenshots/animations.png')
+      await screenshotter.takeScreenshot(),
+      join(__dirname, '../../screenshots/animations.png')
     );
   });
 });
