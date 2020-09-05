@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PuppeteerAdapter | Mugshot</title>
+	<title>PlaywrightAdapter | Mugshot</title>
 	<meta name="description" content="Documentation for Mugshot">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="puppeteeradapter.html">PuppeteerAdapter</a>
+					<a href="playwrightadapter.html">PlaywrightAdapter</a>
 				</li>
 			</ul>
-			<h1>Class PuppeteerAdapter</h1>
+			<h1>Class PlaywrightAdapter</h1>
 		</div>
 	</div>
 </header>
@@ -68,12 +68,12 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Webdriver adapter over <a href="https://github.com/puppeteer/puppeteer">Puppeteer</a>
-						to be used with <a href="webdriverscreenshotter.html">WebdriverScreenshotter</a>.</p>
+						<p>Adapter over <a href="https://github.com/microsoft/playwright">Playwright</a> to be
+						used with <a href="webdriverscreenshotter.html">WebdriverScreenshotter</a>.</p>
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>see</dt>
-						<dd><p><a href="https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md">https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md</a></p>
+						<dd><p><a href="https://playwright.dev/">https://playwright.dev/</a></p>
 						</dd>
 					</dl>
 				</div>
@@ -82,7 +82,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PuppeteerAdapter</span>
+						<span class="target">PlaywrightAdapter</span>
 					</li>
 				</ul>
 			</section>
@@ -99,16 +99,16 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="puppeteeradapter.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="playwrightadapter.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="puppeteeradapter.html#execute" class="tsd-kind-icon">execute</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteeradapter.html#getelementrect" class="tsd-kind-icon">get<wbr>Element<wbr>Rect</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteeradapter.html#setviewportsize" class="tsd-kind-icon">set<wbr>Viewport<wbr>Size</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="puppeteeradapter.html#takescreenshot" class="tsd-kind-icon">take<wbr>Screenshot</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="playwrightadapter.html#execute" class="tsd-kind-icon">execute</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="playwrightadapter.html#getelementrect" class="tsd-kind-icon">get<wbr>Element<wbr>Rect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="playwrightadapter.html#setviewportsize" class="tsd-kind-icon">set<wbr>Viewport<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="playwrightadapter.html#takescreenshot" class="tsd-kind-icon">take<wbr>Screenshot</a></li>
 							</ul>
 						</section>
 					</div>
@@ -120,13 +120,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Puppeteer<wbr>Adapter<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="puppeteeradapter.html" class="tsd-signature-type">PuppeteerAdapter</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Playwright<wbr>Adapter<span class="tsd-signature-symbol">(</span>page<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Page</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="playwrightadapter.html" class="tsd-signature-type">PlaywrightAdapter</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/puppeteer/src/index.ts#L10">packages/puppeteer/src/index.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/playwright/src/index.ts#L10">packages/playwright/src/index.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -135,7 +135,7 @@
 									<h5>page: <span class="tsd-signature-type">Page</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="puppeteeradapter.html" class="tsd-signature-type">PuppeteerAdapter</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="playwrightadapter.html" class="tsd-signature-type">PlaywrightAdapter</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -146,13 +146,13 @@
 					<a name="execute" class="tsd-anchor"></a>
 					<h3>execute</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">execute&lt;R, A&gt;<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">R</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute&lt;R, A&gt;<span class="tsd-signature-symbol">(</span>func<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">R</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/puppeteer/src/index.ts#L43">packages/puppeteer/src/index.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/playwright/src/index.ts#L16">packages/playwright/src/index.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -191,7 +191,7 @@
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">A</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -205,7 +205,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/puppeteer/src/index.ts#L13">packages/puppeteer/src/index.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/playwright/src/index.ts#L26">packages/playwright/src/index.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -228,7 +228,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/puppeteer/src/index.ts#L35">packages/puppeteer/src/index.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/playwright/src/index.ts#L40">packages/playwright/src/index.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -254,7 +254,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/puppeteer/src/index.ts#L41">packages/puppeteer/src/index.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/playwright/src/index.ts#L13">packages/playwright/src/index.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -288,22 +288,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a>
+						<a href="playwrightadapter.html" class="tsd-kind-icon">Playwright<wbr>Adapter</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="puppeteeradapter.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="playwrightadapter.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="puppeteeradapter.html#execute" class="tsd-kind-icon">execute</a>
+								<a href="playwrightadapter.html#execute" class="tsd-kind-icon">execute</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="puppeteeradapter.html#getelementrect" class="tsd-kind-icon">get<wbr>Element<wbr>Rect</a>
+								<a href="playwrightadapter.html#getelementrect" class="tsd-kind-icon">get<wbr>Element<wbr>Rect</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="puppeteeradapter.html#setviewportsize" class="tsd-kind-icon">set<wbr>Viewport<wbr>Size</a>
+								<a href="playwrightadapter.html#setviewportsize" class="tsd-kind-icon">set<wbr>Viewport<wbr>Size</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="puppeteeradapter.html#takescreenshot" class="tsd-kind-icon">take<wbr>Screenshot</a>
+								<a href="playwrightadapter.html#takescreenshot" class="tsd-kind-icon">take<wbr>Screenshot</a>
 							</li>
 						</ul>
 					</li>

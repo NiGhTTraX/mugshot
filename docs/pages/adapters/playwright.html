@@ -1,0 +1,175 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Playwright | Mugshot</title>
+	<meta name="description" content="Documentation for Mugshot">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+	<link rel="stylesheet" href="../../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.json" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">Mugshot</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="webdriverio.html">Adapters</a>
+				</li>
+				<li>
+					<a href="playwright.html">Playwright</a>
+				</li>
+			</ul>
+			<h1>Playwright</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<blockquote>
+					<p><a href="https://www.npmjs.com/package/playwright">Playwright</a> adapter for Mugshot</p>
+				</blockquote>
+				<p><a href="https://travis-ci.com/NiGhTTraX/mugshot"><img src="https://travis-ci.com/NiGhTTraX/mugshot.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/gh/NiGhTTraX/mugshot"><img src="https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://img.shields.io/npm/types/@mugshot/playwright.svg" alt="npm type definitions"></p>
+				<hr>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<pre><code><span class="hljs-built_in">npm</span> install @mugshot/playwright</code></pre>
+				<p>or</p>
+				<pre><code>yarn <span class="hljs-keyword">add</span><span class="bash"> @mugshot/playwright</span></code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Mugshot, {
+  FsStorage,
+  WebdriverScreenshotter,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mugshot&#x27;</span>;
+<span class="hljs-keyword">import</span> PlaywrightAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@mugshot/playwright&#x27;</span>;
+<span class="hljs-keyword">import</span> playwright <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;playwright&#x27;</span>;
+
+test(<span class="hljs-string">&#x27;GitHub project page should look the same&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> browser = <span class="hljs-keyword">await</span> playwright.chromium.launch();
+  <span class="hljs-keyword">const</span> context = <span class="hljs-keyword">await</span> browser.newContext();
+  <span class="hljs-keyword">const</span> page = <span class="hljs-keyword">await</span> context.newPage();
+
+  <span class="hljs-keyword">const</span> mugshot = <span class="hljs-keyword">new</span> Mugshot(
+    <span class="hljs-keyword">new</span> WebdriverScreenshotter(
+      <span class="hljs-keyword">new</span> PlaywrightAdapter(page)
+    ),
+    <span class="hljs-keyword">new</span> FsStorage(<span class="hljs-string">&#x27;./screenshots&#x27;</span>)
+  );
+
+  <span class="hljs-keyword">await</span> page.goto(<span class="hljs-string">&#x27;https://github.com/NiGhTTraX/mugshot&#x27;</span>);
+
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> mugshot.check(<span class="hljs-string">&#x27;project page&#x27;</span>);
+
+  expect(result.matches).toBeTruthy();
+});</code></pre>
+				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+					<h2>Docs</h2>
+				</a>
+				<p><a href="../../classes/playwrightadapter.html">View the API docs</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Adapters</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="webdriverio.html">WebdriverIO</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="puppeteer.html">Puppeteer</a>
+					</li>
+					<li class="current pp-nav pp-page">
+						<a href="playwright.html">Playwright</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class="globals  ">
+						<a href="../../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>

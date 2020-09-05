@@ -4,16 +4,17 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Mugshot</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for Mugshot">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/pages.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -66,6 +67,12 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum"><a href="enums/fixture.html" class="tsd-kind-icon">Fixture</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a></li>
@@ -76,6 +83,7 @@
 								<li class="tsd-kind-class"><a href="classes/mugshotmissingbaselineerror.html" class="tsd-kind-icon">Mugshot<wbr>Missing<wbr>Baseline<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/outofboundserror.html" class="tsd-kind-icon">Out<wbr>OfBounds<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a></li>
+								<li class="tsd-kind-class"><a href="classes/playwrightadapter.html" class="tsd-kind-icon">Playwright<wbr>Adapter</a></li>
 								<li class="tsd-kind-class"><a href="classes/puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a></li>
 								<li class="tsd-kind-class"><a href="classes/toomanyelementserror.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Elements<wbr>Error</a></li>
 								<li class="tsd-kind-class"><a href="classes/webdriverioadapter.html" class="tsd-kind-icon">WebdriverIOAdapter</a></li>
@@ -116,7 +124,10 @@
 						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable"><a href="globals.html#webdrivercontracttests" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests</a></li>
+								<li class="tsd-kind-variable"><a href="globals.html#webdriverexecutecontracttests" class="tsd-kind-icon">webdriver<wbr>Execute<wbr>Contract<wbr>Tests</a></li>
+								<li class="tsd-kind-variable"><a href="globals.html#webdrivergetelementrectcontracttests" class="tsd-kind-icon">webdriver<wbr>Get<wbr>Element<wbr>Rect<wbr>Contract<wbr>Tests</a></li>
+								<li class="tsd-kind-variable"><a href="globals.html#webdrivertakescreenshotcontracttests" class="tsd-kind-icon">webdriver<wbr>Take<wbr>Screenshot<wbr>Contract<wbr>Tests</a></li>
+								<li class="tsd-kind-variable"><a href="globals.html#webdriverviewportcontracttests" class="tsd-kind-icon">webdriver<wbr>Viewport<wbr>Contract<wbr>Tests</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -132,7 +143,7 @@
 						<section class="tsd-index-section ">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal"><a href="globals.html#fixtures" class="tsd-kind-icon">fixtures</a></li>
+								<li class="tsd-kind-object-literal"><a href="globals.html#webdrivercontractsuites" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Suites</a></li>
 							</ul>
 						</section>
 					</div>
@@ -146,9 +157,15 @@
 					<div class="tsd-signature tsd-kind-icon">Diff<wbr>Result<span class="tsd-signature-symbol">:</span> <a href="interfaces/diffpassingresult.html" class="tsd-signature-type">DiffPassingResult</a><span class="tsd-signature-symbol"> | </span><a href="interfaces/difffailingresult.html" class="tsd-signature-type">DiffFailingResult</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-differ.ts#L13">packages/mugshot/src/interfaces/png-differ.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/png-differ.ts#L18">packages/mugshot/src/interfaces/png-differ.ts:18</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A discriminated union of a passing result and a failing result.</p>
+						</div>
+						<p>Check the <code>matches</code> property before attempting to access the <code>diff</code>.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="elementselector" class="tsd-anchor"></a>
@@ -161,9 +178,17 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Uniquely identify an element on the screen according to the <a href="interfaces/screenshotter.html">Screenshotter</a>
-							implementation.</p>
+							<p>Identify an element on the screen. Depending on the <a href="interfaces/screenshotter.html">Screenshotter</a>
+								implementation this could be a CSS selector, an iOS selector, an Android
+							selector etc.</p>
 						</div>
+						<p>NOTE: This abstraction produces a LISP violation: some <a href="interfaces/screenshotter.html">Screenshotter</a>
+							implementations only work with a subset of selectors e.g. CSS selectors
+							or iOS selectors. Fixing this would require inverting the dependency
+							between <a href="classes/mugshot.html">Mugshot</a> and <a href="interfaces/screenshotter.html">Screenshotter</a>, which I&#39;m not fond of since it
+							moves <code>Mugshot</code> one level down. WebdriverIO, for instance, has the same
+							problem; it can talk to Appium which can talk to mobile devices, so using
+						<code>&#39;div&#39;</code> as a selector doesn&#39;t make sense in that case.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
@@ -190,23 +215,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
 				<section class="tsd-panel tsd-member tsd-kind-variable">
-					<a name="webdrivercontracttests" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Contract<wbr>Tests</h3>
-					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should take a viewport screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},{name: &#x27;should get bounding rect of element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2,});},},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100,});},},{name: &#x27;should throw if element is missing&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-scroll&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotFoundError);expect(caughtError.message).to.contain(&#x27;.missing&#x27;);},},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-multiple&#x27;);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 },]);},},{name: &#x27;should throw if element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;#invisible&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;#invisible&#x27;);},},{name: &#x27;should throw if matching element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;rect-invisible&#x27;);let caughtError!: ElementNotFoundError;try {expect(await adapter.getElementRect(&#x27;div&#x27;)).to.be.undefined;} catch (e) {caughtError &#x3D; e;}expect(caughtError).to.be.instanceOf(ElementNotVisibleError);expect(caughtError.message).to.contain(&#x27;div&#x27;);},},{name: &#x27;should execute a simple function&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);},},{name: &#x27;should execute a simple function with args&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, &#x27;simple&#x27;);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);},},]</span></div>
+					<a name="webdriverexecutecontracttests" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Execute<wbr>Contract<wbr>Tests</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Execute<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should execute a simple function&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.simple);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; () &#x3D;&gt; 23;expect(await adapter.execute(func)).to.equal(23);},},{name: &#x27;should execute a simple function with args&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.simple);/* istanbul ignore next because this will get stringified and sent to the client */const func &#x3D; (x: number) &#x3D;&gt; x;expect(await adapter.execute(func, 42)).to.equal(42);},},]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L66">packages/contracts/src/webdriver-spec.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L70">packages/contracts/src/webdriver-spec.ts:70</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Contract tests for the <a href="interfaces/webdriver.html">Webdriver</a> interface.</p>
-						</div>
-						<p>These exercise the <a href="interfaces/webdriver.html#takescreenshot">Webdriver.takeScreenshot</a> method, but they don&#39;t check
-							the actual screenshot content, only some basic properties. This is because
-							the tests can&#39;t assume any details about the environment in which they&#39;re
-						ran e.g. OS, actual client instance, user profile etc.</p>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="webdrivergetelementrectcontracttests" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Get<wbr>Element<wbr>Rect<wbr>Contract<wbr>Tests</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Get<wbr>Element<wbr>Rect<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should get bounding rect of element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rect);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({// Include margin.x: 8 + 3,y: 10 + 3,// Include border and padding.width: 100 + 2 * 2 + 4 * 2,height: 100 + 2 * 2 + 4 * 2,});},},{name: &#x27;should get bounding rect of off-screen element&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectScroll);const rect &#x3D; await adapter.getElementRect(&#x27;.test&#x27;);expect(rect).to.deep.equal({x: 2000,y: 2000,width: 100,height: 100,});},},{name: &#x27;should return null if element is missing&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectScroll);expect(await adapter.getElementRect(&#x27;.missing&#x27;)).to.be.null;},},{name: &#x27;should get bounding rect of all matching elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectMultiple);expect(await adapter.getElementRect(&#x27;.multiple&#x27;)).to.deep.equal([{ x: 0, y: 0, width: 100, height: 100 },{ x: 100, y: 0, width: 100, height: 100 },{ x: 0, y: 100, width: 100, height: 100 },{ x: 100, y: 100, width: 100, height: 100 },]);},},{name: &#x27;should return 0,0,0,0 if the element is not visible&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectInvisible);expect(await adapter.getElementRect(&#x27;#invisible1&#x27;)).to.deep.equal({x: 0,y: 0,width: 0,height: 0,});},},{name: &#x27;should return 0,0,0,0 for every invisible element&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectInvisible);expect(await adapter.getElementRect(&#x27;.invisible&#x27;)).to.deep.equal([{x: 0,y: 0,width: 0,height: 0,},{x: 0,y: 0,width: 0,height: 0,},]);},},{name: &#x27;should return visible and invisible elements&#x27;,run: async (client, adapter) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rectInvisible);expect(await adapter.getElementRect(&#x27;div&#x27;)).to.deep.equal([{x: 0,y: 0,width: 100,height: 100,},{x: 0,y: 0,width: 0,height: 0,},{x: 0,y: 0,width: 0,height: 0,},]);},},]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L125">packages/contracts/src/webdriver-spec.ts:125</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="webdrivertakescreenshotcontracttests" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Take<wbr>Screenshot<wbr>Contract<wbr>Tests</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Take<wbr>Screenshot<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should take a full page screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.simple);const screenshot &#x3D; Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;);await expectIdenticalScreenshots(screenshot,join(__dirname, &#x60;screenshots/simple.png&#x60;));},},{name:&#x27;should take a full page screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rect);const screenshot &#x3D; Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;);await expectIdenticalScreenshots(screenshot,join(__dirname, &#x60;screenshots/full-absolute.png&#x60;));},},]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L242">packages/contracts/src/webdriver-spec.ts:242</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable">
+					<a name="webdriverviewportcontracttests" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Viewport<wbr>Contract<wbr>Tests</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Viewport<wbr>Contract<wbr>Tests<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [{name: &#x27;should take a viewport screenshot&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.simple);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},{name:&#x27;should take a viewport screenshot with absolutely positioned elements&#x27;,run: async (client: TestClient, adapter: Webdriver) &#x3D;&gt; {await loadFixture(client, adapter, Fixture.rect);const screenshot &#x3D; await Jimp.read(Buffer.from(await adapter.takeScreenshot(), &#x27;base64&#x27;));expect(screenshot.getWidth()).to.equal(1024);expect(screenshot.getHeight()).to.equal(768);},},]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L95">packages/contracts/src/webdriver-spec.ts:95</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -221,7 +267,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L39">packages/contracts/src/webdriver-spec.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L37">packages/contracts/src/webdriver-spec.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -244,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L9">packages/webdriverio/src/index.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L5">packages/webdriverio/src/index.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -267,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L26">packages/webdriverio/src/index.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/webdriverio/src/index.ts#L22">packages/webdriverio/src/index.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h4>
@@ -292,7 +338,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/webdriver-screenshotter.ts#L20">packages/mugshot/src/lib/webdriver-screenshotter.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/webdriver-screenshotter.ts#L23">packages/mugshot/src/lib/webdriver-screenshotter.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -303,13 +349,13 @@
 					<a name="loadfixture" class="tsd-anchor"></a>
 					<h3>load<wbr>Fixture</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">fixtures</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Fixture<span class="tsd-signature-symbol">(</span>client<span class="tsd-signature-symbol">: </span><a href="interfaces/testclient.html" class="tsd-signature-type">TestClient</a>, adapter<span class="tsd-signature-symbol">: </span><a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a>, name<span class="tsd-signature-symbol">: </span><a href="enums/fixture.html" class="tsd-signature-type">Fixture</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L44">packages/contracts/src/webdriver-spec.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L53">packages/contracts/src/webdriver-spec.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -321,7 +367,7 @@
 									<h5>adapter: <a href="interfaces/webdriver.html" class="tsd-signature-type">Webdriver</a></h5>
 								</li>
 								<li>
-									<h5>name: <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type">fixtures</span></h5>
+									<h5>name: <a href="enums/fixture.html" class="tsd-signature-type">Fixture</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -332,63 +378,89 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Object literals</h2>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal">
-					<a name="fixtures" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> fixtures</h3>
-					<div class="tsd-signature tsd-kind-icon">fixtures<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="webdrivercontractsuites" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> webdriver<wbr>Contract<wbr>Suites</h3>
+					<div class="tsd-signature tsd-kind-icon">webdriver<wbr>Contract<wbr>Suites<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L1">packages/contracts/src/fixtures.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L278">packages/contracts/src/webdriver-spec.ts:278</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contract tests for the <a href="interfaces/webdriver.html">Webdriver</a> interface.</p>
+						</div>
+						<p>Each key represents a suite of tests. Check the docs for each to understand
+						their scope.</p>
+					</div>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="fixtures.rect" class="tsd-anchor"></a>
-						<h3>rect</h3>
-						<div class="tsd-signature tsd-kind-icon">rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 8px;top: 10px;width: 100px;height: 100px;border: 2px solid blue;margin: 3px;padding: 4px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<a name="webdrivercontractsuites.execute" class="tsd-anchor"></a>
+						<h3>execute</h3>
+						<div class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = webdriverExecuteContractTests</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L2">packages/contracts/src/fixtures.ts:2</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L292">packages/contracts/src/webdriver-spec.ts:292</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This suite checks the <a href="interfaces/webdriver.html#execute">Webdriver.execute</a> method and is
+								<strong>mandatory</strong> for implementations to pass.</p>
+							</div>
+						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="fixtures.rect_invisible" class="tsd-anchor"></a>
-						<h3>rect-<wbr>invisible</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>invisible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Invisible rect&lt;/title&gt;&lt;style&gt;.invisible {display: none;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div id&#x3D;&quot;visible&quot;&gt;visible&lt;/div&gt;&lt;div id&#x3D;&quot;invisible&quot; class&#x3D;&quot;invisible&quot;&gt;invisible&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<a name="webdrivercontractsuites.getelementrect" class="tsd-anchor"></a>
+						<h3>get<wbr>Element<wbr>Rect</h3>
+						<div class="tsd-signature tsd-kind-icon">get<wbr>Element<wbr>Rect<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = webdriverGetElementRectContractTests</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L60">packages/contracts/src/fixtures.ts:60</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L287">packages/contracts/src/webdriver-spec.ts:287</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This suite checks the <a href="interfaces/webdriver.html#getelementrect">Webdriver.getElementRect</a> method
+								and is <strong>mandatory</strong> for implementations to pass.</p>
+							</div>
+						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="fixtures.rect_multiple" class="tsd-anchor"></a>
-						<h3>rect-<wbr>multiple</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>multiple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Multiple rects&lt;/title&gt;&lt;style&gt;.multiple {position: absolute;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 0;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 0; top: 100px;&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;&quot;multiple&quot; style&#x3D;&quot;left: 100px; top: 100px;&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<a name="webdrivercontractsuites.setviewportsize" class="tsd-anchor"></a>
+						<h3>set<wbr>Viewport<wbr>Size</h3>
+						<div class="tsd-signature tsd-kind-icon">set<wbr>Viewport<wbr>Size<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = webdriverViewportContractTests</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L41">packages/contracts/src/fixtures.ts:41</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L299">packages/contracts/src/webdriver-spec.ts:299</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This suite checks that <a href="interfaces/webdriver.html#takescreenshot">Webdriver.takeScreenshot</a> and
+									<a href="interfaces/webdriver.html#setviewportsize">Webdriver.setViewportSize</a> works as expected when setting and getting the
+								viewport size and is <strong>mandatory</strong> for implementations to pass</p>
+							</div>
+						</div>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="fixtures.rect_scroll" class="tsd-anchor"></a>
-						<h3>rect-<wbr>scroll</h3>
-						<div class="tsd-signature tsd-kind-icon">rect-<wbr>scroll<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;&lt;title&gt;Rect with scroll&lt;/title&gt;&lt;style&gt;.test {position: absolute;left: 2000px;top: 2000px;width: 100px;height: 100px;background: coral;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div class&#x3D;&quot;test&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
+						<a name="webdrivercontractsuites.takescreenshot" class="tsd-anchor"></a>
+						<h3>take<wbr>Screenshot</h3>
+						<div class="tsd-signature tsd-kind-icon">take<wbr>Screenshot<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = webdriverTakeScreenshotContractTests</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L23">packages/contracts/src/fixtures.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L310">packages/contracts/src/webdriver-spec.ts:310</a></li>
 							</ul>
 						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="fixtures.simple" class="tsd-anchor"></a>
-						<h3>simple</h3>
-						<div class="tsd-signature tsd-kind-icon">simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;body&gt;This is some simple HTML&lt;div style&#x3D;&quot;width: 100px; height: 100px; border: 1px solid blue; background: coral&quot;&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#x60;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/fixtures.ts#L74">packages/contracts/src/fixtures.ts:74</a></li>
-							</ul>
-						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>This suite check the <a href="interfaces/webdriver.html#takescreenshot">Webdriver.takeScreenshot</a> method and is <em>optional</em>
+								for implementations to pass, but strongly recommended.</p>
+							</div>
+							<p>These tests will compare actual screenshots. The fixtures have been designed
+								to (hopefully) not contain any UI elements that might render differently in
+								different browsers e.g. fonts. They have been checked to generate the same
+							results in Chrome, Chromium and Firefox.</p>
+						</div>
 					</section>
 				</section>
 			</section>
@@ -396,6 +468,21 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Adapters</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="pages/adapters/webdriverio.html">WebdriverIO</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="pages/adapters/puppeteer.html">Puppeteer</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="pages/adapters/playwright.html">Playwright</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
 					<li class="globals current ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
@@ -403,6 +490,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/fixture.html" class="tsd-kind-icon">Fixture</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/elementnotfounderror.html" class="tsd-kind-icon">Element<wbr>Not<wbr>Found<wbr>Error</a>
 					</li>
@@ -426,6 +516,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/pixeldiffer.html" class="tsd-kind-icon">Pixel<wbr>Differ</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/playwrightadapter.html" class="tsd-kind-icon">Playwright<wbr>Adapter</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/puppeteeradapter.html" class="tsd-kind-icon">Puppeteer<wbr>Adapter</a>
@@ -503,7 +596,16 @@
 						<a href="globals.html#mugshotselector" class="tsd-kind-icon">Mugshot<wbr>Selector</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#webdrivercontracttests" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Tests</a>
+						<a href="globals.html#webdriverexecutecontracttests" class="tsd-kind-icon">webdriver<wbr>Execute<wbr>Contract<wbr>Tests</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#webdrivergetelementrectcontracttests" class="tsd-kind-icon">webdriver<wbr>Get<wbr>Element<wbr>Rect<wbr>Contract<wbr>Tests</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#webdrivertakescreenshotcontracttests" class="tsd-kind-icon">webdriver<wbr>Take<wbr>Screenshot<wbr>Contract<wbr>Tests</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#webdriverviewportcontracttests" class="tsd-kind-icon">webdriver<wbr>Viewport<wbr>Contract<wbr>Tests</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
@@ -521,7 +623,7 @@
 						<a href="globals.html#loadfixture" class="tsd-kind-icon">load<wbr>Fixture</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#fixtures" class="tsd-kind-icon">fixtures</a>
+						<a href="globals.html#webdrivercontractsuites" class="tsd-kind-icon">webdriver<wbr>Contract<wbr>Suites</a>
 					</li>
 				</ul>
 			</nav>
@@ -554,6 +656,6 @@
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.json"><' + '/script>');</script>
 </body>
 </html>
