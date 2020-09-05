@@ -57,29 +57,5 @@ describe('Mugshot', () => {
         path.join(__dirname, '../screenshots/simple.png')
       );
     });
-
-    it('should create parent folders when writing baseline', async () => {
-      const adapter = new PuppeteerAdapter(page);
-      const mugshot = new Mugshot(
-        new WebdriverScreenshotter(adapter),
-        new FsStorage(resultsPath),
-        {
-          createMissingBaselines: true,
-        }
-      );
-
-      await loadFixture(
-        { url: (url) => page.goto(url) },
-        adapter,
-        Fixture.simple
-      );
-
-      await mugshot.check('foo/bar/new');
-
-      expect(
-        await fs.pathExists(path.join(resultsPath, 'foo/bar')),
-        "Baseline folder structure wasn't created"
-      ).to.be.true;
-    });
   });
 });

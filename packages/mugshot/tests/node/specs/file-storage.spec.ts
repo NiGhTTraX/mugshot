@@ -39,6 +39,16 @@ describe('FileStorage', () => {
     expect(await readFile(filePath)).to.deep.equal(blackPixelBuffer);
   });
 
+  it('should create the parent folder structure', async () => {
+    const deepPath = path.join(tmpPath, 'foo', 'bar', 'baz');
+    const filePath = path.join(deepPath, 'new.png');
+
+    const storage = new FsStorage(deepPath);
+
+    await storage.write('new', blackPixelBuffer);
+    expect(await readFile(filePath)).to.deep.equal(blackPixelBuffer);
+  });
+
   it('should update an existing screenshot', async () => {
     const filePath = path.join(tmpPath, 'update.png');
     await writeFile(filePath, blackPixelBuffer);
