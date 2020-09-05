@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0-alpha.3](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.0.0-alpha.2...@mugshot/contracts@3.0.0-alpha.3) (2020-09-05)
+
+**Note:** Version bump only for package @mugshot/contracts
+
+
+
+
+
 # [3.0.0-alpha.2](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.0.0-alpha.1...@mugshot/contracts@3.0.0-alpha.2) (2020-09-05)
 
 
