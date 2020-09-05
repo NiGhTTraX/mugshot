@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.0.0-alpha.1...mugshot@3.0.0) (2020-09-05)
+
+
+### Features
+
+* **mugshot:** Handle throwing `ElementNotFound` and `ElementNotVisible` ([463bcc2](https://github.com/NiGhTTraX/mugshot/commit/463bcc2))
+
+
+### Tests
+
+* Remove text from UI fixtures ([23a19d1](https://github.com/NiGhTTraX/mugshot/commit/23a19d1))
+
+
+### BREAKING CHANGES
+
+* there should be no changes on the `Webdriver` contract
+tests, but if you were using `loadFixture` to set up screenshot tests
+then those will most likely fail after this.
+
+
+
+
+
 # [3.0.0-alpha.3](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.0.0-alpha.2...mugshot@3.0.0-alpha.3) (2020-09-05)
 
 **Note:** Version bump only for package mugshot
