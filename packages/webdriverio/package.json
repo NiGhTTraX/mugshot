@@ -18,7 +18,7 @@
   },
   "author": "Andrei Picus",
   "license": "MIT",
-  "homepage": "https://github.com/uberVU/mugshot/tree/master/packages/webdriverio",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/webdriverio",
   "main": "dist/index",
   "types": "dist/index",
   "files": [
