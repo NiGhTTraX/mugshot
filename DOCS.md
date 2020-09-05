@@ -54,9 +54,9 @@ Depending on how you want to take screenshots, you'll need a [`Screenshotter`](.
 <!-- Table also present in README.md; the links here point to ./docs -->
 Package | Version
 --------|--------
-[@mugshot/webdriverio](./docs/classes/webdriverioadapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
-[@mugshot/puppeteer](./docs/classes/puppeteeradapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
-[@mugshot/playwright](./docs/classes/playwrightadapter.html) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
+[@mugshot/webdriverio](./docs/pages/adapters/webdriverio.html) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
+[@mugshot/puppeteer](./docs/pages/adapters/puppeteer.html) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
+[@mugshot/playwright](./docs/pages/adapters/playwright.html) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
 
 
 If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). To validate your implementation you can use the [contract tests package](./packages/contracts).

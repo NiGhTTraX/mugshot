@@ -42,3 +42,7 @@ test('GitHub project page should look the same', async () => {
   expect(result.matches).toBeTruthy();
 });
 ```
+
+## Docs
+
+[View the API docs](../../docs/classes/puppeteeradapter.html)

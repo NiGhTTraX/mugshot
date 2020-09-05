@@ -1,6 +1,8 @@
 {
   "out": "./docs",
-  "inputFiles": ["./packages"],
+  "inputFiles": [
+    "./packages"
+  ],
   "mode": "file",
   "name": "Mugshot",
   "readme": "./DOCS.md",
@@ -8,6 +10,35 @@
   "excludeNotExported": true,
   "excludePrivate": true,
   "excludeProtected": true,
-  "exclude": ["**/tests/**/*"],
-  "media": "./media"
+  "exclude": [
+    "**/tests/**/*"
+  ],
+  "media": "./media",
+  "theme": "pages-plugin",
+  "pages": {
+    "output": "pages",
+    "groups": [
+      {
+        "title": "Adapters",
+        "output": "adapters",
+        "pages": [
+          {
+            "title": "WebdriverIO",
+            "output": "webdriverio",
+            "source": "./packages/webdriverio/README.md"
+          },
+          {
+            "title": "Puppeteer",
+            "output": "puppeteer",
+            "source": "./packages/puppeteer/README.md"
+          },
+          {
+            "title": "Playwright",
+            "output": "playwright",
+            "source": "./packages/playwright/README.md"
+          }
+        ]
+      }
+    ]
+  }
 }
