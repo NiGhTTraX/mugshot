@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.0.0...@mugshot/contracts@3.1.0) (2020-09-07)
+
+
+### Features
+
+* **contracts:** Move test helper here and export it ([a598687](https://github.com/NiGhTTraX/mugshot/commit/a598687))
+
+
+
+
+
 # [3.0.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.0.0-alpha.1...@mugshot/contracts@3.0.0) (2020-09-05)
 
 
