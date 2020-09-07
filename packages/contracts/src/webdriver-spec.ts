@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import Jimp from 'jimp';
 import { Webdriver } from 'mugshot';
 import { join } from 'path';
-import { expectIdenticalScreenshots } from '../../../tests/helpers';
+import { expectIdenticalScreenshots } from './helpers';
 
 /**
  * Methods on the client that these tests need.

@@ -1,9 +1,12 @@
-import { Fixture, loadFixture } from '@mugshot/contracts';
+import {
+  Fixture,
+  loadFixture,
+  expectIdenticalScreenshots,
+} from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { expectIdenticalScreenshots } from '../../../../../../tests/helpers';
 import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {

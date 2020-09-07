@@ -3,9 +3,10 @@ import { PixelDiffer } from 'mugshot';
 import { dirname, join } from 'path';
 
 /**
- * Use PixelDiffer to compare two screenshots.
+ * Expect that the given screenshot matches the baseline on disk.
  *
- * Assume that PixelDiffer passes all of its tests.
+ * This is sort of a basic re-implementation of Mugshot without all
+ * of its features. It only depends on its [[PixelDiffer]] module.
  */
 export async function expectIdenticalScreenshots(
   screenshot: Buffer,
