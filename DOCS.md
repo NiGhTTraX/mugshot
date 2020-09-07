@@ -59,7 +59,7 @@ Package | Version
 [@mugshot/playwright](./docs/pages/adapters/playwright.html) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
 
 
-If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). To validate your implementation you can use the [contract tests package](./packages/contracts).
+If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](./docs/interfaces/webdriver.html). See the [docs](./docs/pages/contracts/docs.html) on how to validate your implementation.
 
 
 ## How to read these docs

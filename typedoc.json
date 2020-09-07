@@ -40,6 +40,17 @@
             "source": "./packages/playwright/README.md"
           }
         ]
+      },
+      {
+        "title": "Contract tests",
+        "output": "contracts",
+        "pages": [
+          {
+            "title": "Docs",
+            "output": "docs",
+            "source": "./packages/contracts/README.md"
+          }
+        ]
       }
     ]
   }
