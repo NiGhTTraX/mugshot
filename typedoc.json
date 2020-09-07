@@ -10,6 +10,7 @@
   "excludeNotExported": true,
   "excludePrivate": true,
   "excludeProtected": true,
+  "listInvalidSymbolLinks": true,
   "exclude": [
     "**/tests/**/*"
   ],
