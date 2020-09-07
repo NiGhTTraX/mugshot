@@ -134,6 +134,7 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function"><a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#expectidenticalscreenshots" class="tsd-kind-icon">expect<wbr>Identical<wbr>Screenshots</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getclientchromesize" class="tsd-kind-icon">get<wbr>Client<wbr>Chrome<wbr>Size</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#injectanimationdisablingstylesheet" class="tsd-kind-icon">inject<wbr>Animation<wbr>Disabling<wbr>Stylesheet</a></li>
@@ -281,6 +282,39 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="expectidenticalscreenshots" class="tsd-anchor"></a>
+					<h3>expect<wbr>Identical<wbr>Screenshots</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">expect<wbr>Identical<wbr>Screenshots<span class="tsd-signature-symbol">(</span>screenshot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, baselinePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/helpers.ts#L11">packages/contracts/src/helpers.ts:11</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Expect that the given screenshot matches the baseline on disk.</p>
+								</div>
+								<p>This is sort of a basic re-implementation of Mugshot without all
+								of its features. It only depends on its <a href="classes/pixeldiffer.html">PixelDiffer</a> module.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>screenshot: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+								<li>
+									<h5>baselinePath: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="getboundingrect" class="tsd-anchor"></a>
 					<h3>get<wbr>Bounding<wbr>Rect</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -415,7 +449,7 @@
 						<div class="tsd-signature tsd-kind-icon">get<wbr>Element<wbr>Rect<span class="tsd-signature-symbol">:</span> <a href="interfaces/webdrivercontracttest.html" class="tsd-signature-type">WebdriverContractTest</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = webdriverGetElementRectContractTests</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L287">packages/contracts/src/webdriver-spec.ts:287</a></li>
+								<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/contracts/src/webdriver-spec.ts#L286">packages/contracts/src/webdriver-spec.ts:286</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -609,6 +643,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#createfixture" class="tsd-kind-icon">create<wbr>Fixture</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#expectidenticalscreenshots" class="tsd-kind-icon">expect<wbr>Identical<wbr>Screenshots</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getboundingrect" class="tsd-kind-icon">get<wbr>Bounding<wbr>Rect</a>

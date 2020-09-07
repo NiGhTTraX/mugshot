@@ -67,7 +67,7 @@ export async function loadFixture(
   await adapter.setViewportSize(1024, 768);
 }
 
-const webdriverExecuteContractTests: WebdriverContractTest[] = [
+export const webdriverExecuteContractTests: WebdriverContractTest[] = [
   {
     name: 'should execute a simple function',
     run: async (client, adapter) => {
@@ -92,7 +92,7 @@ const webdriverExecuteContractTests: WebdriverContractTest[] = [
   },
 ];
 
-const webdriverViewportContractTests: WebdriverContractTest[] = [
+export const webdriverViewportContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a viewport screenshot',
     run: async (client: TestClient, adapter: Webdriver) => {
@@ -122,7 +122,7 @@ const webdriverViewportContractTests: WebdriverContractTest[] = [
   },
 ];
 
-const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
+export const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of element',
     run: async (client: TestClient, adapter: Webdriver) => {
@@ -239,7 +239,7 @@ const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   },
 ];
 
-const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
+export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a full page screenshot',
     run: async (client: TestClient, adapter: Webdriver) => {
@@ -283,8 +283,8 @@ export const webdriverContractSuites: Record<
    * This suite checks the [[Webdriver.getElementRect]] method
    * and is __mandatory__ for implementations to pass.
    */
-
   getElementRect: webdriverGetElementRectContractTests,
+
   /**
    * This suite checks the [[Webdriver.execute]] method and is
    * __mandatory__ for implementations to pass.
