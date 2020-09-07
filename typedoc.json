@@ -17,6 +17,7 @@
   "media": "./media",
   "theme": "pages-plugin",
   "pages": {
+    "failBuildOnInvalidPageLink": true,
     "output": "pages",
     "groups": [
       {
