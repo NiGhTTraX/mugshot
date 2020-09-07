@@ -15,14 +15,14 @@ describe('PuppeteerAdapter', () => {
     await browser.close();
   });
 
-  const client = {
+  const setup = {
     url: (path: string) => page.goto(path),
   };
 
   Object.keys(webdriverContractSuites).forEach((suite) => {
     describe(suite, () => {
       webdriverContractSuites[suite].forEach((test) => {
-        it(test.name, () => test.run(client, new PuppeteerAdapter(page)));
+        it(test.name, () => test.run(setup, new PuppeteerAdapter(page)));
       });
     });
   });

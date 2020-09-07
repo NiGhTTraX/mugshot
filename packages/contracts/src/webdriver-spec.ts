@@ -7,13 +7,12 @@ import { join } from 'path';
 import { expectIdenticalScreenshots } from './helpers';
 
 /**
- * Methods on the client that these tests need.
+ * Help the tests set up the environment.
  *
- * They're different from the ones from [[WebdriverClient]] because
- * the tests are concerned with navigating the client to test
- * fixtures.
+ * This is different from [[Webdriver]] because these methods are only
+ * needed by the tests.
  */
-export interface TestClient {
+export interface WebdriverTestSetup {
   /**
    * Navigate to an URL.
    */
@@ -30,7 +29,7 @@ export interface WebdriverContractTest {
    *   a test fixture.
    * @param adapter The client adapter.
    */
-  run: (client: TestClient, adapter: Webdriver) => Promise<void>;
+  run: (client: WebdriverTestSetup, adapter: Webdriver) => Promise<void>;
 }
 
 /* istanbul ignore next because this will get stringified and sent to the client */
@@ -51,7 +50,7 @@ export enum Fixture {
 }
 
 export async function loadFixture(
-  client: TestClient,
+  client: WebdriverTestSetup,
   adapter: Webdriver,
   name: Fixture
 ) {
@@ -95,7 +94,7 @@ export const webdriverExecuteContractTests: WebdriverContractTest[] = [
 export const webdriverViewportContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a viewport screenshot',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.simple);
 
       const screenshot = await Jimp.read(
@@ -109,7 +108,7 @@ export const webdriverViewportContractTests: WebdriverContractTest[] = [
   {
     name:
       'should take a viewport screenshot with absolutely positioned elements',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
       const screenshot = await Jimp.read(
@@ -125,7 +124,7 @@ export const webdriverViewportContractTests: WebdriverContractTest[] = [
 export const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   {
     name: 'should get bounding rect of element',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
       const rect = await adapter.getElementRect('.test');
@@ -142,7 +141,7 @@ export const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   },
   {
     name: 'should get bounding rect of off-screen element',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rectScroll);
 
       const rect = await adapter.getElementRect('.test');
@@ -157,7 +156,7 @@ export const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
   },
   {
     name: 'should return null if element is missing',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rectScroll);
 
       expect(await adapter.getElementRect('.missing')).to.be.null;
@@ -242,7 +241,7 @@ export const webdriverGetElementRectContractTests: WebdriverContractTest[] = [
 export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
   {
     name: 'should take a full page screenshot',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.simple);
 
       const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
@@ -256,7 +255,7 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
   {
     name:
       'should take a full page screenshot with absolutely positioned elements',
-    run: async (client: TestClient, adapter: Webdriver) => {
+    run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
       const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
