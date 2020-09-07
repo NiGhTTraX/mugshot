@@ -8,10 +8,10 @@ import { dirname, join } from 'path';
  * Assume that PixelDiffer passes all of its tests.
  */
 export async function expectIdenticalScreenshots(
-  screenshot: Buffer | string,
+  screenshot: Buffer,
   baselinePath: string
 ) {
-  if (!(await fs.pathExists(baselinePath)) && typeof screenshot !== 'string') {
+  if (!(await fs.pathExists(baselinePath))) {
     await fs.mkdirp(dirname(baselinePath));
     await fs.writeFile(baselinePath, screenshot);
 
@@ -19,11 +19,6 @@ export async function expectIdenticalScreenshots(
   }
 
   const baseline = await fs.readFile(baselinePath);
-
-  if (typeof screenshot === 'string') {
-    // eslint-disable-next-line no-param-reassign
-    screenshot = await fs.readFile(screenshot);
-  }
 
   const differ = new PixelDiffer({ threshold: 0 });
   const result = await differ.compare(baseline, screenshot);
