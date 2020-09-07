@@ -47,4 +47,4 @@ test('GitHub project page should look the same', async () => {
 
 ## Docs
 
-[View the API docs](../../docs/classes/playwrightadapter.html)
+[[PlaywrightAdapter | View the API docs]]

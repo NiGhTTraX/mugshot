@@ -48,4 +48,4 @@ test('GitHub project page should look the same', async () => {
 
 ## Docs
 
-[View the API docs](../../docs/classes/webdriverioadapter.html)
+[[WebdriverIOAdapter | View the API docs]]

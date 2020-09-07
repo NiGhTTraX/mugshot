@@ -45,4 +45,4 @@ test('GitHub project page should look the same', async () => {
 
 ## Docs
 
-[View the API docs](../../docs/classes/puppeteeradapter.html)
+[[PuppeteerAdapter | View the API docs]]
