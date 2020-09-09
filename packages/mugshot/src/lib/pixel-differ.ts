@@ -41,10 +41,12 @@ export interface PixelDifferOptions {
  * are outside of the intersection will be considered different, no matter the
  * [[PixelDifferOptions.threshold | threshold]].
  *
- * See the image below to understand how images with different sizes will be
+ * ![pixel-differ-explanation](media://pixel-differ-explanation.png)
+ *
+ * See the examples below to understand how images with different sizes will be
  * compared.
  *
- * ![pixel-differ](media://pixel-differ.png)
+ * ![pixel-differ-examples](media://pixel-differ-examples.png)
  */
 export default class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
