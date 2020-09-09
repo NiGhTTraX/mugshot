@@ -66,31 +66,23 @@ export default class PixelDiffer implements PNGDiffer {
     const expectedJimp = await Jimp.read(expected);
     const actualJimp = await Jimp.read(actual);
 
-    const smallestWidth = Math.min(
-      expectedJimp.getWidth(),
-      actualJimp.getWidth()
-    );
-    const smallestHeight = Math.min(
-      expectedJimp.getHeight(),
-      actualJimp.getHeight()
-    );
-    const biggestWidth = Math.max(
-      expectedJimp.getWidth(),
-      actualJimp.getWidth()
-    );
-    const biggestHeight = Math.max(
-      expectedJimp.getHeight(),
-      actualJimp.getHeight()
-    );
+    const expectedWidth = expectedJimp.getWidth();
+    const actualWidth = actualJimp.getWidth();
+    const expectedHeight = expectedJimp.getHeight();
+    const actualHeight = actualJimp.getHeight();
+
+    const smallestWidth = Math.min(expectedWidth, actualWidth);
+    const smallestHeight = Math.min(expectedHeight, actualHeight);
+    const biggestWidth = Math.max(expectedWidth, actualWidth);
+    const biggestHeight = Math.max(expectedHeight, actualHeight);
 
     const allThePixels =
-      expectedJimp.getWidth() * expectedJimp.getHeight() +
-      actualJimp.getWidth() * actualJimp.getHeight() -
+      expectedWidth * expectedHeight +
+      actualWidth * actualHeight -
       smallestWidth * smallestHeight;
 
     const differentSize =
-      expectedJimp.getWidth() !== actualJimp.getWidth() ||
-      expectedJimp.getHeight() !== actualJimp.getHeight();
+      expectedWidth !== actualWidth || expectedHeight !== actualHeight;
 
     if (differentSize) {
       expectedJimp.crop(0, 0, smallestWidth, smallestHeight);
@@ -120,20 +112,39 @@ export default class PixelDiffer implements PNGDiffer {
       100;
 
     if (differentSize) {
-      const wholeDiffJimp = new Jimp(biggestWidth, biggestHeight, '#ff0000');
+      // Start by coloring the rectangle containing both images with the diff color.
+      const wholeDiffJimp = new Jimp(
+        biggestWidth,
+        biggestHeight,
+        Jimp.rgbaToInt(
+          this.diffColor.r,
+          this.diffColor.g,
+          this.diffColor.b,
+          0xff
+        )
+      );
 
-      if (smallestWidth !== biggestWidth || smallestHeight !== biggestHeight) {
+      // If one image doesn't fully contain the other then there's an area that
+      // doesn't belong to either and we need to color it white.
+      if (
+        !(
+          (expectedWidth < actualWidth && expectedHeight < actualHeight) ||
+          (actualWidth < expectedWidth && actualHeight < expectedHeight)
+        )
+      ) {
         await wholeDiffJimp.composite(
           new Jimp(
             biggestWidth - smallestWidth,
             biggestHeight - smallestHeight,
             '#ffffff'
           ),
-          biggestWidth - smallestWidth,
-          biggestHeight - smallestHeight
+          biggestWidth !== smallestWidth ? smallestWidth : 0,
+          biggestHeight !== smallestHeight ? smallestHeight : 0
         );
-        await wholeDiffJimp.composite(diffJimp, 0, 0);
       }
+
+      // Diff the intersecting area.
+      await wholeDiffJimp.composite(diffJimp, 0, 0);
 
       return {
         matches: false,

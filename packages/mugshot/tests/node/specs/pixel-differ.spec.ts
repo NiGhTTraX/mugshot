@@ -255,6 +255,21 @@ describe('PixelDiffer', () => {
       );
     });
 
+    it('should apply custom diff color to non-intersecting areas', async () => {
+      const result = await new PixelDiffer({
+        diffColor: { r: 0, g: 0, b: 255 },
+      }).compare(
+        await createTestBuffer(['RRR', 'RRR']),
+        await createTestBuffer(['GG', 'GG', 'GG'])
+      );
+
+      await expectIdenticalBuffers(
+        // @ts-expect-error because we don't discriminate the result
+        result.diff,
+        await createTestBuffer(['BBB', 'BBB', 'BB '])
+      );
+    });
+
     it('should apply custom threshold', async () => {
       const result = await new PixelDiffer({ threshold: 0.1 }).compare(
         await createTestBuffer(['KKK', 'KKK']),
