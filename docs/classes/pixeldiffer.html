@@ -72,7 +72,14 @@
 						<a href="https://github.com/mapbox/pixelmatch">pixelmatch</a>.</p>
 					</div>
 					<p>Images with different dimensions will always fail comparison and a diff
-					indicating the extra region will be returned.</p>
+						indicating the extra region will be returned. The images will be overlaid
+						starting from the top left corner and then compared. All of the pixels that
+						are outside of the intersection will be considered different, no matter the
+					<a href="../interfaces/pixeldifferoptions.html#threshold">threshold</a>.</p>
+					<p><img src="../media/pixel-differ-explanation.png" alt="pixel-differ-explanation"></p>
+					<p>See the examples below to understand how images with different sizes will be
+					compared.</p>
+					<p><img src="../media/pixel-differ-examples.png" alt="pixel-differ-examples"></p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -120,7 +127,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/pixel-differ.ts#L44">packages/mugshot/src/lib/pixel-differ.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/pixel-differ.ts#L54">packages/mugshot/src/lib/pixel-differ.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/pixel-differ.ts#L57">packages/mugshot/src/lib/pixel-differ.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/lib/pixel-differ.ts#L67">packages/mugshot/src/lib/pixel-differ.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
