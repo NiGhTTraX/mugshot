@@ -12,6 +12,8 @@ export async function expectIdenticalScreenshots(
   screenshot: Buffer,
   baselinePath: string
 ) {
+  /* istanbul ignore next because this is here for convenience when
+  writing new tests that don't have baselines */
   if (!(await fs.pathExists(baselinePath))) {
     await fs.mkdirp(dirname(baselinePath));
     await fs.writeFile(baselinePath, screenshot);
@@ -24,6 +26,8 @@ export async function expectIdenticalScreenshots(
   const differ = new PixelDiffer({ threshold: 0 });
   const result = await differ.compare(baseline, screenshot);
 
+  /* istanbul ignore next because this is here for convenience when
+   updating baselines */
   if (!result.matches) {
     const tmpPath = await fs.mkdtemp(`/tmp/`);
     const diffPath = join(tmpPath, 'diff.png');
