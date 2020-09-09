@@ -11,7 +11,6 @@
     "version:force": "yarn run version --force-publish",
     "pub:git": "yarn run build && lerna publish from-git && yarn run clean",
     "pub:pkg": "yarn run build && lerna publish from-package && yarn run clean",
-    "pub:recover": "lerna publish from-package",
     "lint": "eslint --ext ts,tsx,js .",
     "test": "SELENIUM_HOST=0.0.0.0 SELENIUM_PORT=4444 tdd-buffet test --coverage --runInBand",
     "pretest": "yarn run selenium",
