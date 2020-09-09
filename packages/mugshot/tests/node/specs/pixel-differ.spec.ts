@@ -104,15 +104,15 @@ describe('PixelDiffer', () => {
   describe('different sizes and same content', () => {
     it('with different width and height should create a diff', async () => {
       const result = await new PixelDiffer().compare(
-        await createTestBuffer(['KKKK', 'KKKK', 'KKKK', 'KKKK']),
-        await createTestBuffer(['KK', 'KK'])
+        await createTestBuffer(['KKKK', 'KKKK']),
+        await createTestBuffer(['KK', 'KK', 'KK', 'KK'])
       );
 
       expect(result.matches).to.be.false;
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
-        await createTestBuffer(['  RR', '  RR', 'RRRR', 'RRRR'])
+        await createTestBuffer(['  RR', '  RR', 'RR  ', 'RR  '])
       );
     });
 

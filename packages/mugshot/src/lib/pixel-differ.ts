@@ -121,7 +121,19 @@ export default class PixelDiffer implements PNGDiffer {
 
     if (differentSize) {
       const wholeDiffJimp = new Jimp(biggestWidth, biggestHeight, '#ff0000');
-      await wholeDiffJimp.composite(diffJimp, 0, 0);
+
+      if (smallestWidth !== biggestWidth || smallestHeight !== biggestHeight) {
+        await wholeDiffJimp.composite(
+          new Jimp(
+            biggestWidth - smallestWidth,
+            biggestHeight - smallestHeight,
+            '#ffffff'
+          ),
+          biggestWidth - smallestWidth,
+          biggestHeight - smallestHeight
+        );
+        await wholeDiffJimp.composite(diffJimp, 0, 0);
+      }
 
       return {
         matches: false,
