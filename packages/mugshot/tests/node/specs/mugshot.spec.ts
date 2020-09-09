@@ -138,6 +138,7 @@ describe('Mugshot', () => {
       setupDifferWithResult(whitePixelBuffer, blackPixelBuffer, {
         matches: false,
         diff: redPixelBuffer,
+        percentage: 1,
       });
 
       const mugshot = new Mugshot(instance(screenshotter), instance(storage), {

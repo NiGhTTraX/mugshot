@@ -8,6 +8,10 @@ export interface DiffFailingResult {
    * A PNG MIME encoded buffer of the diff image.
    */
   diff: Buffer;
+  /**
+   * The difference in percentage points (0-100).
+   */
+  percentage: number;
 }
 
 /**

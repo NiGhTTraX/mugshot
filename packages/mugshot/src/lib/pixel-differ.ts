@@ -36,7 +36,15 @@ export interface PixelDifferOptions {
  * [pixelmatch](https://github.com/mapbox/pixelmatch).
  *
  * Images with different dimensions will always fail comparison and a diff
- * indicating the extra region will be returned.
+ * indicating the extra region will be returned. The images will be overlaid
+ * starting from the top left corner and then compared. All of the pixels that
+ * are outside of the intersection will be considered different, no matter the
+ * [[PixelDifferOptions.threshold | threshold]].
+ *
+ * See the image below to understand how images with different sizes will be
+ * compared.
+ *
+ * ![pixel-differ](media://pixel-differ.png)
  */
 export default class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
@@ -75,6 +83,11 @@ export default class PixelDiffer implements PNGDiffer {
       actualJimp.getHeight()
     );
 
+    const allThePixels =
+      expectedJimp.getWidth() * expectedJimp.getHeight() +
+      actualJimp.getWidth() * actualJimp.getHeight() -
+      smallestWidth * smallestHeight;
+
     const differentSize =
       expectedJimp.getWidth() !== actualJimp.getWidth() ||
       expectedJimp.getHeight() !== actualJimp.getHeight();
@@ -101,6 +114,11 @@ export default class PixelDiffer implements PNGDiffer {
 
     const matches = numDiffPixels === 0;
 
+    const percentage =
+      ((numDiffPixels + allThePixels - smallestWidth * smallestHeight) /
+        allThePixels) *
+      100;
+
     if (differentSize) {
       const wholeDiffJimp = new Jimp(biggestWidth, biggestHeight, '#ff0000');
       await wholeDiffJimp.composite(diffJimp, 0, 0);
@@ -108,6 +126,7 @@ export default class PixelDiffer implements PNGDiffer {
       return {
         matches: false,
         diff: await wholeDiffJimp.getBufferAsync(Jimp.MIME_PNG),
+        percentage,
       };
     }
 
@@ -118,6 +137,7 @@ export default class PixelDiffer implements PNGDiffer {
     return {
       matches: false,
       diff: await diffJimp.getBufferAsync(Jimp.MIME_PNG),
+      percentage,
     };
   };
 }

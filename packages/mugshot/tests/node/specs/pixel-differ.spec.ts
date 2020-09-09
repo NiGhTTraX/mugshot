@@ -30,6 +30,18 @@ describe('PixelDiffer', () => {
       ).to.be.undefined;
     });
 
+    it('should not return the diff in percentage', async () => {
+      const result = await new PixelDiffer().compare(
+        await createTestBuffer(['RGB', 'RGB', 'RGB']),
+        await createTestBuffer(['RGB', 'RGB', 'RGB'])
+      );
+
+      expect(
+        // @ts-expect-error because we don't discriminate the result
+        result.percentage
+      ).to.be.undefined;
+    });
+
     it('should compare different buffers', async () => {
       const result = await new PixelDiffer().compare(
         await createTestBuffer(['RRR', 'GGG', 'BBB']),
@@ -50,6 +62,32 @@ describe('PixelDiffer', () => {
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
+    });
+
+    it('should return the diff in percentage', async () => {
+      const baseline = await createTestBuffer(['GGG', 'GGG']);
+      const tests: [[string, ...string[]], number][] = [
+        [['BGG', 'GGG'], 16.67],
+        [['BBG', 'GGG'], 33.33],
+        [['BBB', 'GGG'], 50],
+        [['BBB', 'BGG'], 66.67],
+        [['BBB', 'BBG'], 83.34],
+        [['BBB', 'BBB'], 100],
+      ];
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [test, result] of tests) {
+        // eslint-disable-next-line no-await-in-loop
+        const screenshot = await createTestBuffer(test);
+
+        const {
+          // @ts-expect-error because we don't discriminate the result
+          percentage,
+          // eslint-disable-next-line no-await-in-loop
+        } = await new PixelDiffer().compare(baseline, screenshot);
+
+        expect(percentage).to.be.closeTo(result, 0.01);
+      }
     });
 
     it('should have 0 threshold by default', async () => {
@@ -105,6 +143,30 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['   ', '   ', 'RRR'])
       );
     });
+
+    it('should return the diff in percentage', async () => {
+      const baseline = await createTestBuffer(['GGG', 'GGG']);
+      const tests: [[string, ...string[]], number][] = [
+        [['GGG'], 50],
+        [['GGG', 'GGG', 'GGG'], 33.34],
+        [['GGG', 'GGG', 'GGG', 'GGG'], 50],
+        [['GGG', 'GGG', 'GGG', 'GGG', 'GGG'], 60],
+      ];
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [test, result] of tests) {
+        // eslint-disable-next-line no-await-in-loop
+        const screenshot = await createTestBuffer(test);
+
+        const {
+          // @ts-expect-error because we don't discriminate the result
+          percentage,
+          // eslint-disable-next-line no-await-in-loop
+        } = await new PixelDiffer().compare(baseline, screenshot);
+
+        expect(percentage).to.be.closeTo(result, 0.01);
+      }
+    });
   });
 
   describe('different sizes and different content', () => {
@@ -148,6 +210,32 @@ describe('PixelDiffer', () => {
         result.diff,
         await createTestBuffer(['RRR', 'RRR', 'RRR'])
       );
+    });
+
+    it('should return the diff in percentage', async () => {
+      const baseline = await createTestBuffer(['GGG', 'GGG']);
+      const tests: [[string, ...string[]], number][] = [
+        [['BGG'], 66.67],
+        [['BBG'], 83.34],
+        [['BBB'], 100],
+        [['BBB', 'BBB', 'BBB'], 100],
+        [['BBB', 'BBB', 'BBB', 'BBB'], 100],
+        [['BBB', 'BBB', 'BBB', 'BBB', 'BBB'], 100],
+      ];
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [test, result] of tests) {
+        // eslint-disable-next-line no-await-in-loop
+        const screenshot = await createTestBuffer(test);
+
+        const {
+          // @ts-expect-error because we don't discriminate the result
+          percentage,
+          // eslint-disable-next-line no-await-in-loop
+        } = await new PixelDiffer().compare(baseline, screenshot);
+
+        expect(percentage).to.be.closeTo(result, 0.01);
+      }
     });
   });
 
