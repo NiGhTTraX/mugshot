@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Puppeteer adapter for Mugshot",
   "keywords": [
     "mugshot",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/puppeteer": "~3.0.1",
-    "mugshot": "^3.1.0",
+    "mugshot": "^3.2.0",
     "puppeteer": "~5.2.1",
     "typescript": "~4.0.0"
   }

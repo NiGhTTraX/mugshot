@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.1.0...mugshot@3.2.0) (2020-09-09)
+
+
+### Bug Fixes
+
+* **mugshot:** Mark non-intersecting areas with config diff color ([f76c769](https://github.com/NiGhTTraX/mugshot/commit/f76c769))
+* **mugshot:** Only mark pixels belonging to images with diff color ([6be6751](https://github.com/NiGhTTraX/mugshot/commit/6be6751))
+
+
+### Features
+
+* **mugshot:** Return the diff percentage ([694c295](https://github.com/NiGhTTraX/mugshot/commit/694c295))
+
+
+
+
+
 # [3.1.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.0.0...mugshot@3.1.0) (2020-09-07)
 
 
