@@ -1,17 +1,20 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
+import { after, before, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 
 describe('PuppeteerAdapter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
 
-  beforeEach(async () => {
+  before(async () => {
     browser = await puppeteer.launch();
+  });
+
+  beforeEach(async () => {
     page = await browser.newPage();
   });
 
-  afterEach(async () => {
+  after(async () => {
     await browser.close();
   });
 

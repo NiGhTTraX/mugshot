@@ -1,6 +1,6 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
-import playwright, { Browser, Page } from 'playwright';
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
+import playwright, { Browser, BrowserContext, Page } from 'playwright';
+import { after, before, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import PlaywrightAdapter from '../src';
 
 describe(`PlaywrightAdapter`, () => {
@@ -9,14 +9,18 @@ describe(`PlaywrightAdapter`, () => {
     describe(browserName, () => {
       let browser!: Browser;
       let page!: Page;
+      let context!: BrowserContext;
+
+      before(async () => {
+        browser = await playwright[browserName].launch();
+        context = await browser.newContext();
+      });
 
       beforeEach(async () => {
-        browser = await playwright[browserName].launch();
-        const context = await browser.newContext();
         page = await context.newPage();
       });
 
-      afterEach(async () => {
+      after(async () => {
         await browser.close();
       });
 
