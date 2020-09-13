@@ -11,8 +11,8 @@ describe('WebdriverIOAdapter', () => {
 
       before(async () => {
         const options: RemoteOptions = {
-          hostname: process.env.SELENIUM_HOST!,
-          port: parseInt(process.env.SELENIUM_PORT!, 10),
+          hostname: process.env.SELENIUM_HOST || 'localhost',
+          port: parseInt(process.env.SELENIUM_PORT || '4444', 10),
           path: '/wd/hub',
           capabilities: { browserName },
           logLevel: 'error',
