@@ -12,7 +12,7 @@
     "pub:git": "yarn run build && lerna publish from-git && yarn run clean",
     "pub:pkg": "yarn run build && lerna publish from-package && yarn run clean",
     "lint": "eslint --ext ts,tsx,js .",
-    "test": "tdd-buffet test --coverage --runInBand",
+    "test": "tdd-buffet test --coverage",
     "pretest": "yarn run selenium",
     "selenium": "selenium start",
     "selenium:debug": "selenium debug",
