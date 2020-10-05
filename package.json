@@ -34,7 +34,7 @@
     "@tdd-buffet/tsconfig": "~1.0.0",
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/node": "~10.12.2",
-    "codecov": "~3.7.0",
+    "codecov": "~3.8.0",
     "doctoc": "^1.4.0",
     "eslint": "~7.10.0",
     "husky": "~4.3.0",
