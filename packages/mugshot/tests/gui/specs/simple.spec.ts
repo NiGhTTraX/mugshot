@@ -1,6 +1,6 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
-import puppeteer from 'puppeteer';
+import puppeteer, { Browser, Page } from 'puppeteer';
 import { expect } from 'tdd-buffet/expect/chai';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { afterEach } from 'tdd-buffet/suite/node';
@@ -11,7 +11,7 @@ import { createResultsDirWithBaseline } from '../helpers';
 
 describe('Mugshot', () => {
   let resultsPath!: string;
-  let browser!: puppeteer.Browser, page!: puppeteer.Page;
+  let browser!: Browser, page!: Page;
 
   beforeEach(async () => {
     browser = await puppeteer.launch();
