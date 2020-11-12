@@ -9046,10 +9046,10 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright@~1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.5.0.tgz#27f80ea373b9eec4f735973de4e16ba983b37207"
-  integrity sha512-szV0YksBqKQ8XTaDhhvwoA+0nBICj2GOe8ptesSpmUq8xXjjSYSJqwH2J7haYwY35GD9zzH2+HGqeObI2i8tJw==
+playwright@~1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.6.0.tgz#e73b23562f899be618d4b9d204cdb259e550f831"
+  integrity sha512-fzKoIfIa98ffGnxTHoUgcb+iDPGkJF1OCJEL8in9NbDIyuEjed+gTlIn9X9qWi+RuEOJqrJw8bsG7Yi+dghgrw==
   dependencies:
     debug "^4.1.1"
     extract-zip "^2.0.1"
