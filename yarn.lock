@@ -11133,10 +11133,10 @@ typedoc-default-themes@^0.11.1:
   dependencies:
     lunr "^2.3.9"
 
-typedoc-plugin-pages@~1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-pages/-/typedoc-plugin-pages-1.0.1.tgz#bddff942d91dce4b93b4783158cc40cb70107650"
-  integrity sha512-eOcjcvXZPxyvcpl6U5uP08SqjYz20F7DGZC4kOD1ES2p+2hde6rbF4MPuOjtzcGUOrQeev2HhiaIi+07SiGNsQ==
+typedoc-plugin-pages@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-pages/-/typedoc-plugin-pages-1.1.0.tgz#c51367404b87b9b2e8cc440a53ff641c42b9fd7a"
+  integrity sha512-pmCCp3G2aCeEWb829dcVe9Pl+pI5OsaqfyrkEutcAHZi6IMVfQ5G5NdrkIkFCGhJU/DY04rGrVdynWqnaO5/jg==
   dependencies:
     compare-versions "^3.6.0"
     typedoc-default-themes "^0.10.1"
