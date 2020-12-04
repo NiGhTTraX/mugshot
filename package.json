@@ -35,7 +35,7 @@
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/node": "~10.12.2",
     "codecov": "~3.8.0",
-    "doctoc": "^1.4.0",
+    "doctoc": "^2.0.0",
     "eslint": "~7.14.0",
     "husky": "~4.3.0",
     "jimp": "~0.16.0",
