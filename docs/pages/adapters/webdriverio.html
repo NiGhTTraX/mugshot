@@ -92,8 +92,8 @@
 
 test(<span class="hljs-string">&#x27;GitHub project page should look the same&#x27;</span>, <span class="hljs-keyword">async</span> () =&gt; {
   <span class="hljs-keyword">const</span> browser = <span class="hljs-keyword">await</span> remote({
-    hostname: <span class="hljs-string">&#x27;localhost&#x27;</span>,
-    capabilities: { browserName: <span class="hljs-string">&#x27;chrome&#x27;</span> }
+    <span class="hljs-attr">hostname</span>: <span class="hljs-string">&#x27;localhost&#x27;</span>,
+    <span class="hljs-attr">capabilities</span>: { <span class="hljs-attr">browserName</span>: <span class="hljs-string">&#x27;chrome&#x27;</span> }
   });
 
   <span class="hljs-keyword">const</span> mugshot = <span class="hljs-keyword">new</span> Mugshot(
