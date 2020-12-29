@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.2.0...mugshot@3.3.0) (2020-12-29)
+
+
+### Features
+
+* **mugshot:** Allow ignore color to be customized ([d56c9c6](https://github.com/NiGhTTraX/mugshot/commit/d56c9c6))
+
+
+
+
+
 # [3.2.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.1.0...mugshot@3.2.0) (2020-09-09)
 
 
