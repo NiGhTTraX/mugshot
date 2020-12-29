@@ -81,6 +81,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="screenshotoptions.html#ignore" class="tsd-kind-icon">ignore</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="screenshotoptions.html#ignorecolor" class="tsd-kind-icon">ignore<wbr>Color</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,16 +95,41 @@
 					<div class="tsd-signature tsd-kind-icon">ignore<span class="tsd-signature-symbol">:</span> <a href="../globals.html#mugshotselector" class="tsd-signature-type">MugshotSelector</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/screenshotter.ts#L10">packages/mugshot/src/interfaces/screenshotter.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/screenshotter.ts#L8">packages/mugshot/src/interfaces/screenshotter.ts:8</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>All elements identified by this selector will be painted black
-								before taking the screenshot.
-								TODO: support multiple selectors
-							TODO: configure the color</p>
+							<p>All elements identified by this selector will be covered with <a href="screenshotoptions.html#ignorecolor">ignoreColor</a>
+							before taking the screenshot.</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ignorecolor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ignore<wbr>Color</h3>
+					<div class="tsd-signature tsd-kind-icon">ignore<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/NiGhTTraX/mugshot/blob/master/packages/mugshot/src/interfaces/screenshotter.ts#L23">packages/mugshot/src/interfaces/screenshotter.ts:23</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The color used to covered elements matched by the <a href="screenshotoptions.html#ignore">ignore</a> selector.</p>
+						</div>
+						<p>Needs to be in hex notation with leading bang.</p>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><p>#ff0000 // 6 hex char notation</p>
+							</dd>
+							<dt>example</dt>
+							<dd><p>#ccc // 3 hex char notation</p>
+							</dd>
+							<dt>default</dt>
+							<dd><p>#000</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 			</section>
@@ -143,6 +169,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="screenshotoptions.html#ignore" class="tsd-kind-icon">ignore</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="screenshotoptions.html#ignorecolor" class="tsd-kind-icon">ignore<wbr>Color</a>
 							</li>
 						</ul>
 					</li>

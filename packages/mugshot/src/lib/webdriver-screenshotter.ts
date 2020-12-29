@@ -92,7 +92,11 @@ export default class WebdriverScreenshotter implements Screenshotter {
     }
 
     if (options.ignore) {
-      screenshot = await this.ignore(options.ignore, screenshot);
+      screenshot = await this.ignore(
+        options.ignore,
+        screenshot,
+        options.ignoreColor
+      );
     }
 
     return screenshot;
@@ -128,7 +132,11 @@ export default class WebdriverScreenshotter implements Screenshotter {
     );
   }
 
-  private async ignore(selector: MugshotSelector, screenshot: Buffer) {
+  private async ignore(
+    selector: MugshotSelector,
+    screenshot: Buffer,
+    ignoreColor = '#000'
+  ) {
     let rects: ElementRect | ElementRect[] | null;
 
     if (typeof selector === 'string') {
@@ -163,7 +171,7 @@ export default class WebdriverScreenshotter implements Screenshotter {
           rect.y,
           rect.width,
           rect.height,
-          '#000'
+          ignoreColor
         );
       }
 
@@ -176,7 +184,7 @@ export default class WebdriverScreenshotter implements Screenshotter {
       rects.y,
       rects.width,
       rects.height,
-      '#000'
+      ignoreColor
     );
   }
 }

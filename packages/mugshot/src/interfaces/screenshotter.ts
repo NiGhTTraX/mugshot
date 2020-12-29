@@ -2,12 +2,23 @@ import { MugshotSelector } from '../lib/mugshot';
 
 export interface ScreenshotOptions {
   /**
-   * All elements identified by this selector will be painted black
+   * All elements identified by this selector will be covered with [[ignoreColor]]
    * before taking the screenshot.
-   * TODO: support multiple selectors
-   * TODO: configure the color
    */
-  ignore?: MugshotSelector;
+  ignore?: MugshotSelector; // TODO: support multiple selectors
+
+  /**
+   * The color used to covered elements matched by the [[ignore]] selector.
+   *
+   * @example
+   * #ff0000 // 6 hex char notation
+   *
+   * @example
+   * #ccc // 3 hex char notation
+   *
+   * @default #000
+   */
+  ignoreColor?: string;
 }
 
 /**

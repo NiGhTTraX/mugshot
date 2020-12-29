@@ -127,7 +127,7 @@ A [selector](./docs/globals.html#mugshotselector) can be passed as the second ar
 
 ### Ignoring elements
 
-You can ignore elements on the page by passing a [selector](./docs/globals.html#mugshotselector) through the `ignore` option. The elements identified by that selector will be painted black before taking any screenshots.
+You can ignore elements on the page by passing a [selector](./docs/globals.html#mugshotselector) through the `ignore` option. The elements identified by that selector will be painted with the `ignoreColor` (defaults to `#000`) before taking any screenshots.
 
 
 ### Storing screenshots

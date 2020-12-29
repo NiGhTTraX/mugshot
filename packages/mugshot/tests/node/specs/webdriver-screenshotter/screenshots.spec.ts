@@ -172,6 +172,31 @@ describe('WebdriverScreenshotter', () => {
     await expectIdenticalBuffers(screenshot, whitePixelBuffer);
   });
 
+  it('should cover the ignored element with the custom color', async () => {
+    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.getElementRect('.ignore')).thenResolve({
+      x: 1,
+      y: 2,
+      width: 3,
+      height: 4,
+    });
+
+    when(
+      pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#ff0000')
+    ).thenResolve(whitePixelBuffer);
+
+    const screenshotter = new WebdriverScreenshotter(instance(client), {
+      pngProcessor: instance(pngProcessor),
+    });
+
+    const screenshot = await screenshotter.takeScreenshot({
+      ignore: '.ignore',
+      ignoreColor: '#ff0000',
+    });
+
+    await expectIdenticalBuffers(screenshot, whitePixelBuffer);
+  });
+
   it('should throw if the ignore selector does not return anything', async () => {
     when(client.takeScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve(null);
