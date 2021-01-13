@@ -2322,6 +2322,20 @@
   dependencies:
     "@types/node" "*"
 
+"@types/puppeteer-core@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer-core/-/puppeteer-core-5.4.0.tgz#880a7917b4ede95cbfe2d5e81a558cfcb072c0fb"
+  integrity sha512-yqRPuv4EFcSkTyin6Yy17pN6Qz2vwVwTCJIDYMXbE3j8vTPhv0nCQlZOl5xfi0WHUkqvQsjAR8hAfjeMCoetwg==
+  dependencies:
+    "@types/puppeteer" "*"
+
+"@types/puppeteer@*":
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-5.4.2.tgz#80f3a1f54dedbbf750779716de81401549062072"
+  integrity sha512-yjbHoKjZFOGqA6bIEI2dfBE5UPqU0YGWzP+ipDVP1iGzmlhksVKTBVZfT3Aj3wnvmcJ2PQ9zcncwOwyavmafBw==
+  dependencies:
+    "@types/node" "*"
+
 "@types/puppeteer@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-3.0.1.tgz#053ec20facc162b25a64785affccaa3e5817c607"
@@ -2487,10 +2501,10 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
-"@wdio/protocols@6.10.6":
-  version "6.10.6"
-  resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-6.10.6.tgz#8d1deed6651a5ca0a185ea334fc1a371dc4c700c"
-  integrity sha512-CLLVdc82S+Zij7f9djL90JC1bE5gtaOn+EF2pY4n8XdypqPUa1orQip8stQtX/wXEX0Ak45MEcSU9nCY+CzNnQ==
+"@wdio/protocols@6.12.0":
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/@wdio/protocols/-/protocols-6.12.0.tgz#e40850be62c42c82dd2c486655d6419cd9ec1e3e"
+  integrity sha512-UhTBZxClCsM3VjaiDp4DoSCnsa7D1QNmI2kqEBfIpyNkT3GcZhJb7L+nL0fTkzCwi7+/uLastb3/aOwH99gt0A==
 
 "@wdio/protocols@6.3.6":
   version "6.3.6"
@@ -4219,14 +4233,14 @@ devtools-protocol@0.0.818844:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.818844.tgz#d1947278ec85b53e4c8ca598f607a28fa785ba9e"
   integrity sha512-AD1hi7iVJ8OD0aMLQU5VK0XH9LDlA1+BcPIgrAxPfaibx2DbWucuyOhc4oyQCbnvDDO68nN6/LcKfqTP343Jjg==
 
-devtools@6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/devtools/-/devtools-6.11.0.tgz#d20f1d1bb42357d3f2e424d7103fdd3e0d339879"
-  integrity sha512-fqiRz77IIGkHfHdIkVYIpBNKz7qllJJvHP92NKDo5e41J+sSVKsjzHsPqvYLugRhSGsZKPrJ19Sj8kmPyFi18w==
+devtools@6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/devtools/-/devtools-6.12.0.tgz#f4e01cba622a5bace6b36fcee755435a08eef1b5"
+  integrity sha512-Z0WiT6oAWEt80HPHX4yOUBhXT0xnxI7A3/Fa8pxGpkS03pxSHwm8kNlO694WH/lgTqS6DFubCXzIyQPophZaig==
   dependencies:
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
-    "@wdio/protocols" "6.10.6"
+    "@wdio/protocols" "6.12.0"
     "@wdio/utils" "6.11.0"
     chrome-launcher "^0.13.1"
     edge-paths "^2.1.0"
@@ -11597,14 +11611,14 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-webdriver@6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-6.11.0.tgz#2997bf4ff6c1dcb4e58b4ae9e2b83af8b938f643"
-  integrity sha512-31uD1Vi+9QAzDSpN3+0oFFRnzJP8IVp8wRjLVbIOaQGPXV1sKjAP7v6LJcxl1JjcmW8keAIh2eyAgbjZJbcyZw==
+webdriver@6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/webdriver/-/webdriver-6.12.0.tgz#c9a42b4b01575eb33e96fa6d79e9fb8514c8eb0d"
+  integrity sha512-5HDfOaMnieoDpwYqQ7i9YEP2GGw8Y52rgX8qeUvSFd/3ybh+QP2WiWkxhRI/kYLcCqTV1e+YIwt+WB+LaTtAMQ==
   dependencies:
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
-    "@wdio/protocols" "6.10.6"
+    "@wdio/protocols" "6.12.0"
     "@wdio/utils" "6.11.0"
     got "^11.0.2"
     lodash.merge "^4.6.1"
@@ -11621,11 +11635,12 @@ webdriver@6.4.5:
     got "^11.0.2"
     lodash.merge "^4.6.1"
 
-webdriverio@~6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.11.0.tgz#09761b80395e5a9a745391e7b7a6c7c82dd32465"
-  integrity sha512-8tK3+H6OQP1/17xjNd/u14mgMyy4Iw9QIOOlA0bzVc8flYYfhzs2Z+uKKPT9NtrfeoJOvDa9ms7nq7o0QtcmEg==
+webdriverio@~6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/webdriverio/-/webdriverio-6.12.0.tgz#03bf708d470aaebab669fd0d3de281dafbc09992"
+  integrity sha512-9eu8WWOjsdDksbHeUPblAmQkWRVLOfI3C2P64UU0fX+zjcGXyCnkLsYfjV3dLmB4ePjgYZnNrSi4tsxJiorMew==
   dependencies:
+    "@types/puppeteer-core" "^5.4.0"
     "@wdio/config" "6.11.0"
     "@wdio/logger" "6.10.10"
     "@wdio/repl" "6.11.0"
@@ -11634,7 +11649,7 @@ webdriverio@~6.11.0:
     atob "^2.1.2"
     css-shorthand-properties "^1.1.1"
     css-value "^0.0.1"
-    devtools "6.11.0"
+    devtools "6.12.0"
     fs-extra "^9.0.1"
     get-port "^5.1.1"
     grapheme-splitter "^1.0.2"
@@ -11647,7 +11662,7 @@ webdriverio@~6.11.0:
     resq "^1.9.1"
     rgb2hex "0.2.3"
     serialize-error "^7.0.0"
-    webdriver "6.11.0"
+    webdriver "6.12.0"
 
 webdriverio@~6.4.5:
   version "6.4.5"
