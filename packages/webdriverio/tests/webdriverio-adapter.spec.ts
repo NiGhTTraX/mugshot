@@ -1,13 +1,13 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
 import { after, before, describe, it } from 'tdd-buffet/suite/node';
-import { BrowserObject, remote, RemoteOptions } from 'webdriverio';
+import { Browser, remote, RemoteOptions } from 'webdriverio';
 import WebdriverIOAdapter from '../src';
 
 describe('WebdriverIOAdapter', () => {
   // eslint-disable-next-line no-restricted-syntax
   for (const browserName of ['chrome', 'firefox']) {
     describe(browserName, () => {
-      let browser!: BrowserObject;
+      let browser!: Browser<'async'>;
 
       before(async () => {
         const options: RemoteOptions = {
