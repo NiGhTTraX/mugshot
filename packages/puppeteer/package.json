@@ -35,9 +35,8 @@
     "puppeteer": "^7.0.0"
   },
   "devDependencies": {
-    "@types/puppeteer": "~5.4.0",
     "mugshot": "^3.3.0",
-    "puppeteer": "~7.0.0",
+    "puppeteer": "~7.1.0",
     "typescript": "~4.1.0"
   }
 }

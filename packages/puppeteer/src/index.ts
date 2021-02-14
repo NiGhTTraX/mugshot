@@ -38,7 +38,11 @@ export default class PuppeteerAdapter implements Webdriver {
       height,
     });
 
-  takeScreenshot = () => this.page.screenshot();
+  takeScreenshot = async () =>
+    // The puppeteer type returns Buffer | string depending on the encoding,
+    // but does not discriminate on it. It can also return void if the screenshot
+    // fails.
+    (await (this.page.screenshot() as Promise<Buffer>)).toString('base64');
 
   execute = <R, A extends any[]>(func: (...args: A) => R, ...args: A) =>
     this.page.evaluate(
