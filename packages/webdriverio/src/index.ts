@@ -1,5 +1,5 @@
 import { Webdriver } from 'mugshot';
-import { BrowserObject } from 'webdriverio';
+import { Browser } from 'webdriverio';
 
 /* istanbul ignore next because this will get stringified and sent to the client */
 function getBoundingRect(selector: string): DOMRect | DOMRect[] | null {
@@ -33,7 +33,7 @@ function getClientChromeSize() {
  * @see https://webdriver.io/docs/api.html
  */
 export default class WebdriverIOAdapter implements Webdriver {
-  constructor(private readonly client: BrowserObject) {}
+  constructor(private readonly client: Browser<'async'>) {}
 
   takeScreenshot = async () => this.client.takeScreenshot();
 
