@@ -19,15 +19,6 @@
     "selenium:stop": "selenium stop",
     "report-coverage": "codecov"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.tsx?": "eslint",
-    "*.js": "eslint"
-  },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~8.0.0",
     "@tdd-buffet/jest-config": "~2.0.0",
@@ -37,10 +28,8 @@
     "codecov": "~3.8.0",
     "doctoc": "^2.0.0",
     "eslint": "~7.20.0",
-    "husky": "~5.0.0",
     "jimp": "~0.16.0",
     "lerna": "~3.22.0",
-    "lint-staged": "~10.5.0",
     "strong-mock": "~6.0.0",
     "tdd-buffet": "~2.1.0",
     "typedoc": "~0.19.0",
