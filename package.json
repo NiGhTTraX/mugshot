@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~8.0.0",
-    "@tdd-buffet/jest-config": "~2.0.0",
+    "@tdd-buffet/jest-config": "~3.0.0",
     "@tdd-buffet/tsconfig": "~1.0.2",
     "@tdd-buffet/selenium": "~0.4.1",
     "@types/node": "~10.17.0",
