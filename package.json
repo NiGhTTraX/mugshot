@@ -17,7 +17,7 @@
     "selenium": "selenium start",
     "selenium:debug": "selenium debug",
     "selenium:stop": "selenium stop",
-    "report-coverage": "codecov -f tests/results/coverage-final.json"
+    "report-coverage": "codecov"
   },
   "husky": {
     "hooks": {
