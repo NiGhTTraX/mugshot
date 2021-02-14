@@ -28,7 +28,11 @@
     "build": "yarn run clean && yarn run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "yarn run build"
+    "prepublishOnly": "yarn run build",
+    "test": "tdd-buffet test --coverage",
+    "pretest": "selenium start",
+    "report-coverage": "codecov -F webdriverio"
+
   },
   "peerDependencies": {
     "mugshot": "^3.0.0",

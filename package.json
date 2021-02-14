@@ -16,8 +16,7 @@
     "pretest": "yarn run selenium",
     "selenium": "selenium start",
     "selenium:debug": "selenium debug",
-    "selenium:stop": "selenium stop",
-    "report-coverage": "codecov"
+    "selenium:stop": "selenium stop"
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~8.0.0",
