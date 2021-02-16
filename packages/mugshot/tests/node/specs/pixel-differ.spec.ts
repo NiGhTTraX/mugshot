@@ -1,4 +1,4 @@
-import { expect } from 'tdd-buffet/expect/chai';
+import { expect } from 'tdd-buffet/expect/jest';
 import { describe, it } from 'tdd-buffet/suite/node';
 import {
   createTestBuffer,
@@ -15,7 +15,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['RGB', 'RGB', 'RGB'])
       );
 
-      expect(result.matches).to.be.true;
+      expect(result.matches).toBeTruthy();
     });
 
     it('should not create a diff for identical buffers', async () => {
@@ -27,7 +27,7 @@ describe('PixelDiffer', () => {
       expect(
         // @ts-expect-error because we don't discriminate the result
         result.diff
-      ).to.be.undefined;
+      ).toBeUndefined();
     });
 
     it('should not return the diff in percentage', async () => {
@@ -39,7 +39,7 @@ describe('PixelDiffer', () => {
       expect(
         // @ts-expect-error because we don't discriminate the result
         result.percentage
-      ).to.be.undefined;
+      ).toBeUndefined();
     });
 
     it('should compare different buffers', async () => {
@@ -48,7 +48,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['GGG', 'BBB', 'RRR'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
     });
 
     it('should create a diff for different buffers', async () => {
@@ -86,7 +86,7 @@ describe('PixelDiffer', () => {
           // eslint-disable-next-line no-await-in-loop
         } = await new PixelDiffer().compare(baseline, screenshot);
 
-        expect(percentage).to.be.closeTo(result, 0.01);
+        expect(percentage).toBeCloseTo(result, 0.01);
       }
     });
 
@@ -96,7 +96,7 @@ describe('PixelDiffer', () => {
         await lightenBuffer(await createTestBuffer(['KKK', 'KKK']), 1)
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
     });
   });
 
@@ -108,7 +108,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['KK', 'KK', 'KK', 'KK'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -122,7 +122,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['KK', 'KK', 'KK'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -136,7 +136,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['KKK', 'KKK'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -164,7 +164,7 @@ describe('PixelDiffer', () => {
           // eslint-disable-next-line no-await-in-loop
         } = await new PixelDiffer().compare(baseline, screenshot);
 
-        expect(percentage).to.be.closeTo(result, 0.01);
+        expect(percentage).toBeCloseTo(result, 0.01);
       }
     });
   });
@@ -176,7 +176,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['GGG', 'GGG', 'GGG'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -190,7 +190,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['GG', 'GG', 'GG'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -204,7 +204,7 @@ describe('PixelDiffer', () => {
         await createTestBuffer(['GGG', 'GGG'])
       );
 
-      expect(result.matches).to.be.false;
+      expect(result.matches).toBeFalsy();
       await expectIdenticalBuffers(
         // @ts-expect-error because we don't discriminate the result
         result.diff,
@@ -234,7 +234,7 @@ describe('PixelDiffer', () => {
           // eslint-disable-next-line no-await-in-loop
         } = await new PixelDiffer().compare(baseline, screenshot);
 
-        expect(percentage).to.be.closeTo(result, 0.01);
+        expect(percentage).toBeCloseTo(result, 0.01);
       }
     });
   });
@@ -276,7 +276,7 @@ describe('PixelDiffer', () => {
         await lightenBuffer(await createTestBuffer(['KKK', 'KKK']), 10)
       );
 
-      expect(result.matches).to.be.true;
+      expect(result.matches).toBeTruthy();
     });
   });
 });

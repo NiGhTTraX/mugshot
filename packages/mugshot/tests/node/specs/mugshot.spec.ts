@@ -1,6 +1,6 @@
 import { AssertionError } from 'chai';
 import { instance, It, mock, reset, verify, when } from 'strong-mock';
-import { expect } from 'tdd-buffet/expect/chai';
+import { expect } from 'tdd-buffet/expect/jest';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
@@ -28,9 +28,9 @@ describe('Mugshot', () => {
   ) {
     const result = await checkCall;
 
-    expect(result.matches).to.be.true;
-    expect(result.expectedName).to.equal(name);
-    expect(result.expected).to.deep.equal(baseline);
+    expect(result.matches).toBeTruthy();
+    expect(result.expectedName).toEqual(name);
+    expect(result.expected).toEqual(baseline);
   }
 
   function ignoreCleanup() {
@@ -75,10 +75,10 @@ describe('Mugshot', () => {
       const result = await checkCall;
 
       if (!result.matches) {
-        expect(result.diffName).to.equal(diffName);
-        expect(result.diff).to.deep.equal(diff);
-        expect(result.actualName).to.equal(actualName);
-        expect(result.actual).to.deep.equal(actual);
+        expect(result.diffName).toEqual(diffName);
+        expect(result.diff).toEqual(diff);
+        expect(result.actualName).toEqual(actualName);
+        expect(result.actual).toEqual(actual);
       } else {
         throw new AssertionError('Expected Mugshot to return a diff result');
       }
@@ -282,7 +282,7 @@ describe('Mugshot', () => {
       checkCall: Promise<MugshotResult>
     ) {
       return expectError(checkCall, MugshotMissingBaselineError, (error) => {
-        expect(error.message).to.contain('Missing baseline');
+        expect(error.message).toContain('Missing baseline');
       });
     }
 

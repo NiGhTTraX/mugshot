@@ -1,7 +1,7 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer, { Browser, Page } from 'puppeteer';
-import { expect } from 'tdd-buffet/expect/chai';
+import { expect } from 'tdd-buffet/expect/jest';
 import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { afterEach } from 'tdd-buffet/suite/node';
 import FsStorage from '../../../src/lib/fs-storage';
@@ -41,7 +41,7 @@ describe('Mugshot', () => {
 
     const result = await mugshot.check('simple');
 
-    expect(result.matches).to.be.true;
+    expect(result.matches).toBeTruthy();
   });
 
   it('should fail when different', async () => {
@@ -59,6 +59,6 @@ describe('Mugshot', () => {
 
     const result = await mugshot.check('simple');
 
-    expect(result.matches).to.be.false;
+    expect(result.matches).toBeFalsy();
   });
 });
