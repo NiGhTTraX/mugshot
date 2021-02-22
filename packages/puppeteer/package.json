@@ -31,7 +31,7 @@
     "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
-    "mugshot": "^2.0.0",
+    "mugshot": "^3.0.0",
     "puppeteer": "^7.0.0"
   },
   "devDependencies": {
