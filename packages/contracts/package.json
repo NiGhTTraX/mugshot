@@ -29,7 +29,7 @@
     "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
-    "mugshot": "^2.0.1"
+    "mugshot": "^3.0.0"
   },
   "dependencies": {
     "@types/chai": "~4.2.0",
