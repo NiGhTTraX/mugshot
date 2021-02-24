@@ -33,6 +33,6 @@
     "tdd-buffet": "~2.1.3",
     "typedoc": "~0.19.0",
     "typedoc-plugin-pages": "~1.1.0",
-    "typescript": "~4.1.0"
+    "typescript": "~4.2.0"
   }
 }
