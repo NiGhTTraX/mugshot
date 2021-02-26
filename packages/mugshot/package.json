@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/pixelmatch": "~5.2.0",
-    "puppeteer": "~7.1.0",
+    "puppeteer": "~8.0.0",
     "typescript": "~4.2.0"
   }
 }
