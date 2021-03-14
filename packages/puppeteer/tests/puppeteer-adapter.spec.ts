@@ -7,9 +7,6 @@ describe('PuppeteerAdapter', () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch();
-  });
-
-  beforeEach(async () => {
     page = await browser.newPage();
   });
 
