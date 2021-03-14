@@ -1,4 +1,3 @@
-import { AssertionError } from 'chai';
 import { instance, It, mock, reset, verify, when } from 'strong-mock';
 import { expect } from 'tdd-buffet/expect/jest';
 import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
@@ -80,7 +79,7 @@ describe('Mugshot', () => {
         expect(result.actualName).toEqual(actualName);
         expect(result.actual).toEqual(actual);
       } else {
-        throw new AssertionError('Expected Mugshot to return a diff result');
+        throw new Error('Expected Mugshot to return a diff result');
       }
     }
 
@@ -272,7 +271,7 @@ describe('Mugshot', () => {
       }
 
       if (!threwExpectedError) {
-        throw new AssertionError(
+        throw new Error(
           `Expected Mugshot to throw a ${expectedError.constructor.name} error`
         );
       }
