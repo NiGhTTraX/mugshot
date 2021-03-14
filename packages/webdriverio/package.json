@@ -30,8 +30,7 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
     "test": "jest --config ../../jest.config.js --coverage",
-    "pretest": "selenium start",
-    "report-coverage": "codecov -F webdriverio-${BROWSER}"
+    "pretest": "selenium start"
 
   },
   "peerDependencies": {

@@ -82,8 +82,9 @@ jobs:
         working-directory: packages/mugshot
 
       - name: Coverage
-        run: yarn report-coverage
-        working-directory: packages/mugshot
+        uses: codecov/codecov-action@v1
+        with:
+          flags: mugshot
 
   webdriverio:
     runs-on: ubuntu-latest
@@ -119,10 +120,9 @@ jobs:
         working-directory: packages/webdriverio
 
       - name: Coverage
-        run: yarn report-coverage
-        env:
-          BROWSER: ${{ matrix.browser }}
-        working-directory: packages/webdriverio
+        uses: codecov/codecov-action@v1
+        with:
+          flags: webdriverio, ${{ matrix.browser }}
 
   puppeteer:
     runs-on: ubuntu-latest
@@ -152,8 +152,9 @@ jobs:
         working-directory: packages/puppeteer
 
       - name: Coverage
-        run: yarn report-coverage
-        working-directory: packages/puppeteer
+        uses: codecov/codecov-action@v1
+        with:
+          flags: puppeteer
 
   playwright:
     runs-on: ubuntu-latest
@@ -189,7 +190,6 @@ jobs:
         working-directory: packages/playwright
 
       - name: Coverage
-        run: yarn report-coverage
-        env:
-          BROWSER: ${{ matrix.browser }}
-        working-directory: packages/playwright
+        uses: codecov/codecov-action@v1
+        with:
+          flags: playwright, ${{ matrix.browser }}
