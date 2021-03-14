@@ -11,12 +11,12 @@ import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter'
 describe('WebdriverScreenshotter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await browser.close();
   });
 

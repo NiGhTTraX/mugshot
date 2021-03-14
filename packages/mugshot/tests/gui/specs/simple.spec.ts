@@ -10,12 +10,12 @@ describe('Mugshot', () => {
   let resultsPath!: string;
   let browser!: Browser, page!: Page;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await browser.close();
   });
 
