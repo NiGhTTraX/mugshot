@@ -5,7 +5,7 @@
 <div align="center">
 <h2>Framework independent visual testing library</h2>
 
-![Build Status](https://github.com/NiGhTTraX/mugshot/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg)](https://codecov.io/gh/NiGhTTraX/mugshot) ![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
+![Build Status](https://github.com/NiGhTTraX/mugshot/workflows/Ci/badge.svg) [![codecov](https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg)](https://codecov.io/gh/NiGhTTraX/mugshot) ![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
 </div>
 
 ----
