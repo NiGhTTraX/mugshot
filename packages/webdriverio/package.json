@@ -31,7 +31,7 @@
     "prepublishOnly": "yarn run build",
     "test": "tdd-buffet test --coverage",
     "pretest": "selenium start",
-    "report-coverage": "codecov -F webdriverio"
+    "report-coverage": "codecov -F webdriverio-${BROWSER}"
 
   },
   "peerDependencies": {
