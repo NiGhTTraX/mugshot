@@ -1,5 +1,5 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
-import playwright, { Browser, BrowserContext, Page } from 'playwright';
+import playwright, { Browser, Page } from 'playwright';
 import PlaywrightAdapter from '../src';
 
 const { BROWSER } = process.env as {
@@ -14,14 +14,10 @@ describe(`PlaywrightAdapter`, () => {
   describe(BROWSER, () => {
     let browser!: Browser;
     let page!: Page;
-    let context!: BrowserContext;
 
     beforeAll(async () => {
       browser = await playwright[BROWSER].launch();
-      context = await browser.newContext();
-    });
-
-    beforeEach(async () => {
+      const context = await browser.newContext();
       page = await context.newPage();
     });
 
