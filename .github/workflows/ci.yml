@@ -1,0 +1,173 @@
+name: mugshot
+
+on:
+  push:
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 12
+
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      id: yarn-cache
+      with:
+        path: ~/.yarn
+        key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+        restore-keys: |
+          ${{ runner.OS }}-yarn-
+          ${{ runner.OS }}-
+
+    - name: Update cache
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: yarn --frozen-lockfile
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+  mugshot:
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+        working-directory: packages/mugshot
+
+      - name: Coverage
+        run: yarn report-coverage
+        working-directory: packages/mugshot
+
+  webdriverio:
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+        working-directory: packages/webdriverio
+
+      - name: Coverage
+        run: yarn report-coverage
+        working-directory: packages/webdriverio
+
+  puppeteer:
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+        working-directory: packages/puppeteer
+
+      - name: Coverage
+        run: yarn report-coverage
+        working-directory: packages/puppeteer
+
+  playwright:
+    runs-on: ubuntu-latest
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Test
+        run: yarn test
+        working-directory: packages/playwright
+
+      - name: Coverage
+        run: yarn report-coverage
+        working-directory: packages/playwright
