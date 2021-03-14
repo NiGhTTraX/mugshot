@@ -160,6 +160,10 @@ jobs:
     timeout-minutes: 5
     needs: dependencies
 
+    strategy:
+      matrix:
+        browser: [ 'chromium', 'firefox' ]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -180,8 +184,12 @@ jobs:
 
       - name: Test
         run: yarn test
+        env:
+          BROWSER: ${{ matrix.browser }}
         working-directory: packages/playwright
 
       - name: Coverage
         run: yarn report-coverage
+        env:
+          BROWSER: ${{ matrix.browser }}
         working-directory: packages/playwright

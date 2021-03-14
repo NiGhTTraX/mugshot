@@ -30,7 +30,7 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
     "test": "tdd-buffet test --coverage",
-    "report-coverage": "codecov -F playwright"
+    "report-coverage": "codecov -F playwright-${BROWSER}"
   },
   "peerDependencies": {
     "mugshot": "^3.0.0",
