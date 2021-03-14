@@ -1,7 +1,5 @@
 import { mkdtemp, readFile, writeFile, pathExists } from 'fs-extra';
 import path from 'path';
-import { expect } from 'tdd-buffet/expect/jest';
-import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import { blackPixelBuffer, whitePixelBuffer } from '../fixtures';
 import FsStorage from '../../../src/lib/fs-storage';
 

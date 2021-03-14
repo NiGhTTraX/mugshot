@@ -1,5 +1,5 @@
 import Jimp from 'jimp';
-import { expect } from 'tdd-buffet/expect/chai';
+import { expect } from 'chai';
 
 /**
  * Do a slow pixel by pixel comparison between 2 buffers.

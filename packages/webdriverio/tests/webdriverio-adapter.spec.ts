@@ -1,5 +1,4 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
-import { after, before, describe, it } from 'tdd-buffet/suite/node';
 import { Browser, remote, RemoteOptions } from 'webdriverio';
 import WebdriverIOAdapter from '../src';
 
@@ -13,7 +12,7 @@ describe('WebdriverIOAdapter', () => {
   describe(BROWSER, () => {
     let browser!: Browser<'async'>;
 
-    before(async () => {
+    beforeAll(async () => {
       const options: RemoteOptions = {
         hostname: process.env.SELENIUM_HOST || 'localhost',
         port: parseInt(process.env.SELENIUM_PORT || '4444', 10),
@@ -25,7 +24,7 @@ describe('WebdriverIOAdapter', () => {
       browser = await remote(options);
     });
 
-    after(() => browser.deleteSession());
+    afterAll(() => browser.deleteSession());
 
     Object.keys(webdriverContractSuites).forEach((suite) => {
       describe(suite, () => {

@@ -6,6 +6,7 @@
     "paths": {
       "mugshot": ["mugshot/src"],
       "@mugshot/*": ["*/src"]
-    }
+    },
+    "types": ["jest", "node"]
   }
 }

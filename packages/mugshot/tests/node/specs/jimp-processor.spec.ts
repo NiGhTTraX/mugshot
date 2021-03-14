@@ -1,6 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-import { expect } from 'tdd-buffet/expect/jest';
-import { describe, it } from 'tdd-buffet/suite/node';
 import { createTestBuffer, expectIdenticalBuffers } from '../helpers';
 import { OutOfBoundsError } from '../../../src/interfaces/png-processor';
 import JimpProcessor from '../../../src/lib/jimp-processor';
@@ -135,6 +133,7 @@ describe('JimpProcessor', () => {
   ] as const;
 
   for (const [edge, x, y, w, h] of outOfBoundsCoordinates) {
+    // eslint-disable-next-line no-loop-func
     it(`should throw when trying to crop past the ${edge} edge`, async () => {
       const processor = new JimpProcessor();
 
@@ -151,6 +150,7 @@ describe('JimpProcessor', () => {
   }
 
   for (const [edge, x, y, w, h] of outOfBoundsCoordinates) {
+    // eslint-disable-next-line no-loop-func
     it(`should throw when trying to paint past the ${edge} edge`, async () => {
       const processor = new JimpProcessor();
 

@@ -1,6 +1,4 @@
 import { instance, It, mock, reset, verify, when } from 'strong-mock';
-import { expect } from 'tdd-buffet/expect/jest';
-import { afterEach, beforeEach, describe, it } from 'tdd-buffet/suite/node';
 import {
   blackPixelBuffer,
   redPixelBuffer,

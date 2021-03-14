@@ -1,9 +1,6 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import puppeteer, { Browser, Page } from 'puppeteer';
-import { expect } from 'tdd-buffet/expect/jest';
-import { beforeEach, describe, it } from 'tdd-buffet/suite/node';
-import { afterEach } from 'tdd-buffet/suite/node';
 import FsStorage from '../../../src/lib/fs-storage';
 import Mugshot from '../../../src/lib/mugshot';
 import WebdriverScreenshotter from '../../../src/lib/webdriver-screenshotter';
