@@ -68,7 +68,7 @@
 				<!--suppress HtmlDeprecatedAttribute -->
 				<div align="center">
 					<h2>Framework independent visual testing library</h2>
-					<p><a href="https://travis-ci.com/NiGhTTraX/mugshot"><img src="https://travis-ci.com/NiGhTTraX/mugshot.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/gh/NiGhTTraX/mugshot"><img src="https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://img.shields.io/npm/types/mugshot.svg" alt="npm type definitions"></p>
+					<p><img src="https://github.com/NiGhTTraX/mugshot/workflows/Tests/badge.svg" alt="Build Status"> <a href="https://codecov.io/gh/NiGhTTraX/mugshot"><img src="https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg" alt="codecov"></a> <img src="https://img.shields.io/npm/types/mugshot.svg" alt="npm type definitions"></p>
 				</div>
 				<hr>
 				<p>Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. You can use it to write visual regression tests for websites, mobile apps, native apps etc. Moreover, Mugshot doesn&#39;t impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.</p>
@@ -181,7 +181,7 @@ test(<span class="hljs-string">&#x27;GitHub project page should look the same&#x
 				<a href="#ignoring-elements" id="ignoring-elements" style="color: inherit; text-decoration: none;">
 					<h3>Ignoring elements</h3>
 				</a>
-				<p>You can ignore elements on the page by passing a <a href="./globals.html#mugshotselector">selector</a> through the <code>ignore</code> option. The elements identified by that selector will be painted black before taking any screenshots.</p>
+				<p>You can ignore elements on the page by passing a <a href="./globals.html#mugshotselector">selector</a> through the <code>ignore</code> option. The elements identified by that selector will be painted with the <code>ignoreColor</code> (defaults to <code>#000</code>) before taking any screenshots.</p>
 				<a href="#storing-screenshots" id="storing-screenshots" style="color: inherit; text-decoration: none;">
 					<h3>Storing screenshots</h3>
 				</a>
