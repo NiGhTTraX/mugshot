@@ -1998,10 +1998,10 @@
     meow "~9.0.0"
     progress "~2.0.3"
 
-"@tdd-buffet/tsconfig@~1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@tdd-buffet/tsconfig/-/tsconfig-1.0.2.tgz#2ad94865febe894fee41896c7165e20abdc2ccd2"
-  integrity sha512-HHvB65/SGf4Hu00F1DgRbcY3ldLDKAH3KAOw90N0Jp0sADjeylxmpAurXF6GxOuzBCyULI7Dq5ZaxE1S5/5qrA==
+"@tdd-buffet/tsconfig@~1.0.0":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@tdd-buffet/tsconfig/-/tsconfig-1.0.4.tgz#49be0d346d2929d07d3aec3f33a0af2f318ffd27"
+  integrity sha512-g1w/5wSYvJT4ptcejlL/7URT5GaqRgYc2zi3IOVM4VIADMcRcB4FK9/L84kAeLg/udBzacFj+3tkimghCBE2Eg==
 
 "@textlint/ast-node-types@^4.2.5":
   version "4.3.4"
