@@ -4,8 +4,6 @@ import { Page } from 'puppeteer';
 /**
  * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
  * to be used with [[WebdriverScreenshotter]].
- *
- * @see https://github.com/puppeteer/puppeteer/blob/v2.0.0/docs/api.md
  */
 export default class PuppeteerAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
