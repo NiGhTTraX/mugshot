@@ -129,6 +129,10 @@ jobs:
     timeout-minutes: 5
     needs: dependencies
 
+    strategy:
+      matrix:
+        version: [ 8, 9 ]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -147,6 +151,10 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
+      - name: Version
+        run: yarn add -D puppeteer@${{ matrix.version }}
+        working-directory: packages/puppeteer
+
       - name: Test
         run: yarn test
         working-directory: packages/puppeteer
@@ -154,7 +162,7 @@ jobs:
       - name: Coverage
         uses: codecov/codecov-action@v1
         with:
-          flags: puppeteer
+          flags: puppeteer, ${{ matrix.version }}
 
   playwright:
     runs-on: ubuntu-latest
