@@ -24,7 +24,7 @@ export type DiffResult = DiffPassingResult | DiffFailingResult;
 /**
  * Compare two screenshots and produce a diff image if necessary.
  */
-export default interface PNGDiffer {
+export interface PNGDiffer {
   /**
    * @param expected PNG encoded buffer.
    * @param actual PNG encoded buffer.

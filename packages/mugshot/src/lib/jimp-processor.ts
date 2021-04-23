@@ -1,10 +1,10 @@
 import Jimp from 'jimp';
-import PNGProcessor, { OutOfBoundsError } from '../interfaces/png-processor';
+import { PNGProcessor, OutOfBoundsError } from '../interfaces/png-processor';
 
 /**
  * Process screenshots using [Jimp](https://github.com/oliver-moran/jimp).
  */
-export default class JimpProcessor implements PNGProcessor {
+export class JimpProcessor implements PNGProcessor {
   crop = async (img: Buffer, x: number, y: number, w: number, h: number) => {
     const j = await Jimp.read(img);
 

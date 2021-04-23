@@ -1,13 +1,15 @@
-import Webdriver, {
-  ElementNotFoundError,
-  ElementNotVisibleError,
-} from '../interfaces/webdriver';
-import PNGProcessor from '../interfaces/png-processor';
-import Screenshotter, {
+import { PNGProcessor } from '../interfaces/png-processor';
+import {
   ScreenshotOptions,
+  Screenshotter,
   TooManyElementsError,
 } from '../interfaces/screenshotter';
-import JimpProcessor from './jimp-processor';
+import {
+  ElementNotFoundError,
+  ElementNotVisibleError,
+  Webdriver,
+} from '../interfaces/webdriver';
+import { JimpProcessor } from './jimp-processor';
 import { ElementRect, MugshotSelector } from './mugshot';
 
 export interface WebdriverScreenshotterOptions {
@@ -38,7 +40,7 @@ input {
 /**
  * Take screenshots from a Webdriver compatible client.
  */
-export default class WebdriverScreenshotter implements Screenshotter {
+export class WebdriverScreenshotter implements Screenshotter {
   private readonly pngProcessor: PNGProcessor;
 
   private readonly disableAnimations: boolean;

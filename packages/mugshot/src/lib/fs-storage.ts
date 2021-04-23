@@ -1,13 +1,13 @@
 import { outputFile, pathExists, readFile, remove } from 'fs-extra';
 import path from 'path';
-import ScreenshotStorage from '../interfaces/screenshot-storage';
+import { ScreenshotStorage } from '../interfaces/screenshot-storage';
 
 /**
  * Write and read baselines to and from the local file system.
  *
  * Screenshots will be saved with a `.png` extension.
  */
-export default class FsStorage implements ScreenshotStorage {
+export class FsStorage implements ScreenshotStorage {
   /**
    * @param resultsPath The entire folder structure will be created if missing.
    */

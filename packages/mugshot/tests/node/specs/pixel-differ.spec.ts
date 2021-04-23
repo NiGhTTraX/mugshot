@@ -3,7 +3,7 @@ import {
   expectIdenticalBuffers,
   lightenBuffer,
 } from '../helpers';
-import PixelDiffer from '../../../src/lib/pixel-differ';
+import { PixelDiffer } from '../../../src/lib/pixel-differ';
 
 describe('PixelDiffer', () => {
   describe('same width and height', () => {

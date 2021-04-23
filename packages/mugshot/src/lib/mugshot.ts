@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import isCI from 'is-ci';
-import PNGDiffer from '../interfaces/png-differ';
-import ScreenshotStorage from '../interfaces/screenshot-storage';
-import Screenshotter, { ScreenshotOptions } from '../interfaces/screenshotter';
-import PixelDiffer from './pixel-differ';
+import { PNGDiffer } from '../interfaces/png-differ';
+import { ScreenshotStorage } from '../interfaces/screenshot-storage';
+import { Screenshotter, ScreenshotOptions } from '../interfaces/screenshotter';
+import { PixelDiffer } from './pixel-differ';
 
 export interface MugshotIdenticalResult {
   matches: true;
@@ -78,7 +78,7 @@ export interface ElementRect {
 
 export type MugshotSelector = ElementSelector | ElementRect;
 
-interface MugshotOptions {
+export interface MugshotOptions {
   pngDiffer?: PNGDiffer;
 
   /**
@@ -102,7 +102,7 @@ export class MugshotMissingBaselineError extends Error {
   }
 }
 
-export default class Mugshot {
+export class Mugshot {
   private readonly pngDiffer: PNGDiffer;
 
   private readonly createMissingBaselines: boolean;
@@ -113,7 +113,7 @@ export default class Mugshot {
    * @param screenshotter
    * @param storage How to read and store screenshots.
    * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
-   * @param __namedParameters {@link MugshotOptions}
+   * @param __namedParameters {MugshotOptions}
    */
   constructor(
     private readonly screenshotter: Screenshotter,

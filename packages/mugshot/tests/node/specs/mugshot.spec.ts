@@ -1,16 +1,17 @@
 import { instance, It, mock, reset, verify, when } from 'strong-mock';
+import { DiffResult, PNGDiffer } from '../../../src/interfaces/png-differ';
+import { ScreenshotStorage } from '../../../src/interfaces/screenshot-storage';
+import { Screenshotter } from '../../../src/interfaces/screenshotter';
+import {
+  Mugshot,
+  MugshotMissingBaselineError,
+  MugshotResult,
+} from '../../../src/lib/mugshot';
 import {
   blackPixelBuffer,
   redPixelBuffer,
   whitePixelBuffer,
 } from '../fixtures';
-import PNGDiffer, { DiffResult } from '../../../src/interfaces/png-differ';
-import ScreenshotStorage from '../../../src/interfaces/screenshot-storage';
-import Screenshotter from '../../../src/interfaces/screenshotter';
-import Mugshot, {
-  MugshotMissingBaselineError,
-  MugshotResult,
-} from '../../../src/lib/mugshot';
 
 describe('Mugshot', () => {
   const storage = mock<ScreenshotStorage>();

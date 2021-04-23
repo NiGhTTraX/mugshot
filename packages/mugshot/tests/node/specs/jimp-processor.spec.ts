@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { createTestBuffer, expectIdenticalBuffers } from '../helpers';
 import { OutOfBoundsError } from '../../../src/interfaces/png-processor';
-import JimpProcessor from '../../../src/lib/jimp-processor';
+import { JimpProcessor } from '../../../src/lib/jimp-processor';
 
 describe('JimpProcessor', () => {
   it('should crop the entire image', async () => {

@@ -1,7 +1,7 @@
 import { mkdtemp, readFile, writeFile, pathExists } from 'fs-extra';
 import path from 'path';
 import { blackPixelBuffer, whitePixelBuffer } from '../fixtures';
-import FsStorage from '../../../src/lib/fs-storage';
+import { FsStorage } from '../../../src/lib/fs-storage';
 
 describe('FileStorage', () => {
   let tmpPath!: string;

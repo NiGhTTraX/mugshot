@@ -6,13 +6,14 @@ import {
   whitePixelBuffer,
 } from '../../fixtures';
 import { expectIdenticalBuffers } from '../../helpers';
-import PNGProcessor from '../../../../src/interfaces/png-processor';
+import { PNGProcessor } from '../../../../src/interfaces/png-processor';
 import { TooManyElementsError } from '../../../../src/interfaces/screenshotter';
-import Webdriver, {
+import {
+  Webdriver,
   ElementNotFoundError,
   ElementNotVisibleError,
 } from '../../../../src/interfaces/webdriver';
-import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
+import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
   const client = mock<Webdriver>();

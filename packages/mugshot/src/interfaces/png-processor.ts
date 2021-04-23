@@ -1,4 +1,4 @@
-export default interface PNGProcessor {
+export interface PNGProcessor {
   /**
    * Crop a screenshot to the specified dimensions.
    *

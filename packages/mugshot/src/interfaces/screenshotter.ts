@@ -22,7 +22,7 @@ export interface ScreenshotOptions {
 }
 
 /**
- * Thrown when the selector passed to {@link Mugshot.check} matches more than one
+ * Thrown when the selector passed to {@link check|Mugshot.check} matches more than one
  * element.
  */
 export class TooManyElementsError extends Error {
@@ -33,7 +33,7 @@ You can only take a screenshot of one element. Please narrow down your selector.
   }
 }
 
-export default interface Screenshotter {
+export interface Screenshotter {
   /**
    * Take a viewport screenshot.
    */

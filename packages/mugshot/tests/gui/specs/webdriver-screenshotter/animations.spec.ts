@@ -6,7 +6,7 @@ import {
 import PuppeteerAdapter from '@mugshot/puppeteer';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
-import WebdriverScreenshotter from '../../../../src/lib/webdriver-screenshotter';
+import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
   let browser!: puppeteer.Browser, page!: puppeteer.Page;

@@ -1,6 +1,6 @@
 import Jimp from 'jimp';
 import pixelmatch from 'pixelmatch';
-import PNGDiffer, { DiffResult } from '../interfaces/png-differ';
+import { PNGDiffer, DiffResult } from '../interfaces/png-differ';
 
 export interface Color {
   r: number;
@@ -48,7 +48,7 @@ export interface PixelDifferOptions {
  *
  * ![pixel-differ-examples](media://pixel-differ-examples.png)
  */
-export default class PixelDiffer implements PNGDiffer {
+export class PixelDiffer implements PNGDiffer {
   private readonly diffColor: Color;
 
   private readonly threshold: number;
