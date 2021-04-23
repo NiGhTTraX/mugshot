@@ -1,4 +1,3 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'Mugshot',
   tagline: 'Visual regression testing library',
@@ -23,6 +22,12 @@ module.exports = {
           docId: 'intro',
           position: 'left',
           label: 'Getting started',
+        },
+        {
+          type: 'doc',
+          docId: 'api/index',
+          position: 'left',
+          label: 'API',
         },
       ],
     },
@@ -53,6 +58,23 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+  ],
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'mugshot',
+        allReflectionsHaveOwnDocument: true,
+        entryPoints: ['../mugshot/src/index.ts'],
+        sidebar: {
+          sidebarFile: 'sidebar-mugshot.js',
+        },
+        tsconfig: '../mugshot/tsconfig.json',
+        name: 'Mugshot',
+        media: '../../media',
+        readme: 'none',
       },
     ],
   ],
