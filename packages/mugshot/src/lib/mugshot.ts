@@ -135,7 +135,7 @@ export class Mugshot {
    * @param name Mugshot will ask the storage implementation for a baseline
    *   with this name. If one is not found and `createMissingBaselines`
    *   is true then Mugshot will create a new baseline and return a passing
-   *   result. Any leftover diffs from last time will be cleaned up.<br>
+   *   result. Any leftover diffs from last time will be cleaned up.
    *
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `screenshotter`. If differences are found this will return a
@@ -160,7 +160,7 @@ export class Mugshot {
    * @param name Mugshot will ask the storage implementation for a baseline
    *   with this name. If one is not found and `createMissingBaselines`
    *   is true then Mugshot will create a new baseline and return a passing
-   *   result. Any leftover diffs from last time will be cleaned up.<br>
+   *   result. Any leftover diffs from last time will be cleaned up.
    *
    *   If a baseline is found then it will be compared with the screenshot
    *   taken from `screenshotter`. If differences are found this will return a
