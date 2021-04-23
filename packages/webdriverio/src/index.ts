@@ -28,7 +28,7 @@ function getClientChromeSize() {
 
 /**
  * Adapter over [WebdriverIO](https://webdriver.io/) to be used with
- * [[WebdriverScreenshotter]].
+ * {@link WebdriverScreenshotter}.
  *
  * @see https://webdriver.io/docs/api.html
  */

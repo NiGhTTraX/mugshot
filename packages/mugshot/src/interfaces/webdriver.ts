@@ -18,8 +18,8 @@ export default interface Webdriver {
    * @see https://w3c.github.io/webdriver/#get-element-rect
    *
    * If the selector matches more than 1 element then an array
-   * of [[ElementRect]] should be returned, otherwise a single [[ElementRect]]
-   * should be returned.
+   * of {@link ElementRect} should be returned, otherwise a single
+   * {@link ElementRect} should be returned.
    *
    * Should return `null` if the selector doesn't match any element.
    *

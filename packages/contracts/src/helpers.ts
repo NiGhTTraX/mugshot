@@ -6,7 +6,7 @@ import { dirname, join } from 'path';
  * Expect that the given screenshot matches the baseline on disk.
  *
  * This is sort of a basic re-implementation of Mugshot without all
- * of its features. It only depends on its [[PixelDiffer]] module.
+ * of its features. It only depends on its {@link PixelDiffer} module.
  */
 export async function expectIdenticalScreenshots(
   screenshot: Buffer,

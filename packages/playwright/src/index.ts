@@ -3,7 +3,7 @@ import { ElementHandle, Page } from 'playwright';
 
 /**
  * Adapter over [Playwright](https://github.com/microsoft/playwright) to be
- * used with [[WebdriverScreenshotter]].
+ * used with {@link WebdriverScreenshotter}.
  *
  * @see https://playwright.dev/
  */

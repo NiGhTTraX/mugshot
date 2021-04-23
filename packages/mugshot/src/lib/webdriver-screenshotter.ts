@@ -45,7 +45,7 @@ export default class WebdriverScreenshotter implements Screenshotter {
 
   /**
    * @param client
-   * @param __namedParameters [[WebdriverScreenshotterOptions]]
+   * @param __namedParameters {@link WebdriverScreenshotterOptions}
    */
   constructor(
     private readonly client: Webdriver,

@@ -9,7 +9,7 @@ import { expectIdenticalScreenshots } from './helpers';
 /**
  * Help the tests set up the environment.
  *
- * This is different from [[Webdriver]] because these methods are only
+ * This is different from {@link Webdriver} because these methods are only
  * needed by the tests.
  */
 export interface WebdriverTestSetup {
@@ -269,7 +269,7 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
 ];
 
 /**
- * Contract tests for the [[Webdriver]] interface.
+ * Contract tests for the {@link Webdriver} interface.
  *
  * Each key represents a suite of tests. Check the docs for each to understand
  * their scope.
@@ -279,26 +279,26 @@ export const webdriverContractSuites: Record<
   WebdriverContractTest[]
 > = {
   /**
-   * This suite checks the [[Webdriver.getElementRect]] method
+   * This suite checks the {@link Webdriver.getElementRect} method
    * and is __mandatory__ for implementations to pass.
    */
   getElementRect: webdriverGetElementRectContractTests,
 
   /**
-   * This suite checks the [[Webdriver.execute]] method and is
+   * This suite checks the {@link Webdriver.execute} method and is
    * __mandatory__ for implementations to pass.
    */
   execute: webdriverExecuteContractTests,
 
   /**
-   * This suite checks that [[Webdriver.takeScreenshot]] and
-   * [[Webdriver.setViewportSize]] works as expected when setting and getting the
+   * This suite checks that {@link Webdriver.takeScreenshot} and
+   * {@link Webdriver.setViewportSize} works as expected when setting and getting the
    * viewport size and is __mandatory__ for implementations to pass
    */
   setViewportSize: webdriverViewportContractTests,
 
   /**
-   * This suite check the [[Webdriver.takeScreenshot]] method and is _optional_
+   * This suite check the {@link Webdriver.takeScreenshot} method and is _optional_
    * for implementations to pass, but strongly recommended.
    *
    * These tests will compare actual screenshots. The fixtures have been designed

@@ -2,7 +2,7 @@ export default interface PNGProcessor {
   /**
    * Crop a screenshot to the specified dimensions.
    *
-   * Will throw [[OutOfBoundsError]] if trying to crop outside of the image.
+   * Will throw {@link OutOfBoundsError} if trying to crop outside of the image.
    *
    * @param img PNG encoded buffer.
    * @param x Top left coordinate in pixels.

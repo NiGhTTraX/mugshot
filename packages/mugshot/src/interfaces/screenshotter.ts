@@ -2,13 +2,13 @@ import { MugshotSelector } from '../lib/mugshot';
 
 export interface ScreenshotOptions {
   /**
-   * All elements identified by this selector will be covered with [[ignoreColor]]
+   * All elements identified by this selector will be covered with {@link ignoreColor}
    * before taking the screenshot.
    */
   ignore?: MugshotSelector; // TODO: support multiple selectors
 
   /**
-   * The color used to covered elements matched by the [[ignore]] selector.
+   * The color used to covered elements matched by the {@link ignore} selector.
    *
    * @example
    * #ff0000 // 6 hex char notation
@@ -22,7 +22,7 @@ export interface ScreenshotOptions {
 }
 
 /**
- * Thrown when the selector passed to [[Mugshot.check]] matches more than one
+ * Thrown when the selector passed to {@link Mugshot.check} matches more than one
  * element.
  */
 export class TooManyElementsError extends Error {
@@ -42,7 +42,7 @@ export default interface Screenshotter {
   /**
    * Take a screenshot of a single element.
    *
-   * Will throw [[TooManyElementsError]] if `selector` matches more than one element.
+   * Will throw {@link TooManyElementsError} if `selector` matches more than one element.
    */
   takeScreenshot(
     selector: MugshotSelector,

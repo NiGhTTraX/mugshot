@@ -48,14 +48,14 @@ export interface MugshotDiffResult {
 export type MugshotResult = MugshotIdenticalResult | MugshotDiffResult;
 
 /**
- * Identify an element on the screen. Depending on the [[Screenshotter]]
+ * Identify an element on the screen. Depending on the {@link Screenshotter}
  * implementation this could be a CSS selector, an iOS selector, an Android
  * selector etc.
  *
- * NOTE: This abstraction produces a LISP violation: some [[Screenshotter]]
+ * NOTE: This abstraction produces a LISP violation: some {@link Screenshotter}
  * implementations only work with a subset of selectors e.g. CSS selectors
  * or iOS selectors. Fixing this would require inverting the dependency
- * between [[Mugshot]] and [[Screenshotter]], which I'm not fond of since it
+ * between {@link Mugshot} and {@link Screenshotter}, which I'm not fond of since it
  * moves `Mugshot` one level down. WebdriverIO, for instance, has the same
  * problem; it can talk to Appium which can talk to mobile devices, so using
  * `'div'` as a selector doesn't make sense in that case.
@@ -113,7 +113,7 @@ export default class Mugshot {
    * @param screenshotter
    * @param storage How to read and store screenshots.
    * @param createMissingBaselines Defaults to false in a CI env, true otherwise.
-   * @param __namedParameters [[MugshotOptions]]
+   * @param __namedParameters {@link MugshotOptions}
    */
   constructor(
     private readonly screenshotter: Screenshotter,
@@ -144,7 +144,7 @@ export default class Mugshot {
    *   result will be returned and any leftover diffs from last time will be
    *   cleaned up.
    *
-   * @param selector See [[Screenshotter.takeScreenshot]] for more details.
+   * @param selector See {@link Screenshotter.takeScreenshot} for more details.
    *
    * @param options
    */

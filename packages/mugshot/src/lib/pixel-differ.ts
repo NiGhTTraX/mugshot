@@ -39,7 +39,7 @@ export interface PixelDifferOptions {
  * indicating the extra region will be returned. The images will be overlaid
  * starting from the top left corner and then compared. All of the pixels that
  * are outside of the intersection will be considered different, no matter the
- * [[PixelDifferOptions.threshold | threshold]].
+ * {@link PixelDifferOptions.threshold | threshold}.
  *
  * ![pixel-differ-explanation](media://pixel-differ-explanation.png)
  *
@@ -54,7 +54,7 @@ export default class PixelDiffer implements PNGDiffer {
   private readonly threshold: number;
 
   /**
-   * @param __namedParameters [[PixelDifferOptions]]
+   * @param __namedParameters {@link PixelDifferOptions}
    */
   constructor({
     diffColor = { r: 255, g: 0, b: 0 },
