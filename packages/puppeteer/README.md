@@ -17,11 +17,12 @@ yarn add @mugshot/puppeteer
 ## Usage
 
 ```typescript
-import Mugshot, {
+import {
+  Mugshot,
   FsStorage,
   WebdriverScreenshotter,
 } from 'mugshot';
-import PuppeteerAdapter from '@mugshot/puppeteer';
+import { PuppeteerAdapter } from '@mugshot/puppeteer';
 import puppeteer from 'puppeteer';
 
 test('GitHub project page should look the same', async () => {

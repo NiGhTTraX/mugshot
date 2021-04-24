@@ -2,9 +2,7 @@
 /**
  * @module mugshot
  */
-export { Mugshot as default } from './lib/mugshot';
 export * from './lib/mugshot';
-
 export * from './interfaces/webdriver';
 export * from './lib/webdriver-screenshotter';
 export * from './interfaces/png-differ';

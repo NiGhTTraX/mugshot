@@ -17,11 +17,12 @@ yarn add @mugshot/playwright
 ## Usage
 
 ```typescript
-import Mugshot, {
+import {
+  Mugshot,
   FsStorage,
   WebdriverScreenshotter,
 } from 'mugshot';
-import PlaywrightAdapter from '@mugshot/playwright';
+import { PlaywrightAdapter } from '@mugshot/playwright';
 import playwright from 'playwright';
 
 test('GitHub project page should look the same', async () => {

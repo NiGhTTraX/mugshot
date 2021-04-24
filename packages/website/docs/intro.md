@@ -46,11 +46,12 @@ Once everything is set you just call [`Mugshot.check`](./docs/classes/mugshot.ht
 The following example illustrates the basics. It uses [WebdriverIO](https://webdriver.io/) to control a browser and [Jest](https://jestjs.io/) to run the test:
 
 ```typescript
-import Mugshot, {
+import  {
+  Mugshot,
   FsStorage,
   WebdriverScreenshotter,
 } from 'mugshot';
-import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { WebdriverIOAdapter } from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
 test('GitHub project page should look the same', async () => {

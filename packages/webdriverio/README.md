@@ -17,11 +17,12 @@ yarn add @mugshot/webdriverio
 ## Usage
 
 ```typescript
-import Mugshot, {
+import {
+  Mugshot,
   FsStorage,
   WebdriverScreenshotter,
 } from 'mugshot';
-import WebdriverIOAdapter from '@mugshot/webdriverio';
+import { WebdriverIOAdapter } from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
 test('GitHub project page should look the same', async () => {

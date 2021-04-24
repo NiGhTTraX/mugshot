@@ -1,6 +1,6 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
 import { Browser, remote, RemoteOptions } from 'webdriverio';
-import WebdriverIOAdapter from '../src';
+import { WebdriverIOAdapter } from '../src';
 
 const { BROWSER } = process.env;
 

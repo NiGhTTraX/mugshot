@@ -10,7 +10,7 @@ import { ElementHandle, Page } from 'playwright';
  *
  * @see https://playwright.dev/
  */
-export default class PlaywrightAdapter implements Webdriver {
+export class PlaywrightAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
 
   takeScreenshot = async () =>

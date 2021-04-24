@@ -3,7 +3,7 @@ import {
   loadFixture,
   expectIdenticalScreenshots,
 } from '@mugshot/contracts';
-import PuppeteerAdapter from '@mugshot/puppeteer';
+import { PuppeteerAdapter } from '@mugshot/puppeteer';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
 import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';

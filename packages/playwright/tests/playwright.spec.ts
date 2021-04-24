@@ -1,6 +1,6 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
 import playwright, { Browser, Page } from 'playwright';
-import PlaywrightAdapter from '../src';
+import { PlaywrightAdapter } from '../src';
 
 const { BROWSER } = process.env as {
   BROWSER: 'chromium' | 'firefox' | undefined;

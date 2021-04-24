@@ -1,5 +1,5 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
-import PuppeteerAdapter from '@mugshot/puppeteer';
+import { PuppeteerAdapter } from '@mugshot/puppeteer';
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { FsStorage } from '../../../src/lib/fs-storage';
 import { Mugshot } from '../../../src/lib/mugshot';

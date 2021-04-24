@@ -8,7 +8,7 @@ import { Page } from 'puppeteer';
  * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
  * to be used with {@link WebdriverScreenshotter}.
  */
-export default class PuppeteerAdapter implements Webdriver {
+export class PuppeteerAdapter implements Webdriver {
   constructor(private readonly page: Page) {}
 
   getElementRect = async (selector: string) => {

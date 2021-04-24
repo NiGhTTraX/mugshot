@@ -35,7 +35,7 @@ function getClientChromeSize() {
  *
  * @see https://webdriver.io/docs/api.html
  */
-export default class WebdriverIOAdapter implements Webdriver {
+export class WebdriverIOAdapter implements Webdriver {
   constructor(private readonly client: Browser<'async'>) {}
 
   takeScreenshot = async () => this.client.takeScreenshot();
