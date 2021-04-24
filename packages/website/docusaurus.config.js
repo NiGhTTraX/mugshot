@@ -28,6 +28,12 @@ module.exports = {
           position: 'left',
           label: 'API',
         },
+        {
+          href: 'https://github.com/nighttrax/mugshot',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
+        },
       ],
     },
     footer: {
