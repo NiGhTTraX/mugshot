@@ -1,5 +1,5 @@
-const mugshot = require('./sidebar-mugshot');
+const api = require('./sidebar-api');
 
 module.exports = {
-  mugshot,
+  api,
 };

@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+
+  /* This includes all packages that should generate docs with typedoc. */
+  "include": [
+    "mugshot/src",
+    "puppeteer/src",
+    "webdriverio/src",
+    "playwright/src",
+    "contracts/src"
+  ]
+}
