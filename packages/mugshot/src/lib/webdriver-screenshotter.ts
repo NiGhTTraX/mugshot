@@ -87,7 +87,10 @@ export class WebdriverScreenshotter implements Screenshotter {
       await this.client.execute(injectAnimationDisablingStylesheet);
     }
 
-    let screenshot = Buffer.from(await this.client.takeScreenshot(), 'base64');
+    let screenshot = Buffer.from(
+      await this.client.takeViewportScreenshot(),
+      'base64'
+    );
 
     if (selector) {
       screenshot = await this.crop(selector, screenshot);

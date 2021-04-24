@@ -62,7 +62,7 @@ export class WebdriverIOAdapter implements Webdriver {
    */
   constructor(private readonly client: Browser<'async'>) {}
 
-  takeScreenshot = async () => this.client.takeScreenshot();
+  takeViewportScreenshot = async () => this.client.takeScreenshot();
 
   getElementRect = async (selector: string) => {
     const rects = (await this.client.execute(getBoundingRect, selector)) as

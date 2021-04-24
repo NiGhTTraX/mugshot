@@ -36,7 +36,7 @@ export class PlaywrightAdapter implements Webdriver {
    */
   constructor(private readonly page: Page) {}
 
-  takeScreenshot = async () =>
+  takeViewportScreenshot = async () =>
     (await this.page.screenshot()).toString('base64');
 
   execute = <R, A extends any[]>(

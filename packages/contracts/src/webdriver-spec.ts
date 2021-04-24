@@ -98,7 +98,7 @@ export const webdriverViewportContractTests: WebdriverContractTest[] = [
       await loadFixture(client, adapter, Fixture.simple);
 
       const screenshot = await Jimp.read(
-        Buffer.from(await adapter.takeScreenshot(), 'base64')
+        Buffer.from(await adapter.takeViewportScreenshot(), 'base64')
       );
 
       expect(screenshot.getWidth()).to.equal(1024);
@@ -112,7 +112,7 @@ export const webdriverViewportContractTests: WebdriverContractTest[] = [
       await loadFixture(client, adapter, Fixture.rect);
 
       const screenshot = await Jimp.read(
-        Buffer.from(await adapter.takeScreenshot(), 'base64')
+        Buffer.from(await adapter.takeViewportScreenshot(), 'base64')
       );
 
       expect(screenshot.getWidth()).to.equal(1024);
@@ -244,7 +244,10 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.simple);
 
-      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = Buffer.from(
+        await adapter.takeViewportScreenshot(),
+        'base64'
+      );
 
       await expectIdenticalScreenshots(
         screenshot,
@@ -258,7 +261,10 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
-      const screenshot = Buffer.from(await adapter.takeScreenshot(), 'base64');
+      const screenshot = Buffer.from(
+        await adapter.takeViewportScreenshot(),
+        'base64'
+      );
 
       await expectIdenticalScreenshots(
         screenshot,
@@ -291,14 +297,14 @@ export const webdriverContractSuites: Record<
   execute: webdriverExecuteContractTests,
 
   /**
-   * This suite checks that {@link Webdriver.takeScreenshot} and
+   * This suite checks that {@link Webdriver.takeViewportScreenshot} and
    * {@link Webdriver.setViewportSize} works as expected when setting and getting the
    * viewport size and is __mandatory__ for implementations to pass
    */
   setViewportSize: webdriverViewportContractTests,
 
   /**
-   * This suite check the {@link Webdriver.takeScreenshot} method and is _optional_
+   * This suite check the {@link Webdriver.takeViewportScreenshot} method and is _optional_
    * for implementations to pass, but strongly recommended.
    *
    * These tests will compare actual screenshots. The fixtures have been designed

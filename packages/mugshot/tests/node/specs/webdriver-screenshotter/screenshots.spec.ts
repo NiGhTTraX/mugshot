@@ -30,7 +30,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
     const screenshotter = new WebdriverScreenshotter(instance(client));
 
@@ -40,7 +40,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       x: 1,
       y: 2,
@@ -62,7 +62,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an area', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
     when(pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
       whitePixelBuffer
@@ -83,7 +83,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the selector returns multiple elements', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
       { x: 5, y: 6, width: 7, height: 8 },
@@ -99,7 +99,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element is not found', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve(null);
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
@@ -112,7 +112,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element has 0 width', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       width: 0,
       height: 100,
@@ -130,7 +130,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element has 0 height', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       height: 0,
       width: 100,
@@ -148,7 +148,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore an element', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 2,
@@ -172,7 +172,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should cover the ignored element with the custom color', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 2,
@@ -197,7 +197,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector does not return anything', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve(null);
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {
@@ -212,7 +212,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns 0 width', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve({
       x: 0,
       y: 0,
@@ -232,7 +232,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns 0 height', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve({
       x: 0,
       y: 0,
@@ -252,7 +252,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns multiple elements with one 0 height', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve([
       {
         x: 0,
@@ -280,7 +280,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore an area', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
     when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
       whitePixelBuffer
@@ -298,7 +298,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore all matching elements', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.ignore')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
       { x: 10, y: 20, width: 30, height: 40 },
@@ -323,7 +323,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore an element', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
@@ -356,7 +356,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore an area', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
@@ -383,7 +383,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore all matching elements', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
@@ -417,7 +417,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should disable animations', async () => {
-    when(client.takeScreenshot()).thenResolve(blackPixelB64);
+    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
     when(client.execute(It.isAny())).thenResolve(undefined);
 
     const screenshotter = new WebdriverScreenshotter(instance(client), {

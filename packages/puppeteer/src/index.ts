@@ -63,7 +63,7 @@ export class PuppeteerAdapter implements Webdriver {
       height,
     });
 
-  takeScreenshot = async () =>
+  takeViewportScreenshot = async () =>
     // The puppeteer type returns Buffer | string depending on the encoding,
     // but does not discriminate on it. It can also return void if the screenshot
     // fails.

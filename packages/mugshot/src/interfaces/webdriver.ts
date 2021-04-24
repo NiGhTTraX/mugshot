@@ -10,7 +10,7 @@ export interface Webdriver {
    *
    * @see https://w3c.github.io/webdriver/#take-screenshot
    */
-  takeScreenshot: () => Promise<string>;
+  takeViewportScreenshot: () => Promise<string>;
 
   /**
    * Get the dimensions and coordinates of an element.
