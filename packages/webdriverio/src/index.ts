@@ -1,3 +1,6 @@
+/**
+ * @module @mugshot/webdriverio
+ */
 import { Webdriver } from 'mugshot';
 import { Browser } from 'webdriverio';
 

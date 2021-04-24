@@ -1,3 +1,6 @@
+/**
+ * @module @mugshot/playwright
+ */
 import { Webdriver } from 'mugshot';
 import { ElementHandle, Page } from 'playwright';
 

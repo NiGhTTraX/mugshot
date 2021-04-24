@@ -1,4 +1,7 @@
 /* istanbul ignore file */
+/**
+ * @module mugshot
+ */
 export { Mugshot as default } from './lib/mugshot';
 export * from './lib/mugshot';
 

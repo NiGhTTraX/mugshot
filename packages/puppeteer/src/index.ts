@@ -1,3 +1,6 @@
+/**
+ * @module @mugshot/puppeteer
+ */
 import { Webdriver } from 'mugshot';
 import { Page } from 'puppeteer';
 
