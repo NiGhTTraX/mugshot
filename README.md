@@ -1,5 +1,5 @@
-<!-- DUPLICATED in DOCS.md. Please keep in sync. -->
-![logo](media/logo.png)
+<!-- DUPLICATED in website/docs/usage.md. Please keep in sync. -->
+![logo](packages/website/static/img/logo.png)
 
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
@@ -77,7 +77,7 @@ Mugshot aims to automate that process. It offers a simple API that lets you comp
 
 Expected | Actual | Diff
 ---------|--------|-----
-![expected](media/expected.png) | ![actual](media/actual.png) | ![diff](media/diff.png)
+![expected](packages/website/static/img/expected.png) | ![actual](packages/website/static/img/actual.png) | ![diff](packages/website/static/img/diff.png)
 
 
 ## Docs

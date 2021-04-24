@@ -12,9 +12,8 @@ module.exports = {
     navbar: {
       title: 'Mugshot',
       logo: {
-        // TODO
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: 'Mugshot Logo',
+        src: 'img/logo.png',
       },
       items: [
         {
@@ -80,7 +79,7 @@ module.exports = {
         excludePrivate: true,
         excludeProtected: true,
         listInvalidSymbolLinks: true,
-        media: '../../media',
+        media: './static/img',
         readme: 'none',
         name: 'Mugshot',
       },
