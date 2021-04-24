@@ -35,7 +35,9 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Andrei Picus. Built with Docusaurus.`,
     },
     colorMode: {
+      // Images are designed to only work with the dark theme.
       defaultMode: 'dark',
+      disableSwitch: true,
     },
   },
   presets: [
