@@ -58,4 +58,19 @@ describe('Mugshot', () => {
 
     expect(result.matches).toBeFalsy();
   });
+
+  it('should use sane defaults for basic constructor', async () => {
+    const adapter = new PuppeteerAdapter(page);
+    const mugshot = new Mugshot(adapter, resultsPath);
+
+    await loadFixture(
+      { url: (url) => page.goto(url) },
+      adapter,
+      Fixture.simple
+    );
+
+    const result = await mugshot.check('simple');
+
+    expect(result.matches).toBeTruthy();
+  });
 });

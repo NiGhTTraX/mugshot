@@ -10,11 +10,7 @@ import { ElementHandle, Page } from 'playwright';
  *
  * @example
  * ```ts
- * import {
- *   Mugshot,
- *   FsStorage,
- *   WebdriverScreenshotter,
- * } from 'mugshot';
+ * import { Mugshot } from 'mugshot';
  * import { PlaywrightAdapter } from '@mugshot/playwright';
  * import playwright from 'playwright';
  *
@@ -23,10 +19,8 @@ import { ElementHandle, Page } from 'playwright';
  * const page = await context.newPage();
  *
  * const mugshot = new Mugshot(
- *   new WebdriverScreenshotter(
- *     new PlaywrightAdapter(page)
- *   ),
- *   new FsStorage('./screenshots')
+ *   new PlaywrightAdapter(page),
+ *   './screenshots'
  * );
  * ```
  */

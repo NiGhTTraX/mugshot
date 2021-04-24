@@ -1,9 +1,12 @@
 /* eslint-disable max-classes-per-file */
 import isCI from 'is-ci';
+import { Webdriver } from '../interfaces/webdriver';
 import { PNGDiffer } from '../interfaces/png-differ';
 import { ScreenshotStorage } from '../interfaces/screenshot-storage';
 import { Screenshotter, ScreenshotOptions } from '../interfaces/screenshotter';
+import { FsStorage } from './fs-storage';
 import { PixelDiffer } from './pixel-differ';
+import { WebdriverScreenshotter } from './webdriver-screenshotter';
 
 export interface MugshotIdenticalResult {
   matches: true;
@@ -105,9 +108,46 @@ export class MugshotMissingBaselineError extends Error {
 export class Mugshot {
   private readonly pngDiffer: PNGDiffer;
 
+  private readonly storage: ScreenshotStorage;
+
+  private readonly screenshotter: Screenshotter;
+
   private readonly createMissingBaselines: boolean;
 
   private readonly updateBaselines: boolean;
+
+  /**
+   * Set up Mugshot using sane defaults.
+   *
+   * If you need more complex options use the "advanced" form of the constructor.
+   *
+   * @param adapter A {@link Webdriver} implementation to be passed to
+   *   {@link WebdriverScreenshotter}. If you need to pass in options to
+   *   `WebdriverScreenshotter` then use the "advanced" Mugshot constructor.
+   * @param resultsPath A filesystem path where screenshots will be stored
+   *   using {@link FsStorage}. If you need to pass in options to `FsStorage`
+   *   then use the "advanced" Mugshot constructor.
+   * @param options
+   */
+  constructor(
+    adapter: Webdriver,
+    resultsPath: string,
+    options?: MugshotOptions
+  );
+
+  /**
+   * Set up Mugshot in "advanced" mode where you can pass in options to the
+   * various subsystems or plug in your own.
+   *
+   * @param screenshotter
+   * @param storage
+   * @param options
+   */
+  constructor(
+    screenshotter: Screenshotter,
+    storage: ScreenshotStorage,
+    options?: MugshotOptions
+  );
 
   /**
    * @param screenshotter
@@ -116,8 +156,8 @@ export class Mugshot {
    * @param __namedParameters {MugshotOptions}
    */
   constructor(
-    private readonly screenshotter: Screenshotter,
-    private readonly storage: ScreenshotStorage,
+    screenshotter: Screenshotter | Webdriver,
+    storage: ScreenshotStorage | string,
     {
       pngDiffer = new PixelDiffer(),
       createMissingBaselines = !isCI,
@@ -127,6 +167,19 @@ export class Mugshot {
     this.pngDiffer = pngDiffer;
     this.createMissingBaselines = createMissingBaselines;
     this.updateBaselines = updateBaselines;
+
+    if (typeof storage === 'string') {
+      this.storage = new FsStorage(storage);
+      this.screenshotter = new WebdriverScreenshotter(
+        screenshotter as Webdriver,
+        {
+          disableAnimations: true,
+        }
+      );
+    } else {
+      this.storage = storage;
+      this.screenshotter = screenshotter as Screenshotter;
+    }
   }
 
   /**

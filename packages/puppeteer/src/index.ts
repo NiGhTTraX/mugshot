@@ -10,11 +10,7 @@ import { Page } from 'puppeteer';
  *
  * @example
  * ```ts
- * import {
- *   Mugshot,
- *   FsStorage,
- *   WebdriverScreenshotter,
- * } from 'mugshot';
+ * import { Mugshot } from 'mugshot';
  * import { PuppeteerAdapter } from '@mugshot/puppeteer';
  * import puppeteer from 'puppeteer';
  *
@@ -22,10 +18,8 @@ import { Page } from 'puppeteer';
  * const page = await browser.newPage();
  *
  * const mugshot = new Mugshot(
- *   new WebdriverScreenshotter(
- *     new PuppeteerAdapter(page)
- *   ),
- *   new FsStorage('./screenshots')
+ *   new PuppeteerAdapter(page),
+ *   './screenshots'
  * );
  * ```
  */

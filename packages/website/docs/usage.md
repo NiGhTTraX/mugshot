@@ -19,11 +19,7 @@ Once everything is set you just call [`Mugshot.check`](api/classes/mugshot.mugsh
 The following example illustrates the basics. It uses [WebdriverIO](https://webdriver.io/) to control a browser and [Jest](https://jestjs.io/) to run the test:
 
 ```typescript
-import  {
-  Mugshot,
-  FsStorage,
-  WebdriverScreenshotter,
-} from 'mugshot';
+import { Mugshot } from 'mugshot';
 import { WebdriverIOAdapter } from '@mugshot/webdriverio';
 import { remote } from 'webdriverio';
 
@@ -39,10 +35,8 @@ test('GitHub project page should look the same', async () => {
   
   // 3. Set up mugshot.
   const mugshot = new Mugshot(
-    new WebdriverScreenshotter(
-      new WebdriverIOAdapter(browser)
-    ),
-    new FsStorage('screenshots')
+    new WebdriverIOAdapter(browser),
+    'screenshots'
   );
 
   // 4. Take the screenshot.
@@ -53,21 +47,83 @@ test('GitHub project page should look the same', async () => {
 });
 ```
 
+## Setup
+
+Mugshot can be setup in a "basic" mode, or an "advanced" mode.
+
+### Basic mode
+
+In this mode Mugshot automatically chooses sane implementations of its various pluggable subsystems and has a simpler constructor signature:
+
+- taking screenshots: [WebdriverScreenshotter](api/classes/mugshot.webdriverscreenshotter.md) with [`{ disableAnimations: true }`](api/interfaces/mugshot.webdriverscreenshotteroptions.md#disableanimations); you need to choose one of the bundled [adapters](installation.md#adapters) or pass in your own,
+- storing screenshots: [FsStorage](api/classes/mugshot.fsstorage.md),
+- diffing screenshots: [PixelDiffer](api/classes/mugshot.pixeldiffer.md),
+- processing screenshots: [JimpProcessor](api/classes/mugshot.jimpprocessor.md).
+
+```typescript
+import { Mugshot } from 'mugshot';
+import { WebdriverIOAdapter } from '@mugshot/webdriverio';
+import { remote } from 'webdriverio';
+
+const browser = await remote({
+  hostname: 'localhost',
+  capabilities: { browserName: 'chrome' }
+});
+
+const mugshot = new Mugshot(
+  new WebdriverIOAdapter(browser),
+  './screenshots'
+);
+```
+
+If you need to pass in any options to the default implementations, or you want to plug in your own, use the advanced constructor.
+
+### Advanced mode
+
+In this mode you can choose any of the bundled subsystem implementations and customize them as you see fit, or even provide your own implementations.
+
+```typescript
+import { 
+  Mugshot,
+  WebdriverScreenshotter,
+  FsStorage,
+  JimpProcessor,
+  PixelDiffer
+} from 'mugshot';
+import { WebdriverIOAdapter } from '@mugshot/webdriverio';
+import { remote } from 'webdriverio';
+
+const browser = await remote({
+  hostname: 'localhost',
+  capabilities: { browserName: 'chrome' }
+});
+
+const mugshot = new Mugshot(
+  new WebdriverScreenshotter(
+     new WebdriverIOAdapter(browser),
+     { 
+       pngProcessor: new JimpProcessor()
+     }
+  ),
+  new FsStorage('screenshots'),
+  {
+    pngDiffer: new PixelDiffer({ threshhold: 0.1 }),
+    createMissingBaselines: false
+  }
+);
+```
 
 ## Taking screenshots
 
 Mugshot doesn't care where the screenshots are coming from, as long as they're in **PNG** format. By default it ships with a [webdriver screenshotter](api/classes/mugshot.webdriverscreenshotter.md), but you can pass in your own implementation. See the [Screenshotter](api/interfaces/mugshot.screenshotter.md) interface for more details.
 
-
 ### Taking a screenshot of a single element
 
 A [selector](api/types/mugshot.mugshotselector.md) can be passed as the second argument to [`Mugshot.check`](api/classes/mugshot.mugshot-1.md#check) and will tell Mugshot to only screenshot the corresponding element. How the element is selected depends on the [Screenshotter](api/interfaces/mugshot.screenshotter.md) implementation. For example, using the [WebdriverScreenshotter](api/classes/mugshot.webdriverscreenshotter.md), the element will be cropped out of the viewport according to its bounding rectangle.
 
-
 ### Ignoring elements
 
 You can ignore elements on the page by passing a [selector](api/types/mugshot.mugshotselector.md) through the [`ignore`](api/interfaces/mugshot.screenshotoptions.md#ignore) option. The elements identified by that selector will be painted with the [`ignoreColor`](api/interfaces/mugshot.screenshotoptions.md#ignorecolor) (defaults to `#000`) before taking any screenshots.
-
 
 ### Storing screenshots
 
@@ -79,11 +135,9 @@ Regardless of how they're stored, Mugshot will produce up to 3 screenshots:
 2. The current screenshot. Mugshot will always take a new screenshot each time it's called and compare it to the baseline. If they match, the new screenshot is discarded, otherwise it's saved to the storage.
 3. A diff. If the baseline and current screenshot are different then a diff highlighting the differences will be created and saved to the storage.
 
-
 ## Diffing screenshots
 
 You can customize how diffs are produced by passing in a [`PNGDiffer`](api/interfaces/mugshot.pngdiffer.md) instance when instantiating [`Mugshot`](api/classes/mugshot.mugshot-1.md). Mugshot ships with [`PixelDiffer`](api/classes/mugshot.pixeldiffer.md) that compares screenshots pixels by pixels and marks the differing ones with a color.
-
 
 ### Reducing flakiness
 

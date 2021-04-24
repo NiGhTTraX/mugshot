@@ -35,11 +35,7 @@ function getClientChromeSize() {
  *
  * @example
  * ```ts
- * import {
- *   Mugshot,
- *   FsStorage,
- *   WebdriverScreenshotter,
- * } from 'mugshot';
+ * import { Mugshot } from 'mugshot';
  * import { WebdriverIOAdapter } from '@mugshot/webdriverio';
  * import { remote } from 'webdriverio';
  *
@@ -49,10 +45,8 @@ function getClientChromeSize() {
  *  });
  *
  * const mugshot = new Mugshot(
- *   new WebdriverScreenshotter(
- *     new WebdriverIOAdapter(browser)
- *   ),
- *   new FsStorage('./screenshots')
+ *   new WebdriverIOAdapter(browser),
+ *   './screenshots'
  * );
  * ```
  */

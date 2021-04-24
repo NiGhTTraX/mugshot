@@ -9,7 +9,8 @@ import { ScreenshotStorage } from '../interfaces/screenshot-storage';
  */
 export class FsStorage implements ScreenshotStorage {
   /**
-   * @param resultsPath The entire folder structure will be created if missing.
+   * @param resultsPath An absolute path or a path relative to cwd. The entire
+   *   parent folder structure will be created if missing.
    */
   constructor(private readonly resultsPath: string) {}
 
