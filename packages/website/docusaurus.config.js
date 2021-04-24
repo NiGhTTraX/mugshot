@@ -34,6 +34,9 @@ module.exports = {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} Andrei Picus. Built with Docusaurus.`,
     },
+    colorMode: {
+      defaultMode: 'dark',
+    },
   },
   presets: [
     [
