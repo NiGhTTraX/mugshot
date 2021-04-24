@@ -33,9 +33,33 @@ function getClientChromeSize() {
  * Adapter over [WebdriverIO](https://webdriver.io/) to be used with
  * {@link WebdriverScreenshotter}.
  *
- * @see https://webdriver.io/docs/api.html
+ * @example
+ * ```ts
+ * import {
+ *   Mugshot,
+ *   FsStorage,
+ *   WebdriverScreenshotter,
+ * } from 'mugshot';
+ * import { WebdriverIOAdapter } from '@mugshot/webdriverio';
+ * import { remote } from 'webdriverio';
+ *
+ * const browser = await remote({
+ *    hostname: 'localhost',
+ *    capabilities: { browserName: 'chrome' }
+ *  });
+ *
+ * const mugshot = new Mugshot(
+ *   new WebdriverScreenshotter(
+ *     new WebdriverIOAdapter(browser)
+ *   ),
+ *   new FsStorage('./screenshots')
+ * );
+ * ```
  */
 export class WebdriverIOAdapter implements Webdriver {
+  /**
+   * @param client The return value from `remote()`.
+   */
   constructor(private readonly client: Browser<'async'>) {}
 
   takeScreenshot = async () => this.client.takeScreenshot();

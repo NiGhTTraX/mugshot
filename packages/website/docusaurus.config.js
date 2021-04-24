@@ -20,7 +20,7 @@ module.exports = {
           type: 'doc',
           docId: 'intro',
           position: 'left',
-          label: 'Getting started',
+          label: 'Docs',
         },
         {
           type: 'doc',
@@ -32,17 +32,6 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
-          ],
-        },
-      ],
       copyright: `Copyright © ${new Date().getFullYear()} Andrei Picus. Built with Docusaurus.`,
     },
   },
@@ -52,6 +41,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          routeBasePath: '/',
           editUrl: 'https://github.com/nighttrax/mugshot/edit/master/website/',
         },
         theme: {
@@ -81,7 +71,8 @@ module.exports = {
         listInvalidSymbolLinks: true,
         media: './static/img',
         readme: 'none',
-        name: 'Mugshot',
+        name: 'API',
+        watch: true,
       },
     ],
   ],

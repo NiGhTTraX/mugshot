@@ -16,36 +16,6 @@ or
 yarn add @mugshot/puppeteer
 ```
 
-## Usage
-
-```typescript
-import {
-  Mugshot,
-  FsStorage,
-  WebdriverScreenshotter,
-} from 'mugshot';
-import { PuppeteerAdapter } from '@mugshot/puppeteer';
-import puppeteer from 'puppeteer';
-
-test('GitHub project page should look the same', async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-
-  const mugshot = new Mugshot(
-    new WebdriverScreenshotter(
-      new PuppeteerAdapter(page)
-    ),
-    new FsStorage('./screenshots')
-  );
-  
-  await browser.url('https://github.com/NiGhTTraX/mugshot');
-  
-  const result = await mugshot.check('project page');
-  
-  expect(result.matches).toBeTruthy();
-});
-```
-
 ## Docs
 
-[[PuppeteerAdapter | View the API docs]]
+[View API docs](https://nighttrax.github.io/mugshot/api/modules/_mugshot_puppeteer)

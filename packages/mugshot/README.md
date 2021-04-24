@@ -6,4 +6,6 @@
 
 ----
 
-Check out the main [README on GitHub](https://github.com/NiGhTTraX/mugshot) for more details.
+## Docs
+
+[View API docs](https://nighttrax.github.io/mugshot/api/modules/mugshot)

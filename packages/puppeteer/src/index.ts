@@ -7,8 +7,32 @@ import { Page } from 'puppeteer';
 /**
  * Webdriver adapter over [Puppeteer](https://github.com/puppeteer/puppeteer)
  * to be used with {@link WebdriverScreenshotter}.
+ *
+ * @example
+ * ```ts
+ * import {
+ *   Mugshot,
+ *   FsStorage,
+ *   WebdriverScreenshotter,
+ * } from 'mugshot';
+ * import { PuppeteerAdapter } from '@mugshot/puppeteer';
+ * import puppeteer from 'puppeteer';
+ *
+ * const browser = await puppeteer.launch();
+ * const page = await browser.newPage();
+ *
+ * const mugshot = new Mugshot(
+ *   new WebdriverScreenshotter(
+ *     new PuppeteerAdapter(page)
+ *   ),
+ *   new FsStorage('./screenshots')
+ * );
+ * ```
  */
 export class PuppeteerAdapter implements Webdriver {
+  /**
+   * @param page The return value of `newPage()`.
+   */
   constructor(private readonly page: Page) {}
 
   getElementRect = async (selector: string) => {

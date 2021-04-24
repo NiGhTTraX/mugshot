@@ -8,9 +8,32 @@ import { ElementHandle, Page } from 'playwright';
  * Adapter over [Playwright](https://github.com/microsoft/playwright) to be
  * used with {@link WebdriverScreenshotter}.
  *
- * @see https://playwright.dev/
+ * @example
+ * ```ts
+ * import {
+ *   Mugshot,
+ *   FsStorage,
+ *   WebdriverScreenshotter,
+ * } from 'mugshot';
+ * import { PlaywrightAdapter } from '@mugshot/playwright';
+ * import playwright from 'playwright';
+ *
+ * const browser = await playwright.chromium.launch();
+ * const context = await browser.newContext();
+ * const page = await context.newPage();
+ *
+ * const mugshot = new Mugshot(
+ *   new WebdriverScreenshotter(
+ *     new PlaywrightAdapter(page)
+ *   ),
+ *   new FsStorage('./screenshots')
+ * );
+ * ```
  */
 export class PlaywrightAdapter implements Webdriver {
+  /**
+   * @param page The return value of `newPage()`.
+   */
   constructor(private readonly page: Page) {}
 
   takeScreenshot = async () =>

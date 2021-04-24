@@ -1,5 +1,5 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
-import PuppeteerAdapter from '@mugshot/puppeteer';
+import { PuppeteerAdapter } from '../src';
 import puppeteer from 'puppeteer';
 
 describe('PuppeteerAdapter', () => {

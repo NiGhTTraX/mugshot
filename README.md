@@ -1,4 +1,3 @@
-<!-- DUPLICATED in website/docs/usage.md. Please keep in sync. -->
 ![logo](packages/website/static/img/logo.png)
 
 <!--suppress HtmlDeprecatedAttribute -->
@@ -6,34 +5,20 @@
 <h2>Framework independent visual testing library</h2>
 
 [![Build status](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml/badge.svg)](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg)](https://codecov.io/gh/NiGhTTraX/mugshot) ![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
+[![codecov](https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg)](https://codecov.io/gh/NiGhTTraX/mugshot)
+![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
 </div>
 
 ----
 
 Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. You can use it to write visual regression tests for websites, mobile apps, native apps etc. Moreover, Mugshot doesn't impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.
 
-<!-- END OF COMMON CONTENT -->
-
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
-<a href="http://nighttrax.github.io/mugshot">View API docs</a>
+<a href="https://nighttrax.github.io/mugshot">View API docs</a>
 </div>
 
 ----
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of content**
-
-- [Features](#features)
-- [Installation](#installation)
-- [Motivation](#motivation)
-- [Docs](#docs)
-- [Contributing](#contributing)
-- [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Features
 
@@ -45,28 +30,25 @@ Mugshot is a node library for doing visual regression testing. The way screensho
 
 ## Installation
 
-<!-- DUPLICATED in DOCS.md. Please keep in sync. -->
+<!-- DUPLICATED in website/docs/usage.md. Please keep in sync. -->
 
-```shell script
+```console
 npm install --save-dev mugshot
 ```
 
 Or with yarn
 
-```shell script
+```console
 yarn add -D mugshot
 ```
 
-Depending on how you want to take screenshots, you'll need a [`Screenshotter`](./docs/interfaces/screenshotter.html) implementation. Mugshot bundles a [`WebdriverScreenshotter`](./docs/classes/webdriverscreenshotter.html) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
+Depending on how you want to take screenshots, you'll need a [`Screenshotter`](https://nighttrax.github.io/mugshot/api/interfaces/mugshot.screenshotter) implementation. Mugshot bundles a [`WebdriverScreenshotter`](https://nighttrax.github.io/mugshot/api/classes/mugshot.webdriverscreenshotter) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
-<!-- END OF COMMON CONTENT -->
-
-<!-- Table also present in DOCS.md; the links here point to ./packages -->
 Package | Version
 --------|--------
-[@mugshot/webdriverio](./packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
-[@mugshot/puppeteer](./packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
-[@mugshot/playwright](./packages/playwright) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
+[@mugshot/webdriverio](packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
+[@mugshot/puppeteer](packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
+[@mugshot/playwright](packages/playwright) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
 
 
 ## Motivation
@@ -79,17 +61,6 @@ Expected | Actual | Diff
 ---------|--------|-----
 ![expected](packages/website/static/img/expected.png) | ![actual](packages/website/static/img/actual.png) | ![diff](packages/website/static/img/diff.png)
 
-
-## Docs
-
-[View the API docs](http://nighttrax.github.io/mugshot) | [Edit the docs](./CONTRIBUTING.md#edit-the-docs)
-
-
-## Contributing
-
-See the [CONTRIBUTING](./CONTRIBUTING.md) guide.
-
-
 ## License
 
-[MIT](./LICENSE)
+[MIT](LICENSE)
