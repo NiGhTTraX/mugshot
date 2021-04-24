@@ -7,10 +7,11 @@ sidebar_position: 1
 hide_title: true
 ---
 
-![logo](/img/logo.png)
-
 <!--suppress HtmlDeprecatedAttribute -->
 <div align="center">
+
+![logo](/img/logo.png)
+
 <h2>Framework independent visual testing library</h2>
 
 [![Build status](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml/badge.svg)](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml)

@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico', // TODO
+  favicon: 'img/favicon.ico',
   organizationName: 'NiGhTTraX',
   projectName: 'mugshot',
   themeConfig: {
