@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.1.2...@mugshot/contracts@4.0.0) (2021-04-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency chai to ~4.3.0 ([e50af21](https://github.com/NiGhTTraX/mugshot/commit/e50af2144ae45172af5f12eb378f4705e11c42fe))
+* **deps:** update dependency fs-extra to ~9.1.0 ([c24e935](https://github.com/NiGhTTraX/mugshot/commit/c24e93512c51d810426f9cb6e60ec8d9b50c9d3f))
+
+
+### Code Refactoring
+
+* Rename interface method ([48b6ccc](https://github.com/NiGhTTraX/mugshot/commit/48b6ccc0c2dc086290283f870895b8d6a0e169b7))
+
+
+### BREAKING CHANGES
+
+* The `takeScreenshot` method on the `Webdriver`
+interface has been renamed to `takeViewportScreenshot` to better reflect
+its usage.
+
+
+
+
+
 ## [3.1.2](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.1.1...@mugshot/contracts@3.1.2) (2020-12-29)
 
 **Note:** Version bump only for package @mugshot/contracts

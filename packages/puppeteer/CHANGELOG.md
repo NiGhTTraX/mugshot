@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/puppeteer@1.0.3...@mugshot/puppeteer@2.0.0) (2021-04-24)
+
+
+### Code Refactoring
+
+* Rename interface method ([48b6ccc](https://github.com/NiGhTTraX/mugshot/commit/48b6ccc0c2dc086290283f870895b8d6a0e169b7))
+* Use named exports ([d70775f](https://github.com/NiGhTTraX/mugshot/commit/d70775f4f04f4faf92ccb3c4b6608ee734562e91))
+
+
+### Features
+
+* **mugshot:** Add basic constructor ([a482f74](https://github.com/NiGhTTraX/mugshot/commit/a482f743a9a18eac8bf120343e2bad1ff1fd9913))
+
+
+### BREAKING CHANGES
+
+* The `takeScreenshot` method on the `Webdriver`
+interface has been renamed to `takeViewportScreenshot` to better reflect
+its usage.
+* Default exports are no more and everything is a named
+export now. This improves the generated docs and should also help with
+IDE autocomplete.
+
+
+
+
+
 ## [1.0.3](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/puppeteer@1.0.2...@mugshot/puppeteer@1.0.3) (2020-12-29)
 
 **Note:** Version bump only for package @mugshot/puppeteer

@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.3.0...mugshot@4.0.0) (2021-04-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/is-ci to v3 ([e19b61c](https://github.com/NiGhTTraX/mugshot/commit/e19b61c6f719ba6d564a04e87632ae431953d5e0))
+* **deps:** update dependency @types/node to ~10.17.0 ([2d244ca](https://github.com/NiGhTTraX/mugshot/commit/2d244ca60a1d341c4aeabd87e2f3ab6b7ff3c66d))
+* **deps:** update dependency fs-extra to ~9.1.0 ([c24e935](https://github.com/NiGhTTraX/mugshot/commit/c24e93512c51d810426f9cb6e60ec8d9b50c9d3f))
+* **deps:** update dependency is-ci to v3 ([b36679a](https://github.com/NiGhTTraX/mugshot/commit/b36679a5f3c74aad371beb81e5a8d61fc047a591))
+
+
+### Code Refactoring
+
+* Rename interface method ([48b6ccc](https://github.com/NiGhTTraX/mugshot/commit/48b6ccc0c2dc086290283f870895b8d6a0e169b7))
+* Use named exports ([d70775f](https://github.com/NiGhTTraX/mugshot/commit/d70775f4f04f4faf92ccb3c4b6608ee734562e91))
+
+
+### Features
+
+* **mugshot:** Add basic constructor ([a482f74](https://github.com/NiGhTTraX/mugshot/commit/a482f743a9a18eac8bf120343e2bad1ff1fd9913))
+
+
+### BREAKING CHANGES
+
+* The `takeScreenshot` method on the `Webdriver`
+interface has been renamed to `takeViewportScreenshot` to better reflect
+its usage.
+* Default exports are no more and everything is a named
+export now. This improves the generated docs and should also help with
+IDE autocomplete.
+
+
+
+
+
 # [3.3.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.2.0...mugshot@3.3.0) (2020-12-29)
 
 
