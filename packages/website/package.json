@@ -5,7 +5,7 @@
   "scripts": {
     "start": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start",
     "build": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus build",
-    "deploy": "docusaurus deploy",
+    "deploy": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve"
   },
