@@ -2,7 +2,7 @@ module.exports = {
   title: 'Mugshot',
   tagline: 'Visual regression testing library',
   url: 'https://nighttrax.github.io/mugshot/',
-  baseUrl: '/',
+  baseUrl: '/mugshot/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
