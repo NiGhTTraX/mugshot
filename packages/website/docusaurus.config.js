@@ -53,7 +53,8 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: '/',
-          editUrl: 'https://github.com/nighttrax/mugshot/edit/master/website/',
+          editUrl:
+            'https://github.com/nighttrax/mugshot/edit/master/packages/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
