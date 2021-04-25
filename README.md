@@ -10,11 +10,7 @@
 ![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
 [![License](https://img.shields.io/github/license/nighttrax/mugshot)](LICENSE)
 
-<h3>
-
 [**View Docs**](https://nighttrax.github.io/mugshot)
-
-</h3>
 
 </div>
 
