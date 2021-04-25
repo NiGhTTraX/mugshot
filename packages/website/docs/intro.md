@@ -17,6 +17,8 @@ hide_title: true
 [![Build status](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml/badge.svg)](https://github.com/NiGhTTraX/mugshot/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/NiGhTTraX/mugshot/branch/master/graph/badge.svg)](https://codecov.io/gh/NiGhTTraX/mugshot)
 ![npm type definitions](https://img.shields.io/npm/types/mugshot.svg)
+[![License](https://img.shields.io/github/license/nighttrax/mugshot)](https://github.com/NiGhTTraX/mugshot/blob/master/LICENSE)
+
 </div>
 
 Mugshot is a node library for doing visual regression testing. The way screenshots are taken, processed, compared and stored is entirely customizable. You can use it to write visual regression tests for websites, mobile apps, native apps etc. Moreover, Mugshot doesn't impose any preferences on how you write or execute the tests, it just gives you an assertion that you can call however and whenever you want.
