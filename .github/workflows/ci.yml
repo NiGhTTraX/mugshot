@@ -1,4 +1,4 @@
-name: mugshot
+name: tests
 
 on:
   push:
