@@ -1,6 +1,7 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":widenPeerDependencies"
   ],
   "rangeStrategy": "replace",
   "automerge": true
