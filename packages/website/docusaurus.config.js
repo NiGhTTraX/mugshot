@@ -45,6 +45,10 @@ module.exports = {
       defaultMode: 'dark',
       disableSwitch: true,
     },
+    algolia: {
+      apiKey: '139f20b83f55f9ba5b2f7e258d1fafc4',
+      indexName: 'nighttrax',
+    },
   },
   presets: [
     [
