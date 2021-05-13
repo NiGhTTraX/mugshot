@@ -54,6 +54,28 @@ jobs:
       - name: Lint
         run: yarn lint
 
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: dependencies
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.OS }}-yarn-${{ hashFiles('yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build docs
+        run: yarn run build
+        working-directory: packages/website
+
   mugshot:
     runs-on: ubuntu-latest
     timeout-minutes: 5
