@@ -88,7 +88,7 @@ module.exports = {
         media: './static/img',
         readme: 'none',
         name: 'API',
-        watch: true,
+        watch: process.env.NODE_ENV !== 'production',
       },
     ],
   ],
