@@ -77,9 +77,6 @@ module.exports = {
           '../playwright/src/index.ts',
           '../contracts/src/index.ts',
         ],
-        sidebar: {
-          sidebarFile: 'sidebar-api.js',
-        },
         tsconfig: '../tsconfig.json',
         allReflectionsHaveOwnDocument: true,
         excludePrivate: true,
