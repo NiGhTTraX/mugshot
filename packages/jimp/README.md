@@ -1,0 +1,1 @@
+This is a custom [Jimp](https://github.com/oliver-moran/jimp) instance with a minimal set of types and plugins configured, to be used with [Mugshot](https://github.com/NiGhTTraX/mugshot). The main purpose of this is to disable the GIF type which breaks tests in jest@27 because of an import that happens in `process.nextTick`.

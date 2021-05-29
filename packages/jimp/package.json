@@ -1,0 +1,33 @@
+{
+  "name": "@mugshot/jimp",
+  "description": "Custom Jimp instance to use in Mugshot",
+  "keywords": ["jimp", "mugshot"],
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiGhTTraX/mugshot.git"
+  },
+  "author": "Andrei Picus",
+  "license": "MIT",
+  "homepage": "https://github.com/NiGhTTraX/mugshot/tree/master/packages/jimp",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn run build"
+  },
+  "dependencies": {
+    "@jimp/custom": "~0.16.1",
+    "@jimp/plugin-color": "~0.16.1",
+    "@jimp/plugin-crop": "~0.16.1",
+    "@jimp/png": "~0.16.1"
+  },
+  "devDependencies": {
+    "typescript": "~4.2.0"
+  }
+}

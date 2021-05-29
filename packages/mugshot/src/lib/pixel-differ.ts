@@ -1,4 +1,4 @@
-import Jimp from 'jimp';
+import { Jimp } from '@mugshot/jimp';
 import pixelmatch from 'pixelmatch';
 import { PNGDiffer, DiffResult } from '../interfaces/png-differ';
 
