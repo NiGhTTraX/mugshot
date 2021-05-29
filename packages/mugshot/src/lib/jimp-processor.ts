@@ -1,4 +1,4 @@
-import Jimp from 'jimp';
+import { Jimp } from '@mugshot/jimp';
 import { PNGProcessor, OutOfBoundsError } from '../interfaces/png-processor';
 
 /**
@@ -8,7 +8,7 @@ export class JimpProcessor implements PNGProcessor {
   crop = async (img: Buffer, x: number, y: number, w: number, h: number) => {
     const j = await Jimp.read(img);
 
-    JimpProcessor.checkBounds(j, x, y, w, h);
+    JimpProcessor.checkBounds(x, y, w, h, j.getWidth(), j.getHeight());
 
     await j.crop(x, y, w, h);
 
@@ -25,7 +25,7 @@ export class JimpProcessor implements PNGProcessor {
   ) => {
     const j = await Jimp.read(img);
 
-    JimpProcessor.checkBounds(j, x, y, w, h);
+    JimpProcessor.checkBounds(x, y, w, h, j.getWidth(), j.getHeight());
 
     const colorSquare = new Jimp(w, h, c);
 
@@ -35,14 +35,15 @@ export class JimpProcessor implements PNGProcessor {
   };
 
   private static checkBounds(
-    j: Jimp,
     x: number,
     y: number,
     w: number,
-    h: number
+    h: number,
+    imgWidth: number,
+    imgHeight: number
   ) {
-    if (x < 0 || y < 0 || w > j.getWidth() || h > j.getHeight()) {
-      throw new OutOfBoundsError(x, y, w, h, j.getWidth(), j.getHeight());
+    if (x < 0 || y < 0 || w > imgWidth || h > imgHeight) {
+      throw new OutOfBoundsError(x, y, w, h, imgWidth, imgHeight);
     }
   }
 }
