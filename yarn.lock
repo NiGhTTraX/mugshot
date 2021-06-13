@@ -3143,15 +3143,16 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@tdd-buffet/jest-config@~4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@tdd-buffet/jest-config/-/jest-config-4.0.0.tgz#18de5a68540670cf3f11168935c403037ff57c95"
-  integrity sha512-Ehhhq8uFFWQgdLodCQfHJoSACvCjqvHKtoqAR1Jd03PFlo/mdOqxvsjKJOq2ngpYt0z9Xk/iWFv2x68wf4K6eg==
+"@tdd-buffet/jest-config@~4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@tdd-buffet/jest-config/-/jest-config-4.0.2.tgz#7f047cf5163713fad5bbabaa79d8c664974a22d1"
+  integrity sha512-RkDXKPBGj3mlDbgFtPKYt7pdY6YKcUW2tEUsCsraKHYqvJ9PZX4pxp4o/01bV7FFrYcqF/UMoawRMV3i5GwkhA==
   dependencies:
     "@jest/transform" "~27.0.0"
     "@jest/types" "~27.0.0"
     "@types/fs-extra" "~9.0.0"
     fs-extra "~10.0.0"
+    jest-environment-jsdom "~27.0.3"
     jest-runtime "~27.0.0"
     ts-jest "~27.0.0"
     typescript "~4.3.0"
@@ -9411,7 +9412,7 @@ jest-each@^27.0.2:
     jest-util "^27.0.2"
     pretty-format "^27.0.2"
 
-jest-environment-jsdom@^27.0.3:
+jest-environment-jsdom@^27.0.3, jest-environment-jsdom@~27.0.3:
   version "27.0.3"
   resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-27.0.3.tgz#ed73e913ddc03864eb9f934b5cbabf1b63504e2e"
   integrity sha512-5KLmgv1bhiimpSA8oGTnZYk6g4fsNyZiA/6gI2tAZUgrufd7heRUSVh4gRokzZVEj8zlwAQYT0Zs6tuJSW/ECA==
