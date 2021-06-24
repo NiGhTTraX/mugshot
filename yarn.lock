@@ -14633,10 +14633,10 @@ strong-log-transformer@^2.1.0:
     minimist "^1.2.0"
     through "^2.3.4"
 
-strong-mock@~7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-7.0.0.tgz#be9a9fb8aaf755fbbedfa3f9f1caac481677dc6e"
-  integrity sha512-horpXc2T1QDcM4jdTQsz4oeG48yPvqHPiIotv4/kjxr5PehifQ58fBDq0OaSN2pByOKxmpuFloLoeQjTgQbq+Q==
+strong-mock@~7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-7.1.0.tgz#33560377b2d77c4fc1a80e30f14ab9a4332bf230"
+  integrity sha512-ARy2yftZF2o22GCBeSmrh62OYFC2KE3aT+A9IrNgdIUbirD7ttpnxeur8/kUWUuROdfNJhsTF//f9VKa/JoeIQ==
   dependencies:
     jest-matcher-utils "~27.0.0"
     lodash "~4.17.0"
