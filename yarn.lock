@@ -3147,10 +3147,10 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@tdd-buffet/jest-config@~4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@tdd-buffet/jest-config/-/jest-config-4.0.2.tgz#7f047cf5163713fad5bbabaa79d8c664974a22d1"
-  integrity sha512-RkDXKPBGj3mlDbgFtPKYt7pdY6YKcUW2tEUsCsraKHYqvJ9PZX4pxp4o/01bV7FFrYcqF/UMoawRMV3i5GwkhA==
+"@tdd-buffet/jest-config@~4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@tdd-buffet/jest-config/-/jest-config-4.1.0.tgz#7bbfbfa049a511b154f78373ca94fea7e57b7c09"
+  integrity sha512-6nD5XDJh1bDG9Jqk9qDftiaeXJBhw7LTiqDzCwYhDlt2zynpB/hJPLkobteg4LlbaF7SrfhNHPJ36YcbTF++zw==
   dependencies:
     "@jest/transform" "~27.0.0"
     "@jest/types" "~27.0.0"
