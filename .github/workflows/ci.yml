@@ -104,7 +104,7 @@ jobs:
         working-directory: packages/mugshot
 
       - name: Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           flags: mugshot
 
@@ -142,7 +142,7 @@ jobs:
         working-directory: packages/webdriverio
 
       - name: Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           flags: webdriverio, ${{ matrix.browser }}
 
@@ -182,7 +182,7 @@ jobs:
         working-directory: packages/puppeteer
 
       - name: Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           flags: puppeteer, ${{ matrix.version }}
 
@@ -220,6 +220,6 @@ jobs:
         working-directory: packages/playwright
 
       - name: Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         with:
           flags: playwright, ${{ matrix.browser }}
