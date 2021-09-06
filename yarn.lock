@@ -9637,7 +9637,7 @@ jest-leak-detector@^27.1.0:
     jest-get-type "^27.0.6"
     pretty-format "^27.1.0"
 
-jest-matcher-utils@^27.0.2, jest-matcher-utils@~27.0.0:
+jest-matcher-utils@^27.0.2:
   version "27.0.2"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-27.0.2.tgz#f14c060605a95a466cdc759acc546c6f4cbfc4f0"
   integrity sha512-Qczi5xnTNjkhcIB0Yy75Txt+Ez51xdhOxsukN7awzq2auZQGPHcQrJ623PZj0ECDEMOk2soxWx05EXdXGd1CbA==
@@ -9647,7 +9647,7 @@ jest-matcher-utils@^27.0.2, jest-matcher-utils@~27.0.0:
     jest-get-type "^27.0.1"
     pretty-format "^27.0.2"
 
-jest-matcher-utils@^27.1.0:
+jest-matcher-utils@^27.1.0, jest-matcher-utils@~27.1.0:
   version "27.1.0"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-27.1.0.tgz#68afda0885db1f0b9472ce98dc4c535080785301"
   integrity sha512-VmAudus2P6Yt/JVBRdTPFhUzlIN8DYJd+et5Rd9QDsO/Z82Z4iwGjo43U8Z+PTiz8CBvKvlb6Fh3oKy39hykkQ==
@@ -14955,12 +14955,12 @@ strong-log-transformer@^2.1.0:
     minimist "^1.2.0"
     through "^2.3.4"
 
-strong-mock@~7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-7.1.0.tgz#33560377b2d77c4fc1a80e30f14ab9a4332bf230"
-  integrity sha512-ARy2yftZF2o22GCBeSmrh62OYFC2KE3aT+A9IrNgdIUbirD7ttpnxeur8/kUWUuROdfNJhsTF//f9VKa/JoeIQ==
+strong-mock@~7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/strong-mock/-/strong-mock-7.2.0.tgz#5653cc58b2088b5f57b4c5a445fab6e440abb485"
+  integrity sha512-L8XvG1/ehleCK2ZT/PiZvwK6ABh2QKw1GGMV8hwHBuvQhNVklJuePKik/Gad8K/43GjrMHsIsrMZ58GPt4NjHg==
   dependencies:
-    jest-matcher-utils "~27.0.0"
+    jest-matcher-utils "~27.1.0"
     lodash "~4.17.0"
 
 style-to-object@0.3.0, style-to-object@^0.3.0:
