@@ -106,8 +106,7 @@ export const webdriverViewportContractTests: WebdriverContractTest[] = [
     },
   },
   {
-    name:
-      'should take a viewport screenshot with absolutely positioned elements',
+    name: 'should take a viewport screenshot with absolutely positioned elements',
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
@@ -256,8 +255,7 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
     },
   },
   {
-    name:
-      'should take a full page screenshot with absolutely positioned elements',
+    name: 'should take a full page screenshot with absolutely positioned elements',
     run: async (client, adapter) => {
       await loadFixture(client, adapter, Fixture.rect);
 
@@ -280,37 +278,35 @@ export const webdriverTakeScreenshotContractTests: WebdriverContractTest[] = [
  * Each key represents a suite of tests. Check the docs for each to understand
  * their scope.
  */
-export const webdriverContractSuites: Record<
-  string,
-  WebdriverContractTest[]
-> = {
-  /**
-   * This suite checks the {@link Webdriver.getElementRect} method
-   * and is __mandatory__ for implementations to pass.
-   */
-  getElementRect: webdriverGetElementRectContractTests,
+export const webdriverContractSuites: Record<string, WebdriverContractTest[]> =
+  {
+    /**
+     * This suite checks the {@link Webdriver.getElementRect} method
+     * and is __mandatory__ for implementations to pass.
+     */
+    getElementRect: webdriverGetElementRectContractTests,
 
-  /**
-   * This suite checks the {@link Webdriver.execute} method and is
-   * __mandatory__ for implementations to pass.
-   */
-  execute: webdriverExecuteContractTests,
+    /**
+     * This suite checks the {@link Webdriver.execute} method and is
+     * __mandatory__ for implementations to pass.
+     */
+    execute: webdriverExecuteContractTests,
 
-  /**
-   * This suite checks that {@link Webdriver.takeViewportScreenshot} and
-   * {@link Webdriver.setViewportSize} works as expected when setting and getting the
-   * viewport size and is __mandatory__ for implementations to pass
-   */
-  setViewportSize: webdriverViewportContractTests,
+    /**
+     * This suite checks that {@link Webdriver.takeViewportScreenshot} and
+     * {@link Webdriver.setViewportSize} works as expected when setting and getting the
+     * viewport size and is __mandatory__ for implementations to pass
+     */
+    setViewportSize: webdriverViewportContractTests,
 
-  /**
-   * This suite check the {@link Webdriver.takeViewportScreenshot} method and is _optional_
-   * for implementations to pass, but strongly recommended.
-   *
-   * These tests will compare actual screenshots. The fixtures have been designed
-   * to (hopefully) not contain any UI elements that might render differently in
-   * different browsers e.g. fonts. They have been checked to generate the same
-   * results in Chrome, Chromium and Firefox.
-   */
-  takeScreenshot: webdriverTakeScreenshotContractTests,
-};
+    /**
+     * This suite check the {@link Webdriver.takeViewportScreenshot} method and is _optional_
+     * for implementations to pass, but strongly recommended.
+     *
+     * These tests will compare actual screenshots. The fixtures have been designed
+     * to (hopefully) not contain any UI elements that might render differently in
+     * different browsers e.g. fonts. They have been checked to generate the same
+     * results in Chrome, Chromium and Firefox.
+     */
+    takeScreenshot: webdriverTakeScreenshotContractTests,
+  };
