@@ -23,7 +23,7 @@
     "@tdd-buffet/tsconfig": "~1.0.0",
     "@tdd-buffet/selenium": "~0.4.0",
     "@types/jest": "~27.0.0",
-    "@types/node": "~14.17.0",
+    "@types/node": "~16.11.0",
     "eslint": "~7.32.0",
     "jest": "~27.3.0",
     "lerna": "~4.0.0",
