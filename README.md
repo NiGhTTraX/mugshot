@@ -44,12 +44,11 @@ yarn add -D mugshot
 
 Depending on how you want to take screenshots, you'll need a [`Screenshotter`](https://nighttrax.github.io/mugshot/api/interfaces/mugshot.screenshotter) implementation. Mugshot bundles a [`WebdriverScreenshotter`](https://nighttrax.github.io/mugshot/api/classes/mugshot.webdriverscreenshotter) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
-Package | Version
---------|--------
-[@mugshot/webdriverio](packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
-[@mugshot/puppeteer](packages/puppeteer) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
-[@mugshot/playwright](packages/playwright) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
-
+| Package                                      | Version                                                       |
+|----------------------------------------------|---------------------------------------------------------------|
+| [@mugshot/webdriverio](packages/webdriverio) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg) |
+| [@mugshot/puppeteer](packages/puppeteer)     | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)   |
+| [@mugshot/playwright](packages/playwright)   | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)  |
 
 ## Motivation
 
@@ -57,9 +56,9 @@ Manually checking one component for unexpected visual changes is hard. Doing it 
 
 Mugshot aims to automate that process. It offers a simple API that lets you compare an existing baseline screenshot with a fresh screenshot and make sure they're identical. If they're not you'll get a diff image highlighting the differences. You can then commit it as the new baseline if the changes are expected, or fix the code and rerun the tests.
 
-Expected | Actual | Diff
----------|--------|-----
-![expected](packages/website/static/img/expected.png) | ![actual](packages/website/static/img/actual.png) | ![diff](packages/website/static/img/diff.png)
+| Expected                                              | Actual                                            | Diff                                          |
+|-------------------------------------------------------|---------------------------------------------------|-----------------------------------------------|
+| ![expected](packages/website/static/img/expected.png) | ![actual](packages/website/static/img/actual.png) | ![diff](packages/website/static/img/diff.png) |
 
 ## Docs
 

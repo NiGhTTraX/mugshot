@@ -18,25 +18,24 @@ yarn add -D mugshot
 
 ## Adapters
 
-Depending on how you want to take screenshots, you'll need a [`Screenshotter`](api/interfaces/mugshot.screenshotter.md) implementation. Mugshot bundles a [`WebdriverScreenshotter`](api/classes/mugshot.webdriverscreenshotter.md) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
+Depending on how you want to take screenshots, you'll need a [`Screenshotter`](api/interfaces/mugshot.Screenshotter.md) implementation. Mugshot bundles a [`WebdriverScreenshotter`](api/classes/mugshot.WebdriverScreenshotter.md) that you can use with Webdriver compatible clients e.g. [Selenium](https://selenium.dev/) or [Appium](http://appium.io/). Each client might need an adapter that translates its API to the interface that Mugshot expects. The following adapters are available:
 
-Package | Version
---------|--------
-[@mugshot/webdriverio](api/modules/_mugshot_webdriverio.md) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg)
-[@mugshot/puppeteer](api/modules/_mugshot_puppeteer.md) | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)
-[@mugshot/playwright](api/modules/_mugshot_playwright.md) | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)
+| Package                                                    | Version                                                       |
+|------------------------------------------------------------|---------------------------------------------------------------|
+| [@mugshot/webdriverio](api/modules/mugshot_webdriverio.md) | ![npm](https://img.shields.io/npm/v/@mugshot/webdriverio.svg) |
+| [@mugshot/puppeteer](api/modules/mugshot_puppeteer.md)     | ![npm](https://img.shields.io/npm/v/@mugshot/puppeteer.svg)   |
+| [@mugshot/playwright](api/modules/mugshot_playwright.md)   | ![npm](https://img.shields.io/npm/v/@mugshot/playwright.svg)  |
 
-
-If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](api/interfaces/mugshot.webdriver.md). See the [docs](api/modules/_mugshot_contracts.md) on how to validate your implementation.
+If none of the provided adapters suit you, you can just roll your own by implementing the [`Webdriver` interface](api/interfaces/mugshot.Webdriver.md). See the [docs](api/modules/mugshot_contracts.md) on how to validate your implementation.
 
 
 ### Implementing your own Webdriver adapter
 
-Mugshot ships with a few adapters for the most popular webdriver clients, but if you need something else then you can easily write your own. You need to implement the [`Webdriver` interface](api/interfaces/mugshot.webdriver.md) by providing a way to take screenshots, get element geometry and execute scripts on the page.
+Mugshot ships with a few adapters for the most popular webdriver clients, but if you need something else then you can easily write your own. You need to implement the [`Webdriver` interface](api/interfaces/mugshot.Webdriver.md) by providing a way to take screenshots, get element geometry and execute scripts on the page.
 
-To validate your implementation you can run the [contract tests](api/variables/_mugshot_contracts.webdrivercontractsuites.md). Each suite consists of a number of tests that need your adapter implementation and a way to set up the test environment.
+To validate your implementation you can run the [contract tests](api/variables/mugshot_contracts.webdriverContractSuites.md). Each suite consists of a number of tests that need your adapter implementation and a way to set up the test environment.
 
-The example below illustrates how to run the tests with [Jest](https://jestjs.io/) for [PuppeteerAdapter](api/classes/_mugshot_puppeteer.puppeteeradapter.md):
+The example below illustrates how to run the tests with [Jest](https://jestjs.io/) for [PuppeteerAdapter](api/classes/mugshot_puppeteer.PuppeteerAdapter.md):
 
 ```typescript
 import { webdriverContractSuites } from '@mugshot/contracts';

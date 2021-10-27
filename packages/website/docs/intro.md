@@ -40,6 +40,6 @@ Manually checking one component for unexpected visual changes is hard. Doing it 
 
 Mugshot aims to automate that process. It offers a simple API that lets you compare an existing baseline screenshot with a fresh screenshot and make sure they're identical. If they're not you'll get a diff image highlighting the differences. You can then commit it as the new baseline if the changes are expected, or fix the code and rerun the tests.
 
-Expected | Actual | Diff
----------|--------|-----
-![expected](/img/expected.png) | ![actual](/img/actual.png) | ![diff](/img/diff.png)
+| Expected                       | Actual                     | Diff                   |
+|--------------------------------|----------------------------|------------------------|
+| ![expected](/img/expected.png) | ![actual](/img/actual.png) | ![diff](/img/diff.png) |
