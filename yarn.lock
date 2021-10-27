@@ -3259,15 +3259,15 @@
     typescript "~4.3.0"
     whatwg-fetch "~3.6.0"
 
-"@tdd-buffet/selenium@~0.4.0":
-  version "0.4.19"
-  resolved "https://registry.yarnpkg.com/@tdd-buffet/selenium/-/selenium-0.4.19.tgz#767802c16c2260c7e5b45786d54444cd68c4adbb"
-  integrity sha512-E+viLPuHrXMUTPQgblHJS1fHd9BqRpIuB8Wvjkh253wko28cjX3W43BTD2+aGD52rOUCcDAd3YJekCZ1avP6sg==
+"@tdd-buffet/selenium@~0.4.21":
+  version "0.4.22"
+  resolved "https://registry.yarnpkg.com/@tdd-buffet/selenium/-/selenium-0.4.22.tgz#bacc1088ff70dac3efd5ff985114dd0c9d5e0b97"
+  integrity sha512-9ZYFy3f4z8dqZTBipi7R2Am1O9P0jbv1ZvmGitwwma2/ghP5R3urYDsnPQJpaELeIHjGhToMaNoPXfzsfBzO7g==
   dependencies:
     "@types/got" "~9.6.2"
-    "@types/node" "~12.20.0"
+    "@types/node" "~16.11.0"
     "@types/progress" "~2.0.3"
-    execa "~5.0.0"
+    execa "~5.1.0"
     got "~11.8.0"
     meow "~9.0.0"
     progress "~2.0.3"
@@ -3537,11 +3537,6 @@
   version "16.11.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.1.tgz#2e50a649a50fc403433a14f829eface1a3443e97"
   integrity sha512-PYGcJHL9mwl1Ek3PLiYgyEKtwTMmkMw4vbiyz/ps3pfdRYLVv+SN7qHVAImrjdAXxgluDEw6Ph4lyv+m9UpRmA==
-
-"@types/node@~12.20.0":
-  version "12.20.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.10.tgz#4dcb8a85a8f1211acafb88d72fafc7e3d2685583"
-  integrity sha512-TxCmnSSppKBBOzYzPR2BR25YlX5Oay8z2XGwFBInuA/Co0V9xJhLlW4kjbxKtgeNo3NOMbQP1A5Rc03y+XecPw==
 
 "@types/node@~16.11.0":
   version "16.11.6"
@@ -7156,10 +7151,25 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^5.0.0, execa@~5.0.0:
+execa@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-5.0.0.tgz#4029b0007998a841fbd1032e5f4de86a3c1e3376"
   integrity sha512-ov6w/2LCiuyO4RLYGdpFGjkcs0wMTgGE8PrkTHikeUy5iJekXyPIKUjifk5CsE0pt7sMCrMZ3YNqoCj6idQOnQ==
+  dependencies:
+    cross-spawn "^7.0.3"
+    get-stream "^6.0.0"
+    human-signals "^2.1.0"
+    is-stream "^2.0.0"
+    merge-stream "^2.0.0"
+    npm-run-path "^4.0.1"
+    onetime "^5.1.2"
+    signal-exit "^3.0.3"
+    strip-final-newline "^2.0.0"
+
+execa@~5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
+  integrity sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==
   dependencies:
     cross-spawn "^7.0.3"
     get-stream "^6.0.0"
