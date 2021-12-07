@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@mugshot/jimp": "0.0.1",
-    "@types/chai": "~4.2.0",
+    "@types/chai": "~4.3.0",
     "chai": "~4.3.0",
     "fs-extra": "~10.0.0"
   },
