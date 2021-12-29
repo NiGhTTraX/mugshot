@@ -2,3 +2,5 @@ node_modules
 dist
 results
 *.tsbuildinfo
+
+.pnpm-debug.log

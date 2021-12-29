@@ -23,10 +23,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
+    "build": "pnpm run clean && pnpm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "yarn run build",
+    "prepublishOnly": "pnpm run build",
     "test": "jest --coverage"
   },
   "dependencies": {
