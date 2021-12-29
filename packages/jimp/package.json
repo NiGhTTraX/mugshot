@@ -22,6 +22,7 @@
     "prepublishOnly": "yarn run build"
   },
   "dependencies": {
+    "@jimp/core": "~0.16.1",
     "@jimp/custom": "~0.16.1",
     "@jimp/plugin-color": "~0.16.1",
     "@jimp/plugin-crop": "~0.16.1",
