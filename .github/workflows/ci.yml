@@ -131,7 +131,7 @@ jobs:
 
     strategy:
       matrix:
-        version: [ 8, 9 ]
+        version: [ 8, 9, "latest" ]
 
     steps:
       - name: Checkout
