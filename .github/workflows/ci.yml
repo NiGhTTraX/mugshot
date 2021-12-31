@@ -30,31 +30,6 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-  docs:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: latest
-
-      - name: Install Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm i
-
-      - name: Docs
-        run: pnpm run build
-        working-directory: packages/website
-
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
