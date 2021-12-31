@@ -2,10 +2,9 @@
   "extends": "./tsconfig.build.json",
 
   "compilerOptions": {
-    "baseUrl": "./packages",
     "paths": {
-      "mugshot": ["mugshot/src"],
-      "@mugshot/*": ["*/src"]
+      "mugshot": ["./packages/mugshot/src"],
+      "@mugshot/*": ["./packages/*/src"]
     },
     "types": ["jest", "node"]
   }
