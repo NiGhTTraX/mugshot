@@ -125,9 +125,10 @@ importers:
 
   packages/website:
     specifiers:
-      '@docusaurus/core': 2.0.0-beta.ff31de0ff
-      '@docusaurus/module-type-aliases': 2.0.0-beta.ff31de0ff
-      '@docusaurus/preset-classic': 2.0.0-beta.ff31de0ff
+      '@algolia/client-search': ~4.11.0
+      '@docusaurus/core': ~2.0.0-beta.14
+      '@docusaurus/module-type-aliases': ~2.0.0-beta.14
+      '@docusaurus/preset-classic': ~2.0.0-beta.14
       '@mdx-js/react': ~1.6.21
       '@tsconfig/docusaurus': ~1.0.2
       '@types/react': ~17.0.3
@@ -135,14 +136,17 @@ importers:
       '@types/react-router-dom': ~5.3.0
       clsx: ~1.1.1
       docusaurus-plugin-typedoc: ~0.16.0
+      prism-react-renderer: ~1.2.1
       react: ~17.0.1
       react-dom: ~17.0.1
       typedoc: ~0.22.0
       typedoc-plugin-markdown: ~3.11.0
+      url-loader: ~4.1.1
     dependencies:
+      '@algolia/client-search': 4.11.0
       '@docusaurus/core': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
       '@docusaurus/module-type-aliases': 2.0.0-beta.ff31de0ff
-      '@docusaurus/preset-classic': 2.0.0-beta.ff31de0ff_b3482aaf5744fc7c2aeb7941b0e0a78f
+      '@docusaurus/preset-classic': 2.0.0-beta.ff31de0ff_019f5686020abb38ed0259f63b224a7e
       '@mdx-js/react': 1.6.22_react@17.0.2
       '@tsconfig/docusaurus': 1.0.4
       '@types/react': 17.0.38
@@ -150,10 +154,12 @@ importers:
       '@types/react-router-dom': 5.3.2
       clsx: 1.1.1
       docusaurus-plugin-typedoc: 0.16.6_329514d561ebf417a6a0c278b3292d1b
+      prism-react-renderer: 1.2.1_react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       typedoc: 0.22.10_typescript@4.5.4
       typedoc-plugin-markdown: 3.11.8_typedoc@0.22.10
+      url-loader: 4.1.1
 
 packages:
 
@@ -163,13 +169,14 @@ packages:
       '@algolia/autocomplete-shared': 1.5.0
     dev: false
 
-  /@algolia/autocomplete-preset-algolia/1.5.0_algoliasearch@4.11.0:
+  /@algolia/autocomplete-preset-algolia/1.5.0_dfef30c7f26bb301324d2ff0806e18ca:
     resolution: {integrity: sha512-iiFxKERGHkvkiupmrFJbvESpP/zv5jSgH714XRiP5LDvUHaYOo4GLAwZCFf2ef/L5tdtPBARvekn6k1Xf33gjA==}
     peerDependencies:
       '@algolia/client-search': ^4.9.1
       algoliasearch: ^4.9.1
     dependencies:
       '@algolia/autocomplete-shared': 1.5.0
+      '@algolia/client-search': 4.11.0
       algoliasearch: 4.11.0
     dev: false
 
@@ -712,7 +719,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.10.4
+      '@babel/helper-plugin-utils': 7.16.5
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.16.5_@babel+core@7.12.9
     dev: false
@@ -1602,7 +1609,7 @@ packages:
     resolution: {integrity: sha512-AGwI2AXUacYhVOHmYnsXoYDJKO6Ued2W+QO80GERbMLhC7GH5tfvtW5REs/s7jSdcU3vzFoxT8iPDBCh/PkrlQ==}
     dev: false
 
-  /@docsearch/react/3.0.0-alpha.42_b3482aaf5744fc7c2aeb7941b0e0a78f:
+  /@docsearch/react/3.0.0-alpha.42_ec2c511c363c3e7a5cc09a9563ba253f:
     resolution: {integrity: sha512-1aOslZJDxwUUcm2QRNmlEePUgL8P5fOAeFdOLDMctHQkV2iTja9/rKVbkP8FZbIUnZxuuCCn8ErLrjD/oXWOag==}
     peerDependencies:
       '@types/react': '>= 16.8.0 < 18.0.0'
@@ -1610,7 +1617,7 @@ packages:
       react-dom: '>= 16.8.0 < 18.0.0'
     dependencies:
       '@algolia/autocomplete-core': 1.5.0
-      '@algolia/autocomplete-preset-algolia': 1.5.0_algoliasearch@4.11.0
+      '@algolia/autocomplete-preset-algolia': 1.5.0_dfef30c7f26bb301324d2ff0806e18ca
       '@docsearch/css': 3.0.0-alpha.42
       '@types/react': 17.0.38
       algoliasearch: 4.11.0
@@ -1996,7 +2003,7 @@ packages:
       - webpack-cli
     dev: false
 
-  /@docusaurus/preset-classic/2.0.0-beta.ff31de0ff_b3482aaf5744fc7c2aeb7941b0e0a78f:
+  /@docusaurus/preset-classic/2.0.0-beta.ff31de0ff_019f5686020abb38ed0259f63b224a7e:
     resolution: {integrity: sha512-kXTtH1CygI7+jL/Tr2gQwGytE4IZti/Nep7f3p+i0I4euihMz90413CUHdp6/jx3HnrzcO5lPKAfdlZXbKh5Rw==}
     engines: {node: '>=12.13.0'}
     deprecated: this canary release is now deprecated
@@ -2013,7 +2020,7 @@ packages:
       '@docusaurus/plugin-google-gtag': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
       '@docusaurus/plugin-sitemap': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
       '@docusaurus/theme-classic': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/theme-search-algolia': 2.0.0-beta.ff31de0ff_b3482aaf5744fc7c2aeb7941b0e0a78f
+      '@docusaurus/theme-search-algolia': 2.0.0-beta.ff31de0ff_019f5686020abb38ed0259f63b224a7e
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
     transitivePeerDependencies:
@@ -2119,37 +2126,7 @@ packages:
       - webpack-cli
     dev: false
 
-  /@docusaurus/theme-common/2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2:
-    resolution: {integrity: sha512-v98AvBy3F2qWuqofN30E/lvrA/B0eh+0g9Ly5Y3ZSJxMovGazp8jbP1YJ6pnz+ttUvbZEOFLpV9SUMe7ZMcB4Q==}
-    engines: {node: '>=12.13.0'}
-    deprecated: this canary release is now deprecated
-    peerDependencies:
-      prism-react-renderer: ^1.2.1
-      react: ^16.8.4 || ^17.0.0
-      react-dom: ^16.8.4 || ^17.0.0
-    dependencies:
-      '@docusaurus/core': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/plugin-content-blog': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/plugin-content-docs': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/plugin-content-pages': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/types': 2.0.0-beta.ff31de0ff
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      tslib: 2.3.1
-    transitivePeerDependencies:
-      - '@swc/core'
-      - acorn
-      - bufferutil
-      - csso
-      - debug
-      - esbuild
-      - supports-color
-      - uglify-js
-      - utf-8-validate
-      - webpack-cli
-    dev: false
-
-  /@docusaurus/theme-search-algolia/2.0.0-beta.ff31de0ff_b3482aaf5744fc7c2aeb7941b0e0a78f:
+  /@docusaurus/theme-search-algolia/2.0.0-beta.ff31de0ff_019f5686020abb38ed0259f63b224a7e:
     resolution: {integrity: sha512-eTtObHogSlC+FGMhR7f5LAt3q3S8UCsJ3x0OMCnZM8AF6NS7aMJX26T4isyDv1j6xY3quUJiortFLyZ65Is78g==}
     engines: {node: '>=12.13.0'}
     deprecated: this canary release is now deprecated
@@ -2157,9 +2134,9 @@ packages:
       react: ^16.8.4 || ^17.0.0
       react-dom: ^16.8.4 || ^17.0.0
     dependencies:
-      '@docsearch/react': 3.0.0-alpha.42_b3482aaf5744fc7c2aeb7941b0e0a78f
+      '@docsearch/react': 3.0.0-alpha.42_ec2c511c363c3e7a5cc09a9563ba253f
       '@docusaurus/core': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
-      '@docusaurus/theme-common': 2.0.0-beta.ff31de0ff_react-dom@17.0.2+react@17.0.2
+      '@docusaurus/theme-common': 2.0.0-beta.ff31de0ff_cf03b7458ee8070c9e09362c20b6f0a1
       '@docusaurus/utils': 2.0.0-beta.ff31de0ff
       '@docusaurus/utils-validation': 2.0.0-beta.ff31de0ff
       algoliasearch: 4.11.0
@@ -4019,7 +3996,7 @@ packages:
   /@types/sax/1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 15.14.9
+      '@types/node': 17.0.5
     dev: false
 
   /@types/scheduler/0.16.2:
@@ -7605,7 +7582,7 @@ packages:
     resolution: {integrity: sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==}
     engines: {node: '>=6.11.5', yarn: '>=1.0.0'}
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.16.0
       chalk: 2.4.2
       micromatch: 3.1.10
       minimatch: 3.0.4
@@ -14794,6 +14771,21 @@ packages:
   /urix/0.1.0:
     resolution: {integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=}
     deprecated: Please see https://github.com/lydell/urix#deprecated
+    dev: false
+
+  /url-loader/4.1.1:
+    resolution: {integrity: sha512-3BTV812+AVHHOJQO8O5MkWgZ5aosP7GnROJwvzLS9hWDj00lZ6Z0wNak423Lp9PBZN05N+Jk/N5Si8jRAlGyWA==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      file-loader: '*'
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      file-loader:
+        optional: true
+    dependencies:
+      loader-utils: 2.0.2
+      mime-types: 2.1.34
+      schema-utils: 3.1.1
     dev: false
 
   /url-loader/4.1.1_file-loader@6.2.0+webpack@5.65.0:
