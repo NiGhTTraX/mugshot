@@ -76,7 +76,7 @@ importers:
       fs-extra: ~10.0.0
       is-ci: ~3.0.0
       pixelmatch: ~5.2.0
-      puppeteer: ~13.1.0
+      puppeteer: ~13.2.0
       typescript: ~4.5.0
     dependencies:
       '@mugshot/jimp': link:../jimp
@@ -90,7 +90,7 @@ importers:
       '@types/chai': 4.3.0
       '@types/pixelmatch': 5.2.4
       chai: 4.3.4
-      puppeteer: 13.1.0
+      puppeteer: 13.2.0
       typescript: 4.5.4
 
   packages/playwright:
@@ -106,11 +106,11 @@ importers:
   packages/puppeteer:
     specifiers:
       mugshot: ^4.0.0
-      puppeteer: ~13.1.0
+      puppeteer: ~13.2.0
       typescript: ~4.5.0
     devDependencies:
       mugshot: link:../mugshot
-      puppeteer: 13.1.0
+      puppeteer: 13.2.0
       typescript: 4.5.4
 
   packages/webdriverio:
@@ -6601,6 +6601,10 @@ packages:
     resolution: {integrity: sha512-5fGyt9xmMqUl2VI7+rnUkKCiAQIpLns8sfQtTENy5L70ktbNw0Z3TFJ1JoFNYdx/jffz4YXU45VF75wKZD7sZQ==}
     dev: true
 
+  /devtools-protocol/0.0.960912:
+    resolution: {integrity: sha512-I3hWmV9rWHbdnUdmMKHF2NuYutIM2kXz2mdXW8ha7TbRlGTVs+PF+PsB5QWvpCek4Fy9B+msiispCfwlhG5Sqg==}
+    dev: true
+
   /devtools/7.16.12:
     resolution: {integrity: sha512-gKe2DV1VkcZ4omTEss3cTeVg/ZmAUkJArAQp22ceDEbeE6AYYDeCpFDlZmbVgsjMxh+gY2mU5IWQlRIY/7Vyrg==}
     engines: {node: '>=12.0.0'}
@@ -8085,7 +8089,6 @@ packages:
 
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
-    dev: true
 
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -10008,7 +10011,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
 
   /jsonparse/1.3.1:
     resolution: {integrity: sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=}
@@ -11014,6 +11017,18 @@ packages:
   /node-fetch/2.6.6:
     resolution: {integrity: sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==}
     engines: {node: 4.x || >=6.0.0}
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: true
+
+  /node-fetch/2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
     dependencies:
       whatwg-url: 5.0.0
     dev: true
@@ -12592,16 +12607,16 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer/13.1.0:
-    resolution: {integrity: sha512-6rf16giGGLFMh1VrB89zwaTeA90E+tbpq5o1R1Z+a1z9Hrhrj1MlT8Pe0kaecUV3kjpLRaukCRVXw1dp/gbYEw==}
+  /puppeteer/13.2.0:
+    resolution: {integrity: sha512-OSRcIgPq78Cjysm4AOvGgGN464qugfYZ1bJRpPZ7d6c2P/zVQmACblIiB56frVoSuHpvqo+ZphFJo7kF9V5iEg==}
     engines: {node: '>=10.18.1'}
     requiresBuild: true
     dependencies:
-      debug: 4.3.2
-      devtools-protocol: 0.0.948846
+      debug: 4.3.3
+      devtools-protocol: 0.0.960912
       extract-zip: 2.0.1
       https-proxy-agent: 5.0.0
-      node-fetch: 2.6.5
+      node-fetch: 2.6.7
       pkg-dir: 4.2.0
       progress: 2.0.3
       proxy-from-env: 1.1.0
@@ -12611,6 +12626,7 @@ packages:
       ws: 8.2.3
     transitivePeerDependencies:
       - bufferutil
+      - encoding
       - supports-color
       - utf-8-validate
     dev: true
