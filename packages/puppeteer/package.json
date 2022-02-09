@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "mugshot": "^4.0.0",
-    "puppeteer": "~13.2.0",
+    "puppeteer": "~13.3.0",
     "typescript": "~4.5.0"
   }
 }

@@ -76,7 +76,7 @@ importers:
       fs-extra: ~10.0.0
       is-ci: ~3.0.0
       pixelmatch: ~5.2.0
-      puppeteer: ~13.2.0
+      puppeteer: ~13.3.0
       typescript: ~4.5.0
     dependencies:
       '@mugshot/jimp': link:../jimp
@@ -90,7 +90,7 @@ importers:
       '@types/chai': 4.3.0
       '@types/pixelmatch': 5.2.4
       chai: 4.3.4
-      puppeteer: 13.2.0
+      puppeteer: 13.3.0
       typescript: 4.5.4
 
   packages/playwright:
@@ -106,11 +106,11 @@ importers:
   packages/puppeteer:
     specifiers:
       mugshot: ^4.0.0
-      puppeteer: ~13.2.0
+      puppeteer: ~13.3.0
       typescript: ~4.5.0
     devDependencies:
       mugshot: link:../mugshot
-      puppeteer: 13.2.0
+      puppeteer: 13.3.0
       typescript: 4.5.4
 
   packages/webdriverio:
@@ -6050,6 +6050,14 @@ packages:
     dependencies:
       node-fetch: 2.6.1
     dev: false
+
+  /cross-fetch/3.1.5:
+    resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
+    dependencies:
+      node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - encoding
+    dev: true
 
   /cross-spawn/6.0.5:
     resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
@@ -12607,23 +12615,23 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer/13.2.0:
-    resolution: {integrity: sha512-OSRcIgPq78Cjysm4AOvGgGN464qugfYZ1bJRpPZ7d6c2P/zVQmACblIiB56frVoSuHpvqo+ZphFJo7kF9V5iEg==}
+  /puppeteer/13.3.0:
+    resolution: {integrity: sha512-qEsXUQhF4mcF++0O5N7mW7jcVXqztC9fWYj14s2xNrd16SD1U/rCfV0BYE6/MBK7sHXi400qJlxWv7INYytZtQ==}
     engines: {node: '>=10.18.1'}
     requiresBuild: true
     dependencies:
+      cross-fetch: 3.1.5
       debug: 4.3.3
       devtools-protocol: 0.0.960912
       extract-zip: 2.0.1
       https-proxy-agent: 5.0.0
-      node-fetch: 2.6.7
       pkg-dir: 4.2.0
       progress: 2.0.3
       proxy-from-env: 1.1.0
       rimraf: 3.0.2
       tar-fs: 2.1.1
       unbzip2-stream: 1.4.3
-      ws: 8.2.3
+      ws: 8.5.0
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -15711,6 +15719,19 @@ packages:
 
   /ws/8.2.3:
     resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: true
+
+  /ws/8.5.0:
+    resolution: {integrity: sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
