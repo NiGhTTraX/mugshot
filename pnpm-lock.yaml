@@ -96,11 +96,11 @@ importers:
   packages/playwright:
     specifiers:
       mugshot: ^4.0.0
-      playwright: ~1.18.0
+      playwright: ~1.19.0
       typescript: ~4.5.0
     devDependencies:
       mugshot: link:../mugshot
-      playwright: 1.18.0
+      playwright: 1.19.0
       typescript: 4.5.4
 
   packages/puppeteer:
@@ -10726,6 +10726,13 @@ packages:
     resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
     engines: {node: '>=4.0.0'}
     hasBin: true
+    dev: false
+
+  /mime/3.0.0:
+    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    dev: true
 
   /mimic-fn/2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
@@ -11907,8 +11914,8 @@ packages:
       find-up: 3.0.0
     dev: false
 
-  /playwright-core/1.18.0:
-    resolution: {integrity: sha512-JTRlCVpfAFcC1nth+XIE07w6M5m6C8PaEoClv7wGWF97cyDMcHIij0xIVEKMKli7IG5N0mqjLDFc/akXSbMZ1g==}
+  /playwright-core/1.19.0:
+    resolution: {integrity: sha512-mlT/2pHUQbcZumVIKD4iwIKtO2k/BFHYmOAwOepdEvHLgqJrmsCgHvDgpehM6wDh5chksh2sJZIp8dZQ6158Yw==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
@@ -11917,15 +11924,15 @@ packages:
       extract-zip: 2.0.1
       https-proxy-agent: 5.0.0
       jpeg-js: 0.4.3
-      mime: 2.6.0
-      pngjs: 5.0.0
+      mime: 3.0.0
+      pngjs: 6.0.0
       progress: 2.0.3
       proper-lockfile: 4.1.2
       proxy-from-env: 1.1.0
       rimraf: 3.0.2
       socks-proxy-agent: 6.1.1
       stack-utils: 2.0.5
-      ws: 7.5.6
+      ws: 8.4.2
       yauzl: 2.10.0
       yazl: 2.5.1
     transitivePeerDependencies:
@@ -11934,13 +11941,13 @@ packages:
       - utf-8-validate
     dev: true
 
-  /playwright/1.18.0:
-    resolution: {integrity: sha512-GOWvcWRtL7o6QCj6tvZCxqHKx2sIhXeEmEJAqQdOZgxzQiCkPe1hnTHab1p8R1bDvHK703fDS2oIbs3mcvg6gw==}
+  /playwright/1.19.0:
+    resolution: {integrity: sha512-wEhlkEx4QCzFgl5prkdPOjK5dLK9M3nKJuqZdNtpZirIzkDnbIbVZbEmo2Uh177ZbXTWnt184BkvM+hsIvUFVg==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.18.0
+      playwright-core: 1.19.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -11957,9 +11964,9 @@ packages:
     engines: {node: '>=8.0.0'}
     dev: false
 
-  /pngjs/5.0.0:
-    resolution: {integrity: sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==}
-    engines: {node: '>=10.13.0'}
+  /pngjs/6.0.0:
+    resolution: {integrity: sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==}
+    engines: {node: '>=12.13.0'}
     dev: true
 
   /portfinder/1.0.28:
@@ -12529,7 +12536,7 @@ packages:
   /proper-lockfile/4.1.2:
     resolution: {integrity: sha512-TjNPblN4BwAWMXU8s9AEz4JmQxnD1NNL7bNOY/AKUzyamc379FWASUhc/K1pL2noVb+XmZKLL68cjzLsiOAMaA==}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       retry: 0.12.0
       signal-exit: 3.0.6
     dev: true
@@ -15719,6 +15726,19 @@ packages:
 
   /ws/8.2.3:
     resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: true
+
+  /ws/8.4.2:
+    resolution: {integrity: sha512-Kbk4Nxyq7/ZWqr/tarI9yIt/+iNNFOjBXEWgTb4ydaNHBNGgvf2QHbS9fdfsndfjFlFwEd4Al+mw83YkaD10ZA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
