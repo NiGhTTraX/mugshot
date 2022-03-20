@@ -1,4 +1,3 @@
 comment:
   layout: "diff, files"
-  behavior: "new"
   require_changes: true
