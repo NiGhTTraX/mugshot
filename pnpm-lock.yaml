@@ -132,7 +132,7 @@ importers:
       '@mdx-js/react': ~1.6.21
       '@tsconfig/docusaurus': ~1.0.2
       '@types/react': ~18.0.0
-      '@types/react-dom': ~17.0.3
+      '@types/react-dom': ~18.0.0
       '@types/react-router-dom': ~5.3.0
       clsx: ~1.1.1
       docusaurus-plugin-typedoc: ~0.17.0
@@ -150,7 +150,7 @@ importers:
       '@mdx-js/react': 1.6.22_react@17.0.2
       '@tsconfig/docusaurus': 1.0.4
       '@types/react': 18.0.0
-      '@types/react-dom': 17.0.11
+      '@types/react-dom': 18.0.0
       '@types/react-router-dom': 5.3.2
       clsx: 1.1.1
       docusaurus-plugin-typedoc: 0.17.0_329514d561ebf417a6a0c278b3292d1b
@@ -4066,8 +4066,8 @@ packages:
     resolution: {integrity: sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==}
     dev: false
 
-  /@types/react-dom/17.0.11:
-    resolution: {integrity: sha512-f96K3k+24RaLGVu/Y2Ng3e1EbZ8/cVJvypZWd7cy0ofCBaf2lcM46xNhycMZ2xGwbBjRql7hOlZ+e2WlJ5MH3Q==}
+  /@types/react-dom/18.0.0:
+    resolution: {integrity: sha512-49897Y0UiCGmxZqpC8Blrf6meL8QUla6eb+BBhn69dTXlmuOlzkfr7HHY/O8J25e1lTUMs+YYxSlVDAaGHCOLg==}
     dependencies:
       '@types/react': 18.0.0
     dev: false
