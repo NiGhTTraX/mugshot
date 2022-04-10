@@ -140,7 +140,7 @@ importers:
       react: ~17.0.1
       react-dom: ~17.0.1
       typedoc: ~0.22.0
-      typedoc-plugin-markdown: ~3.11.0
+      typedoc-plugin-markdown: ~3.12.0
       url-loader: ~4.1.1
     dependencies:
       '@algolia/client-search': 4.13.0
@@ -153,12 +153,12 @@ importers:
       '@types/react-dom': 18.0.0
       '@types/react-router-dom': 5.3.2
       clsx: 1.1.1
-      docusaurus-plugin-typedoc: 0.17.0_329514d561ebf417a6a0c278b3292d1b
+      docusaurus-plugin-typedoc: 0.17.0_a025ece560c6e372b559cb6719822852
       prism-react-renderer: 1.3.1_react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       typedoc: 0.22.10_typescript@4.6.2
-      typedoc-plugin-markdown: 3.11.8_typedoc@0.22.10
+      typedoc-plugin-markdown: 3.12.0_typedoc@0.22.10
       url-loader: 4.1.1
 
 packages:
@@ -6681,14 +6681,14 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /docusaurus-plugin-typedoc/0.17.0_329514d561ebf417a6a0c278b3292d1b:
+  /docusaurus-plugin-typedoc/0.17.0_a025ece560c6e372b559cb6719822852:
     resolution: {integrity: sha512-FOvHHd5RrsgmPdn2RcUZNh6g/s5FynEI1ChdRbAPW0o7vpuElUV3Wq2YkiStw8pcTgdgz2cy8qaFY55hDoEIiA==}
     peerDependencies:
       typedoc: '>=0.22.0'
       typedoc-plugin-markdown: '>=3.11.10'
     dependencies:
       typedoc: 0.22.10_typescript@4.6.2
-      typedoc-plugin-markdown: 3.11.8_typedoc@0.22.10
+      typedoc-plugin-markdown: 3.12.0_typedoc@0.22.10
     dev: false
 
   /dom-converter/0.2.0:
@@ -14764,8 +14764,8 @@ packages:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
     dev: true
 
-  /typedoc-plugin-markdown/3.11.8_typedoc@0.22.10:
-    resolution: {integrity: sha512-j2Kwi/RnwDwiNr9CMy4lrwB9+1alwjrMakb9+7S0Bz9gnDsdqamOguZ6e27iB97U18nK6GBeR8qDarIyoJYDCg==}
+  /typedoc-plugin-markdown/3.12.0_typedoc@0.22.10:
+    resolution: {integrity: sha512-yKl7/KWD8nP6Ot6OzMLLc8wBzN3CmkBoI/YQzxT62a9xmDgxyeTxGbHbkUoSzhKFqMI3SR0AqV6prAhVKbYnxw==}
     peerDependencies:
       typedoc: '>=0.22.0'
     dependencies:
