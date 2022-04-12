@@ -96,11 +96,11 @@ importers:
   packages/playwright:
     specifiers:
       mugshot: ^4.0.0
-      playwright: ~1.20.0
+      playwright: ~1.21.0
       typescript: ~4.6.0
     devDependencies:
       mugshot: link:../mugshot
-      playwright: 1.20.0
+      playwright: 1.21.0
       typescript: 4.6.2
 
   packages/puppeteer:
@@ -11904,8 +11904,8 @@ packages:
       find-up: 3.0.0
     dev: false
 
-  /playwright-core/1.20.0:
-    resolution: {integrity: sha512-d25IRcdooS278Cijlp8J8A5fLQZ+/aY3dKRJvgX5yjXA69N0huIUdnh3xXSgn+LsQ9DCNmB7Ngof3eY630jgdA==}
+  /playwright-core/1.21.0:
+    resolution: {integrity: sha512-yDGVs9qaaW6WiefgR7wH1CGt9D6D/X4U3jNpIzH0FjjrrWLCOYQo78Tu3SkW8X+/kWlBpj49iWf3QNSxhYc12Q==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
@@ -11933,13 +11933,13 @@ packages:
       - utf-8-validate
     dev: true
 
-  /playwright/1.20.0:
-    resolution: {integrity: sha512-YcFXhXttk9yvpc8PMbfvts6KEopXjxdBh47BdOiA7xhjF/gkXeSM0Hs9CSdbL9mp2xtlB5xqE7+D+F2soQOjbA==}
+  /playwright/1.21.0:
+    resolution: {integrity: sha512-OH5ZFoiS0HkBZzhb7HPVeE8lEx3PO/AaKgoQfgs1NbmwFPqHgPzfKFa3fO+VM27WqTLjtYOL6hM03sWnJhT3ig==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.20.0
+      playwright-core: 1.21.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
