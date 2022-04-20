@@ -76,7 +76,7 @@ importers:
       fs-extra: ~10.1.0
       is-ci: ~3.0.0
       pixelmatch: ~5.2.0
-      puppeteer: ~13.5.0
+      puppeteer: ~13.6.0
       typescript: ~4.6.0
     dependencies:
       '@mugshot/jimp': link:../jimp
@@ -90,7 +90,7 @@ importers:
       '@types/chai': 4.3.0
       '@types/pixelmatch': 5.2.4
       chai: 4.3.4
-      puppeteer: 13.5.0
+      puppeteer: 13.6.0
       typescript: 4.6.2
 
   packages/playwright:
@@ -106,11 +106,11 @@ importers:
   packages/puppeteer:
     specifiers:
       mugshot: ^4.0.0
-      puppeteer: ~13.5.0
+      puppeteer: ~13.6.0
       typescript: ~4.6.0
     devDependencies:
       mugshot: link:../mugshot
-      puppeteer: 13.5.0
+      puppeteer: 13.6.0
       typescript: 4.6.2
 
   packages/webdriverio:
@@ -4499,7 +4499,7 @@ packages:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
-      debug: 4.3.3
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6386,6 +6386,18 @@ packages:
       supports-color: 6.1.0
     dev: false
 
+  /debug/4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+    dev: true
+
   /debuglog/1.0.1:
     resolution: {integrity: sha1-qiT/uaw9+aI1GDfPstJ5NgzXhJI=}
     dev: true
@@ -6602,6 +6614,10 @@ packages:
 
   /devtools-protocol/0.0.969999:
     resolution: {integrity: sha512-6GfzuDWU0OFAuOvBokXpXPLxjOJ5DZ157Ue3sGQQM3LgAamb8m0R0ruSfN0DDu+XG5XJgT50i6zZ/0o8RglreQ==}
+    dev: true
+
+  /devtools-protocol/0.0.981744:
+    resolution: {integrity: sha512-0cuGS8+jhR67Fy7qG3i3Pc7Aw494sb9yG9QgpG97SFVWwolgYjlhJg7n+UaHxOQT30d1TYu/EYe9k01ivLErIg==}
     dev: true
 
   /devtools-protocol/0.0.982423:
@@ -7420,7 +7436,7 @@ packages:
     engines: {node: '>= 10.17.0'}
     hasBin: true
     dependencies:
-      debug: 4.3.3
+      debug: 4.3.4
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -8535,7 +8551,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       agent-base: 6.0.2
-      debug: 4.3.3
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -12623,14 +12639,14 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer/13.5.0:
-    resolution: {integrity: sha512-raPr2YZ3RZLboGwt7jJgusJTBRDaVEUiPOSOWWFLV1oj07xqT5UqqbjmNXFXlMlkhF/NwmcEInW64VhvyllVdw==}
+  /puppeteer/13.6.0:
+    resolution: {integrity: sha512-EJXhTyY5bXNPLFXPGcY9JaF6EKJIX8ll8cGG3WUK+553Jx96oDf1cB+lkFOro9p0X16tY+9xx7zYWl+vnWgW2g==}
     engines: {node: '>=10.18.1'}
     requiresBuild: true
     dependencies:
       cross-fetch: 3.1.5
-      debug: 4.3.3
-      devtools-protocol: 0.0.969999
+      debug: 4.3.4
+      devtools-protocol: 0.0.981744
       extract-zip: 2.0.1
       https-proxy-agent: 5.0.0
       pkg-dir: 4.2.0
