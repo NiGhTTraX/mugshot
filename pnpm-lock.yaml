@@ -76,7 +76,7 @@ importers:
       fs-extra: ~10.1.0
       is-ci: ~3.0.0
       pixelmatch: ~5.3.0
-      puppeteer: ~13.6.0
+      puppeteer: ~13.7.0
       typescript: ~4.6.0
     dependencies:
       '@mugshot/jimp': link:../jimp
@@ -90,7 +90,7 @@ importers:
       '@types/chai': 4.3.0
       '@types/pixelmatch': 5.2.4
       chai: 4.3.4
-      puppeteer: 13.6.0
+      puppeteer: 13.7.0
       typescript: 4.6.2
 
   packages/playwright:
@@ -106,11 +106,11 @@ importers:
   packages/puppeteer:
     specifiers:
       mugshot: ^4.0.0
-      puppeteer: ~13.6.0
+      puppeteer: ~13.7.0
       typescript: ~4.6.0
     devDependencies:
       mugshot: link:../mugshot
-      puppeteer: 13.6.0
+      puppeteer: 13.7.0
       typescript: 4.6.2
 
   packages/webdriverio:
@@ -8556,6 +8556,16 @@ packages:
       - supports-color
     dev: true
 
+  /https-proxy-agent/5.0.1:
+    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
+    engines: {node: '>= 6'}
+    dependencies:
+      agent-base: 6.0.2
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /human-signals/2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
@@ -12647,8 +12657,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /puppeteer/13.6.0:
-    resolution: {integrity: sha512-EJXhTyY5bXNPLFXPGcY9JaF6EKJIX8ll8cGG3WUK+553Jx96oDf1cB+lkFOro9p0X16tY+9xx7zYWl+vnWgW2g==}
+  /puppeteer/13.7.0:
+    resolution: {integrity: sha512-U1uufzBjz3+PkpCxFrWzh4OrMIdIb2ztzCu0YEPfRHjHswcSwHZswnK+WdsOQJsRV8WeTg3jLhJR4D867+fjsA==}
     engines: {node: '>=10.18.1'}
     requiresBuild: true
     dependencies:
@@ -12656,7 +12666,7 @@ packages:
       debug: 4.3.4
       devtools-protocol: 0.0.981744
       extract-zip: 2.0.1
-      https-proxy-agent: 5.0.0
+      https-proxy-agent: 5.0.1
       pkg-dir: 4.2.0
       progress: 2.0.3
       proxy-from-env: 1.1.0
