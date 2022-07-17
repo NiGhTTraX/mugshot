@@ -182,7 +182,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm i
+        run: |
+          pnpm i
+          pnpm dlx playwright install
 
       - name: Test
         run: pnpm test
