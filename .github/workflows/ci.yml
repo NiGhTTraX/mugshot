@@ -126,7 +126,7 @@ jobs:
 
     strategy:
       matrix:
-        version: [ 8, 9, "latest" ]
+        version: [ 8, 9, "installed" ]
 
     steps:
       - name: Checkout
@@ -146,6 +146,7 @@ jobs:
         run: pnpm i
 
       - name: Version
+        if: ${{ matrix.version }} != 'installed'
         run: pnpm add -D puppeteer@${{ matrix.version }}
         working-directory: packages/puppeteer
 
