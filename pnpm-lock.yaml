@@ -8,7 +8,7 @@ importers:
       '@tdd-buffet/jest-config': ~4.1.0
       '@tdd-buffet/selenium': ~0.4.21
       '@tdd-buffet/tsconfig': ~1.0.0
-      '@types/jest': ~27.4.0
+      '@types/jest': ~27.5.0
       '@types/node': ~16.11.0
       eslint: ~8.20.0
       jest: ~27.5.0
@@ -17,10 +17,10 @@ importers:
       typescript: ~4.6.0
     devDependencies:
       '@nighttrax/eslint-config-ts': 10.0.0-beta.0_gcm4r6qcfjuuh5lwzjaszq6vpa
-      '@tdd-buffet/jest-config': 4.1.1_6nwemoqaupp6jc2ioighn46w5m
+      '@tdd-buffet/jest-config': 4.1.1_h5hmgixftickcl26bkfsz342om
       '@tdd-buffet/selenium': 0.4.22
       '@tdd-buffet/tsconfig': 1.0.4_typescript@4.6.2
-      '@types/jest': 27.4.0
+      '@types/jest': 27.5.2
       '@types/node': 16.11.17
       eslint: 8.20.0
       jest: 27.5.0
@@ -3835,7 +3835,7 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tdd-buffet/jest-config/4.1.1_6nwemoqaupp6jc2ioighn46w5m:
+  /@tdd-buffet/jest-config/4.1.1_h5hmgixftickcl26bkfsz342om:
     resolution: {integrity: sha512-wujY7ZDen3nWO+VqyHVyP+pQJsvjWdZU9D0oFky+7GMb7rnomRjKryjZDsfNVM4JXEAxUzxU2lUg9mUEqfNNxw==}
     peerDependencies:
       jest: ^27.0.0
@@ -3847,7 +3847,7 @@ packages:
       jest: 27.5.0
       jest-environment-jsdom: 27.3.1
       jest-runtime: 27.3.1
-      ts-jest: 27.0.7_intyyxxj2q76vj35yx27pv4bli
+      ts-jest: 27.0.7_p7iam57wzvulmvjl6nriq2xcpe
       typescript: 4.3.5
       whatwg-fetch: 3.6.2
     transitivePeerDependencies:
@@ -4028,11 +4028,11 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/27.4.0:
-    resolution: {integrity: sha512-gHl8XuC1RZ8H2j5sHv/JqsaxXkDDM9iDOgu0Wp8sjs4u/snb2PVehyWXJPr+ORA0RPpgw231mnutWI1+0hgjIQ==}
+  /@types/jest/27.5.2:
+    resolution: {integrity: sha512-mpT8LJJ4CMeeahobofYWIjFo0xonRS/HfxnVEPMPFSQdGUt1uHCnoPT7Zhb+sjDU2wz0oKV0OLUR0WzrHNgfeA==}
     dependencies:
-      jest-diff: 27.4.2
-      pretty-format: 27.4.2
+      jest-matcher-utils: 27.5.0
+      pretty-format: 27.5.0
     dev: true
 
   /@types/json-schema/7.0.9:
@@ -15034,7 +15034,7 @@ packages:
     resolution: {integrity: sha512-rvuRbTarPXmMb79SmzEp8aqXNKcK+y0XaB298IXueQ8I2PsrATcPBCSPyK/dDNa2iWOhKlfNnOjdAOTBU/nkFA==}
     dev: false
 
-  /ts-jest/27.0.7_intyyxxj2q76vj35yx27pv4bli:
+  /ts-jest/27.0.7_p7iam57wzvulmvjl6nriq2xcpe:
     resolution: {integrity: sha512-O41shibMqzdafpuP+CkrOL7ykbmLh+FqQrXEmV9CydQ5JBk0Sj0uAEF5TNNe94fZWKm3yYvWa/IbyV4Yg1zK2Q==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -15052,7 +15052,7 @@ packages:
       babel-jest:
         optional: true
     dependencies:
-      '@types/jest': 27.4.0
+      '@types/jest': 27.5.2
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 27.5.0
