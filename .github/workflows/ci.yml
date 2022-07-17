@@ -146,7 +146,7 @@ jobs:
         run: pnpm i
 
       - name: Version
-        if: ${{ matrix.version }} != 'installed'
+        if: ${{ matrix.version != 'installed' }}
         run: pnpm add -D puppeteer@${{ matrix.version }}
         working-directory: packages/puppeteer
 
