@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@4.0.0...@mugshot/contracts@4.0.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/chai to ~4.3.0 ([172ca10](https://github.com/NiGhTTraX/mugshot/commit/172ca108b4c75588cc41201b694bc1d98b55641c))
+* **deps:** update dependency fs-extra to ~10.1.0 ([68b4979](https://github.com/NiGhTTraX/mugshot/commit/68b4979c369af698dc0888453cab95881b2ffcf1))
+* **deps:** update dependency fs-extra to v10 ([f039fb6](https://github.com/NiGhTTraX/mugshot/commit/f039fb67d523fcbc879a3e68e3434d2270b88bcf))
+
+
+
+
+
 # [4.0.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/contracts@3.1.2...@mugshot/contracts@4.0.0) (2021-04-24)
 
 

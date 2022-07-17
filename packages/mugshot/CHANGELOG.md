@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/NiGhTTraX/mugshot/compare/mugshot@4.0.0...mugshot@4.0.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/node to v14 ([bb5c484](https://github.com/NiGhTTraX/mugshot/commit/bb5c484bc95a02994dc24d0d1541726016aacf6f))
+* **deps:** update dependency @types/node to v16 ([e272591](https://github.com/NiGhTTraX/mugshot/commit/e272591fca592fdd7b80003491d24c6211183466))
+* **deps:** update dependency fs-extra to ~10.1.0 ([68b4979](https://github.com/NiGhTTraX/mugshot/commit/68b4979c369af698dc0888453cab95881b2ffcf1))
+* **deps:** update dependency fs-extra to v10 ([f039fb6](https://github.com/NiGhTTraX/mugshot/commit/f039fb67d523fcbc879a3e68e3434d2270b88bcf))
+* **deps:** update dependency pixelmatch to ~5.3.0 ([79e6313](https://github.com/NiGhTTraX/mugshot/commit/79e631399186732ed12195c2cd20e5d7cb25b5cf))
+
+
+
+
+
 # [4.0.0](https://github.com/NiGhTTraX/mugshot/compare/mugshot@3.3.0...mugshot@4.0.0) (2021-04-24)
 
 

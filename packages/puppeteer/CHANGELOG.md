@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/puppeteer@2.0.0...@mugshot/puppeteer@2.0.1) (2022-07-17)
+
+
+### Bug Fixes
+
+* **puppeteer:** Fix mugshot peer dependency ([cad614f](https://github.com/NiGhTTraX/mugshot/commit/cad614f8645f9f37e79e39a2b95f00c0c35880f3))
+
+
+
+
+
 # [2.0.0](https://github.com/NiGhTTraX/mugshot/compare/@mugshot/puppeteer@1.0.3...@mugshot/puppeteer@2.0.0) (2021-04-24)
 
 
