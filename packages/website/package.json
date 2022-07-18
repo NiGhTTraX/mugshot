@@ -10,7 +10,7 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
-    "@algolia/client-search": "~4.13.0",
+    "@algolia/client-search": "~4.14.0",
     "@docusaurus/core": "~2.0.0-beta.14",
     "@docusaurus/module-type-aliases": "~2.0.0-beta.14",
     "@docusaurus/preset-classic": "~2.0.0-beta.14",
