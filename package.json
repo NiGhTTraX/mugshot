@@ -19,13 +19,13 @@
   },
   "devDependencies": {
     "@nighttrax/eslint-config-ts": "~10.0.0-beta.0",
-    "@tdd-buffet/jest-config": "~4.1.0",
+    "@tdd-buffet/jest-config": "~5.0.0",
     "@tdd-buffet/tsconfig": "~1.0.0",
     "@tdd-buffet/selenium": "~0.4.21",
-    "@types/jest": "~27.5.0",
+    "@types/jest": "~28.1.6",
     "@types/node": "~16.11.0",
     "eslint": "~8.20.0",
-    "jest": "~27.5.0",
+    "jest": "~28.1.3",
     "lerna": "~5.1.0",
     "strong-mock": "~7.3.0",
     "typescript": "~4.6.0"
