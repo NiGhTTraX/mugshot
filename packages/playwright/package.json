@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "mugshot": "^4.0.1",
-    "playwright": "~1.23.0",
+    "playwright": "~1.24.0",
     "typescript": "~4.6.0"
   }
 }
