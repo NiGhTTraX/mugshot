@@ -96,11 +96,11 @@ importers:
   packages/playwright:
     specifiers:
       mugshot: ^4.0.1
-      playwright: ~1.26.0
+      playwright: ~1.27.0
       typescript: ~4.6.0
     devDependencies:
       mugshot: link:../mugshot
-      playwright: 1.26.0
+      playwright: 1.27.0
       typescript: 4.6.2
 
   packages/puppeteer:
@@ -12360,19 +12360,19 @@ packages:
       find-up: 3.0.0
     dev: false
 
-  /playwright-core/1.26.0:
-    resolution: {integrity: sha512-p8huU8eU4gD3VkJd3DA1nA7R3XA6rFvFL+1RYS96cSljCF2yJE9CWEHTPF4LqX8KN9MoWCrAfVKP5381X3CZqg==}
+  /playwright-core/1.27.0:
+    resolution: {integrity: sha512-VBKaaFUVKDo3akW+o4DwbK1ZyXh46tcSwQKPK3lruh8IJd5feu55XVZx4vOkbb2uqrNdIF51sgsadYT533SdpA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
 
-  /playwright/1.26.0:
-    resolution: {integrity: sha512-XxTVlvFEYHdatxUkh1KiPq9BclNtFKMi3BgQnl/aactmhN4G9AkZUXwt0ck6NDAOrDFlfibhbM7A1kZwQJKSBw==}
+  /playwright/1.27.0:
+    resolution: {integrity: sha512-F+0+0RD03LS+KdNAMMp63OBzu+NwYYLd52pKLczuSlTsV5b/SLkUoNhSfzDFngEFOuRL2gk0LlfGW3mKiUBk6w==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.26.0
+      playwright-core: 1.27.0
     dev: true
 
   /pngjs/3.4.0:
