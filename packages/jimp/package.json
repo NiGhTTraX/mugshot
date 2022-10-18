@@ -32,6 +32,6 @@
     "@jimp/png": "~0.16.1"
   },
   "devDependencies": {
-    "typescript": "~4.6.0"
+    "typescript": "~4.8.0"
   }
 }
