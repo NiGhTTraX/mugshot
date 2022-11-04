@@ -4,5 +4,6 @@
     ":widenPeerDependencies"
   ],
   "rangeStrategy": "replace",
-  "automerge": true
+  "automerge": true,
+  "automergeType": "branch"
 }
