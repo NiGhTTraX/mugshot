@@ -64,9 +64,5 @@ export class PuppeteerAdapter implements Webdriver {
     (await (this.page.screenshot() as Promise<Buffer>)).toString('base64');
 
   execute = <R, A extends any[]>(func: (...args: A) => R, ...args: A) =>
-    this.page.evaluate(
-      // @ts-expect-error the puppeteer type expects at least 1 argument
-      func,
-      ...args
-    );
+    this.page.evaluate(func, ...args);
 }
