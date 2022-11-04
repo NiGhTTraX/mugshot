@@ -77,7 +77,7 @@ importers:
       fs-extra: ~10.1.0
       is-ci: ~3.0.0
       pixelmatch: ~5.3.0
-      puppeteer: ~13.7.0
+      puppeteer: ~19.2.2
       typescript: ~4.8.0
     dependencies:
       '@mugshot/jimp': link:../jimp
@@ -92,7 +92,7 @@ importers:
       '@types/chai': 4.3.0
       '@types/pixelmatch': 5.2.4
       chai: 4.3.4
-      puppeteer: 13.7.0
+      puppeteer: 19.2.2
       typescript: 4.8.4
 
   packages/playwright:
@@ -7064,10 +7064,6 @@ packages:
     resolution: {integrity: sha512-6GfzuDWU0OFAuOvBokXpXPLxjOJ5DZ157Ue3sGQQM3LgAamb8m0R0ruSfN0DDu+XG5XJgT50i6zZ/0o8RglreQ==}
     dev: true
 
-  /devtools-protocol/0.0.981744:
-    resolution: {integrity: sha512-0cuGS8+jhR67Fy7qG3i3Pc7Aw494sb9yG9QgpG97SFVWwolgYjlhJg7n+UaHxOQT30d1TYu/EYe9k01ivLErIg==}
-    dev: true
-
   /devtools/7.25.0_typescript@4.8.4:
     resolution: {integrity: sha512-SU9jKoJJccXKXfYiIqgktoL5TuzLglqcHeivPPJjzhX17S99zH9bHw4SyhQALox3J1Xgmim+dzO6yTQtRU6cAQ==}
     engines: {node: '>=12.0.0'}
@@ -13348,30 +13344,6 @@ packages:
       tar-fs: 2.1.1
       unbzip2-stream: 1.4.3
       ws: 8.10.0
-    transitivePeerDependencies:
-      - bufferutil
-      - encoding
-      - supports-color
-      - utf-8-validate
-    dev: true
-
-  /puppeteer/13.7.0:
-    resolution: {integrity: sha512-U1uufzBjz3+PkpCxFrWzh4OrMIdIb2ztzCu0YEPfRHjHswcSwHZswnK+WdsOQJsRV8WeTg3jLhJR4D867+fjsA==}
-    engines: {node: '>=10.18.1'}
-    requiresBuild: true
-    dependencies:
-      cross-fetch: 3.1.5
-      debug: 4.3.4
-      devtools-protocol: 0.0.981744
-      extract-zip: 2.0.1
-      https-proxy-agent: 5.0.1
-      pkg-dir: 4.2.0
-      progress: 2.0.3
-      proxy-from-env: 1.1.0
-      rimraf: 3.0.2
-      tar-fs: 2.1.1
-      unbzip2-stream: 1.4.3
-      ws: 8.5.0
     transitivePeerDependencies:
       - bufferutil
       - encoding
