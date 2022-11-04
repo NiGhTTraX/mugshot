@@ -1,5 +1,8 @@
 {
   "name": "@mugshot/jimp",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Custom Jimp instance to use in Mugshot",
   "keywords": [
     "jimp",
