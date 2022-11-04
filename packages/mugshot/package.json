@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Visual regression testing library",
   "keywords": [
     "visual",
@@ -30,7 +30,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "@mugshot/jimp": "^0.0.2",
+    "@mugshot/jimp": "^0.0.3",
     "@types/fs-extra": "~9.0.0",
     "@types/is-ci": "~3.0.0",
     "@types/node": "~18.11.0",

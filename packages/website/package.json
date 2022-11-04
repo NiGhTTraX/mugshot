@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "scripts": {
     "start": "DOCUSAURUS_NO_DUPLICATE_TITLE_WARNING=false docusaurus start",
@@ -27,8 +27,8 @@
     "typedoc": "~0.23.0",
     "typedoc-plugin-markdown": "~3.13.0",
     "typescript": "~4.8.0",
-    "webpack": "~5.74.0",
-    "url-loader": "~4.1.1"
+    "url-loader": "~4.1.1",
+    "webpack": "~5.74.0"
   },
   "browserslist": {
     "production": [
