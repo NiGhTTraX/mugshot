@@ -1,4 +1,4 @@
-import { instance, It, mock, reset, verify, when } from 'strong-mock';
+import { It, mock, reset, verify, when } from 'strong-mock';
 import { DiffResult, PNGDiffer } from '../../../src/interfaces/png-differ';
 import { ScreenshotStorage } from '../../../src/interfaces/screenshot-storage';
 import { Screenshotter } from '../../../src/interfaces/screenshotter';
@@ -32,7 +32,9 @@ describe('Mugshot', () => {
   }
 
   function ignoreCleanup() {
-    when(storage.delete(It.isAny())).thenResolve(undefined).atLeast(0);
+    when(() => storage.delete(It.isAny()))
+      .thenResolve(undefined)
+      .atLeast(0);
   }
 
   beforeEach(() => {
@@ -49,8 +51,8 @@ describe('Mugshot', () => {
 
   describe('existing baselines', () => {
     function setupStorageWithExistingBaseline(name: string, base: Buffer) {
-      when(storage.exists(name)).thenResolve(true);
-      when(storage.read(name)).thenResolve(base);
+      when(() => storage.exists(name)).thenResolve(true);
+      when(() => storage.read(name)).thenResolve(base);
 
       return storage;
     }
@@ -60,7 +62,7 @@ describe('Mugshot', () => {
       screenshot: Buffer,
       result: DiffResult
     ) {
-      when(pngDiffer.compare(base, screenshot)).thenResolve(result);
+      when(() => pngDiffer.compare(base, screenshot)).thenResolve(result);
     }
 
     async function expectDiffResult(
@@ -86,14 +88,16 @@ describe('Mugshot', () => {
       setupStorageWithExistingBaseline('identical', blackPixelBuffer);
       ignoreCleanup();
 
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
         matches: true,
       });
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await expectIdenticalResult(
@@ -106,30 +110,34 @@ describe('Mugshot', () => {
 
     it('should remove leftover artifacts', async () => {
       setupStorageWithExistingBaseline('identical', blackPixelBuffer);
-      when(storage.delete('identical.diff')).thenResolve(undefined);
-      when(storage.delete('identical.actual')).thenResolve(undefined);
+      when(() => storage.delete('identical.diff')).thenResolve(undefined);
+      when(() => storage.delete('identical.actual')).thenResolve(undefined);
 
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
         matches: true,
       });
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await mugshot.check('identical');
     });
 
     it('should fail and create diff for an unexpected change', async () => {
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupStorageWithExistingBaseline('unexpected', whitePixelBuffer);
-      when(storage.write('unexpected.actual', blackPixelBuffer)).thenResolve(
-        undefined
-      );
-      when(storage.write('unexpected.diff', redPixelBuffer)).thenResolve(
+      when(() =>
+        storage.write('unexpected.actual', blackPixelBuffer)
+      ).thenResolve(undefined);
+      when(() => storage.write('unexpected.diff', redPixelBuffer)).thenResolve(
         undefined
       );
 
@@ -139,8 +147,8 @@ describe('Mugshot', () => {
         percentage: 1,
       });
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await expectDiffResult(
@@ -156,16 +164,16 @@ describe('Mugshot', () => {
       setupStorageWithExistingBaseline('ignore', blackPixelBuffer);
       ignoreCleanup();
 
-      when(screenshotter.takeScreenshot({ ignore: '.ignore' })).thenResolve(
-        blackPixelBuffer
-      );
+      when(() =>
+        screenshotter.takeScreenshot({ ignore: '.ignore' })
+      ).thenResolve(blackPixelBuffer);
 
       setupDifferWithResult(blackPixelBuffer, blackPixelBuffer, {
         matches: true,
       });
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await expectIdenticalResult(
@@ -184,12 +192,12 @@ describe('Mugshot', () => {
         matches: true,
       });
 
-      when(screenshotter.takeScreenshot('.element', {})).thenResolve(
+      when(() => screenshotter.takeScreenshot('.element', {})).thenResolve(
         whitePixelBuffer
       );
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await expectIdenticalResult(
@@ -208,12 +216,12 @@ describe('Mugshot', () => {
         matches: true,
       });
 
-      when(
+      when(() =>
         screenshotter.takeScreenshot({ x: 0, y: 1, width: 2, height: 3 }, {})
       ).thenResolve(whitePixelBuffer);
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
       });
 
       await expectIdenticalResult(
@@ -225,14 +233,18 @@ describe('Mugshot', () => {
     });
 
     it('should update when told to', async () => {
-      when(storage.exists('update')).thenResolve(true);
-      when(storage.write('update', whitePixelBuffer)).thenResolve(undefined);
+      when(() => storage.exists('update')).thenResolve(true);
+      when(() => storage.write('update', whitePixelBuffer)).thenResolve(
+        undefined
+      );
       ignoreCleanup();
 
-      when(screenshotter.takeScreenshot({})).thenResolve(whitePixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        whitePixelBuffer
+      );
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         updateBaselines: true,
       });
 
@@ -247,7 +259,7 @@ describe('Mugshot', () => {
 
   describe('missing baselines', () => {
     function setupStorageWithMissingBaseline(name: string) {
-      when(storage.exists(name)).thenResolve(false);
+      when(() => storage.exists(name)).thenResolve(false);
     }
 
     async function expectError<E extends Error>(
@@ -287,8 +299,8 @@ describe('Mugshot', () => {
     it('should fail when told to not create', async () => {
       setupStorageWithMissingBaseline('missing');
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: false,
       });
 
@@ -296,14 +308,18 @@ describe('Mugshot', () => {
     });
 
     it('should write missing baseline and pass when told to create', async () => {
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupStorageWithMissingBaseline('missing');
-      when(storage.write('missing', blackPixelBuffer)).thenResolve(undefined);
+      when(() => storage.write('missing', blackPixelBuffer)).thenResolve(
+        undefined
+      );
       ignoreCleanup();
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: true,
       });
 
@@ -316,15 +332,19 @@ describe('Mugshot', () => {
     });
 
     it('should remove leftover artifacts', async () => {
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupStorageWithMissingBaseline('missing');
-      when(storage.write('missing', blackPixelBuffer)).thenResolve(undefined);
-      when(storage.delete('missing.diff')).thenResolve(undefined);
-      when(storage.delete('missing.actual')).thenResolve(undefined);
+      when(() => storage.write('missing', blackPixelBuffer)).thenResolve(
+        undefined
+      );
+      when(() => storage.delete('missing.diff')).thenResolve(undefined);
+      when(() => storage.delete('missing.actual')).thenResolve(undefined);
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: true,
       });
 
@@ -333,15 +353,17 @@ describe('Mugshot', () => {
 
     it('should ignore an element when told to create', async () => {
       setupStorageWithMissingBaseline('ignore');
-      when(storage.write('ignore', blackPixelBuffer)).thenResolve(undefined);
+      when(() => storage.write('ignore', blackPixelBuffer)).thenResolve(
+        undefined
+      );
       ignoreCleanup();
 
-      when(screenshotter.takeScreenshot({ ignore: '.ignore' })).thenResolve(
-        blackPixelBuffer
-      );
+      when(() =>
+        screenshotter.takeScreenshot({ ignore: '.ignore' })
+      ).thenResolve(blackPixelBuffer);
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: true,
       });
 
@@ -355,15 +377,17 @@ describe('Mugshot', () => {
 
     it('should screenshot only an element when told to create', async () => {
       setupStorageWithMissingBaseline('element');
-      when(storage.write('element', blackPixelBuffer)).thenResolve(undefined);
+      when(() => storage.write('element', blackPixelBuffer)).thenResolve(
+        undefined
+      );
       ignoreCleanup();
 
-      when(screenshotter.takeScreenshot('.element', {})).thenResolve(
+      when(() => screenshotter.takeScreenshot('.element', {})).thenResolve(
         blackPixelBuffer
       );
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: true,
       });
 
@@ -376,14 +400,18 @@ describe('Mugshot', () => {
     });
 
     it('should write missing baseline and pass when told to update', async () => {
-      when(screenshotter.takeScreenshot({})).thenResolve(blackPixelBuffer);
+      when(() => screenshotter.takeScreenshot({})).thenResolve(
+        blackPixelBuffer
+      );
 
       setupStorageWithMissingBaseline('missing');
-      when(storage.write('missing', blackPixelBuffer)).thenResolve(undefined);
+      when(() => storage.write('missing', blackPixelBuffer)).thenResolve(
+        undefined
+      );
       ignoreCleanup();
 
-      const mugshot = new Mugshot(instance(screenshotter), instance(storage), {
-        pngDiffer: instance(pngDiffer),
+      const mugshot = new Mugshot(screenshotter, storage, {
+        pngDiffer,
         createMissingBaselines: false,
         updateBaselines: true,
       });

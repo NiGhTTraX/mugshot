@@ -1,4 +1,12 @@
-import { instance, It, mock, reset, verify, when } from 'strong-mock';
+import { It, mock, reset, verify, when } from 'strong-mock';
+import { PNGProcessor } from '../../../../src/interfaces/png-processor';
+import { TooManyElementsError } from '../../../../src/interfaces/screenshotter';
+import {
+  ElementNotFoundError,
+  ElementNotVisibleError,
+  Webdriver,
+} from '../../../../src/interfaces/webdriver';
+import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';
 import {
   blackPixelB64,
   blackPixelBuffer,
@@ -6,14 +14,6 @@ import {
   whitePixelBuffer,
 } from '../../fixtures';
 import { expectIdenticalBuffers } from '../../helpers';
-import { PNGProcessor } from '../../../../src/interfaces/png-processor';
-import { TooManyElementsError } from '../../../../src/interfaces/screenshotter';
-import {
-  Webdriver,
-  ElementNotFoundError,
-  ElementNotVisibleError,
-} from '../../../../src/interfaces/webdriver';
-import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
   const client = mock<Webdriver>();
@@ -30,9 +30,9 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client));
+    const screenshotter = new WebdriverScreenshotter(client);
 
     const screenshot = await screenshotter.takeScreenshot();
 
@@ -40,20 +40,20 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       x: 1,
       y: 2,
       width: 3,
       height: 4,
     });
 
-    when(pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
+    when(() => pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
       whitePixelBuffer
     );
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test');
@@ -62,14 +62,14 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an area', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
-    when(pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
+    when(() => pngProcessor.crop(blackPixelBuffer, 1, 2, 3, 4)).thenResolve(
       whitePixelBuffer
     );
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot({
@@ -83,14 +83,14 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the selector returns multiple elements', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve([
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
       { x: 5, y: 6, width: 7, height: 8 },
     ]);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
@@ -99,11 +99,11 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element is not found', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve(null);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve(null);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
@@ -112,16 +112,16 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element has 0 width', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       width: 0,
       height: 100,
       x: 0,
       y: 0,
     });
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
@@ -130,16 +130,16 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the element has 0 height', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       height: 0,
       width: 100,
       x: 0,
       y: 0,
     });
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(screenshotter.takeScreenshot('.test')).rejects.toBeInstanceOf(
@@ -148,20 +148,20 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore an element', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 2,
       width: 3,
       height: 4,
     });
 
-    when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
-      whitePixelBuffer
-    );
+    when(() =>
+      pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')
+    ).thenResolve(whitePixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot({
@@ -172,20 +172,20 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should cover the ignored element with the custom color', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 2,
       width: 3,
       height: 4,
     });
 
-    when(
+    when(() =>
       pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#ff0000')
     ).thenResolve(whitePixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot({
@@ -197,11 +197,11 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector does not return anything', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve(null);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve(null);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(
@@ -212,16 +212,16 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns 0 width', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve({
       x: 0,
       y: 0,
       width: 0,
       height: 100,
     });
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(
@@ -232,16 +232,16 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns 0 height', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve({
       x: 0,
       y: 0,
       width: 100,
       height: 0,
     });
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(
@@ -252,8 +252,8 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should throw if the ignore selector returns multiple elements with one 0 height', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve([
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve([
       {
         x: 0,
         y: 0,
@@ -268,8 +268,8 @@ describe('WebdriverScreenshotter', () => {
       },
     ]);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     await expect(
@@ -280,14 +280,14 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore an area', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
 
-    when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
-      whitePixelBuffer
-    );
+    when(() =>
+      pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')
+    ).thenResolve(whitePixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot({
@@ -298,21 +298,21 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of the viewport and ignore all matching elements', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.ignore')).thenResolve([
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.ignore')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
       { x: 10, y: 20, width: 30, height: 40 },
     ]);
 
-    when(pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
-      whitePixelBuffer
-    );
-    when(
+    when(() =>
+      pngProcessor.paint(blackPixelBuffer, 1, 2, 3, 4, '#000')
+    ).thenResolve(whitePixelBuffer);
+    when(() =>
       pngProcessor.paint(whitePixelBuffer, 10, 20, 30, 40, '#000')
     ).thenResolve(blackPixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot({
@@ -323,29 +323,29 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore an element', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
       width: 10,
       height: 10,
     });
-    when(client.getElementRect('.ignore')).thenResolve({
+    when(() => client.getElementRect('.ignore')).thenResolve({
       x: 1,
       y: 1,
       width: 4,
       height: 4,
     });
 
-    when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
+    when(() => pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
       whitePixelBuffer
     );
-    when(pngProcessor.paint(whitePixelBuffer, 1, 1, 4, 4, '#000')).thenResolve(
-      redPixelBuffer
-    );
+    when(() =>
+      pngProcessor.paint(whitePixelBuffer, 1, 1, 4, 4, '#000')
+    ).thenResolve(redPixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
@@ -356,23 +356,23 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore an area', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
       width: 10,
       height: 10,
     });
 
-    when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
+    when(() => pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
       whitePixelBuffer
     );
-    when(pngProcessor.paint(whitePixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
-      redPixelBuffer
-    );
+    when(() =>
+      pngProcessor.paint(whitePixelBuffer, 1, 2, 3, 4, '#000')
+    ).thenResolve(redPixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
@@ -383,30 +383,30 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should take a screenshot of an element and ignore all matching elements', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.getElementRect('.test')).thenResolve({
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.getElementRect('.test')).thenResolve({
       x: 0,
       y: 0,
       width: 10,
       height: 10,
     });
-    when(client.getElementRect('.ignore')).thenResolve([
+    when(() => client.getElementRect('.ignore')).thenResolve([
       { x: 1, y: 2, width: 3, height: 4 },
       { x: 5, y: 6, width: 7, height: 8 },
     ]);
 
-    when(pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
+    when(() => pngProcessor.crop(blackPixelBuffer, 0, 0, 10, 10)).thenResolve(
       whitePixelBuffer
     );
-    when(pngProcessor.paint(whitePixelBuffer, 1, 2, 3, 4, '#000')).thenResolve(
-      redPixelBuffer
-    );
-    when(pngProcessor.paint(redPixelBuffer, 5, 6, 7, 8, '#000')).thenResolve(
-      blackPixelBuffer
-    );
+    when(() =>
+      pngProcessor.paint(whitePixelBuffer, 1, 2, 3, 4, '#000')
+    ).thenResolve(redPixelBuffer);
+    when(() =>
+      pngProcessor.paint(redPixelBuffer, 5, 6, 7, 8, '#000')
+    ).thenResolve(blackPixelBuffer);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
     });
 
     const screenshot = await screenshotter.takeScreenshot('.test', {
@@ -417,11 +417,11 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should disable animations', async () => {
-    when(client.takeViewportScreenshot()).thenResolve(blackPixelB64);
-    when(client.execute(It.isAny())).thenResolve(undefined);
+    when(() => client.takeViewportScreenshot()).thenResolve(blackPixelB64);
+    when(() => client.execute(It.isAny())).thenResolve(undefined);
 
-    const screenshotter = new WebdriverScreenshotter(instance(client), {
-      pngProcessor: instance(pngProcessor),
+    const screenshotter = new WebdriverScreenshotter(client, {
+      pngProcessor,
       disableAnimations: true,
     });
 
