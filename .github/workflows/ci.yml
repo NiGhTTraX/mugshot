@@ -124,10 +124,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    strategy:
-      matrix:
-        version: [ 8, 9, "installed" ]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -145,11 +141,6 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Version
-        if: ${{ matrix.version != 'installed' }}
-        run: pnpm add -D puppeteer@${{ matrix.version }}
-        working-directory: packages/puppeteer
-
       - name: Test
         run: pnpm test
         working-directory: packages/puppeteer
@@ -157,7 +148,7 @@ jobs:
       - name: Coverage
         uses: codecov/codecov-action@v3
         with:
-          flags: puppeteer, ${{ matrix.version }}
+          flags: puppeteer
 
   playwright:
     runs-on: ubuntu-latest
