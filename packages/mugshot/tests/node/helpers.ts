@@ -52,6 +52,7 @@ export async function createTestBuffer(
   const j = new Jimp(rows[0].length, rows.length);
 
   let y = 0;
+
   // eslint-disable-next-line no-restricted-syntax
   for (const row of rows) {
     let x = 0;

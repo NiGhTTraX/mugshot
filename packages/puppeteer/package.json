@@ -36,6 +36,7 @@
     "puppeteer": "^19.0.0"
   },
   "devDependencies": {
+    "@mugshot/contracts": "~4.0.2",
     "mugshot": "^4.0.2",
     "puppeteer": "~19.2.2",
     "typescript": "~4.8.0"

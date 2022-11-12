@@ -1,4 +1,5 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { PuppeteerAdapter } from '@mugshot/puppeteer';
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { FsStorage } from '../../../src/lib/fs-storage';

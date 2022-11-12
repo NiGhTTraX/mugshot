@@ -1,8 +1,9 @@
 import {
+  expectIdenticalScreenshots,
   Fixture,
   loadFixture,
-  expectIdenticalScreenshots,
 } from '@mugshot/contracts';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { PuppeteerAdapter } from '@mugshot/puppeteer';
 import { join } from 'path';
 import puppeteer from 'puppeteer';
