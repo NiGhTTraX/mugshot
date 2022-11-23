@@ -126,12 +126,12 @@ importers:
       '@mugshot/contracts': ~4.0.2
       mugshot: ^4.0.2
       typescript: ~4.9.0
-      webdriverio: ~7.26.0
+      webdriverio: ~7.27.0
     devDependencies:
       '@mugshot/contracts': link:../contracts
       mugshot: link:../mugshot
       typescript: 4.9.3
-      webdriverio: 7.26.0_typescript@4.9.3
+      webdriverio: 7.27.0_typescript@4.9.3
 
   packages/website:
     specifiers:
@@ -4636,8 +4636,8 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /@wdio/protocols/7.22.0:
-    resolution: {integrity: sha512-8EXRR+Ymdwousm/VGtW3H1hwxZ/1g1H99A1lF0U4GuJ5cFWHCd0IVE5H31Z52i8ZruouW8jueMkGZPSo2IIUSQ==}
+  /@wdio/protocols/7.27.0:
+    resolution: {integrity: sha512-hT/U22R5i3HhwPjkaKAG0yd59eaOaZB0eibRj2+esCImkb5Y6rg8FirrlYRxIGFVBl0+xZV0jKHzR5+o097nvg==}
     engines: {node: '>=12.0.0'}
     dev: true
 
@@ -7095,23 +7095,23 @@ packages:
     resolution: {integrity: sha512-CmTu6SQx2g3TbZzDCAV58+LTxVdKplS7xip0g5oDXpZ+isr0rv5dDP8ToyVRywzPHkCCPKgKgScEcwz4uPWDIA==}
     dev: true
 
-  /devtools-protocol/0.0.1069585:
-    resolution: {integrity: sha512-sHmkZB6immWQWU4Wx3ogXwxjQUvQc92MmUDL52+q1z2hQmvpOcvDmbsjwX7QZOPTA32dMV7fgT6zUytcpPzy4A==}
+  /devtools-protocol/0.0.1075032:
+    resolution: {integrity: sha512-Np2EaEFlSOev03f5ySurGi3/z8YWOwsfSPPSDTbf7zlBY77SxBWfkFf41IUmkvfkeckX8XVW9hes1jVwALNAaA==}
     dev: true
 
   /devtools-protocol/0.0.969999:
     resolution: {integrity: sha512-6GfzuDWU0OFAuOvBokXpXPLxjOJ5DZ157Ue3sGQQM3LgAamb8m0R0ruSfN0DDu+XG5XJgT50i6zZ/0o8RglreQ==}
     dev: true
 
-  /devtools/7.26.0_typescript@4.9.3:
-    resolution: {integrity: sha512-+8HNbNpzgo4Sn+WcrvXuwsHW9XPJfLo4bs9lgs6DPJHIIDXYJXQGsd7940wMX0Rp0D2vHXA4ibK0oTI5rogM3Q==}
+  /devtools/7.27.0_typescript@4.9.3:
+    resolution: {integrity: sha512-3zKwVXtmKjewqXF1rwkuBaRNKexEpAIvAp2K5sXTuF5YsIo9GqOrEDYNskQ0DMM0bQzxE0mxRle9ZVjlpghr3A==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@types/node': 18.11.5
       '@types/ua-parser-js': 0.7.36
       '@wdio/config': 7.26.0_typescript@4.9.3
       '@wdio/logger': 7.26.0
-      '@wdio/protocols': 7.22.0
+      '@wdio/protocols': 7.27.0
       '@wdio/types': 7.26.0_typescript@4.9.3
       '@wdio/utils': 7.26.0_typescript@4.9.3
       chrome-launcher: 0.15.0
@@ -16086,14 +16086,14 @@ packages:
     resolution: {integrity: sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==}
     dev: false
 
-  /webdriver/7.26.0_typescript@4.9.3:
-    resolution: {integrity: sha512-T21T31wq29D/rmpFHcAahhdrvfsfXsLs/LBe2su7wL725ptOEoSssuDXjXMkwjf9MSUIXnTcUIz8oJGbKRUMwQ==}
+  /webdriver/7.27.0_typescript@4.9.3:
+    resolution: {integrity: sha512-870uIBnrGJ86g3DdYjM+PHhqdWf6NxysSme1KIs6irWxK+LqcaWKWhN75PldE+04xJB2mVWt1tKn0NBBFTWeMg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@types/node': 18.11.5
       '@wdio/config': 7.26.0_typescript@4.9.3
       '@wdio/logger': 7.26.0
-      '@wdio/protocols': 7.22.0
+      '@wdio/protocols': 7.27.0
       '@wdio/types': 7.26.0_typescript@4.9.3
       '@wdio/utils': 7.26.0_typescript@4.9.3
       got: 11.8.3
@@ -16103,15 +16103,15 @@ packages:
       - typescript
     dev: true
 
-  /webdriverio/7.26.0_typescript@4.9.3:
-    resolution: {integrity: sha512-7m9TeP871aYxZYKBI4GDh5aQZLN9Fd/PASu5K/jEIT65J4OBB6g5ZaycGFOmfNHCfjWKjwPXZuKiN1f2mcrcRg==}
+  /webdriverio/7.27.0_typescript@4.9.3:
+    resolution: {integrity: sha512-xEcpWdbDLTFVP57kxEVniXWL6SNq2hxEMwaXbRck9EiFlhNvVca00oMzYjCVm8jmlL6JYnbfv/u7XyhvkktMIg==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@types/aria-query': 5.0.0
       '@types/node': 18.11.5
       '@wdio/config': 7.26.0_typescript@4.9.3
       '@wdio/logger': 7.26.0
-      '@wdio/protocols': 7.22.0
+      '@wdio/protocols': 7.27.0
       '@wdio/repl': 7.26.0_typescript@4.9.3
       '@wdio/types': 7.26.0_typescript@4.9.3
       '@wdio/utils': 7.26.0_typescript@4.9.3
@@ -16119,8 +16119,8 @@ packages:
       aria-query: 5.0.0
       css-shorthand-properties: 1.1.1
       css-value: 0.0.1
-      devtools: 7.26.0_typescript@4.9.3
-      devtools-protocol: 0.0.1069585
+      devtools: 7.27.0_typescript@4.9.3
+      devtools-protocol: 0.0.1075032
       fs-extra: 10.1.0
       grapheme-splitter: 1.0.4
       lodash.clonedeep: 4.5.0
@@ -16133,7 +16133,7 @@ packages:
       resq: 1.10.1
       rgb2hex: 0.2.5
       serialize-error: 8.1.0
-      webdriver: 7.26.0_typescript@4.9.3
+      webdriver: 7.27.0_typescript@4.9.3
     transitivePeerDependencies:
       - bufferutil
       - encoding
