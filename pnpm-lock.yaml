@@ -34,14 +34,14 @@ importers:
       '@types/chai': ~4.3.0
       '@types/fs-extra': ~9.0.0
       chai: ~4.3.0
-      fs-extra: ~10.1.0
+      fs-extra: ~11.0.0
       mugshot: ^4.0.2
       typescript: ~4.9.0
     dependencies:
       '@mugshot/jimp': link:../jimp
       '@types/chai': 4.3.0
       chai: 4.3.4
-      fs-extra: 10.1.0
+      fs-extra: 11.0.0
     devDependencies:
       '@types/fs-extra': 9.0.13
       mugshot: link:../mugshot
@@ -74,7 +74,7 @@ importers:
       '@types/node': ~18.11.0
       '@types/pixelmatch': ~5.2.0
       chai: ~4.3.0
-      fs-extra: ~10.1.0
+      fs-extra: ~11.0.0
       is-ci: ~3.0.0
       pixelmatch: ~5.3.0
       puppeteer: ~19.2.2
@@ -85,7 +85,7 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/is-ci': 3.0.0
       '@types/node': 18.11.5
-      fs-extra: 10.1.0
+      fs-extra: 11.0.0
       is-ci: 3.0.1
       pixelmatch: 5.3.0
     devDependencies:
@@ -1728,7 +1728,7 @@ packages:
       eta: 1.12.3
       express: 4.17.2
       file-loader: 6.2.0_webpack@5.75.0
-      fs-extra: 10.0.0
+      fs-extra: 10.1.0
       github-slugger: 1.4.0
       globby: 11.0.4
       html-minifier-terser: 5.1.1
@@ -8467,15 +8467,6 @@ packages:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
     dev: true
 
-  /fs-extra/10.0.0:
-    resolution: {integrity: sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      graceful-fs: 4.2.9
-      jsonfile: 6.1.0
-      universalify: 2.0.0
-    dev: false
-
   /fs-extra/10.1.0:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
     engines: {node: '>=12'}
@@ -8483,6 +8474,15 @@ packages:
       graceful-fs: 4.2.9
       jsonfile: 6.1.0
       universalify: 2.0.0
+
+  /fs-extra/11.0.0:
+    resolution: {integrity: sha512-4YxRvMi4P5C3WQTvdRfrv5UVqbISpqjORFQAW5QPiKAauaxNCwrEdIi6pG3tDFhKKpMen+enEhHIzB/tvIO+/w==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      graceful-fs: 4.2.9
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+    dev: false
 
   /fs-extra/9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
