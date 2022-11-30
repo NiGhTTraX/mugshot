@@ -34,14 +34,14 @@ importers:
       '@types/chai': ~4.3.0
       '@types/fs-extra': ~9.0.0
       chai: ~4.3.0
-      fs-extra: ~11.0.0
+      fs-extra: ~11.1.0
       mugshot: ^4.0.2
       typescript: ~4.9.0
     dependencies:
       '@mugshot/jimp': link:../jimp
       '@types/chai': 4.3.0
       chai: 4.3.4
-      fs-extra: 11.0.0
+      fs-extra: 11.1.0
     devDependencies:
       '@types/fs-extra': 9.0.13
       mugshot: link:../mugshot
@@ -74,7 +74,7 @@ importers:
       '@types/node': ~18.11.0
       '@types/pixelmatch': ~5.2.0
       chai: ~4.3.0
-      fs-extra: ~11.0.0
+      fs-extra: ~11.1.0
       is-ci: ~3.0.0
       pixelmatch: ~5.3.0
       puppeteer: ~19.2.2
@@ -85,7 +85,7 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/is-ci': 3.0.0
       '@types/node': 18.11.5
-      fs-extra: 11.0.0
+      fs-extra: 11.1.0
       is-ci: 3.0.1
       pixelmatch: 5.3.0
     devDependencies:
@@ -8488,8 +8488,8 @@ packages:
       jsonfile: 6.1.0
       universalify: 2.0.0
 
-  /fs-extra/11.0.0:
-    resolution: {integrity: sha512-4YxRvMi4P5C3WQTvdRfrv5UVqbISpqjORFQAW5QPiKAauaxNCwrEdIi6pG3tDFhKKpMen+enEhHIzB/tvIO+/w==}
+  /fs-extra/11.1.0:
+    resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.9
