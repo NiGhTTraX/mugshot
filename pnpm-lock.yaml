@@ -145,7 +145,7 @@ importers:
       '@types/react-dom': ~17.0.17
       '@types/react-router-dom': ~5.3.0
       clsx: ~1.2.0
-      docusaurus-plugin-typedoc: ~0.17.0
+      docusaurus-plugin-typedoc: ~0.18.0
       prism-react-renderer: ~1.3.0
       react: ~17.0.2
       react-dom: ~17.0.2
@@ -165,7 +165,7 @@ importers:
       '@types/react-dom': 17.0.17
       '@types/react-router-dom': 5.3.2
       clsx: 1.2.1
-      docusaurus-plugin-typedoc: 0.17.0_e36op5mghhviwo236fj6qvkhiy
+      docusaurus-plugin-typedoc: 0.18.0_e36op5mghhviwo236fj6qvkhiy
       prism-react-renderer: 1.3.1_react@17.0.2
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -7195,11 +7195,11 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /docusaurus-plugin-typedoc/0.17.0_e36op5mghhviwo236fj6qvkhiy:
-    resolution: {integrity: sha512-FOvHHd5RrsgmPdn2RcUZNh6g/s5FynEI1ChdRbAPW0o7vpuElUV3Wq2YkiStw8pcTgdgz2cy8qaFY55hDoEIiA==}
+  /docusaurus-plugin-typedoc/0.18.0_e36op5mghhviwo236fj6qvkhiy:
+    resolution: {integrity: sha512-kurIUu8LhVIOPT88HoeBcu0/D2GMDdg0pUYaFlqeuXT9an6Wlgvuy0C22ZMYcJUcp/gA/Mw2XdUHubsLK2M4uA==}
     peerDependencies:
-      typedoc: '>=0.22.0'
-      typedoc-plugin-markdown: '>=3.11.10'
+      typedoc: '>=0.23.0'
+      typedoc-plugin-markdown: '>=3.13.0'
     dependencies:
       typedoc: 0.23.17_typescript@4.9.3
       typedoc-plugin-markdown: 3.14.0_typedoc@0.23.17
