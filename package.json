@@ -24,7 +24,7 @@
     "@tdd-buffet/selenium": "~0.4.21",
     "@types/jest": "~29.2.0",
     "@types/node": "~18.11.0",
-    "eslint": "~8.29.0",
+    "eslint": "~8.30.0",
     "jest": "~29.3.0",
     "lerna": "~6.1.0",
     "strong-mock": "~8.0.0",
