@@ -142,7 +142,7 @@ importers:
       '@mdx-js/react': ~1.6.21
       '@tsconfig/docusaurus': ~1.0.2
       '@types/react': ~18.0.0
-      '@types/react-dom': ~17.0.17
+      '@types/react-dom': ~18.0.0
       '@types/react-router-dom': ~5.3.0
       clsx: ~1.2.0
       docusaurus-plugin-typedoc: ~0.18.0
@@ -162,7 +162,7 @@ importers:
       '@mdx-js/react': 1.6.22_react@17.0.2
       '@tsconfig/docusaurus': 1.0.4
       '@types/react': 18.0.0
-      '@types/react-dom': 17.0.17
+      '@types/react-dom': 18.0.9
       '@types/react-router-dom': 5.3.2
       clsx: 1.2.1
       docusaurus-plugin-typedoc: 0.18.0_e36op5mghhviwo236fj6qvkhiy
@@ -4392,10 +4392,10 @@ packages:
     resolution: {integrity: sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==}
     dev: false
 
-  /@types/react-dom/17.0.17:
-    resolution: {integrity: sha512-VjnqEmqGnasQKV0CWLevqMTXBYG9GbwuE6x3VetERLh0cq2LTptFE73MrQi2S7GkKXCf2GgwItB/melLnxfnsg==}
+  /@types/react-dom/18.0.9:
+    resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
     dependencies:
-      '@types/react': 17.0.47
+      '@types/react': 18.0.0
     dev: false
 
   /@types/react-router-dom/5.3.2:
@@ -4411,14 +4411,6 @@ packages:
     dependencies:
       '@types/history': 4.7.9
       '@types/react': 18.0.0
-    dev: false
-
-  /@types/react/17.0.47:
-    resolution: {integrity: sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==}
-    dependencies:
-      '@types/prop-types': 15.7.4
-      '@types/scheduler': 0.16.2
-      csstype: 3.0.10
     dev: false
 
   /@types/react/18.0.0:
