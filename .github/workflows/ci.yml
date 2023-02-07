@@ -187,3 +187,16 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           flags: playwright, ${{ matrix.browser }}
+
+  qodana:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@main
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
