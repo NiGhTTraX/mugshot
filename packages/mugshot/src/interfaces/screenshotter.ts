@@ -37,6 +37,8 @@ export interface Screenshotter {
   /**
    * Take a viewport screenshot.
    */
+  // TODO: fix lint error
+  // eslint-disable-next-line @typescript-eslint/method-signature-style
   takeScreenshot(options?: ScreenshotOptions): Promise<Buffer>;
 
   /**
@@ -44,6 +46,7 @@ export interface Screenshotter {
    *
    * Will throw {@link TooManyElementsError} if `selector` matches more than one element.
    */
+  // eslint-disable-next-line @typescript-eslint/method-signature-style
   takeScreenshot(
     selector: MugshotSelector,
     options?: ScreenshotOptions

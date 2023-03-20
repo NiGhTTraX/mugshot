@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
+import { Jimp } from '@mugshot/jimp';
 import { expect } from 'chai';
 import { readFileSync } from 'fs';
-import { Jimp } from '@mugshot/jimp';
 import { Webdriver } from 'mugshot';
 import { join } from 'path';
 import { expectIdenticalScreenshots } from './helpers';
@@ -16,7 +16,7 @@ export interface WebdriverTestSetup {
   /**
    * Navigate to an URL.
    */
-  url: (path: string) => Promise<any>;
+  url: (path: string) => Promise<unknown>;
 }
 
 export interface WebdriverContractTest {

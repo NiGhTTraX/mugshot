@@ -33,7 +33,7 @@ export class PlaywrightAdapter implements Webdriver {
   takeViewportScreenshot = async () =>
     (await this.page.screenshot()).toString('base64');
 
-  execute = <R, A extends any[]>(
+  execute = <R, A extends unknown[]>(
     func: (...args: A) => R,
     ...args: A
   ): Promise<R> =>

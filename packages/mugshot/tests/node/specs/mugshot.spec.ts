@@ -262,40 +262,6 @@ describe('Mugshot', () => {
       when(() => storage.exists(name)).thenResolve(false);
     }
 
-    async function expectError<E extends Error>(
-      checkCall: Promise<MugshotResult>,
-      expectedError: new (...args: any) => E,
-      runExpectations: (error: E) => void
-    ) {
-      let threwExpectedError = 0;
-
-      try {
-        await checkCall;
-      } catch (error) {
-        if (error instanceof expectedError) {
-          threwExpectedError = 1;
-
-          runExpectations(error);
-        } else {
-          throw error;
-        }
-      }
-
-      if (!threwExpectedError) {
-        throw new Error(
-          `Expected Mugshot to throw a ${expectedError.constructor.name} error`
-        );
-      }
-    }
-
-    async function expectMissingBaselineError(
-      checkCall: Promise<MugshotResult>
-    ) {
-      return expectError(checkCall, MugshotMissingBaselineError, (error) => {
-        expect(error.message).toContain('Missing baseline');
-      });
-    }
-
     it('should fail when told to not create', async () => {
       setupStorageWithMissingBaseline('missing');
 
@@ -304,7 +270,27 @@ describe('Mugshot', () => {
         createMissingBaselines: false,
       });
 
-      await expectMissingBaselineError(mugshot.check('missing'));
+      let threwExpectedError = 0;
+
+      try {
+        await mugshot.check('missing');
+      } catch (error) {
+        if (error instanceof MugshotMissingBaselineError) {
+          threwExpectedError = 1;
+
+          ((error) => {
+            expect(error.message).toContain('Missing baseline');
+          })(error);
+        } else {
+          throw error;
+        }
+      }
+
+      if (!threwExpectedError) {
+        throw new Error(
+          `Expected Mugshot to throw a ${MugshotMissingBaselineError.constructor.name} error`
+        );
+      }
     });
 
     it('should write missing baseline and pass when told to create', async () => {

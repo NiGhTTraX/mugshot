@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { ElementSelector, ElementRect } from '../lib/mugshot';
+import { ElementRect, ElementSelector } from '../lib/mugshot';
 
 /**
  * Webdriver compatible client.
@@ -48,7 +48,7 @@ export interface Webdriver {
    *
    * @see https://w3c.github.io/webdriver/#execute-async-script
    */
-  execute: <R, A extends any[]>(
+  execute: <R, A extends unknown[]>(
     func: (...args: A) => R,
     ...args: A
   ) => Promise<R>;

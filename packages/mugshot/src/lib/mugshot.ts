@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import isCI from 'is-ci';
-import { Webdriver } from '../interfaces/webdriver';
 import { PNGDiffer } from '../interfaces/png-differ';
 import { ScreenshotStorage } from '../interfaces/screenshot-storage';
-import { Screenshotter, ScreenshotOptions } from '../interfaces/screenshotter';
+import { ScreenshotOptions, Screenshotter } from '../interfaces/screenshotter';
+import { Webdriver } from '../interfaces/webdriver';
 import { FsStorage } from './fs-storage';
 import { PixelDiffer } from './pixel-differ';
 import { WebdriverScreenshotter } from './webdriver-screenshotter';
