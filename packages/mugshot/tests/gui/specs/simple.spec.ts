@@ -1,7 +1,8 @@
 import { Fixture, loadFixture } from '@mugshot/contracts';
+// Suppressing the error to avoid circular dependencies.
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PuppeteerAdapter } from '@mugshot/puppeteer';
-import puppeteer, { Browser, Page } from 'puppeteer';
+import { PlaywrightAdapter } from '@mugshot/playwright';
+import playwright, { Browser, Page } from 'playwright';
 import { FsStorage } from '../../../src/lib/fs-storage';
 import { Mugshot } from '../../../src/lib/mugshot';
 import { WebdriverScreenshotter } from '../../../src/lib/webdriver-screenshotter';
@@ -12,8 +13,9 @@ describe('Mugshot', () => {
   let browser!: Browser, page!: Page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
-    page = await browser.newPage();
+    browser = await playwright.chromium.launch();
+    const context = await browser.newContext();
+    page = await context.newPage();
   });
 
   afterAll(async () => {
@@ -25,7 +27,7 @@ describe('Mugshot', () => {
   });
 
   it('should pass when identical', async () => {
-    const adapter = new PuppeteerAdapter(page);
+    const adapter = new PlaywrightAdapter(page);
     const mugshot = new Mugshot(
       new WebdriverScreenshotter(adapter),
       new FsStorage(resultsPath)
@@ -43,7 +45,7 @@ describe('Mugshot', () => {
   });
 
   it('should fail when different', async () => {
-    const adapter = new PuppeteerAdapter(page);
+    const adapter = new PlaywrightAdapter(page);
     const mugshot = new Mugshot(
       new WebdriverScreenshotter(adapter),
       new FsStorage(resultsPath)
@@ -61,7 +63,7 @@ describe('Mugshot', () => {
   });
 
   it('should use sane defaults for basic constructor', async () => {
-    const adapter = new PuppeteerAdapter(page);
+    const adapter = new PlaywrightAdapter(page);
     const mugshot = new Mugshot(adapter, resultsPath);
 
     await loadFixture(

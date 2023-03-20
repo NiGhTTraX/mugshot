@@ -3,18 +3,20 @@ import {
   Fixture,
   loadFixture,
 } from '@mugshot/contracts';
+// Suppressing the error to avoid circular dependencies.
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { PuppeteerAdapter } from '@mugshot/puppeteer';
+import { PlaywrightAdapter } from '@mugshot/playwright';
 import { join } from 'path';
-import puppeteer from 'puppeteer';
+import playwright, { Browser, Page } from 'playwright';
 import { WebdriverScreenshotter } from '../../../../src/lib/webdriver-screenshotter';
 
 describe('WebdriverScreenshotter', () => {
-  let browser!: puppeteer.Browser, page!: puppeteer.Page;
+  let browser!: Browser, page!: Page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch();
-    page = await browser.newPage();
+    browser = await playwright.chromium.launch();
+    const context = await browser.newContext();
+    page = await context.newPage();
   });
 
   afterAll(async () => {
@@ -22,7 +24,7 @@ describe('WebdriverScreenshotter', () => {
   });
 
   it('should disable animations', async () => {
-    const adapter = new PuppeteerAdapter(page);
+    const adapter = new PlaywrightAdapter(page);
     const screenshotter = new WebdriverScreenshotter(adapter, {
       disableAnimations: true,
     });
