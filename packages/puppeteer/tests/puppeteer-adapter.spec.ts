@@ -1,9 +1,9 @@
 import { webdriverContractSuites } from '@mugshot/contracts';
+import puppeteer, { Browser, Page } from 'puppeteer';
 import { PuppeteerAdapter } from '../src';
-import puppeteer from 'puppeteer';
 
 describe('PuppeteerAdapter', () => {
-  let browser!: puppeteer.Browser, page!: puppeteer.Page;
+  let browser!: Browser, page!: Page;
 
   beforeAll(async () => {
     browser = await puppeteer.launch();
