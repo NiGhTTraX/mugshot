@@ -22,10 +22,10 @@
     "@tdd-buffet/jest-config": "~5.0.1",
     "@tdd-buffet/tsconfig": "~1.0.0",
     "@tdd-buffet/selenium": "~0.4.21",
-    "@types/jest": "~29.2.0",
+    "@types/jest": "~29.5.0",
     "@types/node": "~18.11.0",
     "eslint": "~8.36.0",
-    "jest": "~29.3.0",
+    "jest": "~29.5.0",
     "lerna": "~6.5.0",
     "strong-mock": "~8.0.0",
     "typescript": "~4.9.0"
