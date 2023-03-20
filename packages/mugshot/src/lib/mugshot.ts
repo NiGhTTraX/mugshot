@@ -226,7 +226,6 @@ export class Mugshot {
   // eslint-disable-next-line no-dupe-class-members
   check(name: string, options?: ScreenshotOptions): Promise<MugshotResult>;
 
-  // eslint-disable-next-line no-dupe-class-members
   async check(
     name: string,
     selectorOrOptions?: MugshotSelector | ScreenshotOptions,
