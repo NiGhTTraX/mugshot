@@ -63,12 +63,10 @@ export class PuppeteerAdapter implements Webdriver {
     // fails.
     (await (this.page.screenshot() as Promise<Buffer>)).toString('base64');
 
-  // @ts-expect-error because we're suppressing another error below which causes
-  // the return type to be unknown
   execute = <R, A extends unknown[]>(func: (...args: A) => R, ...args: A) =>
     this.page.evaluate(
       // @ts-expect-error because the puppeteer type maps over A and does some funky stuff
       func,
       ...args
-    );
+    ) as Promise<R>; // needed because we're suppressing an error above
 }
