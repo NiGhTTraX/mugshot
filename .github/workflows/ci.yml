@@ -9,7 +9,6 @@ env:
   # Cache browser binaries inside node_modules so that the node action
   # properly packs them between runs.
   PLAYWRIGHT_BROWSERS_PATH: 0
-  PUPPETEER_CACHE_DIR: node_modules/.cache/puppeteer
 
 jobs:
   lint:
@@ -145,7 +144,9 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm i
+        run: |
+          pnpm i
+          node packages/puppeteer/node_modules/puppeteer/install.js
 
       - name: Test
         run: pnpm test
