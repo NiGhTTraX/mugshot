@@ -86,8 +86,7 @@ export interface MugshotOptions {
 
   /**
    * If set to `true` then `Mugshot.check` will pass if a baseline is not
-   * found and it will create the baseline from the screenshot it
-   * takes.
+   * found, and it will create the baseline from the screenshot it takes.
    */
   createMissingBaselines?: boolean;
 
