@@ -5,6 +5,12 @@ on:
   pull_request:
     branches: [ $default-branch ]
 
+env:
+  # Cache browser binaries inside node_modules so that the node action
+  # properly packs them between runs.
+  PLAYWRIGHT_BROWSERS_PATH: 0
+  PUPPETEER_CACHE_DIR: node_modules/.cache/puppeteer
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -173,9 +179,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: |
-          pnpm i
-          pnpm dlx playwright install
+        run: pnpm i
 
       - name: Test
         run: pnpm test
