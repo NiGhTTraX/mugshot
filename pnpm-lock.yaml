@@ -52,14 +52,14 @@ importers:
       '@jimp/core': ~0.16.1
       '@jimp/custom': ~0.16.1
       '@jimp/plugin-color': ~0.16.1
-      '@jimp/plugin-crop': ~0.16.1
+      '@jimp/plugin-crop': ~0.22.0
       '@jimp/png': ~0.16.1
       typescript: ~4.9.0
     dependencies:
       '@jimp/core': 0.16.1
       '@jimp/custom': 0.16.1
       '@jimp/plugin-color': 0.16.1_@jimp+custom@0.16.1
-      '@jimp/plugin-crop': 0.16.1_@jimp+custom@0.16.1
+      '@jimp/plugin-crop': 0.22.7_@jimp+custom@0.16.1
       '@jimp/png': 0.16.1_@jimp+custom@0.16.1
     devDependencies:
       typescript: 4.9.3
@@ -1611,21 +1611,21 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       core-js-pure: 3.20.1
-      regenerator-runtime: 0.13.10
+      regenerator-runtime: 0.13.11
     dev: false
 
   /@babel/runtime/7.16.5:
     resolution: {integrity: sha512-TXWihFIS3Pyv5hzR7j6ihmeLkZfrXGxAr5UfSl8CHf+6q/wpiYDkUau0czckpYG8QmnCIuPpdLtuA9VmuGGyMA==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      regenerator-runtime: 0.13.10
+      regenerator-runtime: 0.13.11
     dev: false
 
   /@babel/runtime/7.20.1:
     resolution: {integrity: sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      regenerator-runtime: 0.13.10
+      regenerator-runtime: 0.13.11
     dev: false
 
   /@babel/runtime/7.21.0:
@@ -2718,14 +2718,13 @@ packages:
       tinycolor2: 1.4.2
     dev: false
 
-  /@jimp/plugin-crop/0.16.1_@jimp+custom@0.16.1:
-    resolution: {integrity: sha512-UQdva9oQzCVadkyo3T5Tv2CUZbf0klm2cD4cWMlASuTOYgaGaFHhT9st+kmfvXjKL8q3STkBu/zUPV6PbuV3ew==}
+  /@jimp/plugin-crop/0.22.7_@jimp+custom@0.16.1:
+    resolution: {integrity: sha512-XXvUU+hPdodtTBSgyUJUnzh7JgKMVlS1GxjcQsjYU8iGr1dbpuazKMTQxc76ChVmy8ue4goi8bGstacWUHpl/Q==}
     peerDependencies:
       '@jimp/custom': '>=0.3.5'
     dependencies:
-      '@babel/runtime': 7.16.5
       '@jimp/custom': 0.16.1
-      '@jimp/utils': 0.16.1
+      '@jimp/utils': 0.22.7
     dev: false
 
   /@jimp/png/0.16.1_@jimp+custom@0.16.1:
@@ -2743,7 +2742,13 @@ packages:
     resolution: {integrity: sha512-8fULQjB0x4LzUSiSYG6ZtQl355sZjxbv8r9PPAuYHzS9sGiSHJQavNqK/nKnpDsVkU88/vRGcE7t3nMU0dEnVw==}
     dependencies:
       '@babel/runtime': 7.20.1
-      regenerator-runtime: 0.13.10
+      regenerator-runtime: 0.13.11
+    dev: false
+
+  /@jimp/utils/0.22.7:
+    resolution: {integrity: sha512-4ax4IOWLIERx4yz9y3fNXKvQaPOY23yJF5h4sizxVkQUObkZHWE0kL0TVHodBt3rS8ksdbCL8Jkz4GeNP/Katg==}
+    dependencies:
+      regenerator-runtime: 0.13.11
     dev: false
 
   /@jridgewell/resolve-uri/3.1.0:
@@ -13448,13 +13453,8 @@ packages:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
     dev: false
 
-  /regenerator-runtime/0.13.10:
-    resolution: {integrity: sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==}
-    dev: false
-
   /regenerator-runtime/0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
-    dev: true
 
   /regenerator-transform/0.14.5:
     resolution: {integrity: sha512-eOf6vka5IO151Jfsw2NO9WpGX58W6wWmefK3I1zEGr0lOD0u8rwPaNqQL1aRxUaxLeKO3ArNh3VYg1KbaD+FFw==}
