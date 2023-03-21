@@ -53,14 +53,14 @@ importers:
       '@jimp/custom': ~0.16.1
       '@jimp/plugin-color': ~0.16.1
       '@jimp/plugin-crop': ~0.22.0
-      '@jimp/png': ~0.16.1
+      '@jimp/png': ~0.22.0
       typescript: ~4.9.0
     dependencies:
       '@jimp/core': 0.16.1
       '@jimp/custom': 0.16.1
       '@jimp/plugin-color': 0.16.1_@jimp+custom@0.16.1
       '@jimp/plugin-crop': 0.22.7_@jimp+custom@0.16.1
-      '@jimp/png': 0.16.1_@jimp+custom@0.16.1
+      '@jimp/png': 0.22.7_@jimp+custom@0.16.1
     devDependencies:
       typescript: 4.9.3
 
@@ -2727,15 +2727,14 @@ packages:
       '@jimp/utils': 0.22.7
     dev: false
 
-  /@jimp/png/0.16.1_@jimp+custom@0.16.1:
-    resolution: {integrity: sha512-iyWoCxEBTW0OUWWn6SveD4LePW89kO7ZOy5sCfYeDM/oTPLpR8iMIGvZpZUz1b8kvzFr27vPst4E5rJhGjwsdw==}
+  /@jimp/png/0.22.7_@jimp+custom@0.16.1:
+    resolution: {integrity: sha512-LxD3O9FKEwVv+j+HcUV7ez72Miy+823EjhtFZbBYXNp9qjHtHFBpgcSJBftUOCei8OlmmVgULYn9XjyfPsDgGw==}
     peerDependencies:
       '@jimp/custom': '>=0.3.5'
     dependencies:
-      '@babel/runtime': 7.16.5
       '@jimp/custom': 0.16.1
-      '@jimp/utils': 0.16.1
-      pngjs: 3.4.0
+      '@jimp/utils': 0.22.7
+      pngjs: 6.0.0
     dev: false
 
   /@jimp/utils/0.16.1:

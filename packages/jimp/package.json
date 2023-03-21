@@ -32,7 +32,7 @@
     "@jimp/custom": "~0.16.1",
     "@jimp/plugin-color": "~0.16.1",
     "@jimp/plugin-crop": "~0.22.0",
-    "@jimp/png": "~0.16.1"
+    "@jimp/png": "~0.22.0"
   },
   "devDependencies": {
     "typescript": "~4.9.0"
