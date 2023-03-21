@@ -7,7 +7,7 @@ importers:
       '@nighttrax/eslint-config-ts': ~12.0.0-alpha.2
       '@tdd-buffet/jest-config': ~5.0.1
       '@tdd-buffet/selenium': ~0.4.21
-      '@tdd-buffet/tsconfig': ~1.0.0
+      '@tdd-buffet/tsconfig': ~1.0.5
       '@types/jest': ~29.5.0
       '@types/node': ~18.15.0
       eslint: ~8.36.0
@@ -19,7 +19,7 @@ importers:
       '@nighttrax/eslint-config-ts': 12.0.0-alpha.2_ksm65cmkhueqbr4niscev4pjv4
       '@tdd-buffet/jest-config': 5.0.1_jest@29.5.0
       '@tdd-buffet/selenium': 0.4.22
-      '@tdd-buffet/tsconfig': 1.0.4_typescript@4.9.3
+      '@tdd-buffet/tsconfig': 1.0.5_typescript@4.9.3
       '@types/jest': 29.5.0
       '@types/node': 18.15.5
       eslint: 8.36.0
@@ -3522,10 +3522,10 @@ packages:
       progress: 2.0.3
     dev: true
 
-  /@tdd-buffet/tsconfig/1.0.4_typescript@4.9.3:
-    resolution: {integrity: sha512-g1w/5wSYvJT4ptcejlL/7URT5GaqRgYc2zi3IOVM4VIADMcRcB4FK9/L84kAeLg/udBzacFj+3tkimghCBE2Eg==}
+  /@tdd-buffet/tsconfig/1.0.5_typescript@4.9.3:
+    resolution: {integrity: sha512-7S3SwOnZG0js7FkzSbuysdbrKfeHE48tneN6K/sHDhSvTUFK+gpskEPb3GScEpxvmnoXm+DP7Swa/VZs0bWGQQ==}
     peerDependencies:
-      typescript: ^3.8.3 || ^4.0.0
+      typescript: ^3.8.3 || ^4.0.0 || ^5.0.0
     dependencies:
       typescript: 4.9.3
     dev: true
@@ -4666,7 +4666,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.4
     transitivePeerDependencies:
       - debug
     dev: false
@@ -5796,8 +5796,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      JSONStream: 1.3.5
       is-text-path: 1.0.1
+      JSONStream: 1.3.5
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -7840,6 +7840,7 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: true
 
   /follow-redirects/1.15.2_debug@4.3.4:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -13103,12 +13104,6 @@ packages:
   /react-dev-utils/11.0.4_kuefv56xgqg33iu5i7lcsgj5dy:
     resolution: {integrity: sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A==}
     engines: {node: '>=10'}
-    peerDependencies:
-      typescript: '>=2.7'
-      webpack: '>=4'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
     dependencies:
       '@babel/code-frame': 7.10.4
       address: 1.1.2
@@ -13139,7 +13134,9 @@ packages:
     transitivePeerDependencies:
       - eslint
       - supports-color
+      - typescript
       - vue-template-compiler
+      - webpack
     dev: false
 
   /react-dom/17.0.2_react@17.0.2:
