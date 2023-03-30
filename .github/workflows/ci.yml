@@ -26,7 +26,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -50,7 +50,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -74,7 +74,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -108,7 +108,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -140,7 +140,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -176,7 +176,7 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'pnpm'
 
       - name: Install dependencies
