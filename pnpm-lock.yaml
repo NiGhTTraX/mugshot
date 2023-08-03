@@ -76,8 +76,8 @@ importers:
         specifier: ~0.16.1
         version: 0.16.13
       '@jimp/plugin-color':
-        specifier: ~0.16.1
-        version: 0.16.13(@jimp/custom@0.16.13)
+        specifier: ~0.22.0
+        version: 0.22.7(@jimp/custom@0.16.13)
       '@jimp/plugin-crop':
         specifier: ~0.22.0
         version: 0.22.7(@jimp/custom@0.16.13)
@@ -2859,14 +2859,13 @@ packages:
       '@jimp/utils': 0.22.7
     dev: false
 
-  /@jimp/plugin-color@0.16.13(@jimp/custom@0.16.13):
-    resolution: {integrity: sha512-xW+9BtEvoIkkH/Wde9ql4nAFbYLkVINhpgAE7VcBUsuuB34WUbcBl/taOuUYQrPEFQJ4jfXiAJZ2H/rvKjCVnQ==}
+  /@jimp/plugin-color@0.22.7(@jimp/custom@0.16.13):
+    resolution: {integrity: sha512-OXro9pdB0twQjV4LgW0bTEXaX1VgBsTBcFoDAs8q9mtQzD5p3UQmJ+ykCiQ5rTPxNN1Buc44tcCIfp8haB1ZVQ==}
     peerDependencies:
       '@jimp/custom': '>=0.3.5'
     dependencies:
-      '@babel/runtime': 7.21.0
       '@jimp/custom': 0.16.13
-      '@jimp/utils': 0.16.13
+      '@jimp/utils': 0.22.7
       tinycolor2: 1.6.0
     dev: false
 
