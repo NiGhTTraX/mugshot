@@ -70,8 +70,8 @@ importers:
   packages/jimp:
     dependencies:
       '@jimp/core':
-        specifier: ~0.16.1
-        version: 0.16.13
+        specifier: ~0.22.0
+        version: 0.22.7
       '@jimp/custom':
         specifier: ~0.16.1
         version: 0.16.13
