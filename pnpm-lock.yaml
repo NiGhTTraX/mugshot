@@ -73,17 +73,17 @@ importers:
         specifier: ~0.16.1
         version: 0.16.13
       '@jimp/custom':
-        specifier: ~0.16.1
-        version: 0.16.13
+        specifier: ~0.22.0
+        version: 0.22.7
       '@jimp/plugin-color':
         specifier: ~0.16.1
-        version: 0.16.13(@jimp/custom@0.16.13)
+        version: 0.16.13(@jimp/custom@0.22.7)
       '@jimp/plugin-crop':
         specifier: ~0.22.0
-        version: 0.22.7(@jimp/custom@0.16.13)
+        version: 0.22.7(@jimp/custom@0.22.7)
       '@jimp/png':
         specifier: ~0.22.0
-        version: 0.22.7(@jimp/custom@0.16.13)
+        version: 0.22.7(@jimp/custom@0.22.7)
     devDependencies:
       typescript:
         specifier: ~4.9.0
@@ -2796,13 +2796,6 @@ packages:
       - encoding
     dev: false
 
-  /@jimp/custom@0.16.13:
-    resolution: {integrity: sha512-LTATglVUPGkPf15zX1wTMlZ0+AU7cGEGF6ekVF1crA8eHUWsGjrYTB+Ht4E3HTrCok8weQG+K01rJndCp/l4XA==}
-    dependencies:
-      '@babel/runtime': 7.21.0
-      '@jimp/core': 0.16.13
-    dev: false
-
   /@jimp/custom@0.22.7:
     resolution: {integrity: sha512-n+1+ZVDNumB1E+sL7KdGKAJ6MbgniX1/v/xOEFEQ46WDZ4cRTqP4+tXjHTuHSlOXiANH+K9zD6qgzqmgO6mCVw==}
     dependencies:
@@ -2859,13 +2852,13 @@ packages:
       '@jimp/utils': 0.22.7
     dev: false
 
-  /@jimp/plugin-color@0.16.13(@jimp/custom@0.16.13):
+  /@jimp/plugin-color@0.16.13(@jimp/custom@0.22.7):
     resolution: {integrity: sha512-xW+9BtEvoIkkH/Wde9ql4nAFbYLkVINhpgAE7VcBUsuuB34WUbcBl/taOuUYQrPEFQJ4jfXiAJZ2H/rvKjCVnQ==}
     peerDependencies:
       '@jimp/custom': '>=0.3.5'
     dependencies:
       '@babel/runtime': 7.21.0
-      '@jimp/custom': 0.16.13
+      '@jimp/custom': 0.22.7
       '@jimp/utils': 0.16.13
       tinycolor2: 1.6.0
     dev: false
@@ -2907,15 +2900,6 @@ packages:
       '@jimp/plugin-crop': 0.22.7(@jimp/custom@0.22.7)
       '@jimp/plugin-resize': 0.22.7(@jimp/custom@0.22.7)
       '@jimp/plugin-scale': 0.22.7(@jimp/custom@0.22.7)(@jimp/plugin-resize@0.22.7)
-      '@jimp/utils': 0.22.7
-    dev: false
-
-  /@jimp/plugin-crop@0.22.7(@jimp/custom@0.16.13):
-    resolution: {integrity: sha512-XXvUU+hPdodtTBSgyUJUnzh7JgKMVlS1GxjcQsjYU8iGr1dbpuazKMTQxc76ChVmy8ue4goi8bGstacWUHpl/Q==}
-    peerDependencies:
-      '@jimp/custom': '>=0.3.5'
-    dependencies:
-      '@jimp/custom': 0.16.13
       '@jimp/utils': 0.22.7
     dev: false
 
@@ -3103,16 +3087,6 @@ packages:
       '@jimp/plugin-shadow': 0.22.7(@jimp/custom@0.22.7)(@jimp/plugin-blur@0.22.7)(@jimp/plugin-resize@0.22.7)
       '@jimp/plugin-threshold': 0.22.7(@jimp/custom@0.22.7)(@jimp/plugin-color@0.22.7)(@jimp/plugin-resize@0.22.7)
       timm: 1.7.1
-    dev: false
-
-  /@jimp/png@0.22.7(@jimp/custom@0.16.13):
-    resolution: {integrity: sha512-LxD3O9FKEwVv+j+HcUV7ez72Miy+823EjhtFZbBYXNp9qjHtHFBpgcSJBftUOCei8OlmmVgULYn9XjyfPsDgGw==}
-    peerDependencies:
-      '@jimp/custom': '>=0.3.5'
-    dependencies:
-      '@jimp/custom': 0.16.13
-      '@jimp/utils': 0.22.7
-      pngjs: 6.0.0
     dev: false
 
   /@jimp/png@0.22.7(@jimp/custom@0.22.7):
