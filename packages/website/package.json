@@ -14,7 +14,7 @@
     "@docusaurus/core": "~2.0.0-beta.14",
     "@docusaurus/module-type-aliases": "~2.0.0-beta.14",
     "@docusaurus/preset-classic": "~2.0.0-beta.14",
-    "@mdx-js/react": "~1.6.21",
+    "@mdx-js/react": "~3.1.0",
     "@tsconfig/docusaurus": "~1.0.2",
     "@types/react": "~17.0.39",
     "@types/react-dom": "~17.0.19",
