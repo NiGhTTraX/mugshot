@@ -126,8 +126,8 @@ importers:
         specifier: ~4.3.0
         version: 4.3.4
       playwright:
-        specifier: ~1.32.0
-        version: 1.32.0
+        specifier: ~1.55.0
+        version: 1.55.1
       strong-mock:
         specifier: ~8.0.0
         version: 8.0.0
@@ -144,8 +144,8 @@ importers:
         specifier: ^4.0.2
         version: link:../mugshot
       playwright:
-        specifier: ~1.32.0
-        version: 1.32.0
+        specifier: ~1.55.0
+        version: 1.55.1
       typescript:
         specifier: ~4.9.0
         version: 4.9.3
@@ -8431,7 +8431,7 @@ packages:
     resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
     engines: {node: '>= 4.0'}
     os: [darwin]
-    deprecated: The v1 package contains DANGEROUS / INSECURE binaries. Upgrade to safe fsevents v2
+    deprecated: Upgrade to fsevents v2 to mitigate potential security issues
     requiresBuild: true
     dependencies:
       bindings: 1.5.0
@@ -12926,19 +12926,20 @@ packages:
       find-up: 3.0.0
     dev: false
 
-  /playwright-core@1.32.0:
-    resolution: {integrity: sha512-Z9Ij17X5Z3bjpp6XKujGBp9Gv4eViESac9aDmwgQFUEJBW0K80T21m/Z+XJQlu4cNsvPygw33b6V1Va6Bda5zQ==}
-    engines: {node: '>=14'}
+  /playwright-core@1.55.1:
+    resolution: {integrity: sha512-Z6Mh9mkwX+zxSlHqdr5AOcJnfp+xUWLCt9uKV18fhzA8eyxUd8NUWzAjxUh55RZKSYwDGX0cfaySdhZJGMoJ+w==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: true
 
-  /playwright@1.32.0:
-    resolution: {integrity: sha512-zQVzxTGoC/ak2Zu0l3CeBGQ6z5oOka5ecUOk+5QbmAerih6CaVsjY9BjjhiN+UOImd3xLiNeCcmLEWcXlz1Dlg==}
-    engines: {node: '>=14'}
+  /playwright@1.55.1:
+    resolution: {integrity: sha512-cJW4Xd/G3v5ovXtJJ52MAOclqeac9S/aGGgRzLabuF8TnIb6xHvMzKIa6JmrRzUkeXJgfL1MhukP0NK6l39h3A==}
+    engines: {node: '>=18'}
     hasBin: true
-    requiresBuild: true
     dependencies:
-      playwright-core: 1.32.0
+      playwright-core: 1.55.1
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /pngjs@3.4.0:
